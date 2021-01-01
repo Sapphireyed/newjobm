@@ -1,0 +1,233 @@
+@import "~bootstrap/scss/bootstrap";
+$fa-font-path: "~font-awesome/fonts";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+
+/*black in main nav bar, light to all*/
+$mainBg: #a87f53;
+$mainBgLight: #ebddca;
+/*brown headings bg*/
+$secondBg: #282623;
+$secondBgLight: #c4c2bf;
+
+@mixin title {
+    text-align: center;
+    color: #fff;
+    background-color: $mainBg;
+}
+
+@mixin subtitle {
+    h2 {
+        text-align: center;
+    }
+
+    h5 {
+        color: #fff;
+        background-color: $mainBg;
+    }
+}
+
+
+body {
+    background-color: $mainBgLight;
+    font-size: 18px
+}
+
+img { max-width: 100%}
+
+.section {
+    padding: 10px 0;
+    max-width: 90vw;
+    margin: auto;
+}
+
+nav:nth-child(2) {
+    background-color: $secondBg;
+    margin-bottom: 40px
+}
+
+.tooltipMy {
+    position: relative;
+    opacity: 1;
+    font-size: 16px;
+}
+
+    .tooltipMy .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        bottom: 125%;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+        .tooltipMy .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+    .tooltipMy:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
+
+.row {
+    margin: 0
+}
+
+h1 {
+    @include title;
+}
+
+.subtitle {
+    color: #fff;
+    background-color: $mainBg;
+}
+
+.subtitle2 {
+    @include subtitle;
+}
+
+.subtitle3 {
+    h2
+
+{
+    color: #fff;
+    background-color: $mainBg;
+}
+
+}
+
+.monsterAv h6 {
+    text-align: center
+}
+
+.info {
+    margin-bottom: 10px
+}
+
+#jobtable {
+    width: 100%;
+    tr: nth-child(even)
+
+{
+    background-color: #fff;
+}
+
+td:nth-child(n+4) {
+    text-align: center;
+}
+
+tr:nth-child(n+1):hover {
+    color: #fff;
+    background-color: $mainBg;
+}
+
+i {
+    margin-top: 5px;
+}
+
+img {
+    width: 40%
+}
+
+}
+table { overflow-x: scroll}
+.thead {
+    @include title;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px 0;
+    cursor: pointer
+}
+
+#jobsTable tr td:nth-child(3) {
+    font-weight: bold;
+    cursor: pointer;
+}
+#jobsTable tr td:nth-child(4) {
+    color: gold;
+}
+#jobsTable tr td:nth-child(8) {
+    background-color: rgba(245, 241, 15, 0.7);
+}
+
+#jobsTable tr td:nth-child(9) {
+    background-color: rgba(255, 101, 101, 0.7);
+}
+
+#jobsTable tr td:nth-child(10) {
+    background-color: rgba(101, 255, 101, 0.7);
+}
+
+#jobsTable tr td:nth-child(11) {
+    background-color: rgba(205, 24, 205, 0.7);
+}
+
+#jobsTable tr td:nth-child(n+4) {
+  text-align: center;
+}
+#pages {display: inline; right: 5px}
+.pages {
+  width: 2%;
+}
+
+.job1star {
+    background-color: #f4ffed;
+    .jobh1
+
+{
+    background-color: #6a8d55;
+}
+
+h1 {
+    background-color: #6a8d55;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+h4 {
+    text-align: center
+}
+
+}
+
+.job2star {
+    background-color: #f4ffed;
+    .jobh1
+
+{
+    background-color: #954e3a
+}
+
+h1 {
+    background-color: #954e3a;
+    margin-right:auto;
+    margin-left: auto;
+}
+
+h4 {
+    text-align: center;
+    color: #954e3a
+}
+
+}
+
+@media only screen and (max-width: 760px) {
+    .monsterAv {
+        width: 50%
+    }
+}

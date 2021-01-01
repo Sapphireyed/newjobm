@@ -1,0 +1,36 @@
+{
+  "name": "lrnwebpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "html-webpack-plugin": "^4.5.0",
+    "node-sass": "^5.0.0",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.0",
+    "webpack-dev-server": "^3.11.1"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "jw-paginate": "^1.0.4",
+    "popper.js": "^1.16.1",
+    "tablesorter": "^2.31.3",
+    "tabletop": "^1.6.3"
+  }
+}
