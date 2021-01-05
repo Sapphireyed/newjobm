@@ -1,6 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
-$fa-font-path: "~font-awesome/fonts";
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
 
 
 /*black in main nav bar, light to all*/
@@ -182,49 +186,10 @@ table { overflow-x: scroll}
 }
 #pages {display: inline; right: 5px}
 .pages {
-  width: 2%;
+  //width: 2%;
 }
 
-.job1star {
-    background-color: #f4ffed;
-    .jobh1
 
-{
-    background-color: #6a8d55;
-}
-
-h1 {
-    background-color: #6a8d55;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-h4 {
-    text-align: center
-}
-
-}
-
-.job2star {
-    background-color: #f4ffed;
-    .jobh1
-
-{
-    background-color: #954e3a
-}
-
-h1 {
-    background-color: #954e3a;
-    margin-right:auto;
-    margin-left: auto;
-}
-
-h4 {
-    text-align: center;
-    color: #954e3a
-}
-
-}
 
 @media only screen and (max-width: 760px) {
     .monsterAv {

@@ -1,0 +1,99 @@
+@import "~bootstrap/scss/bootstrap";
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
+
+#rarity { color: gold }
+#jobmaindiv { margin: 10px}
+#basicinfo { margin: 20px 5px 40px 5px}
+.job1star {
+    background-color: #f4ffed;
+    .jobh1
+
+{
+    background-color: #6a8d55;
+}
+
+h1 {
+    background-color: #6a8d55;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+h4 {
+    text-align: center
+}
+
+}
+
+.job2star {
+    background-color: #f4ffed;
+    .jobh1
+
+{
+    background-color: #954e3a
+}
+
+h1 {
+    background-color: #954e3a;
+    margin-right:auto;
+    margin-left: auto;
+}
+
+h4 {
+    text-align: center;
+    color: #954e3a
+}
+}
+
+.job2star {
+    background-color: #f4ffed;
+    .jobh1
+
+{
+    background-color: #954e3a
+}
+
+h1 {
+    background-color: #954e3a;
+    margin-right:auto;
+    margin-left: auto;
+}
+
+h4 {
+    text-align: center;
+    color: #954e3a
+}
+
+}
+
+.job4star {
+    background-color: #f4ffed;
+    h1 {
+        background-color: #954e3a;
+        margin-right:auto;
+        margin-left: auto;
+    }
+
+    h4 {
+        text-align: center;
+        color: #954e3a
+    }
+}
+
+.job5star {
+    background-color: #f4ffed;
+    h1 {
+        background-color: gold;
+        margin-right:auto;
+        margin-left: auto;
+    }
+
+    h4 {
+        text-align: center;
+        color: #954e3a
+    }
+}

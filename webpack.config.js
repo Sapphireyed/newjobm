@@ -27,6 +27,15 @@ module: {
       }
     },
     {
+      test: /\.(ico|jpg|jpeg|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+      use: {
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+        },
+      },
+    },
+    {
         test: /\.(scss|css)$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
     },

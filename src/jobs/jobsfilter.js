@@ -5,13 +5,12 @@ jobsfilter.classList.add('section', 'shadow')
 jobsfilter.id = 'jobs'
 
 const header = document.createElement('h1')
+header.classList.add('col-12')
 header.innerHTML = 'JOBS'
 
 // RARITY filter
-const label = document.createElement('label');
-label.for = 'rarity'
-label.innerHTML = 'Choose Rarity'
 const rarSel = document.createElement('select');
+//rarSel.classList.add('col-4')
 rarSel.id = 'rarity'
 rarSel.name = 'rarity'
 const optionsArr = ['Rarity', 1, 2, 3, 4, 5];
@@ -25,27 +24,29 @@ rarSel.innerHTML = options;
 
 // SEARCH
 const search = document.createElement('input')
+//search.classList.add('col-4')
 search.type = 'text'
 search.value = 'Search...'
-search.classList.add('rounded')
+search.classList.add('rounded', 'float-right')
 console.log(search)
 
 // DISPLAY PAGE / PAGER
 var pages = document.createElement('div')
 pages.id = 'pages'
+pages.classList.add('float-right')
 //pager.classList.add()
 pages.innerHTML = '<!-- pager -->' +
-    '<img src="https://mottie.github.io/tablesorter/addons/pager/icons/first.png" class="first pages" id="first"/>' +
-    '<img src="https://mottie.github.io/tablesorter/addons/pager/icons/prev.png" class="pages" id="prev"/>'+
-        '<span class="pagedisplay"></span> <!-- this can be any element, including an input -->'+
-        '<img src="https://mottie.github.io/tablesorter/addons/pager/icons/next.png" class="pages" id="next" value="first"/>'+
-        '<img src="https://mottie.github.io/tablesorter/addons/pager/icons/last.png" class="pages" id="last"/>' +
-        '<select class="pagesize" title="Select page size">' +
-            '<option selected="selected" value="10">10</option>'+
-            '<option value="20">20</option>'+
-            '<option value="30">30</option> '+
-            '<option value="all">All</option>'+
-        '</select>'
+    '<button class="pages" id="first"><i class="fas fa-step-backward"></i></button>' +
+    '<button class="pages" id="prev"><i class="fas fa-caret-left"></i></button>'+
+    ' <select class="pagesize" id="numOfPages">' +
+        '<option selected="selected" value="10">10</option>'+
+        '<option value="20">20</option>'+
+        '<option value="30">30</option> '+
+        '<option value="all">All</option>'+
+    '</select> '+
+    '<button class="pages" id="next"><i class="fas fa-caret-right"></i></button>'+
+    '<button class="pages" id="last"><i class="fas fa-step-forward"></i></button>'
+
 
 //add it all to the section
 jobsfilter.append(header, search, rarSel, pages)
