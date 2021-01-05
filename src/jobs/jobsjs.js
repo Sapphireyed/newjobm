@@ -12,11 +12,15 @@ const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 export {powlvl, unitDesc, abilitiesArr}
 
 let abilAll = [{...Array}];
-let abilSheet = []
-let powlvl;
-let unitDesc;
-let abilitiesArr;
 
+//Store data from different sheets for later use
+let abilSheet = []
+let powlvl;     // power level table from sheet 4
+let unitDesc;  // unit desc table from sheet 4
+let abilitiesArr;   // abilites from sheet 6
+
+
+// merge skill unitis andabilities data to get full info on every ability
 let abilities = {
   units:() => {
     return GetSheetDone
@@ -45,31 +49,62 @@ let abilities = {
     return GetSheetDone
       .raw(id, 6).then(data => data.data).then(res => {
         res.shift()
-        console.log(powlvl.map(lvl => lvl.lvl))
-        abilitiesArr = res.map(row => {
-            var desc1 = unitDesc.filter(res => row[5] == res.skill && row[6] == res.type)
-            var multi1 = powlvl.filter(lvl => lvl.lvl == row[7])
+
+        function getDescr(arrToMap, arrToCompare, powlvlArr, ) {
+          abilitiesArr = arrToMap.map(row => {
+            var desc1 = arrToCompare.filter(res => row[5] == res.skill && row[6] == res.type);
+            var multi1 = powlvlArr.filter(lvl => lvl.lvl == row[7])
             var multi1maxhp = multi1.map(multi => multi.maxHP)
             var multi1attr = multi1.map(multi => multi.strAgiInt)
-            if (row[5] == 'Damage' || row[5] == 'Heal')  //|| (row[5] == "Protect" && (row[6] == 'MaxHP' || row[6] == 'Strength' || row[6] == 'Agility' || row[6] == 'Intelligence')))
+
+            if (row[5] == 'Damage' || row[5] == 'Heal' || (row[5] == "Protect" && (row[6] == 'MaxHP' || row[6] == 'Strength' || row[6] == 'Agility' || row[6] == 'Intelligence')))
             {
               desc1 = row[6] == 'MaxHP' ? desc1.map(desc => desc.desc.replace('X%', multi1maxhp)) : desc1.map(desc => desc.desc.replace('X%', multi1attr))
               desc1 = row[6] == 'Null' ?  desc1[0].replace('X', row[7]) : desc1[0].replace('X', multi1attr)
             } else {
               desc1 = row[5] == 'Sacrifice' ? desc1.map(desc => desc.desc.replace('10x', 10 * row[7])) : desc1.map(desc => desc.desc)
-              desc1 = desc1[0] == undefined ? '' : desc1[0].replace('X%', '%') || desc1[0].replace('X', row[7])
+              desc1 = desc1[0] == undefined ? '' : desc1[0].replace('X%', '%')
+              desc1 = desc1.replace('X', row[7])
 
             }
-console.log(row[2] + ' ' + desc1 + ' ' +  row[5] + ',' + row[6] + ',' + row[7])
+
+            return {
+              name: row[2],
+              desc1: desc1
+            }
+
+          })
+        }
+        abilitiesArr = res.map(row => {
+            var desc1 = unitDesc.filter(res => row[5] == res.skill && row[6] == res.type)
+            var multi1 = powlvl.filter(lvl => lvl.lvl == row[7])
+            var multi1maxhp = multi1.map(multi => multi.maxHP)
+            var multi1attr = multi1.map(multi => multi.strAgiInt)
+
+            if (row[5] == 'Damage' || row[5] == 'Heal' || (row[5] == "Protect" && (row[6] == 'MaxHP' || row[6] == 'Strength' || row[6] == 'Agility' || row[6] == 'Intelligence')))
+            {
+              desc1 = row[6] == 'MaxHP' ? desc1.map(desc => desc.desc.replace('X%', multi1maxhp)) : desc1.map(desc => desc.desc.replace('X%', multi1attr))
+              desc1 = row[6] == 'Null' ?  desc1[0].replace('X', row[7]) : desc1[0].replace('X', multi1attr)
+            } else {
+              desc1 = row[5] == 'Sacrifice' ? desc1.map(desc => desc.desc.replace('10x', 10 * row[7])) : desc1.map(desc => desc.desc)
+              desc1 = desc1[0] == undefined ? '' : desc1[0].replace('X%', '%')
+              desc1 = desc1.replace('X', row[7])
+
+            }
+//console.log(row[2] + ' ' + desc1 + ' ' +  row[5] + ',' + row[6] + ',' + row[7])
           var desc2 = unitDesc.filter(res => row[8] == res.skill && row[9] ==res.type)
           var desc3 = unitDesc.filter(res => row[11] == res.skill && row[12] == res.type)
           var desc4 = unitDesc.filter(res => row[14] == res.skill && row[15] == res.type)
-
+          return {
+            name: row[2],
+            desc1: desc1
+          }
 
         })
       })
+      console.log(abilitiesArr)
   },
-  find:() => {
+  /*find:() => {
     return GetSheetDone.raw(id,6).then((sheet) => {
       sheet.data.map(data => abilSheet.push(data))
       return GetSheetDone
@@ -94,10 +129,10 @@ console.log(row[2] + ' ' + desc1 + ' ' +  row[5] + ',' + row[6] + ',' + row[7])
             var desc3 = result.filter(res => row[11] == res[7] && row[12] == res[8])
             var desc4 = result.filter(res => row[14] == res[7] && row[15] == res[8])
 
-            return desc1.map(desc =>/* row[2] + ':\n' + */desc[9] + '(Lvl ' + row[7] + ')' + row[5] + '/' + row[6] + '\n'
-              + desc2.map(desc => desc[9]/*.replace('X', row[10]) */+ '(Lvl ' + row[10] + ')\n')
-              + desc3.map(desc => desc[9]/*.replace('X', row[13]) */+ '(Lvl ' + row[13] + ')\n')
-              + desc4.map(desc => desc[9]/*.replace('X', row[16]) */ + '(Lvl ' + row[16] + ')\n'))
+            return desc1.map(desc =>/* row[2] + ':\n' + desc[9] + '(Lvl ' + row[7] + ')' + row[5] + '/' + row[6] + '\n'
+              + desc2.map(desc => desc[9]/*.replace('X', row[10]) + '(Lvl ' + row[10] + ')\n')
+              + desc3.map(desc => desc[9]/*.replace('X', row[13]) + '(Lvl ' + row[13] + ')\n')
+              + desc4.map(desc => desc[9]/*.replace('X', row[16])  + '(Lvl ' + row[16] + ')\n'))
           });
 
             Object.values(abils).map(val => abilSheet.map(row=> row[1] = val))
@@ -120,14 +155,12 @@ console.log(row[2] + ' ' + desc1 + ' ' +  row[5] + ',' + row[6] + ',' + row[7])
   } else {
     res[9] = res[9].replace('X', row[7])
   }
-  return res*/
+  return res
 //})
-
-console.log(abilAll)
 
     })
     });
-  },
+  },*/
 };
 export {abilities}
 
@@ -137,7 +170,10 @@ export function jobs() {
 
   GetSheetDone.raw(id, 7)
   .then((data) => {
-    console.log(powlvl)
+
+    abilities.abils()
+    .then(res => {
+      console.log(abilitiesArr)
     var jobsSheet = data
     //       J O B S
     var rarFilter = document.getElementById('rarity')
@@ -220,7 +256,7 @@ function loadList() {
         //jobLinksIndex.push(jobLinks[i].previousElementSibling.previousElementSibling.innerHTML)
         jobLinks[i].addEventListener("click", function() {
           var i = this.parentNode.firstChild.innerHTML
-          openNew(jobValues, i, abilAll)
+          openNew(jobValues, i, abilitiesArr)
         })
         i++
     }
@@ -317,7 +353,7 @@ document.getElementById('first').click()
     var jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)')
 
 
-
+  })
   })
 }
 /*export function init() {

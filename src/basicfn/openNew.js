@@ -1,4 +1,4 @@
-import {jobmain} from '../jobs/job/jobmain.js'
+import {jobmain, abilities} from '../jobs/job/jobmain.js'
 
 export function openNew(arr, i, abilArr) {
     var abil = abilArr
@@ -65,9 +65,10 @@ export function openNew(arr, i, abilArr) {
         passiveDesc.innerHTML = ''
         let switchH = win.document.getElementById('switchH')
         let switchDesc = win.document.getElementById('switchDesc')
-        var switchSkill = abil.filter(ab => jobItem[8] == ab[0])
+        var switchSkill = abil.filter(ab => jobItem[8] == ab.name)
+        console.log(switchSkill)
         switchH.innerHTML = jobItem[8] || ''
-        switchDesc.innerHTML = switchSkill[0]
+        switchDesc.innerHTML = switchSkill[0].desc1
 }, 40)
 
 setTimeout(function() {

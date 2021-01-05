@@ -8,14 +8,11 @@ import './style.scss';
 var $ = require("jquery")
 import nav from './nav/nav';
 import { jobsmain } from './jobs/jobsmain.js'
-import { jobs, abilities, unitPerc, powlvl, unitDesc } from './jobs/jobsjs.js'
+import { jobs, abilities, unitPerc, powlvl, unitDesc, abilitiesArr} from './jobs/jobsjs.js'
 
 document.body.append(nav(), jobsmain)
 abilities.units()
-    .then(res => {
-        abilities.abils()
-    }).then(res => {
-      console.log(unitDesc[0])
+    .then(data => {
         jobs()
     })
 
