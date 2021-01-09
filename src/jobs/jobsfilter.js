@@ -26,9 +26,10 @@ rarSel.innerHTML = options;
 const search = document.createElement('input')
 //search.classList.add('col-4')
 search.type = 'text'
+search.id = 'search'
 search.value = 'Search...'
+
 search.classList.add('rounded', 'float-right')
-console.log(search)
 
 // DISPLAY PAGE / PAGER
 var pages = document.createElement('div')

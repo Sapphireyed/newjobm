@@ -3,168 +3,14 @@ global.fetch = require('node-fetch');
 const GetSheetDone = require('get-sheet-done');
 import { tbody } from './jobsTable.js'
 import {jobsfilter} from './jobsfilter'
+import {abilities,
+        abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
+        passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from '../abilitiesData.js'
 var $ = require("jquery")
 import 'tablesorter'
 import { rarityFilter } from '../basicfn/rarityFilter.js'
 import { openNew } from '../basicfn/openNew.js'
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
-
-export {powlvl, unitDesc, abilitiesArr}
-
-let abilAll = [{...Array}];
-
-//Store data from different sheets for later use
-let abilSheet = []
-let powlvl;     // power level table from sheet 4
-let unitDesc;  // unit desc table from sheet 4
-let abilitiesArr;   // abilites from sheet 6
-
-
-// merge skill unitis andabilities data to get full info on every ability
-let abilities = {
-  units:() => {
-    return GetSheetDone
-      .raw(id, 4).then(data => data.data).then(res => {
-        res.shift()
-        powlvl = res.map(row => {
-          return {
-            lvl: row[0],
-            strAgiInt: row[1],
-            maxHP: row[3] + '/' + row[2]
-          }
-        })
-        powlvl.length = 8
-
-        unitDesc = res.map(row => {
-          return {
-            skill: row[7],
-            type: row[8],
-            desc: row[9]
-          }
-        })
-      })
-  },
-
-  abils:() => {
-    return GetSheetDone
-      .raw(id, 6).then(data => data.data).then(res => {
-        res.shift()
-
-        function getDescr(arrToMap, arrToCompare, powlvlArr, ) {
-          abilitiesArr = arrToMap.map(row => {
-            var desc1 = arrToCompare.filter(res => row[5] == res.skill && row[6] == res.type);
-            var multi1 = powlvlArr.filter(lvl => lvl.lvl == row[7])
-            var multi1maxhp = multi1.map(multi => multi.maxHP)
-            var multi1attr = multi1.map(multi => multi.strAgiInt)
-
-            if (row[5] == 'Damage' || row[5] == 'Heal' || (row[5] == "Protect" && (row[6] == 'MaxHP' || row[6] == 'Strength' || row[6] == 'Agility' || row[6] == 'Intelligence')))
-            {
-              desc1 = row[6] == 'MaxHP' ? desc1.map(desc => desc.desc.replace('X%', multi1maxhp)) : desc1.map(desc => desc.desc.replace('X%', multi1attr))
-              desc1 = row[6] == 'Null' ?  desc1[0].replace('X', row[7]) : desc1[0].replace('X', multi1attr)
-            } else {
-              desc1 = row[5] == 'Sacrifice' ? desc1.map(desc => desc.desc.replace('10x', 10 * row[7])) : desc1.map(desc => desc.desc)
-              desc1 = desc1[0] == undefined ? '' : desc1[0].replace('X%', '%')
-              desc1 = desc1.replace('X', row[7])
-
-            }
-
-            return {
-              name: row[2],
-              desc1: desc1
-            }
-
-          })
-        }
-        abilitiesArr = res.map(row => {
-            var desc1 = unitDesc.filter(res => row[5] == res.skill && row[6] == res.type)
-            var multi1 = powlvl.filter(lvl => lvl.lvl == row[7])
-            var multi1maxhp = multi1.map(multi => multi.maxHP)
-            var multi1attr = multi1.map(multi => multi.strAgiInt)
-
-            if (row[5] == 'Damage' || row[5] == 'Heal' || (row[5] == "Protect" && (row[6] == 'MaxHP' || row[6] == 'Strength' || row[6] == 'Agility' || row[6] == 'Intelligence')))
-            {
-              desc1 = row[6] == 'MaxHP' ? desc1.map(desc => desc.desc.replace('X%', multi1maxhp)) : desc1.map(desc => desc.desc.replace('X%', multi1attr))
-              desc1 = row[6] == 'Null' ?  desc1[0].replace('X', row[7]) : desc1[0].replace('X', multi1attr)
-            } else {
-              desc1 = row[5] == 'Sacrifice' ? desc1.map(desc => desc.desc.replace('10x', 10 * row[7])) : desc1.map(desc => desc.desc)
-              desc1 = desc1[0] == undefined ? '' : desc1[0].replace('X%', '%')
-              desc1 = desc1.replace('X', row[7])
-
-            }
-//console.log(row[2] + ' ' + desc1 + ' ' +  row[5] + ',' + row[6] + ',' + row[7])
-          var desc2 = unitDesc.filter(res => row[8] == res.skill && row[9] ==res.type)
-          var desc3 = unitDesc.filter(res => row[11] == res.skill && row[12] == res.type)
-          var desc4 = unitDesc.filter(res => row[14] == res.skill && row[15] == res.type)
-          return {
-            name: row[2],
-            desc1: desc1
-          }
-
-        })
-      })
-      console.log(abilitiesArr)
-  },
-  /*find:() => {
-    return GetSheetDone.raw(id,6).then((sheet) => {
-      sheet.data.map(data => abilSheet.push(data))
-      return GetSheetDone
-        .raw(id, 4)
-        .then((res) => res.data)
-        .then((data) => {
-          var result = data;
-          result.shift();
-          var level = result.slice(0, 8)
-          var power = level.map(pow => {
-          return {
-            lvl: pow[0],
-            strAgiInt: pow[1],
-            maxHP: pow[2] + '/' + pow[3]
-          }
-
-          })
-          var abils = sheet.data.map((row) => {
-
-            var desc1 = result.filter(res=> row[5] == res[7] && row[6] == res[8])
-            var desc2 = result.filter(res => row[8] == res[7] && row[9] == res[8])
-            var desc3 = result.filter(res => row[11] == res[7] && row[12] == res[8])
-            var desc4 = result.filter(res => row[14] == res[7] && row[15] == res[8])
-
-            return desc1.map(desc =>/* row[2] + ':\n' + desc[9] + '(Lvl ' + row[7] + ')' + row[5] + '/' + row[6] + '\n'
-              + desc2.map(desc => desc[9]/*.replace('X', row[10]) + '(Lvl ' + row[10] + ')\n')
-              + desc3.map(desc => desc[9]/*.replace('X', row[13]) + '(Lvl ' + row[13] + ')\n')
-              + desc4.map(desc => desc[9]/*.replace('X', row[16])  + '(Lvl ' + row[16] + ')\n'))
-          });
-
-            Object.values(abils).map(val => abilSheet.map(row=> row[1] = val))
-
-            //Object.values(abilAll).map(abil => abil == undefined ? '' : abil.split(':'))
- //abilAll = Object.values(abilAll).map(val => val[0] == undefined ? '' : val[0].split(':'))
-//abilAll.map(val => {
-  /*if (
-    (row[5] == ('Damage' || 'Heal')
-    || (row[5] == "Protect" && (row[6] == ('MaxHP' || 'Strength' || 'Agility' || 'Intelligence'))))
-    && (row[5] == res[7] && row[6] == res[8])
-  ) {
-    var perc = power.map(lvl => {
-      if (lvl.lvl == row[7]) {
-        row[6] == 'MaxHP'
-        ? res[9].replace('X%' , lvl.maxHP)
-        : res[9].replace('X%' , lvl.strAgiInt)
-      }
-      })
-  } else {
-    res[9] = res[9].replace('X', row[7])
-  }
-  return res
-//})
-
-    })
-    });
-  },*/
-};
-export {abilities}
-
-
 
 export function jobs() {
 
@@ -172,8 +18,9 @@ export function jobs() {
   .then((data) => {
 
     abilities.abils()
+    abilities.passivesFn()
     .then(res => {
-      console.log(abilitiesArr)
+
     var jobsSheet = data
     //       J O B S
     var rarFilter = document.getElementById('rarity')
@@ -250,13 +97,14 @@ function loadList() {
       rarityFilter(tableRows, pageList, rarFilter)
     })
     rarFilter.value = 'Rarity'
+
     // jobLinks
     jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)');
     for (var i = 0; i < jobLinks.length;) {
         //jobLinksIndex.push(jobLinks[i].previousElementSibling.previousElementSibling.innerHTML)
         jobLinks[i].addEventListener("click", function() {
           var i = this.parentNode.firstChild.innerHTML
-          openNew(jobValues, i, abilitiesArr)
+          openNew(jobValues, i, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
         })
         i++
     }
@@ -351,8 +199,19 @@ document.getElementById('first').click()
       }
     }*/
     var jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)')
-
-
+    //search
+    document.getElementById('search').onfocus = function() {
+      document.getElementById('search').value=''
+    }
+    document.getElementById('search').onblur = function() {
+      document.getElementById('search').value='Search...'
+    }
+    $("#search").on("keyup", function() {
+var input = $(this).val().toLowerCase();
+  $("#jobsTable tr").filter(function(){
+    $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1)
+  });
+});
   })
   })
 }

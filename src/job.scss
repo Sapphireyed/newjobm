@@ -9,69 +9,66 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 #rarity { color: gold }
 #jobmaindiv { margin: 10px}
 #basicinfo { margin: 20px 5px 40px 5px}
+#traitsdivPassive h5:first-child {
+  text-align: center;
+  text-decoration: underline
+}
+#passiveDesc { margin: 10px 5px 40px 5px}
+#passiveSkill { text-align: center }
+#switchDesc { margin: 10px 5px 40px 5px}
+#traitsdiv h5:first-child {
+  text-align: center;
+  text-decoration: underline
+}
+#switchSkill { text-align: center}
+#deckdiv { margin: 10px 10px}
+
 .job1star {
-    background-color: #f4ffed;
-    .jobh1
+  background-color: #f4ffed;
 
-{
-    background-color: #6a8d55;
-}
+  h1 {
+      background-color: #6a8d55;
+      margin-right: auto;
+      margin-left: auto;
+  }
 
-h1 {
-    background-color: #6a8d55;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-h4 {
-    text-align: center
-}
-
+  h4 {
+      text-align: center;
+      color: #6a8d55;
+  }
 }
 
 .job2star {
-    background-color: #f4ffed;
-    .jobh1
+    background-color: #eef7ff;
+    h1
+    {
+        background-color: #4b7396;
+        margin-right:auto;
+        margin-left: auto;
+    }
 
-{
-    background-color: #954e3a
+    h4 {
+        text-align: center;
+        color: #4b7396
+    }
 }
 
-h1 {
-    background-color: #954e3a;
-    margin-right:auto;
-    margin-left: auto;
-}
+.job3star {
+    background-color: #f5eefd;
+    h1 {
+        background-color: #584b67;
+        margin-right:auto;
+        margin-left: auto;
+    }
 
-h4 {
-    text-align: center;
-    color: #954e3a
-}
-}
-
-.job2star {
-    background-color: #f4ffed;
-    .jobh1
-
-{
-    background-color: #954e3a
-}
-
-h1 {
-    background-color: #954e3a;
-    margin-right:auto;
-    margin-left: auto;
-}
-
-h4 {
-    text-align: center;
-    color: #954e3a
-}
-
+    h4 {
+        text-align: center;
+        color: #584b67
+    }
 }
 
 .job4star {
-    background-color: #f4ffed;
+    background-color: #fff0ec;
     h1 {
         background-color: #954e3a;
         margin-right:auto;
@@ -85,15 +82,40 @@ h4 {
 }
 
 .job5star {
-    background-color: #f4ffed;
+    background-color: #fffaef;
     h1 {
-        background-color: gold;
+        background-color: #b9994c;
         margin-right:auto;
         margin-left: auto;
     }
 
     h4 {
         text-align: center;
-        color: #954e3a
+        color: #b9994c
     }
 }
+/*attr*/
+.maxhp { color: goldenrod }
+.str { color: red }
+.agi { color: green }
+.int { color: blue }
+/*elements*/
+.water { color: #3d9af2 }
+.fire { color: #ff4538 }
+.earth { color: #520500 }
+.thunder { color: #c2ae55 }
+.wind { color: #5ee6a9 }
+.dark { color: #7436ba }
+.light { color: #ccc7d1 }
+/*debuffs*/
+.blind { color: #ccc7d1 }
+.bleed { color: #ad2424 }
+.dizzy { color: #5ee6a9 }
+.insane { color: #d86de8 }
+.depress { color: #7436ba }
+.burn { color: #ff4538 }
+.chill { color: #3d9af2 }
+.paralysis { color: #c2ae55 }
+.restrain { color: #8fc9c3 }
+.injury { color: #cfae72 }
+.seed { color: #520500 }
