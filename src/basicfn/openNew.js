@@ -128,7 +128,7 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
         console.log(card1H)
         card1H.innerHTML = card1[0] + ' x5'
         let card1desc = win.document.getElementById('card1desc')
-        card1desc.innerHTML = card[1]
+        card1desc.innerHTML = card1[1]
 
 }, 40)
 

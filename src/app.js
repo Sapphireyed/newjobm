@@ -11,14 +11,17 @@ import { jobsmain } from './jobs/jobsmain.js'
 import { jobs} from './jobs/jobsjs.js'
 import {abilities,
         powlvl, unitDesc,
-        abilitiesArr, descFinale, abilTraits,
-        passives, passivesArr, passiveFinale} from './abilitiesData.js'
+        abilitiesAllInfo, abilitiesArr, descFinale, abilTraits,
+        passivesFn,passives, passivesArr, passiveFinale} from './abilitiesData.js'
 
 document.body.append(nav(), jobsmain)
 abilities.units()
     .then(data => {
+        abilities.abils()
+        abilities.passivesFn()
+    }).then(res => {
         jobs()
-  console.log(passivesArr)
+        console.log(abilitiesAllInfo)
     })
 
 //console.log(abilities.find)

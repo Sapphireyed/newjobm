@@ -4,11 +4,11 @@ const GetSheetDone = require('get-sheet-done');
 import { tbody } from './jobsTable.js'
 import {jobsfilter} from './jobsfilter'
 import {abilities,
-        abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
-        passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from '../abilitiesData.js'
+        abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
+        passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from '../abilitiesData.js'
 var $ = require("jquery")
 import 'tablesorter'
-import { rarityFilter } from '../basicfn/rarityFilter.js'
+import { rarityFilter, elementFilter } from '../basicfn/rarityFilter.js'
 import { openNew } from '../basicfn/openNew.js'
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 
@@ -17,21 +17,21 @@ export function jobs() {
   GetSheetDone.raw(id, 7)
   .then((data) => {
 
-    abilities.abils()
-    abilities.passivesFn()
-    .then(res => {
-
     var jobsSheet = data
     //       J O B S
     var rarFilter = document.getElementById('rarity')
+    var elemFilter = document.getElementById('element')
     var jobsSheetArrs = Object.entries(jobsSheet);
     var jobsRows = jobsSheetArrs[2][1];
     jobsRows.shift()
     jobsRows.map(job => {
-      job[7] == undefined ? job.splice(7,1, '') : job[7]
+      for (var i=0; i< job.length; i++) {
+        job[i] == undefined ? job.splice(i,1, '') : job[i]
+      }
       return job
     })
     var job = Object.entries(jobsRows);
+
     var jobValues = job.map(job => job[1])
 
 
@@ -74,9 +74,11 @@ function lastPage() {
     currentPage = numberOfPages;
     loadList();
 }
-
+console.log(abilitiesAllInfo)
 function loadList() {
   numberPerPage = parseInt(numberPerPage) || 'all'
+
+  console.log(list)
     var jobsBody = document.getElementById('jobsBody');
     var begin
     if (numberPerPage == 10) {
@@ -97,6 +99,11 @@ function loadList() {
       rarityFilter(tableRows, pageList, rarFilter)
     })
     rarFilter.value = 'Rarity'
+    console.log(element)
+    elemFilter.addEventListener("change", function() {
+      elementFilter(tableRows, pageList, elemFilter, passivesAllInfo, abilitiesAllInfo)
+    })
+    element.value = 'Element'
 
     // jobLinks
     jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)');
@@ -116,18 +123,18 @@ function loadList() {
 }
 
 function drawList() {
+  console.log(pageList)
     document.getElementById("jobsBody").innerHTML = "";
     //console.log(pageList)
       for (var i=0; i < pageList.length; i++) {
         var jobItem = Object.values(pageList[i])
-        //console.log(jobItem)
+      //  jobItem[i] = jobItem[i] == undefined ? '' : jobItem[i]
         jobItem.splice(1, 0, "pic")
         var attrs = jobItem.splice(4, 4)
-        //console.log(jobItem)
-        jobItem[6] = jobItem[6] == undefined ? '' : jobItem[6] + ' x5' + '<br>'
-        jobItem[7] = jobItem[7] == undefined ? '' : jobItem[7] + ' x3' + '<br>'
-        jobItem[8] = jobItem[8] == undefined ? '' : jobItem[8] + ' x2' + '<br>'
-        jobItem[9] = jobItem[9] == undefined ? '' : jobItem[9] + ' x1' + '<br>'
+        jobItem[6] = jobItem[6] == '' ? '' : jobItem[6] + ' x5' + '<br>'
+        jobItem[7] = jobItem[7] == '' ? '' : jobItem[7] + ' x3' + '<br>'
+        jobItem[8] = jobItem[8] == '' ? '' : jobItem[8] + ' x2' + '<br>'
+        jobItem[9] = jobItem[9] == '' ? '' : jobItem[9] + ' x1' + '<br>'
         jobItem[6] = jobItem[6] + jobItem[7] + jobItem[8] + jobItem[9]
         jobItem.length = 11
         jobItem[0] = jobItem[0] + '.'
@@ -137,6 +144,7 @@ function drawList() {
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
         i % 2 == 0 ? tableRow : tableRow.style.backgroundColor = 'white'
+
         jobItem.map( job => {
           var cell = document.createElement('td')
           var star = document.createElement('i')
@@ -212,7 +220,6 @@ var input = $(this).val().toLowerCase();
     $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1)
   });
 });
-  })
   })
 }
 /*export function init() {

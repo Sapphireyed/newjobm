@@ -22,6 +22,19 @@ const options = optionsArr.map(opt => {
 
 rarSel.innerHTML = options;
 
+// Element filter
+const elemSel = document.createElement('select');
+elemSel.id = 'element'
+elemSel.name = 'element'
+const optionsArrElem = ['Element', 'Fire', 'Water', 'Earth', 'Wind', 'Thunder', 'Light', 'Dark'];
+
+const optionsElem = optionsArrElem.map(opt => {
+  const value = opt
+  return `<option value="${value}">${opt}</option>`;
+});
+
+elemSel.innerHTML = optionsElem;
+
 // SEARCH
 const search = document.createElement('input')
 //search.classList.add('col-4')
@@ -50,5 +63,5 @@ pages.innerHTML = '<!-- pager -->' +
 
 
 //add it all to the section
-jobsfilter.append(header, search, rarSel, pages)
+jobsfilter.append(header, search, rarSel, elemSel, pages)
 export { jobsfilter}

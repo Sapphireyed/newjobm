@@ -3,22 +3,24 @@ const GetSheetDone = require('get-sheet-done');
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 
 export { powlvl, unitDesc,
-         abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
-         passives, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits }
+         abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
+         passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits }
 
 let powlvl;     // power level table from sheet 4
 let unitDesc;  // unit desc table from sheet 4
 let abilitiesArr = [];   // abilites from sheet 6
-let descFinale = [];
-let abilSkills = [];
-let abilEffects = []
-let abilTraits = [];
-let abilBasic = [];
-let passives = [];
+let abilitiesAllInfo = [];
+let descFinale = []; // name +desc with changed color and X value
+let abilSkills = [];  // Damage/Sacrifice/Heal etc
+let abilEffects = []  // attr, element etc
+let abilTraits = []; // draw, multiply, element, exhaust etc
+let abilBasic = [];   // name +rarity+ cost
+let passives = [];  // passives skillunits
 let passivesArr = [];
-let passiveFinale = []
-let passiveSkills = [];
-let passiveEffects = []
+let passivesAllInfo = [];
+let passiveFinale = []  // passiveswith changed color and x value
+let passiveSkills = []; // turnDamage/turnHeal etc
+let passiveEffects = [] // attr, element etc
 let passiveTraits = [];
 
 var x = 0
@@ -180,6 +182,7 @@ let abilities = {
     return GetSheetDone
       .raw(id, 6).then(data => data.data).then(res => {
         res.shift()
+        res.map(inf => abilitiesAllInfo.push(inf))
         // call the function to get the desc for each of 4 skill units that build ability desc
           getDesc(abilitiesArr, res, unitDesc, powlvl, 5, 6, 7)
           getDesc(abilitiesArr, res, unitDesc, powlvl, 8, 9, 10)
@@ -247,7 +250,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
         return GetSheetDone
           .raw(id, 5).then(data => data.data).then(res => {
             res.shift()
-            console.log(res.length)
+            res.map(inf => passivesAllInfo.push(inf))
 
             getDesc(passivesArr, res, passives, powlvl, 4, 5, 6)
             getDesc(passivesArr, res, unitDesc, powlvl, 7, 8, 9)
