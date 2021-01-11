@@ -64,9 +64,9 @@ function changeColors(arr) {
       if ((i !== 2) && (r[i] !== undefined)) {
         // attr change colors
         r[i] = r[i].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
-        r[i] = r[i].replace(/\bstr\b|\bstrength\b/gi, '<span class=\'str\'>Strength</span>')
-        r[i] = r[i].replace(/\bagi\b|\bagility\b/gi, '<span class=\'agi\'>Agility</span>')
-        r[i] = r[i].replace(/\bint\b|\bintelligence\b/gi, '<span class=\'int\'>Inteligence</span>')
+        r[i] = r[i].replace(/\bstr\b|\bstrength\b/gi, '<span class=\'strength\'>Strength</span>')
+        r[i] = r[i].replace(/\bagi\b|\bagility\b/gi, '<span class=\'agility\'>Agility</span>')
+        r[i] = r[i].replace(/\bint\b|\bintelligence\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
         // elements change color
         r[i] = r[i].replace(/\bwater\b/gi, '<span class=\'water\'>Water</span>')
         r[i] = r[i].replace(/\bfire\b/gi, '<span class=\'fire\'>Fire</span>')
@@ -112,9 +112,9 @@ let abilities = {
         unitDesc = res.map(row => {
           //attr
           row[9] = row[9].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
-          row[9] = row[9].replace(/\bstr\b/gi, '<span class=\'str\'>Strength</span>')
-          row[9] = row[9].replace(/\bagi\b/gi, '<span class=\'agi\'>Agility</span>')
-          row[9] = row[9].replace(/\bint\b/gi, '<span class=\'int\'>Inteligence</span>')
+          row[9] = row[9].replace(/\bstr\b/gi, '<span class=\'strength\'>Strength</span>')
+          row[9] = row[9].replace(/\bagi\b/gi, '<span class=\'agility\'>Agility</span>')
+          row[9] = row[9].replace(/\bint\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
           //elements
           row[9] = row[9].replace(/\bwater\b/gi, '<span class=\'water\'>Water</span>')
           row[9] = row[9].replace(/\bfire\b/gi, '<span class=\'fire\'>Fire</span>')
@@ -148,7 +148,7 @@ let abilities = {
           row[30] = row[30].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
           row[30] = row[30].replace(/\bagi\b/gi, '<span class=\'agi\'>Agility</span>')
           row[30] = row[30].replace(/\bstr\b/gi, '<span class=\'str\'>Strength</span>')
-          row[30] = row[30].replace(/\bint\b/gi, '<span class=\'int\'>Inteligence</span>')
+          row[30] = row[30].replace(/\bint\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
           //elements
           row[30] = row[30].replace(/\bwater\b/gi, '<span class=\'water\'>Water</span>')
           row[30] = row[30].replace(/\bfire\b/gi, '<span class=\'fire\'>Fire</span>')

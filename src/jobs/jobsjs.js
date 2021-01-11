@@ -8,7 +8,7 @@ import {abilities,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from '../abilitiesData.js'
 var $ = require("jquery")
 import 'tablesorter'
-import { rarityFilter, elementFilter } from '../basicfn/rarityFilter.js'
+import { rarityFilter, elementFilter, attrsFilter } from '../basicfn/rarityFilter.js'
 import { openNew } from '../basicfn/openNew.js'
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 
@@ -21,6 +21,7 @@ export function jobs() {
     //       J O B S
     var rarFilter = document.getElementById('rarity')
     var elemFilter = document.getElementById('element')
+    var attrFilter = document.getElementById('attrSel')
     var jobsSheetArrs = Object.entries(jobsSheet);
     var jobsRows = jobsSheetArrs[2][1];
     jobsRows.shift()
@@ -95,15 +96,68 @@ function loadList() {
     check();
     //RARITY FILTER
     tableRows = document.querySelectorAll('tr')
-    rarFilter.addEventListener("change", function() {
-      rarityFilter(tableRows, pageList, rarFilter)
+
+  var filters = document.getElementsByClassName('filter')
+  console.log(filters)
+for (var i=0; i< filters.length; i++) {
+  filters[i].onchange = test
+}
+
+
+function test() {
+  var elem = this.value
+  for (var ind = 1; ind < tableRows.length; ind++) {
+    tableRows[ind].classList.add('d-none')
+    tableRows[ind].classList.remove('4', '3', '2', '1', this.id)
+  if (this.value == pageList[ind-1][2]) {  // rarity
+    tableRows[ind].classList.add(this.id)
+  }
+
+  pageList[ind-1][8] = pageList[ind-1][8] == '' ? 'n/a' : pageList[ind-1][8]  // switch name
+  var abilname = pageList[i-1][8]
+  abilitiesAllInfo.map(a => {  //switch
+    if (a[2] == pageList[ind-1][8] && a.includes("<span class='" + elem.toLowerCase() + "'>" + elem + "</span>")) {
+      tableRows[ind].classList.add(this.id)
+    }
+  })
+
+  pageList[ind-1][7] = pageList[ind-1][7] == '' ? 'n/a' : pageList[ind-1][7]  // passive name
+  passivesAllInfo.map(a => {
+    if (a[2] == pageList[ind-1][7] && a.includes("<span class='" + elem.toLowerCase() + "'>" + elem + "</span>")) {
+      tableRows[ind].classList.add(this.id)
+    }
+  })
+
+var counter = 1
+  for (var index=0; index < filters.length; index++) {
+    if (tableRows[ind].classList.contains(filters[index].id) || filters[index].value == 'All') {
+      tableRows[ind].classList.add(counter += 1)
+    }
+  }
+console.log(counter)
+  if (tableRows[ind].classList.contains('4')) {
+    tableRows[ind].classList.remove('d-none')
+  } else {
+    tableRows[ind].classList.add('d-none')
+  }
+  }
+}
+
+
+  /*  rarFilter.addEventListener("change", function() {
+      rarityFilter(tableRows, pageList, rarFilter, elemFilter, attrFilter)
     })
     rarFilter.value = 'Rarity'
-    console.log(element)
+    // ELEMENT FILTER
     elemFilter.addEventListener("change", function() {
-      elementFilter(tableRows, pageList, elemFilter, passivesAllInfo, abilitiesAllInfo)
+      elementFilter(tableRows, pageList, elemFilter, passivesAllInfo, abilitiesAllInfo, rarFilter, attrFilter)
     })
     element.value = 'Element'
+    // ATTRIBUTE FILTER
+    attrFilter.addEventListener("change", function() {
+      attrsFilter(tableRows, pageList, attrFilter, passivesAllInfo, abilitiesAllInfo, rarFilter,elemFilter)
+    })
+    attrFilter.value = 'Attribute'*/
 
     // jobLinks
     jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)');
@@ -131,10 +185,10 @@ function drawList() {
       //  jobItem[i] = jobItem[i] == undefined ? '' : jobItem[i]
         jobItem.splice(1, 0, "pic")
         var attrs = jobItem.splice(4, 4)
-        jobItem[6] = jobItem[6] == '' ? '' : jobItem[6] + ' x5' + '<br>'
-        jobItem[7] = jobItem[7] == '' ? '' : jobItem[7] + ' x3' + '<br>'
-        jobItem[8] = jobItem[8] == '' ? '' : jobItem[8] + ' x2' + '<br>'
-        jobItem[9] = jobItem[9] == '' ? '' : jobItem[9] + ' x1' + '<br>'
+        jobItem[6] = (jobItem[6] == '' || jobItem[6] == undefined) ? '' : jobItem[6] + ' x5' + '<br>'
+        jobItem[7] = (jobItem[7] == '' || jobItem[7] == undefined) ? '' : jobItem[7] + ' x3' + '<br>'
+        jobItem[8] = (jobItem[8] == '' || jobItem[8] == undefined) ? '' : jobItem[8] + ' x2' + '<br>'
+        jobItem[9] = (jobItem[9] == '' || jobItem[9] == undefined) ? '' : jobItem[9] + ' x1' + '<br>'
         jobItem[6] = jobItem[6] + jobItem[7] + jobItem[8] + jobItem[9]
         jobItem.length = 11
         jobItem[0] = jobItem[0] + '.'
