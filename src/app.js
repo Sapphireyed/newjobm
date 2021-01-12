@@ -21,7 +21,9 @@ abilities.units()
         abilities.passivesFn()
     }).then(res => {
         jobs()
-        console.log(abilitiesAllInfo)
+      //  setTimeout(function() {
+      //    clearInterval(tooltips, 3000)
+      //  })
     })
 
 //console.log(abilities.find)

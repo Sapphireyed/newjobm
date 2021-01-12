@@ -6,7 +6,7 @@ var thead = document.createElement('thead')
 thead.classList.add('thead', 'shadow-lg', 'w-100')
 thead.id = 'thead'
 thead.innerHTML = '<tr>'
-    + '<th>Index<i class="fas-sort float-right"></i></th>'
+    + '<th>Index<i class="fas fa-sort float-right"></i></th>'
     + '<th>Icon<i class="fas fa-sort float-right"></i></th>'
     + '<th>Name<i class="fas fa-sort float-right"></i></th>'
     + '<th>Rarity<i class="fas fa-sort float-right"></i></th>'
