@@ -19,6 +19,7 @@ thead.innerHTML = '<tr>'
     + '<th>Lv 10 INT<i class="fas fa-sort float-right"></i></th>'
     + '</tr>'
   var tbody = document.createElement('tbody')
+  
   tbody.id = 'jobsBody'
 jobsTable.append(thead, tbody)
 export { jobsTable }

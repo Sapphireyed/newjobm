@@ -15,6 +15,8 @@ import {abilities,
         passivesFn,passives, passivesArr, passiveFinale} from './abilitiesData.js'
 
 document.body.append(nav(), jobsmain)
+
+
 abilities.units()
     .then(data => {
         abilities.abils()

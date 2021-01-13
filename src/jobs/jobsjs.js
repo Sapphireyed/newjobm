@@ -12,6 +12,15 @@ import { rarityFilter, elementFilter, attrsFilter } from '../basicfn/rarityFilte
 import { openNew } from '../basicfn/openNew.js'
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 
+function importAll(r) {
+  let images = {};
+  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+  return images;
+}
+
+const images = importAll(require.context('../img/jobs', false, /\.(png|jpe?g|svg)$/));
+console.log(images)
+
 export function jobs() {
 
   GetSheetDone.raw(id, 7)
@@ -244,6 +253,40 @@ function drawList() {
           tooltip.classList.add('tooltipMy', 'tooltiptext')
           cell.innerHTML == jobItem[5] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
           cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
+
+          var imgdiv = document.createElement('div')
+          imgdiv.style.display = 'block';
+          imgdiv.style.margin = 'auto'
+          imgdiv.style.position = 'relative'
+          var img = document.createElement('img')
+          //img.width = '50'
+          img.className = 'jobimg'
+          var imgBg = document.createElement('img')
+          imgBg.className = 'jobBg'
+          var imgFrame = document.createElement('img')
+        //  imgFrame.width = '50'
+          imgFrame.className = 'jobFrame'
+          imgdiv.append(img, imgBg, imgFrame)
+
+
+          let icons = Object.entries(images).filter(pic => pic[0] == jobItem[2])
+console.log(icons)
+          Object.entries(images).map(pic => {
+            pic[0] == jobItem[2] + '.png' ? img.src = pic[1] : ''
+            pic[0] == 'str.png' ? imgBg.src = pic[1] : ''
+            pic[0] == jobItem[3] + '.png' ? imgFrame.src = pic[1] : ''
+            if (cell.innerHTML == 'pic') {
+              cell.innerHTML = ''
+            //  cell.style.position = 'relative'
+              cell.style.height = '50px'
+            //  pic[0] == 'str.png' ? imgBg.src = pic[1] : ''
+              cell.append(imgdiv)
+            }
+          })
+
+      //    cell.innerHTML == 'pic' ?  : ''
+        //  cell.innerHTML.includes('pic') ? cell.innerHTML.replace('pic', '') : ''
+
           tableRow.appendChild(cell)
           jobsBody.append(tableRow)
         })
