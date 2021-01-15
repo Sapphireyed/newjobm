@@ -94,28 +94,13 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
         color: #b9994c
     }
 }
-/*attr*/
-.maxhp { color: goldenrod }
-.strength { color: red }
-.agility { color: green }
-.intelligence { color: blue }
-/*elements*/
-.water { color: #3d9af2 }
-.fire { color: #ff4538 }
-.earth { color: #520500 }
-.thunder { color: #c2ae55 }
-.wind { color: #5ee6a9 }
-.dark { color: #7436ba }
-.light { color: #ccc7d1 }
-/*debuffs*/
-.blind { color: #ccc7d1 }
-.bleed { color: #ad2424 }
-.dizzy { color: #5ee6a9 }
-.insane { color: #d86de8 }
-.depress { color: #7436ba }
-.burn { color: #ff4538 }
-.chill { color: #3d9af2 }
-.paralysis { color: #c2ae55 }
-.restrain { color: #8fc9c3 }
-.injury { color: #cfae72 }
-.seed { color: #520500 }
+
+.craft {
+  text-align: center;
+}
+.craftjob {
+  width: 60px
+}
+.craftmat {
+  width: 30px
+}

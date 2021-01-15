@@ -10,16 +10,10 @@ var $ = require("jquery")
 import 'tablesorter'
 import { rarityFilter, elementFilter, attrsFilter } from '../basicfn/rarityFilter.js'
 import { openNew } from '../basicfn/openNew.js'
+import {jobsImgs, matsImgs, matImagesComplete} from '../importImgs.js'
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 
-function importAll(r) {
-  let images = {};
-  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-  return images;
-}
 
-const images = importAll(require.context('../img/jobs', false, /\.(png|jpe?g|svg)$/));
-console.log(images)
 
 export function jobs() {
 
@@ -123,13 +117,21 @@ function loadList() {
     for (var ind = 1; ind < tableRows.length; ind++) {
       tableRows[ind].classList.add('d-none')
       tableRows[ind].classList.remove('6', '5', '4', '3', '2', '1', this.id)
+
     if (this.value == pageList[ind-1][2]) {  // rarity
+      console.log(this.value)
+      console.log(pageList[ind-1])
+      console.log(pageList[ind-1][2])
+      console.log(this.value == pageList[ind-1][2])
+      console.log(tableRows[ind])
+      console.log(this.id)
       tableRows[ind].classList.add(this.id)
+
     }
 
     pageList[ind-1][8] = pageList[ind-1][8] == '' ? 'n/a' : pageList[ind-1][8]  // switch name
     var abilname = pageList[i-1][8]
-    abilitiesAllInfo.map(a => {  //switch
+    abilitiesAllInfo.map(a => {  //switch typa & traits
       if (a[2] == pageList[ind-1][8] && a.includes("<span class='" + elem.toLowerCase() + "'>" + elem + "</span>")) {
         tableRows[ind].classList.add(this.id)
       }
@@ -142,10 +144,15 @@ function loadList() {
       }
     })
 
-    abilitiesAllInfo.map(a => {  //switch
-      if (a[2] == pageList[ind-1][8] && a.includes(elem)) {
+    abilitiesAllInfo.map(a => {  //passive type & traits
+      if (a[2] == pageList[ind-1][8] && a.includes(elem) && elem !== '1' && elem !== '2' && elem !== '3' && elem !== 4 && elem !== '5') {
         tableRows[ind].classList.add(this.id)
-        console.log(a)
+      }
+    })
+
+    passivesAllInfo.map(a => {  //switch
+      if (a[2] == pageList[ind-1][8] && a.includes(elem) && elem !== '1' && elem !== '2' && elem !== '3' && elem !== '4' && elem !== '5') {
+        tableRows[ind].classList.add(this.id)
       }
     })
 
@@ -269,16 +276,15 @@ function drawList() {
           imgdiv.append(img, imgBg, imgFrame)
 
 
-          let icons = Object.entries(images).filter(pic => pic[0] == jobItem[2])
-console.log(icons)
-          Object.entries(images).map(pic => {
+        //  let icons = Object.entries(images).filter(pic => pic[0] == jobItem[2])
+          Object.entries(jobsImgs).map(pic => {
             pic[0] == jobItem[2] + '.png' ? img.src = pic[1] : ''
             pic[0] == 'str.png' ? imgBg.src = pic[1] : ''
             pic[0] == jobItem[3] + '.png' ? imgFrame.src = pic[1] : ''
             if (cell.innerHTML == 'pic') {
               cell.innerHTML = ''
             //  cell.style.position = 'relative'
-              cell.style.height = '50px'
+              cell.style.minHeight = '50px'
             //  pic[0] == 'str.png' ? imgBg.src = pic[1] : ''
               cell.append(imgdiv)
             }
@@ -348,7 +354,7 @@ document.getElementById('first').click()
     }*/
     $("#search").on("keyup", function() {
 var input = $(this).val().toLowerCase();
-  $("#jobsTable tr").filter(function(){
+  $("#jobsBody tr").filter(function(){
     $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1)
   });
 });

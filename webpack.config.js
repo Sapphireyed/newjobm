@@ -40,7 +40,7 @@ module: {
         use: ['style-loader', 'css-loader', 'sass-loader'],
     },
     {
-      test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+      test: /\.(?:ico|gif|png|PNG|jpg|jpeg)$/i,
       type: 'asset/resource',
     },
   ],

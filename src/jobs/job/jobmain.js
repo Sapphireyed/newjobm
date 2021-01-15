@@ -176,14 +176,27 @@ let card4 = document.createElement('div')
 card4.className = 'col'
 card4.id = 'card4'
 let card4H = document.createElement('h5')
-card4H.id = 'card1H'
+card4H.id = 'card4H'
 let card4desc = document.createElement('h5')
 card4desc.id = 'card4desc'
 card4.append(card4H, card4desc)
 
 deck.append(deckH, card1, card2, card3, card4)
+
+// CRAFT
+let craftdiv = document.createElement('div')
+craftdiv.id = 'craftdiv'
+let craftH = document.createElement('h4')
+craftH.innerHTML = 'Craft'
+let craftCraft = document.createElement('div')
+craftCraft.id = 'craftCraft'
+craftCraft.className = 'row'
+
+craftdiv.append(craftH, craftCraft)
+
 div3.append(deck)
 
-jobmain.append(maindiv, div1, div2, div3)
+
+jobmain.append(maindiv, div1, div2, div3, craftdiv)
 
 export {jobmain}

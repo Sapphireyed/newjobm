@@ -39,6 +39,30 @@ body {
 
 img { max-width: 100%}
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: $secondBg;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+
+  a {
+    text-align: left;
+    color: black
+  }
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(0,0,0,0.2);
+  color: black;
+}
+.dropdown:hover .dropdown-content {display: block;}
+//.dropdown:hover .dropbtn {background-color: #3e8e41;}
 //.fas {line-height: 1.5;}
 .section {
     padding: 10px 0;
@@ -66,7 +90,7 @@ nav:nth-child(2) {
         padding: 0;
         position: absolute;
         z-index: 1;
-        left: -55%;
+        left: -35%;
         bottom: 85%;
         opacity: 0;
         transition: opacity 0.3s;
@@ -214,9 +238,45 @@ table { overflow-x: scroll}
   z-index: 2
 }
 
-@media only screen and (max-width: 760px) {
-  .jobimg {
+/*attr*/
+.maxhp { color: goldenrod }
+.strength { color: red }
+.agility { color: green }
+.intelligence { color: blue }
+/*elements*/
+.water { color: #3d9af2 }
+.fire { color: #ff4538 }
+.earth { color: #520500 }
+.thunder { color: #c2ae55 }
+.wind { color: #5ee6a9 }
+.dark { color: #7436ba }
+.light { color: #ccc7d1 }
+/*debuffs*/
+.blind { color: #ccc7d1 }
+.bleed { color: #ad2424 }
+.dizzy { color: #5ee6a9 }
+.insane { color: #d86de8 }
+.depress { color: #7436ba }
+.burn { color: #ff4538 }
+.chill { color: #3d9af2 }
+.paralysis { color: #c2ae55 }
+.restrain { color: #8fc9c3 }
+.injury { color: #cfae72 }
+.seed { color: #520500 }
 
+@media only screen and (max-width: 1000px) {
+  .tooltipMy .tooltiptext {
+      left: -55%;
+  }
+
+  .jobBg {
+    width: 35px;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .tooltipMy .tooltiptext {
+      left: -65%;
   }
 
   .jobBg {

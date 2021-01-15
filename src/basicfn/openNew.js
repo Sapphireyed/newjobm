@@ -1,6 +1,8 @@
 import {jobmain} from '../jobs/job/jobmain.js'
 import {abilitiesArr, descFinale, abilSkills, abilEffects, abilTraits,
-        passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from '../abilitiesData.js'
+        passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
+        craft } from '../abilitiesData.js'
+import {getMatImgs, matImagesComplete } from '../img/imgsHTML.js'
 
 
 function splitDesc(arr, item){
@@ -8,6 +10,7 @@ function splitDesc(arr, item){
   return arr.filter(ab => item == ab[0])
 }
 
+getMatImgs()
 
 export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, passivesarr, passivedesc, passiveskills,  passiveeffects, passivetraits) {
     var abil = abilArr
@@ -125,10 +128,84 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
         card4 = card4.length == 0 ? '' : card4[0]
 
         let card1H = win.document.getElementById('card1H')
-        console.log(card1H)
         card1H.innerHTML = card1[0] + ' x5'
         let card1desc = win.document.getElementById('card1desc')
         card1desc.innerHTML = card1[1]
+        let card2H = win.document.getElementById('card2H')
+        card2H.innerHTML = card2[0] + ' x3'
+        let card2desc = win.document.getElementById('card2desc')
+        card2desc.innerHTML = card2[1]
+        let card3H = win.document.getElementById('card3H')
+        card3H.innerHTML = card3[0] + ' x2'
+        let card3desc = win.document.getElementById('card3desc')
+        card3desc.innerHTML = card3[1]
+        let card4H = win.document.getElementById('card4H')
+        card4H.innerHTML = card4[0] + ' x3'
+        let card4desc = win.document.getElementById('card4desc')
+        card4desc.innerHTML = card4[1]
+
+        let cards = [card1H, card2H, card3H, card4H]
+        for (var i=0; i< cards.length; i++) {
+          if (cards[i].innerHTML.includes(undefined)) {
+            cards[i].parentNode.remove()
+          }
+        }
+
+        // Craft
+        let craftdiv = win.document.getElementById('craftCraft')
+        let craftjob = Object.entries(craft).map(job => {
+          job.shift()
+          job = job[0]
+          job[9] = job[9] == undefined ? 'n/a' : job[9]
+          let material = job[0]
+          let matImg = matImagesComplete.filter(m => m.id == material)
+
+          switch (jobItem[1]) {
+            case job[9]:
+              craftdiv.innerHTML = '<div class="col">Jobless + </div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div>'
+                                    + '<div class="col craft craftjob"><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div>'
+                                    + '<div class="col craft craftjob"><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[4] + '</span></div>'
+                                    + '<div class="col craft craftjob"><span id="craftjob"></span><span class="craft">' + job[5] + '</span></div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[6] + '</span></div>'
+                                    + '<div class="col craft craftjob"><span id="craftjob"></span><span class="craft">' + job[7] + '</span></div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[8] + '</span></div>'
+              break;
+            case job[7]:
+              craftdiv.innerHTML = '<div class="col">Jobless + </div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div>'
+                                    + '<div class="col craft craftjob"><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div>'
+                                    + '<div class="col craft craftjob"><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[4] + '</span></div>'
+                                    + '<div class="col craft craftjob"><span id="craftjob"></span><span class="craft">' + job[5] + '</span></div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[6] + '</span></div>'
+              break;
+            case job[5]:
+              craftdiv.innerHTML = '<div class="col">Jobless + </div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div>'
+                                    + '<div class="col craft craftjob"><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div>'
+                                    + '<div class="col craft craftjob"><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[4] + '</span></div>'
+              break;
+            case job[3]:
+              craftdiv.innerHTML = '<div class="col">Jobless + </div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div>'
+                                    + '<div class="col craft craftjob"><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div>'
+              break;
+            case job[1]:
+              craftdiv.innerHTML = '<div class="col">Jobless + </div>'
+                                    + '<div class="col craft craftmat"><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div>'
+              break;
+            default:
+
+          }
+        })
+    //    console.log(jobcraft)
 
 }, 40)
 

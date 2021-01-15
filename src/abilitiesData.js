@@ -4,7 +4,8 @@ const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 
 export { powlvl, unitDesc,
          abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
-         passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits }
+         passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
+         jobsData, craft, mats}
 
 let powlvl;     // power level table from sheet 4
 let unitDesc;  // unit desc table from sheet 4
@@ -22,8 +23,9 @@ let passiveFinale = []  // passiveswith changed color and x value
 let passiveSkills = []; // turnDamage/turnHeal etc
 let passiveEffects = [] // attr, element etc
 let passiveTraits = [];
+let craft = [];
+let mats = [];   //materials to craft jobs
 
-var x = 0
 var name, desc, desc1, desc2, desc3, desc4
 function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multiplier) {
 
@@ -52,7 +54,8 @@ function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multip
     name = row[2]
     return {
       name: name,
-      desc: desc
+      desc: desc,
+      level: row[multiplier]
     }
   }))
 
@@ -188,6 +191,7 @@ let abilities = {
           getDesc(abilitiesArr, res, unitDesc, powlvl, 8, 9, 10)
           getDesc(abilitiesArr, res, unitDesc, powlvl, 11, 12, 13)
           getDesc(abilitiesArr, res, unitDesc, powlvl, 14, 15, 16)
+          console.log(abilitiesArr)
           desc1 = abilitiesArr[0]
           desc2 = abilitiesArr[1]
           desc3 = abilitiesArr[2]
@@ -246,39 +250,57 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
         })
       },
 
-      passivesFn:() => {
-        return GetSheetDone
-          .raw(id, 5).then(data => data.data).then(res => {
-            res.shift()
-            res.map(inf => passivesAllInfo.push(inf))
+    passivesFn:() => {
+      return GetSheetDone
+        .raw(id, 5).then(data => data.data).then(res => {
+          res.shift()
+          res.map(inf => passivesAllInfo.push(inf))
 
-            getDesc(passivesArr, res, passives, powlvl, 4, 5, 6)
-            getDesc(passivesArr, res, unitDesc, powlvl, 7, 8, 9)
-            getDesc(passivesArr, res, unitDesc, powlvl, 10, 11, 12)
-            getDesc(passivesArr, res, unitDesc, powlvl, 13, 14, 15)
-            desc1 = passivesArr[0]
-            desc2 = passivesArr[1]
-            desc3 = passivesArr[2]
-            desc4 = passivesArr[3]
+          getDesc(passivesArr, res, passives, powlvl, 4, 5, 6)
+          getDesc(passivesArr, res, unitDesc, powlvl, 7, 8, 9)
+          getDesc(passivesArr, res, unitDesc, powlvl, 10, 11, 12)
+          getDesc(passivesArr, res, unitDesc, powlvl, 13, 14, 15)
+          desc1 = passivesArr[0]
+          desc2 = passivesArr[1]
+          desc3 = passivesArr[2]
+          desc4 = passivesArr[3]
           //descFinale to get info needed for building a description
-            for (var i = 0; i < desc1.length; i++) {
-              passiveFinale.push(desc1[i].name + ':<br>'
-              + (desc1[i].desc || '')
-              + '<br>' + (desc2[i].desc || '')
-              + '<br>' + (desc3[i].desc || '')
-              + '<br>' + (desc4[i].desc || ''))
+          for (var i = 0; i < desc1.length; i++) {
+            passiveFinale.push(desc1[i].name + ':<br>'
+            + (desc1[i].desc || '')
+            + '<br>' + (desc2[i].desc || '')
+            + '<br>' + (desc3[i].desc || '')
+            + '<br>' + (desc4[i].desc || ''))
             }
-            changeColors(res)  // change colors of keywords in skills/effects/traits
+          changeColors(res)  // change colors of keywords in skills/effects/traits
 
           //  res.map(res=> abilBasic.push(res[2] + ':' + res[3]/*tier*/ + '\t\t' + res[4]/*cost*/))
-            res.map(res=> passiveSkills.push(res[2] + ':' + (res[4] || '') + '<br>' + (res[7] || '') + '<br>' + (res[10] || '') + '<br>' + (res[13] || '')))
-            res.map(res=> passiveEffects.push(res[2] + ':' + (res[5] || '') + '<br>' + (res[8] || '') + '<br>' + (res[11] || '') + '<br>' + (res[14] || '')))
-            res.map(res=> passiveTraits.push(res[2] + ':' + (res[16] || '') + '<br>' + (res[17] || '') + '<br>' + (res[18] || '')))
+          res.map(res=> passiveSkills.push(res[2] + ':' + (res[4] || '') + '<br>' + (res[7] || '') + '<br>' + (res[10] || '') + '<br>' + (res[13] || '')))
+          res.map(res=> passiveEffects.push(res[2] + ':' + (res[5] || '') + '<br>' + (res[8] || '') + '<br>' + (res[11] || '') + '<br>' + (res[14] || '')))
+          res.map(res=> passiveTraits.push(res[2] + ':' + (res[16] || '') + '<br>' + (res[17] || '') + '<br>' + (res[18] || '')))
 
-          })
-      }
+        })
+    },
+
 
   };
+
+  let jobsData = {
+    craft:() => {
+      return GetSheetDone
+        .raw(id, 3).then(data => data.data).then(res => {
+          res.shift()
+          res.map(inf => craft.push(inf))
+        })
+      },
+      materials:() => {
+        return GetSheetDone
+          .raw(id, 8).then(data => data.data).then(res => {
+            res.shift()
+            res.map(inf => mats.push(inf))
+          })
+        },
+  }
   //console.log(abilitiesArr)
   /*find:() => {
     return GetSheetDone.raw(id,6).then((sheet) => {
