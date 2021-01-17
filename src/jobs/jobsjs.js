@@ -7,11 +7,17 @@ import {abilities,
         abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from '../abilitiesData.js'
 var $ = require("jquery")
-import 'tablesorter'
+//import 'tablesorter'
 import { rarityFilter, elementFilter, attrsFilter } from '../basicfn/rarityFilter.js'
 import { openNew } from '../basicfn/openNew.js'
 import {jobsImgs, matsImgs, matImagesComplete} from '../importImgs.js'
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
+import tablesorter from 'tablesorter';
+
+
+
+
+
 
 
 
@@ -89,20 +95,27 @@ function loadList() {
     // pagination
     var begin
     if (numberPerPage == 10) {
+      $("table").trigger("destroy");
       begin = ((currentPage - 1) * numberPerPage);
     } else if ( numberPerPage == 'all') {
       begin = 0
       numberPerPage = list.length
+      $("table").trigger("destroy");
+
     } else {
+      $("table").trigger("destroy");
        begin = currentPage == 1 ? currentPage - 1 : (currentPage-1)*numberPerPage
     }
     var end = begin + numberPerPage;
     pageList = list.slice(begin, end);
     drawList();
     check();
+    const myTable = document.querySelector("#jobsTable");
 
-
-
+    //SORT
+    let sort = setTimeout(function() {
+      $('.myTable').tablesorter();
+    },500)
     // FILTERS
     tableRows = document.querySelectorAll('tr')
 
@@ -119,12 +132,6 @@ function loadList() {
       tableRows[ind].classList.remove('6', '5', '4', '3', '2', '1', this.id)
 
     if (this.value == pageList[ind-1][2]) {  // rarity
-      console.log(this.value)
-      console.log(pageList[ind-1])
-      console.log(pageList[ind-1][2])
-      console.log(this.value == pageList[ind-1][2])
-      console.log(tableRows[ind])
-      console.log(this.id)
       tableRows[ind].classList.add(this.id)
 
     }
@@ -203,12 +210,72 @@ function loadList() {
         })
         i++
     }
+  /*  document.getElementById('thHp').onclick = function() {
+      sortTable(7)
+    }
+    document.getElementById('thStr').onclick = function() {
+      sortTable(8)
+    }*/
+    function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("jobsTable");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    rows = Array.from(rows)
 
-    $(document).ready(function() {
-      $('.thead').click(function(){
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+
+/*    $(document).ready(function() {
         $(".myTable").tablesorter();
-      });
-    })
+    })*/
 }
 
 function drawList() {
@@ -298,6 +365,7 @@ function drawList() {
         })
 }
 
+//document.getElementById('thead').click()
 }
 document.getElementById('next').onclick = nextPage
 document.getElementById('first').onclick = firstPage
@@ -310,6 +378,7 @@ function check() {
     document.getElementById("first").disabled = currentPage == 1 ? true : false;
     document.getElementById("last").disabled = currentPage == numberOfPages ? true : false;
     setTimeout(function() {
+
       var descFinaleSplit = descFinale.map(desc => desc.split(':'))
       var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':'))
       var switchCells =  document.getElementsByClassName('tooltiptext')

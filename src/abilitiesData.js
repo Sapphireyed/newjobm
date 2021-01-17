@@ -5,7 +5,7 @@ const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 export { powlvl, unitDesc,
          abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
          passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
-         jobsData, craft, mats}
+         jobsData, jobsDataAll, craft, mats}
 
 let powlvl;     // power level table from sheet 4
 let unitDesc;  // unit desc table from sheet 4
@@ -23,6 +23,7 @@ let passiveFinale = []  // passiveswith changed color and x value
 let passiveSkills = []; // turnDamage/turnHeal etc
 let passiveEffects = [] // attr, element etc
 let passiveTraits = [];
+let jobsDataAll = []//jobs
 let craft = [];
 let mats = [];   //materials to craft jobs
 
@@ -286,6 +287,13 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
   };
 
   let jobsData = {
+    jobs:() => {
+      return GetSheetDone
+        .raw(id, 7).then(data => data.data).then(res => {
+          res.shift()
+          res.map(inf => jobsDataAll.push(inf))
+        })
+    },
     craft:() => {
       return GetSheetDone
         .raw(id, 3).then(data => data.data).then(res => {
@@ -295,7 +303,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
       },
       materials:() => {
         return GetSheetDone
-          .raw(id, 8).then(data => data.data).then(res => {
+          .raw(id, 9).then(data => data.data).then(res => {
             res.shift()
             res.map(inf => mats.push(inf))
           })

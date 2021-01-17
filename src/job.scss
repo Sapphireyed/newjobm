@@ -98,9 +98,11 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 .craft {
   text-align: center;
 }
-.craftjob {
-  width: 60px
+.craftjob img {
+  max-width: 100px
 }
-.craftmat {
-  width: 30px
+.craftmat img {
+  max-width: 60px;
+  display: block;
+  margin: 20px auto;
 }

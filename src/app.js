@@ -13,9 +13,9 @@ import {abilities,
         powlvl, unitDesc,
         abilitiesAllInfo, abilitiesArr, descFinale, abilTraits,
         passivesFn, passives, passivesArr, passiveFinale,
-        jobsData, craft, mats} from './abilitiesData.js'
-import {getMatImgs, matImagesComplete} from './img/imgsHTML.js'
-import { matsImgs } from './importImgs.js'
+        jobsData, jobsDataAll, craft, mats} from './abilitiesData.js'
+import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete} from './img/imgsHTML.js'
+import { matsImgs, jobsImgs } from './importImgs.js'
 
 document.body.append(nav(), jobsmain)
 
@@ -25,18 +25,21 @@ abilities.units()
         abilities.passivesFn()
         jobsData.craft()
         jobsData.materials()
+        jobsData.jobs()
 
     }).then(res => {
               getMatImgs()
-      console.log(matImagesComplete)
+              getJobImgs()
         jobs()
+
+
       //  setTimeout(function() {
       //    clearInterval(tooltips, 3000)
       //  })
     })
 
 //console.log(abilities.find)
-document.getElementById('thead').click()
+
 
 //console.log(gsheet)
 //let button = document.getElementById('navbtn')

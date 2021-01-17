@@ -18,10 +18,9 @@ div1.id = 'basicinfo'
 div1.className = 'row';
 
 let imgdiv = document.createElement('div')
-let jobimg = document.createElement('img')
+let jobimg = document.createElement('div')
 imgdiv.classList.add('col-2')
-jobimg.alt = 'jobicon'
-jobimg.src = ''
+jobimg.id = 'jobimg'
 jobimg.classList.add('d-block', 'mx-auto')
 imgdiv.appendChild(jobimg)
 
