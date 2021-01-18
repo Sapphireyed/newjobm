@@ -13,30 +13,29 @@ import {abilities,
         powlvl, unitDesc,
         abilitiesAllInfo, abilitiesArr, descFinale, abilTraits,
         passivesFn, passives, passivesArr, passiveFinale,
-        jobsData, jobsDataAll, craft, mats} from './abilitiesData.js'
-import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete} from './img/imgsHTML.js'
+        jobsData, jobsStats, jobsDataAll, craft, mats} from './abilitiesData.js'
+import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete, abilImages} from './img/imgsHTML.js'
 import { matsImgs, jobsImgs } from './importImgs.js'
 
 document.body.append(nav(), jobsmain)
 
+abilImages.images()
 abilities.units()
     .then(data => {
         abilities.abils()
         abilities.passivesFn()
-        jobsData.craft()
-        jobsData.materials()
-        jobsData.jobs()
+      })
+jobsData.craft()
+    .then(data => {
+      jobsData.materials()
+      jobsData.jobs().then(res => {
+        getMatImgs()
+        getJobImgs()
 
-    }).then(res => {
-              getMatImgs()
-              getJobImgs()
-        jobs()
-
-
-      //  setTimeout(function() {
-      //    clearInterval(tooltips, 3000)
-      //  })
+      })
+      jobs()
     })
+
 
 //console.log(abilities.find)
 

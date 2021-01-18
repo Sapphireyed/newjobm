@@ -5,7 +5,7 @@ const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 export { powlvl, unitDesc,
          abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
          passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
-         jobsData, jobsDataAll, craft, mats}
+         jobsData, jobsStats, jobsDataAll, craft, mats}
 
 let powlvl;     // power level table from sheet 4
 let unitDesc;  // unit desc table from sheet 4
@@ -24,6 +24,7 @@ let passiveSkills = []; // turnDamage/turnHeal etc
 let passiveEffects = [] // attr, element etc
 let passiveTraits = [];
 let jobsDataAll = []//jobs
+let jobsStats;
 let craft = [];
 let mats = [];   //materials to craft jobs
 
@@ -192,7 +193,7 @@ let abilities = {
           getDesc(abilitiesArr, res, unitDesc, powlvl, 8, 9, 10)
           getDesc(abilitiesArr, res, unitDesc, powlvl, 11, 12, 13)
           getDesc(abilitiesArr, res, unitDesc, powlvl, 14, 15, 16)
-          console.log(abilitiesArr)
+
           desc1 = abilitiesArr[0]
           desc2 = abilitiesArr[1]
           desc3 = abilitiesArr[2]
@@ -291,7 +292,18 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
       return GetSheetDone
         .raw(id, 7).then(data => data.data).then(res => {
           res.shift()
+          jobsStats = res.map(job => {
+            return {
+              name: job[1],
+              hp: job[3]/5,
+              str: job[4]/1,
+              agi: job[5]/1,
+              int: job[6]/1,
+            }
+          })
           res.map(inf => jobsDataAll.push(inf))
+
+
         })
     },
     craft:() => {
@@ -303,7 +315,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
       },
       materials:() => {
         return GetSheetDone
-          .raw(id, 9).then(data => data.data).then(res => {
+          .raw(id, 8).then(data => data.data).then(res => {
             res.shift()
             res.map(inf => mats.push(inf))
           })

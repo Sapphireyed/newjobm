@@ -10,15 +10,9 @@ var $ = require("jquery")
 //import 'tablesorter'
 import { rarityFilter, elementFilter, attrsFilter } from '../basicfn/rarityFilter.js'
 import { openNew } from '../basicfn/openNew.js'
-import {jobsImgs, matsImgs, matImagesComplete} from '../importImgs.js'
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 import tablesorter from 'tablesorter';
-
-
-
-
-
-
+import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete} from '../img/imgsHTML.js'
 
 
 export function jobs() {
@@ -43,7 +37,6 @@ export function jobs() {
     var job = Object.entries(jobsRows);
 
     var jobValues = job.map(job => job[1])
-
 
     // PAGINATIOM
     var pagesSel = document.getElementById('numOfPages')
@@ -280,7 +273,6 @@ function loadList() {
 
 function drawList() {
     document.getElementById("jobsBody").innerHTML = "";
-    //console.log(pageList)
       for (var i=0; i < pageList.length; i++) {
         var jobItem = Object.values(pageList[i])
       //  jobItem[i] = jobItem[i] == undefined ? '' : jobItem[i]
@@ -299,6 +291,7 @@ function drawList() {
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
         i % 2 == 0 ? tableRow : tableRow.style.backgroundColor = 'white'
+
 
         jobItem.map( job => {
           var cell = document.createElement('td')
@@ -323,46 +316,41 @@ function drawList() {
               default:
                   cell.innerHTML = '<td>' + job + '</td>'
           }
+
+          //add tooltips to specific cells
           var tooltip = document.createElement('span')
           tooltip.classList.add('tooltipMy', 'tooltiptext')
           cell.innerHTML == jobItem[5] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
           cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
 
-          var imgdiv = document.createElement('div')
-          imgdiv.style.display = 'block';
-          imgdiv.style.margin = 'auto'
-          imgdiv.style.position = 'relative'
-          var img = document.createElement('img')
-          //img.width = '50'
-          img.className = 'jobimg'
-          var imgBg = document.createElement('img')
-          imgBg.className = 'jobBg'
-          var imgFrame = document.createElement('img')
-        //  imgFrame.width = '50'
-          imgFrame.className = 'jobFrame'
-          imgdiv.append(img, imgBg, imgFrame)
+          //add images to pic cell
+          var imgComplete = jobImagesComplete.find(jobimg => jobimg.id == jobItem[2])
 
+          if (cell.innerHTML == 'pic') {
+            cell.id = 'pic'
+            cell.innerHTML = ''
+            cell.append(imgComplete)
 
-        //  let icons = Object.entries(images).filter(pic => pic[0] == jobItem[2])
-          Object.entries(jobsImgs).map(pic => {
-            pic[0] == jobItem[2] + '.png' ? img.src = pic[1] : ''
-            pic[0] == 'str.png' ? imgBg.src = pic[1] : ''
-            pic[0] == jobItem[3] + '.png' ? imgFrame.src = pic[1] : ''
-            if (cell.innerHTML == 'pic') {
-              cell.innerHTML = ''
-            //  cell.style.position = 'relative'
-              cell.style.minHeight = '50px'
-            //  pic[0] == 'str.png' ? imgBg.src = pic[1] : ''
-              cell.append(imgdiv)
-            }
-          })
+          }
 
-      //    cell.innerHTML == 'pic' ?  : ''
-        //  cell.innerHTML.includes('pic') ? cell.innerHTML.replace('pic', '') : ''
 
           tableRow.appendChild(cell)
           jobsBody.append(tableRow)
         })
+
+      /*  Object.entries(jobImagesComplete).map(pic => {
+          console.log(pic)
+          pic[0] == jobItem[2] + '.png' ? img.src = pic[1] : ''
+          pic[0] == 'str.png' ? imgBg.src = pic[1] : ''
+          pic[0] == jobItem[3] + '.png' ? imgFrame.src = pic[1] : ''
+          if (cell.innerHTML == 'pic') {
+            cell.innerHTML = ''
+          //  cell.style.position = 'relative'
+            cell.style.minHeight = '50px'
+          //  pic[0] == 'str.png' ? imgBg.src = pic[1] : ''
+            cell.append(imgdiv)
+          }
+        })*/
 }
 
 //document.getElementById('thead').click()

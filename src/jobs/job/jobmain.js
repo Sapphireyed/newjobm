@@ -19,13 +19,13 @@ div1.className = 'row';
 
 let imgdiv = document.createElement('div')
 let jobimg = document.createElement('div')
-imgdiv.classList.add('col-2')
+imgdiv.classList.add('col-12', 'col-sm-2')
 jobimg.id = 'jobimg'
 jobimg.classList.add('d-block', 'mx-auto')
 imgdiv.appendChild(jobimg)
 
 let attrs = document.createElement('div')
-attrs.classList.add('col-10', 'row')
+attrs.classList.add('col-10', 'row', 'my-auto')
 let rarity = document.createElement('div')
 rarity.id = 'rarity'
 let hp = document.createElement('h4')
@@ -38,7 +38,7 @@ let int = document.createElement('h4')
 int.id = 'int'
 let attrsArr = [rarity, hp, str, agi, int]
 attrsArr.map(attr => {
-  attr.classList.add('col', 'jobattr')
+  attr.classList.add('col', 'col-sm', 'jobattr')
   attrs.appendChild(attr)
 })
 

@@ -139,10 +139,6 @@ h1 {
 
 }
 
-.monsterAv h6 {
-    text-align: center
-}
-
 .info {
     margin-bottom: 10px
 }
@@ -172,6 +168,17 @@ img {
     width: 40%
 }
 
+}
+#pic div:first-child {
+  max-width: 65px;
+  img:first-child {
+    max-width:65px;
+  }
+  img:nth-child(2) {
+    max-width: 53px;
+    top: 7px;
+    left: 7px;
+  }
 }
 table { overflow-x: scroll}
 .thead {

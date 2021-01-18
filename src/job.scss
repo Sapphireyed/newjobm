@@ -23,6 +23,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 #switchSkill { text-align: center}
 #deckdiv { margin: 10px 10px}
 
+.jobattrs {margin: auto}
 .job1star {
   background-color: #f4ffed;
 
@@ -84,23 +85,47 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 .job5star {
     background-color: #fffaef;
     h1 {
-        background-color: #b9994c;
+        background-color: #e0c369;
         margin-right:auto;
         margin-left: auto;
     }
 
     h4 {
         text-align: center;
-        color: #b9994c
+        color: #e0c369
     }
 }
+#jobimg div:first-child {
+  max-width: 195px;
+  img:first-child {
+    max-width: 195px;
+  }
+  img:nth-child(2) {
+    left: 13px;
+    top: 13px;
+    max-width: 165px;
+  }
+}
 
+#craftCraft i {margin: 30px auto}
 .craft {
   text-align: center;
 }
+
 .craftjob img {
   max-width: 100px
 }
+.craftjob div:first-child {
+  max-width:100px;
+  margin: auto;
+
+  img:nth-child(2) {
+    left: 6px;
+    top: 6px;
+    width:87px;
+  }
+}
+
 .craftmat img {
   max-width: 60px;
   display: block;
