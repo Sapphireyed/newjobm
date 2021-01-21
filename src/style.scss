@@ -8,8 +8,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 
 /*black in main nav bar, light to all*/
-$mainBg: #a87f53;
-$mainBgLight: #ebddca;
+$mainBg: #435761; //#a87f53;
+$mainBgLight: #f5f7f8; //#ebddca;
 /*brown headings bg*/
 $secondBg: #282623;
 $secondBgLight: #c4c2bf;
@@ -83,7 +83,7 @@ nav:nth-child(2) {
     .tooltipMy .tooltiptext {
         visibility: hidden;
         width: 200px;
-        background-color: #555;
+        background-color: rgb(77, 99, 111);
         color: #fff;
         text-align: center;
         border-radius: 6px;
@@ -94,6 +94,7 @@ nav:nth-child(2) {
         bottom: 85%;
         opacity: 0;
         transition: opacity 0.3s;
+        box-shadow: 2px 2px black;
     }
 
         .tooltipMy .tooltiptext::after {
@@ -143,12 +144,19 @@ h1 {
     margin-bottom: 10px
 }
 
+#jobs select {
+  box-shadow: 2px 2px #435761;
+ }
+select option {
+   background-color: rgb(158, 177, 187);
+}
+
 #jobtable {
     width: 100%;
     tr: nth-child(even)
 
 {
-    background-color: #fff;
+    background-color: #9eb1bb;
 }
 
 td:nth-child(n+4) {
@@ -169,15 +177,17 @@ img {
 }
 
 }
-#pic div:first-child {
+#pic div:first-child {   // jobicon in the table
   max-width: 65px;
   img:first-child {
-    max-width:65px;
+    max-width:50px;
+    height: auto;
   }
   img:nth-child(2) {
-    max-width: 53px;
-    top: 7px;
-    left: 7px;
+    max-width: 40px;
+    top: 5px;
+    left: 5px;
+    height: auto;
   }
 }
 table { overflow-x: scroll}
@@ -209,18 +219,37 @@ table { overflow-x: scroll}
 }
 
 #jobsTable tr td:nth-child(11) {
-    background-color: rgba(205, 24, 205, 0.7);
+    background-color: rgba(0, 0, 255, 0.7);
 }
 
 #jobsTable tr td:nth-child(n+4) {
   text-align: center;
 }
-#pages {display: inline}
+
+#jobs select { float: right }
+#jobsclear { float: right }
+#pages {
+  display: inline;
+  button {
+    background-color: rgb(77, 99, 111);
+    color: rgb(158, 177, 187)
+  }
+  select {
+    background-color: rgb(158, 177, 187);
+    float: none;
+  }
+  img {
+    width: 44px;
+    margin-bottom: 3px
+  }
+}
+#otherfilters div:first-child {text-align: right}
 .pages {
-  font-size: 22px;
+  font-size: 20px;
   margin: auto;
 }
-
+#first img { transform: rotate(177deg)}
+#prev img { transform: rotate(177deg)}
 .jobimg {
   position: absolute;
   top: -18px;
@@ -246,7 +275,7 @@ table { overflow-x: scroll}
 }
 
 /*attr*/
-.maxhp { color: goldenrod }
+.maxhp { color: #e3a200 }
 .strength { color: red }
 .agility { color: green }
 .intelligence { color: blue }
@@ -254,7 +283,7 @@ table { overflow-x: scroll}
 .water { color: #3d9af2 }
 .fire { color: #ff4538 }
 .earth { color: #520500 }
-.thunder { color: #c2ae55 }
+.thunder { color: #b5a45b }
 .wind { color: #5ee6a9 }
 .dark { color: #7436ba }
 .light { color: #ccc7d1 }
@@ -279,6 +308,15 @@ table { overflow-x: scroll}
   .jobBg {
     width: 35px;
   }
+  #jobs label { width: 100%}
+  #jobs select { float: none}
+  #jobsclear {
+    float: none;
+    margin-top: 25px;
+  }
+  #otherfilters { margin: 20px 0 0 0 }
+  #otherfilters div:first-child {text-align: left}
+  #jobsfilter div:nth-child(even) {text-align: right}
 }
 
 @media only screen and (max-width: 760px) {
@@ -289,4 +327,12 @@ table { overflow-x: scroll}
   .jobBg {
     width: 35px;
   }
+  #jobs label { width: 100%}
+  #jobsclear {
+    margin-top: 25px;
+  }
+  #otherfilters { margin: 20px 0 0 0 }
+  #otherfilters div:first-child {text-align: left}
+  #jobsfilter div:nth-child(even) {text-align: right}
+
 }

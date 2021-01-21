@@ -17,7 +17,6 @@ jobsData.materials().then(d => {
   jobsData.jobs().then(j => {
     getMatImgs()
     getJobImgs()
-console.log(jobImagesComplete)
       // jobicon
       let jobmain = document.getElementById('jobimg')
       var header = document.getElementById('jobheader')
@@ -27,31 +26,28 @@ console.log(jobImagesComplete)
       // crafting
       let matName = document.getElementById('craftmat').nextElementSibling.innerHTML
       let craftmat = document.querySelectorAll('.craftmat span:nth-child(2)')
+      let craftmatparent = document.getElementById('craftmat')
       let craftmatPic = document.querySelectorAll('.craftmat span:nth-child(1)')
 
       let craftjob = document.querySelectorAll('.craftjob span:nth-child(2)')
       let craftjobPic = document.querySelectorAll('.craftjob span:nth-child(1)')
-      for (var i=0; i<craftmat.length; i++) {
+      for (var i=0; i<craftmat.length; i++) {  // matimgs
         let name = craftmat[i].innerHTML
         matImagesComplete.map(m => {
             name == m.id ? craftmatPic[i].innerHTML = m.outerHTML + '<br>': ''
         })
-        craftmatPic[i].innerHTML == '' ? craftmatPic[i].parentNode.remove() : ''
+        craftmatPic[i].innerHTML == '' ? craftmatPic[i].parentNode.parentNode.nextSibling.remove() : ''
+        craftmatPic[i].innerHTML == '' ? craftmatPic[i].parentNode.parentNode.remove() : ''
+
       }
-      for (var i=0; i<craftjob.length; i++) {
+      for (var i=0; i<craftjob.length; i++) {  //jobimgs
         let name = craftjob[i].innerHTML
         jobImagesComplete.map(m => {
             name == m.id ? craftjobPic[i].innerHTML = m.outerHTML + '<br>': ''
           })
-        craftjobPic[i].innerHTML == '' ? craftjobPic[i].parentNode.remove() : ''
+        craftjobPic[i].innerHTML == '' ? craftjobPic[i].parentNode.parentNode.nextSibling.remove() : ''
+        craftjobPic[i].innerHTML == '' ? craftjobPic[i].parentNode.parentNode.remove() : ''
       }
-
-  /*  setTimeout(function(){
-      clearInterval(crafstart)
-    }, 101)*/
-    //    m.id == matName ? document.getElementById('craftmat').innerHTML = m.outerHTML + '<br>' : ''
-    //    m.id == matName ? document.getElementById('craftjob').innerHTML = m.outerHTML + '<br>' : ''
-    //    m.id == matName ? document.getElementById('craftjob').innerHTML = m.outerHTML + '<br>' : ''
   })
 
 })

@@ -4,7 +4,6 @@ const id = '1W-ptBX6fjkQcZXrrr4KTZRp2qNcer66Ak4VANW2dM8';
 import {jobsData, jobsDataAll, mats, jobsStats } from '../abilitiesData.js'
 import {jobsImgs, jobsFrames, jobsBg, matsImgs, matsFrames} from '../importImgs.js'
 
-
 let matImagesComplete = []
 let jobImagesComplete = []
 
@@ -84,6 +83,7 @@ export function getJobImgs() {
     jobImgDiv.id = name;
     jobImgDiv.style.position = 'relative'
     let jobImgHtml = document.createElement('img'); // 1st img frame + shape as bg
+  //  jobImgHtml.height = 'auto'
     jobImgHtml.style.backgroundImage = "url('" + job[1] + "')";
     jobImgHtml.classList.add('jobic')
     jobImgHtml.style.backgroundSize = 'contain'
@@ -147,7 +147,7 @@ export function getJobImgs() {
 
   Object.entries(jobsBg).map(bg => {
     jobbg.map(jobbg => {
-      jobbg[1] +'.png' == bg[0] ? jobbg.push(bg[1]) : ''
+      jobbg[1] +'.jpg' == bg[0] ? jobbg.push(bg[1]) : ''
     })
 
   })
@@ -156,17 +156,15 @@ export function getJobImgs() {
     let jobImgBg = document.createElement('img');
     jobImgBg.style.position = 'absolute'
     jobImgBg.style.zIndex = '1'
-    jobbg.map(bg => {
-
-      bg[0] == imgdiv.id ? jobImgBg.src = bg[2] : ''
-    })
+    let x = jobbg.find(bg => bg[0] == imgdiv.id)
+    jobImgBg.src = x[2]
     imgdiv.append(jobImgBg)
 
   })
 }
 
 // abilities
-export {abilImages}
+/*export {abilImages}
 // new spreadsheet with rules which pic to apply
 let abilImages = {
   images:() => {
@@ -176,4 +174,4 @@ let abilImages = {
         console.log(res)
       })
     }
-  }
+  }*/

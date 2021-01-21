@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
+//const CompressionPlugin = require("compression-webpack-plugin");
+var HtmlWebpackPreconnectPlugin = require('html-webpack-preconnect-plugin')
 
 module.exports = {
   entry: {
@@ -7,8 +9,11 @@ module.exports = {
   job: path.resolve(__dirname, './src/job.js'),
 },
 output: {
-  filename: '[name].bundle.js',
+  filename: '[name].[contenthash]bundle.js',
   path: path.resolve(__dirname, 'deploy')
+},
+optimization: {
+  runtimeChunk: 'single',
 },
 devServer: {
   contentBase: './deploy',
@@ -27,11 +32,12 @@ module: {
       }
     },
     {
-      test: /\.(ico|jpg|jpeg|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+      test: /\.(ico|jpg|JPG|jpeg|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
       use: {
         loader: 'file-loader',
         options: {
-          name: '[path][name].[ext]',
+
+          esModule: false,
         },
       },
     },
@@ -40,7 +46,7 @@ module: {
         use: ['style-loader', 'css-loader', 'sass-loader'],
     },
     {
-      test: /\.(?:ico|gif|png|PNG|jpg|jpeg)$/i,
+      test: /\.(?:ico|gif|png|PNG)$/i,
       type: 'asset/resource',
     },
   ],
@@ -49,12 +55,18 @@ module: {
     new HtmlWebpackPlugin({
       title: "Webpack Output",
       filename: 'index.html',
-      chunks: ['app']
+      chunks: ['app'],
+      preconnect: [
+        'https://docs.google.com/spreadsheets/d/1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g/edit?usp=sharing',
+      ]
     }),
     new HtmlWebpackPlugin({
       filename: 'job.html',
       chunks: ['job']
 
-    })
+    }),
+    /*new CompressionPlugin({
+      test: /\.js(\?.*)?$/i
+    })*/
   ],
 };

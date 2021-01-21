@@ -1,27 +1,18 @@
-@import "~bootstrap/scss/bootstrap";
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
-@import '@fortawesome/fontawesome-free/scss/solid';
-@import '@fortawesome/fontawesome-free/scss/regular';
-@import '@fortawesome/fontawesome-free/scss/brands';
-@import '@fortawesome/fontawesome-free/scss/v4-shims';
+
 
 #rarity { color: gold }
 #jobmaindiv { margin: 10px}
-#basicinfo { margin: 20px 5px 40px 5px}
+#basicinfo { margin: 20px 5px 20px 5px}
 #traitsdivPassive h5:first-child {
-  text-align: center;
-  text-decoration: underline
+  //text-align: center;
 }
 #passiveDesc { margin: 10px 5px 40px 5px}
 #passiveSkill { text-align: center }
 #switchDesc { margin: 10px 5px 40px 5px}
-#traitsdiv h5:first-child {
-  text-align: center;
-  text-decoration: underline
-}
 #switchSkill { text-align: center}
-#deckdiv { margin: 10px 10px}
+#deckdiv {
+  margin: 10px 0;
+}
 
 .jobattrs {margin: auto}
 .job1star {
@@ -37,6 +28,17 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
       text-align: center;
       color: #6a8d55;
   }
+  #passiveH {
+    background-color: #6a8d55;
+    color: white
+  }
+  #passiveSkill { border-right: 2px solid #6a8d55}
+  #switchH {
+    background-color: #6a8d55;
+    color: white
+  }
+  #deck { background-color: rgba(106, 141, 85, .7) }
+  #deckH {background-color: #6a8d55 }
 }
 
 .job2star {
@@ -52,6 +54,16 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
         text-align: center;
         color: #4b7396
     }
+    #passiveH {
+      background-color: #4b7396;
+      color: white
+    }
+    #passiveSkill { border-right: 2px solid #4b7396}
+    #switchH {
+      background-color: #4b7396;
+      color: white
+    }
+    #deck { background-color: rgba(75, 115, 150, .7) }
 }
 
 .job3star {
@@ -66,6 +78,16 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
         text-align: center;
         color: #584b67
     }
+    #passiveH {
+      background-color: #584b67;
+      color: white
+    }
+    #passiveSkill { border-right: 2px solid #584b67}
+    #switchH {
+      background-color: #584b67;
+      color: white
+    }
+    #deck { background-color: rgba(88, 75, 103, .7) }
 }
 
 .job4star {
@@ -80,6 +102,16 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
         text-align: center;
         color: #954e3a
     }
+    #passiveH {
+      background-color: #954e3a;
+      color: white
+    }
+    #passiveSkill { border-right: 2px solid #954e3a}
+    #switchH {
+      background-color: #954e3a;
+      color: white
+    }
+    #deck { background-color: rgba(149, 78, 58, .7) }
 }
 
 .job5star {
@@ -92,21 +124,47 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
     h4 {
         text-align: center;
-        color: #e0c369
+        color: #e0c369;
+        font-weight: bold;
     }
+    #passiveH {
+      background-color: #e0c369;
+      color: white
+    }
+    #passiveSkill { border-right: 2px solid #e0c369}
+    #switchH {
+      background-color: #e0c369;
+      color: white
+    }
+    #deck { background-color: #e0c369 }
+    #deckH {background-color: #e0c369 }
 }
+
+#passiveSkillsH, #passiveSkills { display: inline}
+#passiveEffectsH, #passiveEffects { display: inline}
+#passiveTraitsH, #passiveTraits { display: inline}
+#switchskillsH, #switchskills { display: inline}
+#switcheffectsH, #switcheffects { display: inline}
+#switchtraitsH, #switchtraits { display: inline}
+
 #jobimg div:first-child {
   max-width: 195px;
   img:first-child {
     max-width: 195px;
+    height: auto;
   }
   img:nth-child(2) {
     left: 13px;
     top: 13px;
     max-width: 165px;
+    height: auto;
   }
 }
 
+#rarity img {
+  margin-top: -40px;
+  margin-bottom: 45px;
+}
 #craftCraft i {margin: 30px auto}
 .craft {
   text-align: center;

@@ -211,9 +211,9 @@ let abilities = {
 
         //get cost+tier / skills / effects / TRAITS arrays
 res.map(res=> abilBasic.push(res[2] + ':' + res[3]/*tier*/ + '\t\t' + res[4]/*cost*/))
-res.map(res=> abilSkills.push(res[2] + ':' + (res[5] || '') + '<br>' + (res[8] || '') + '<br>' + (res[11] || '') + '<br>' + (res[14] || '')))
-res.map(res=> abilEffects.push(res[2] + ':' + (res[6] || '') + '<br>' + (res[9] || '') + '<br>' + (res[12] || '') + '<br>' + (res[15] || '')))
-res.map(res=> abilTraits.push(res[2] + ':' + (res[17] || '') + '<br>' + (res[18] || '') + '<br>' + (res[19] || '')))
+res.map(res=> abilSkills.push(res[2] + ':' + (res[5] || '') + ', ' + (res[8] || '') + ', ' + (res[11] || '') + ', ' + (res[14] || '')))
+res.map(res=> abilEffects.push(res[2] + ':' + (res[6] || '') + ', ' + (res[9] || '') + ', ' + (res[12] || '') + ', ' + (res[15] || '')))
+res.map(res=> abilTraits.push(res[2] + ':' + (res[17] || '') + ', ' + (res[18] || '') + ', ' + (res[19] || '')))
 /*descFinale = descFinale.map(data => data.replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>'))
 descFinale = descFinale.map(data => data.replace(/\bStr\b/gi, '<span class=\'str\'>Strength</span>'))
 descFinale = descFinale.map(data => data.replace(/\bAgi\b/gi, '<span class=\'agi\'>Agility</span>'))
@@ -277,9 +277,9 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
           changeColors(res)  // change colors of keywords in skills/effects/traits
 
           //  res.map(res=> abilBasic.push(res[2] + ':' + res[3]/*tier*/ + '\t\t' + res[4]/*cost*/))
-          res.map(res=> passiveSkills.push(res[2] + ':' + (res[4] || '') + '<br>' + (res[7] || '') + '<br>' + (res[10] || '') + '<br>' + (res[13] || '')))
-          res.map(res=> passiveEffects.push(res[2] + ':' + (res[5] || '') + '<br>' + (res[8] || '') + '<br>' + (res[11] || '') + '<br>' + (res[14] || '')))
-          res.map(res=> passiveTraits.push(res[2] + ':' + (res[16] || '') + '<br>' + (res[17] || '') + '<br>' + (res[18] || '')))
+          res.map(res=> passiveSkills.push(res[2] + ':' + (res[4] || '') + ', ' + (res[7] || '') + ', ' + (res[10] || '') + ', ' + (res[13] || '')))
+          res.map(res=> passiveEffects.push(res[2] + ':' + (res[5] || '') + ', ' + (res[8] || '') + ', ' + (res[11] || '') + ', ' + (res[14] || '')))
+          res.map(res=> passiveTraits.push(res[2] + ':' + (res[16] || '') + ', ' + (res[17] || '') + ', ' + (res[18] || '')))
 
         })
     },

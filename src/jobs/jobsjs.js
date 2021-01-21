@@ -2,21 +2,20 @@
 global.fetch = require('node-fetch');
 const GetSheetDone = require('get-sheet-done');
 import { tbody } from './jobsTable.js'
-import {jobsfilter} from './jobsfilter'
-import {abilities,
-        abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
+import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from '../abilitiesData.js'
 var $ = require("jquery")
 //import 'tablesorter'
 import { rarityFilter, elementFilter, attrsFilter } from '../basicfn/rarityFilter.js'
 import { openNew } from '../basicfn/openNew.js'
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
+import star from '../img/events/StarColor1.png'
+import { matImagesComplete, jobImagesComplete} from '../img/imgsHTML.js'
+import {jobsfilter} from './jobsfilter'
 import tablesorter from 'tablesorter';
-import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete} from '../img/imgsHTML.js'
 
 
 export function jobs() {
-
   GetSheetDone.raw(id, 7)
   .then((data) => {
 
@@ -25,6 +24,7 @@ export function jobs() {
     var rarFilter = document.getElementById('rarity')
     var elemFilter = document.getElementById('element')
     var attrFilter = document.getElementById('attrSel')
+    var filters = document.getElementsByClassName('filter')
     var jobsSheetArrs = Object.entries(jobsSheet);
     var jobsRows = jobsSheetArrs[2][1];
     jobsRows.shift()
@@ -103,16 +103,19 @@ function loadList() {
     pageList = list.slice(begin, end);
     drawList();
     check();
-    const myTable = document.querySelector("#jobsTable");
+    jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)');
+    joblink()
+    document.getElementById('chooselvl').value = 10
+    document.getElementById('jobmCrystal').value = 0
+  //  const myTable = document.querySelector("#jobsTable");
 
     //SORT
-    let sort = setTimeout(function() {
+
       $('.myTable').tablesorter();
-    },500)
+
     // FILTERS
     tableRows = document.querySelectorAll('tr')
 
-  var filters = document.getElementsByClassName('filter')
   for (var i=0; i< filters.length; i++) {
     filters[i].onchange = filter
     filters[i].value = 'All'
@@ -172,68 +175,31 @@ function loadList() {
 
 
 
-  /*  rarFilter.addEventListener("change", function() {
-      rarityFilter(tableRows, pageList, rarFilter, elemFilter, attrFilter)
-    })
-    rarFilter.value = 'Rarity'
-    // ELEMENT FILTER
-    elemFilter.addEventListener("change", function() {
-      elementFilter(tableRows, pageList, elemFilter, passivesAllInfo, abilitiesAllInfo, rarFilter, attrFilter)
-    })
-    element.value = 'Element'
-    // ATTRIBUTE FILTER
-    attrFilter.addEventListener("change", function() {
-      attrsFilter(tableRows, pageList, attrFilter, passivesAllInfo, abilitiesAllInfo, rarFilter,elemFilter)
-    })
-    attrFilter.value = 'Attribute'*/
-
-  //  var descFinaleSplit = descFinale.map(desc => desc.split(':'))
-  //  var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':'))
-  //  var switchCells =  document.getElementsByClassName('tooltiptext')
-
-
-
-    // jobLinks
-    jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)');
-    for (var i = 0; i < jobLinks.length;) {
-        //jobLinksIndex.push(jobLinks[i].previousElementSibling.previousElementSibling.innerHTML)
-        jobLinks[i].addEventListener("click", function() {
-          var i = this.parentNode.firstChild.innerHTML
-          openNew(jobValues, i, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
-        })
-        i++
-    }
-  /*  document.getElementById('thHp').onclick = function() {
-      sortTable(7)
-    }
-    document.getElementById('thStr').onclick = function() {
-      sortTable(8)
-    }*/
-    function sortTable(n) {
+/*    function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("jobsTable");
   switching = true;
   // Set the sorting direction to ascending:
   dir = "asc";
-  /* Make a loop that will continue until
-  no switching has been done: */
+  // Make a loop that will continue until
+  //no switching has been done:
   while (switching) {
     // Start by saying: no switching is done:
     switching = false;
     rows = table.rows;
     rows = Array.from(rows)
 
-    /* Loop through all table rows (except the
-    first, which contains table headers): */
+    // Loop through all table rows (except the
+    //first, which contains table headers):
     for (i = 1; i < (rows.length - 1); i++) {
       // Start by saying there should be no switching:
       shouldSwitch = false;
-      /* Get the two elements you want to compare,
-      one from current row and one from the next: */
+      // Get the two elements you want to compare,
+      //one from current row and one from the next:
       x = rows[i].getElementsByTagName("TD")[n];
       y = rows[i + 1].getElementsByTagName("TD")[n];
-      /* Check if the two rows should switch place,
-      based on the direction, asc or desc: */
+      // Check if the two rows should switch place,
+      //based on the direction, asc or desc:
       if (dir == "asc") {
         if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
           // If so, mark as a switch and break the loop:
@@ -249,22 +215,22 @@ function loadList() {
       }
     }
     if (shouldSwitch) {
-      /* If a switch has been marked, make the switch
-      and mark that a switch has been done: */
+      // If a switch has been marked, make the switch
+      //and mark that a switch has been done:
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
       switching = true;
       // Each time a switch is done, increase this count by 1:
       switchcount ++;
     } else {
-      /* If no switching has been done AND the direction is "asc",
-      set the direction to "desc" and run the while loop again. */
+      // If no switching has been done AND the direction is "asc",
+      //set the direction to "desc" and run the while loop again.
       if (switchcount == 0 && dir == "asc") {
         dir = "desc";
         switching = true;
       }
     }
   }
-}
+}*/
 
 /*    $(document).ready(function() {
         $(".myTable").tablesorter();
@@ -290,33 +256,32 @@ function drawList() {
 
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow : tableRow.style.backgroundColor = 'white'
+        i % 2 == 0 ? tableRow : tableRow.style.backgroundColor = '#9eb1bb'
 
 
         jobItem.map( job => {
           var cell = document.createElement('td')
-          var star = document.createElement('i')
-          star.classList.add("fa", "fa-star")
+
           switch (job) {
               case "1":
-                  cell.innerHTML = '<td><i class="fa fa-star"></i><span style="color: transparent">1</span></td>'
+                  cell.innerHTML = '<td><img id="star" src="' + star + '" width="25" height="25"><span style="color: transparent">1</span></td>'
                   break;
               case "2":
-                  cell.innerHTML = '<td><i class="fa fa-star"></i><i class="fa fa-star"></i><span style="color: transparent">2</span></td>'
+                  cell.innerHTML = '<td><img id="star" src="' + star + '" width="25" height="25"><img id="star" src="' + star + '" width="25" height="25"><span style="color: transparent">2</span></td>'
                   break;
               case "3":
-                  cell.innerHTML = '<td><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><span style="color: transparent">3</span></td>'
+                  cell.innerHTML = '<td><img id="star" src="' + star + '" width="25" height="25"><img id="star" src="' + star + '" width="25" height="25"><img id="star" src="' + star + '" width="25" height="25"><span style="color: transparent">3</span></td>'
                   break;
               case "4":
-                  cell.innerHTML = '<td><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><span style="color: transparent">4</span></td>'
+                  cell.innerHTML = '<td><img id="star" src="' + star + '" width="25" height="25"><img id="star" src="' + star + '" width="25" height="25"><img id="star" src="' + star + '" width="25" height="25"><img id="star" src="' + star + '" width="25" height="25"><span style="color: transparent">4</span></td>'
                   break;
               case "5":
-                  cell.innerHTML = '<td><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><span style="color: transparent">5</span></td>'
+                  cell.innerHTML = '<td><img id="star" src="' + star + '" width="25" height="25"><img id="star" src="' + star + '" width="25" height="25"><img id="star" src="' + star + '" width="25" height="25"><img id="star" src="' + star + '" width="25" height="25"><img id="star" src="' + star + '" width="25" height="25"><span style="color: transparent">5</span></td>'
                   break;
               default:
                   cell.innerHTML = '<td>' + job + '</td>'
           }
-
+          cell.id = cell.innerHTML
           //add tooltips to specific cells
           var tooltip = document.createElement('span')
           tooltip.classList.add('tooltipMy', 'tooltiptext')
@@ -330,31 +295,15 @@ function drawList() {
             cell.id = 'pic'
             cell.innerHTML = ''
             cell.append(imgComplete)
-
           }
 
 
           tableRow.appendChild(cell)
           jobsBody.append(tableRow)
         })
-
-      /*  Object.entries(jobImagesComplete).map(pic => {
-          console.log(pic)
-          pic[0] == jobItem[2] + '.png' ? img.src = pic[1] : ''
-          pic[0] == 'str.png' ? imgBg.src = pic[1] : ''
-          pic[0] == jobItem[3] + '.png' ? imgFrame.src = pic[1] : ''
-          if (cell.innerHTML == 'pic') {
-            cell.innerHTML = ''
-          //  cell.style.position = 'relative'
-            cell.style.minHeight = '50px'
-          //  pic[0] == 'str.png' ? imgBg.src = pic[1] : ''
-            cell.append(imgdiv)
-          }
-        })*/
+}
 }
 
-//document.getElementById('thead').click()
-}
 document.getElementById('next').onclick = nextPage
 document.getElementById('first').onclick = firstPage
 document.getElementById('last').onclick = lastPage
@@ -388,20 +337,17 @@ function check() {
         }
       })
       }
-    }, 3000)
+    }, 2000)
 }
 
 function load() {
     loadList();
 }
 
-  window.onload = load;
+window.onload = load;
 document.getElementById('first').click()
-
-
-    var tableRows = document.querySelectorAll('tr')
-
-    var jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)')
+var tableRows = document.querySelectorAll('tr')
+var jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)')
   /*  //search
     document.getElementById('search').onfocus = function() {
       document.getElementById('search').value=''
@@ -415,7 +361,51 @@ var input = $(this).val().toLowerCase();
     $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1)
   });
 });
+// jobLinks
+
+function joblink() {
+  for (var i = 0; i < jobLinks.length;) {
+      //jobLinksIndex.push(jobLinks[i].previousElementSibling.previousElementSibling.innerHTML)
+      jobLinks[i].addEventListener("click", function() {
+        var i = this.parentNode.firstChild.innerHTML
+        openNew(jobValues, i, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+      })
+      i++
+  }
+}
 
 
+//clear filters
+let clear = document.getElementById('jobsclear')
+clear.onclick = function() {
+  Array.from(filters).map(filter => filter.value = 'All')
+  load()
+}
+//change stats on changing level
+let crystal = document.getElementById('jobmCrystal')
+let chooselvl = document.getElementById('chooselvl')
+let hp = Array.from(document.querySelectorAll('.jobRow td:nth-child(8)'))
+let str = Array.from(document.querySelectorAll('.jobRow td:nth-child(9)'))
+let agi = Array.from(document.querySelectorAll('.jobRow td:nth-child(10)'))
+let int = Array.from(document.querySelectorAll('.jobRow td:nth-child(11)'))
+
+function changeStat(arr, el) {
+  arr.map(cell => cell.innerHTML = Math.ceil(cell.id/10 * el.value) + Math.ceil((cell.id/10 * el.value) * crystal.value/10))
+}
+chooselvl.onchange = function() {
+
+//  hp.map(cell => cell.innerHTML = Math.ceil(cell.id/10 * this.value))
+  changeStat(hp, this)
+  changeStat(str, this)
+  changeStat(agi, this)
+  changeStat(int, this)
+}
+crystal.onchange = function() {
+  changeStat(hp, chooselvl)
+  changeStat(str, chooselvl)
+  changeStat(agi, chooselvl)
+  changeStat(int, chooselvl)
+}
+//let str = document.querySelectorAll()
 }) // end of getsheetdone.then
 }

@@ -1,9 +1,9 @@
 import {jobmain} from '../jobs/job/jobmain.js'
-import {abilitiesArr, descFinale, abilSkills, abilEffects, abilTraits,
-        passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
+import {descFinale, abilSkills, abilEffects, abilTraits,
+        passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
         craft, jobsStats } from '../abilitiesData.js'
 import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete } from '../img/imgsHTML.js'
-
+import star from '../img/events/StarColor.png'
 
 function splitDesc(arr, item){
   arr = Object.values(arr).map(ab => ab == undefined ? '' : ab.split(':'))
@@ -23,19 +23,19 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
       let rarity = win.document.getElementById('rarity')
       switch (jobItem[2]) {
           case "1":
-              rarity.innerHTML = '<i class="fa fa-star fa-2x"></i>'
+              rarity.innerHTML = '<img id="star" src="' + star + '" width="45">'
               break;
           case "2":
-              rarity.innerHTML = '<i class="fa fa-star fa-2x"></i><i class="fa fa-star fa-2x"></i>'
+              rarity.innerHTML = '<img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45">'
               break;
           case "3":
-              rarity.innerHTML = '<i class="fa fa-star fa-2x"></i><i class="fa fa-star fa-2x"></i><i class="fa fa-star fa-2x"></i>'
+              rarity.innerHTML = '<img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45">'
               break;
           case "4":
-              rarity.innerHTML = '<i class="fa fa-star fa-2x"></i><i class="fa fa-star fa-2x"></i><i class="fa fa-star fa-2x"></i><i class="fa fa-star fa-2x"></i>'
+              rarity.innerHTML = '<img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45">'
               break;
           case "5":
-              rarity.innerHTML = '<i class="fa fa-star fa-2x"></i><i class="fa fa-star fa-2x"></i><i class="fa fa-star fa-2x"></i><i class="fa fa-star fa-2x"></i><i class="fa fa-star fa-2x"></i>'
+              rarity.innerHTML = '<img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40">'
               break;
           }
 
@@ -81,17 +81,20 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
         let passiveSkills = win.document.getElementById('passiveSkills')
         var pskills = splitDesc(passiveskills, jobItem[7])
         pskills = pskills.length == 0 ? '' : pskills[0][1]
-        passiveSkills.innerHTML = pskills
+        passiveSkills.innerHTML = ' ' + pskills
+        passiveSkills.innerHTML = passiveSkills.innerHTML.replace(', ,', '')
         //passive effects
         let passiveEffects = win.document.getElementById('passiveEffects')
         var peffects = splitDesc(passiveeffects, jobItem[7])
         peffects = peffects.length == 0 ? '' : peffects[0][1]
-        passiveEffects.innerHTML = peffects
+        passiveEffects.innerHTML = ' ' + peffects
+        passiveEffects.innerHTML = passiveEffects.innerHTML.replace(', ,', '')
         //passive traits
         let passiveTraits = win.document.getElementById('passiveTraits')
         var ptraits = splitDesc(passivetraits, jobItem[7])
         ptraits = ptraits.length == 0 ? '' : ptraits[0][1]
-        passiveTraits.innerHTML = ptraits
+        passiveTraits.innerHTML = ' ' + ptraits
+        passiveTraits.innerHTML = passiveTraits.innerHTML.replace(', ,', '')
 
         //switsch header
         let switchH = win.document.getElementById('switchH')
@@ -105,44 +108,95 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
         let switchskills = win.document.getElementById('switchskills')
         var skills = splitDesc(abilskills, jobItem[8])
         skills = skills.length == 0 ? '' : skills[0][1]
-        switchskills.innerHTML = skills
+        switchskills.innerHTML = ' ' + skills
+        switchskills.innerHTML = switchskills.innerHTML.replace(', ,', '')
         //switch effects
         let switcheffects = win.document.getElementById('switcheffects')
         var effects = splitDesc(abilEffects, jobItem[8])
         effects = effects.length == 0 ? '' : effects[0][1]
-        switcheffects.innerHTML = effects
+        switcheffects.innerHTML = ' ' + effects
+        switcheffects.innerHTML = switcheffects.innerHTML.replace(', ,', '')
         //switch traits
         let switchtraits = win.document.getElementById('switchtraits')
         var traits = splitDesc(abiltraits, jobItem[8])
         traits = traits.length == 0 ? '' : traits[0][1]
-        switchtraits.innerHTML = traits
+        switchtraits.innerHTML = ' ' + traits
+        switchtraits.innerHTML = switchtraits.innerHTML.replace(', ,', '')
+
 
         // DECK
         let card1 = splitDesc(abil, jobItem[9])
         card1 = card1.length == 0 ? '' : card1[0]
+        let card1skills = splitDesc(abilskills, jobItem[9])
+        card1skills = card1skills.length == 0 ? '' : card1skills[0][1]
+        let card1effects = splitDesc(abilEffects, jobItem[9])
+        card1effects = card1effects.length == 0 ? '' : card1effects[0][1]
+        let card1traits = splitDesc(abiltraits, jobItem[9])
+        card1traits = card1traits.length == 0 ? '' : card1traits[0][1]
+
         let card2 = splitDesc(abil, jobItem[10])
         card2 = card2.length == 0 ? '' : card2[0]
+        let card2skills = splitDesc(abilskills, jobItem[10])
+        card2skills = card2skills.length == 0 ? '' : card2skills[0][1]
+        let card2effects = splitDesc(abilEffects, jobItem[10])
+        card2effects = card2effects.length == 0 ? '' : card2effects[0][1]
+        let card2traits = splitDesc(abiltraits, jobItem[10])
+        card2traits = card2traits.length == 0 ? '' : card2traits[0][1]
+
         let card3 = splitDesc(abil, jobItem[11])
         card3 = card3.length == 0 ? '' : card3[0]
+        let card3skills = splitDesc(abilskills, jobItem[11])
+        card3skills = card3skills.length == 0 ? '' : card3skills[0][1]
+        let card3effects = splitDesc(abilEffects, jobItem[11])
+        card3effects = card3effects.length == 0 ? '' : card3effects[0][1]
+        let card3traits = splitDesc(abiltraits, jobItem[11])
+        card3traits = card3traits.length == 0 ? '' : card3traits[0][1]
+
         let card4 = splitDesc(abil, jobItem[12])
         card4 = card4.length == 0 ? '' : card4[0]
+        let card4skills = splitDesc(abilskills, jobItem[12])
+        card4skills = card4skills.length == 0 ? '' : card4skills[0][1]
+        let card4effects = splitDesc(abilEffects, jobItem[12])
+        card4effects = card4effects.length == 0 ? '' : card4effects[0][1]
+        let card4traits = splitDesc(abiltraits, jobItem[12])
+        card4traits = card4traits.length == 0 ? '' : card4traits[0][1]
 
         let card1H = win.document.getElementById('card1H')
-        card1H.innerHTML = card1[0] + ' x5'
+        card1H.innerHTML = card1[0] + ' (x5)'
+
         let card1desc = win.document.getElementById('card1desc')
-        card1desc.innerHTML = card1[1]
+        card1desc.innerHTML = card1[1] + '<br><br>'
+                                + 'Skills: ' + card1skills + '<br>'
+                                + 'Effects: ' + card1effects + '<br>'
+                                + 'Traits: ' + card1traits
+        card1desc.innerHTML = card1desc.innerHTML.replace(/, ,/, '')
+
         let card2H = win.document.getElementById('card2H')
-        card2H.innerHTML = card2[0] + ' x3'
+        card2H.innerHTML = card2[0] + ' (x3)'
         let card2desc = win.document.getElementById('card2desc')
-        card2desc.innerHTML = card2[1]
+        card2desc.innerHTML = card2[1] + '<br><br>'
+                                + 'Skills: ' + card2skills + '<br>'
+                                + 'Effects: ' + card2effects + '<br>'
+                                + 'Traits: ' + card2traits
+        card2desc.innerHTML = card2desc.innerHTML.replace(/, ,/, '')
+
         let card3H = win.document.getElementById('card3H')
-        card3H.innerHTML = card3[0] + ' x2'
+        card3H.innerHTML = card3[0] + ' (x2)'
         let card3desc = win.document.getElementById('card3desc')
-        card3desc.innerHTML = card3[1]
+        card3desc.innerHTML = card3[1] + '<br><br>'
+                                + 'Skills: ' + card3skills + '<br>'
+                                + 'Effects: ' + card3effects + '<br>'
+                                + 'Traits: ' + card3traits
+        card3desc.innerHTML = card3desc.innerHTML.replace(/, ,/, '')
+        
         let card4H = win.document.getElementById('card4H')
-        card4H.innerHTML = card4[0] + ' x3'
+        card4H.innerHTML = card4[0] + ' (x1)'
         let card4desc = win.document.getElementById('card4desc')
-        card4desc.innerHTML = card4[1]
+        card4desc.innerHTML = card4[1] + '<br><br>'
+                                + 'Skills: ' + card4skills + '<br>'
+                                + 'Effects: ' + card4effects + '<br>'
+                                + 'Traits: ' + card4traits
+        card4desc.innerHTML = card4desc.innerHTML.replace(/, ,/, '')
 
         let cards = [card1H, card2H, card3H, card4H]
         for (var i=0; i< cards.length; i++) {
@@ -205,11 +259,12 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
 
           }
         })
+
     //    console.log(jobcraft)
 
 }, 40)
 
 setTimeout(function() {
   clearInterval(newWin)
-}, 1000)
+}, 500)
 }
