@@ -33,14 +33,31 @@ function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multip
 
  arrToGet.push(arrToMap.map(row => {
     desc = arrToCompare.filter(res => row[skill] == res.skill && row[effect] == res.type)
+
     row = row == undefined ? 'n/a' : row
     var multi1 = powlvl.filter(lvl => lvl.lvl == row[multiplier]) || ''
     var multi1maxhp = multi1.map(multi => multi.maxHP)
     var multi1attr = multi1.map(multi => multi.strAgiInt)
+  //  console.log(arrToCompare)
+
     row[skill] = row[skill] == undefined ? 'n/a' : row[skill]
-
-
-    if (row[skill].includes('Damage') || row[skill].includes('Heal') || row[skill].includes("Protect") && (row[effect] == 'MaxHP' || row[effect] == 'Strength' || row[effect] == 'Agility' || row[effect] == 'Intelligence'))
+    if (arrToCompare == passives && row[skill] == 'Buff' && (row[effect] == 'MaxHP' || row[effect] == 'Strength' || row[effect] == 'Agility' || row[effect] == 'Intelligence')) {
+         desc[0] = desc.map(desc => desc.name)
+         desc[0] = 'Gain ' + row[multiplier] +  ' ' + desc
+         desc = desc[0]
+    } else if (arrToCompare == passives && row[skill] == 'Upgrade') {
+        desc[0] = desc.map(desc => desc.name)
+        desc[0] = 'Become ' + desc
+        desc = desc[0]
+    } else if (arrToCompare == passives && row[skill] == 'Sacrifice' && row[effect] == 'Charge') {
+        desc[0] = desc.map(desc => desc.name)
+        desc[0] = 'Gain ' + row[multiplier] +  ' ' + desc
+        desc = desc[0]
+    } else if (arrToCompare == passives && row[skill] == 'Sacrifice' && row[effect] == 'Guard') {
+        desc[0] = desc.map(desc => desc.name)
+        desc[0] = 'Gain ' + row[multiplier] +  ' ' + desc
+        desc = desc[0]
+    } else if (row[skill].includes('Damage')  || row[skill].includes('Heal')  || row[skill].includes('Reflect') || row[skill].includes("Protect") && (row[effect] == 'MaxHP' || row[effect] == 'Strength' || row[effect] == 'Agility' || row[effect] == 'Intelligence'))
     {
       desc = row[effect] == 'MaxHP' ? desc.map(desc => desc.desc.replace('X%', multi1maxhp)) : desc.map(desc => desc.desc.replace('X%', multi1attr))
       desc[0] = desc[0] == undefined ? '' : desc[0]
@@ -51,6 +68,7 @@ function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multip
       desc = desc.replace('X', row[multiplier])
       desc = (row[skill] == 'Buff'|| row[skill] == 'InstantBoost') ?  desc.replace('Add/minus', 'Add') : desc
       desc = row[skill] == 'Debuff' ?  desc.replace('Add/minus', 'Minus') : desc
+      desc = row[skill] == 'Buff' ?  desc.replace('10%', 10 * row[multiplier] + '%') : desc
     }
     row[skill] = row[skill] == 'n/a' ? '' : row[skill]
     name = row[2]
@@ -66,7 +84,9 @@ function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multip
 function changeColors(arr) {
   arr.map(r => {
     for (var i=0; i<r.length; i++) {
-      if ((i !== 2) && (r[i] !== undefined)) {
+      if ( i == 20 ) {
+        r[i] = r[i]
+      } else if ((i !== 2) && (r[i] !== undefined)) {
         // attr change colors
         r[i] = r[i].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
         r[i] = r[i].replace(/\bstr\b|\bstrength\b/gi, '<span class=\'strength\'>Strength</span>')
@@ -147,13 +167,19 @@ let abilities = {
             desc: row[9]
           }
         })
+
         passives = res.map(row => {
           //attr
           row[30] = row[30] == undefined ? '' : row[30]
+          row[24] = row[24] == undefined ? '' : row[24]
           row[30] = row[30].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
           row[30] = row[30].replace(/\bagi\b/gi, '<span class=\'agi\'>Agility</span>')
           row[30] = row[30].replace(/\bstr\b/gi, '<span class=\'str\'>Strength</span>')
           row[30] = row[30].replace(/\bint\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
+          row[24] = row[24].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
+          row[24] = row[24].replace(/\bagi\b|\bagility\b/gi, '<span class=\'agility\'>Agility</span>')
+          row[24] = row[24].replace(/\bstr\b|\bstrength\b/gi, '<span class=\'strength\'>Strength</span>')
+          row[24] = row[24].replace(/\bint\b|\bintelligence\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
           //elements
           row[30] = row[30].replace(/\bwater\b/gi, '<span class=\'water\'>Water</span>')
           row[30] = row[30].replace(/\bfire\b/gi, '<span class=\'fire\'>Fire</span>')
@@ -178,6 +204,9 @@ let abilities = {
             skill: row[25],
             type: row[26],
             desc: row[30],
+            activetype: row[28],
+            passivetype: row[29],
+            name: row[24]
           }
         })
       })
@@ -252,6 +281,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
         })
       },
 
+
     passivesFn:() => {
       return GetSheetDone
         .raw(id, 5).then(data => data.data).then(res => {
@@ -259,9 +289,9 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
           res.map(inf => passivesAllInfo.push(inf))
 
           getDesc(passivesArr, res, passives, powlvl, 4, 5, 6)
-          getDesc(passivesArr, res, unitDesc, powlvl, 7, 8, 9)
-          getDesc(passivesArr, res, unitDesc, powlvl, 10, 11, 12)
-          getDesc(passivesArr, res, unitDesc, powlvl, 13, 14, 15)
+          getDesc(passivesArr, res, passives, powlvl, 7, 8, 9)
+          getDesc(passivesArr, res, passives, powlvl, 10, 11, 12)
+          getDesc(passivesArr, res, passives, powlvl, 13, 14, 15)
           desc1 = passivesArr[0]
           desc2 = passivesArr[1]
           desc3 = passivesArr[2]

@@ -10,7 +10,7 @@ import { rarityFilter, elementFilter, attrsFilter } from '../basicfn/rarityFilte
 import { openNew } from '../basicfn/openNew.js'
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 import star from '../img/events/StarColor1.png'
-import { matImagesComplete, jobImagesComplete} from '../img/imgsHTML.js'
+import { matImagesComplete, jobImagesComplete, abilImagesComplete} from '../img/imgsHTML.js'
 import {jobsfilter} from './jobsfilter'
 import tablesorter from 'tablesorter';
 
@@ -25,6 +25,8 @@ export function jobs() {
     var elemFilter = document.getElementById('element')
     var attrFilter = document.getElementById('attrSel')
     var filters = document.getElementsByClassName('filter')
+    let crystal = document.getElementById('jobmCrystal')
+    let chooselvl = document.getElementById('chooselvl')
     var jobsSheetArrs = Object.entries(jobsSheet);
     var jobsRows = jobsSheetArrs[2][1];
     jobsRows.shift()
@@ -105,20 +107,72 @@ function loadList() {
     check();
     jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)');
     joblink()
-    document.getElementById('chooselvl').value = 10
-    document.getElementById('jobmCrystal').value = 0
-  //  const myTable = document.querySelector("#jobsTable");
+
+    chooselvl.value = 10
+    crystal.value = 0
+
+      if (numOfPages.value == 'all') {
+        document.getElementById("next").disabled = true
+        document.getElementById("prev").disabled = true
+        document.getElementById("first").disabled = true
+        document.getElementById("last").disabled = true
+      } else {
+        check()
+      }
+
+    //adjust stats
+    let hp = Array.from(document.querySelectorAll('.jobRow td:nth-child(8)'))
+    let str = Array.from(document.querySelectorAll('.jobRow td:nth-child(9)'))
+    let agi = Array.from(document.querySelectorAll('.jobRow td:nth-child(10)'))
+    let int = Array.from(document.querySelectorAll('.jobRow td:nth-child(11)'))
+    chooselvl.onchange = function() {
+      changeStat(hp, this)
+      changeStat(str, this)
+      changeStat(agi, this)
+      changeStat(int, this)
+    }
+    crystal.onchange = function() {
+      changeStat(hp, chooselvl)
+      changeStat(str, chooselvl)
+      changeStat(agi, chooselvl)
+      changeStat(int, chooselvl)
+    }
+
+    //switch imgs
+    let switchskills = document.getElementsByClassName('tooltipMy')
+    for (var i=0; i< switchskills.length; i++) {
+      let src = abilImagesComplete.filter(img => switchskills[i].id == img.id)
+      switchskills[i].innerHTML = src[0] == undefined ? switchskills[i].innerHTML : switchskills[i].innerText + ' ' + src[0].outerHTML
+    //  if (switchskill[i].innerHTML)
+    }
+  //  console.log(switchskills.map(skill => skill.id))
 
     //SORT
-
       $('.myTable').tablesorter();
 
     // FILTERS
     tableRows = document.querySelectorAll('tr')
 
-  for (var i=0; i< filters.length; i++) {
-    filters[i].onchange = filter
-    filters[i].value = 'All'
+  var descFinaleSplit = descFinale.map(desc => desc.split(':'))
+  var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':'))
+  var switchCells =  document.getElementsByClassName('tooltiptext')
+
+  for (var i=0; i < switchCells.length; i++) {
+  var switchName = switchCells[i].parentNode.innerHTML
+  var indexof = switchName.indexOf('<')
+  switchName = switchName.substring(0, indexof)
+  var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
+  var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
+  tooltipsAb.map(desc => {
+    if (desc[0] == switchName) {
+      switchCells[i].innerHTML = desc[1]
+    }
+  })
+  tooltipsPass.map(desc => {
+    if (desc[0] == switchName) {
+      switchCells[i].innerHTML = desc[1]
+    }
+  })
   }
 
   function filter() {
@@ -172,7 +226,10 @@ function loadList() {
     }
     }
   }
-
+  for (var i=0; i< filters.length; i++) {
+    filters[i].onchange = filter
+    filters[i].value = 'All'
+  }
 
 
 /*    function sortTable(n) {
@@ -256,12 +313,11 @@ function drawList() {
 
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow : tableRow.style.backgroundColor = '#9eb1bb'
+        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#9eb1bb'
 
 
         jobItem.map( job => {
           var cell = document.createElement('td')
-
           switch (job) {
               case "1":
                   cell.innerHTML = '<td><img id="star" src="' + star + '" width="25" height="25"><span style="color: transparent">1</span></td>'
@@ -285,8 +341,10 @@ function drawList() {
           //add tooltips to specific cells
           var tooltip = document.createElement('span')
           tooltip.classList.add('tooltipMy', 'tooltiptext')
-          cell.innerHTML == jobItem[5] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
-          cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
+
+
+            cell.innerHTML == jobItem[5] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
+            cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
 
           //add images to pic cell
           var imgComplete = jobImagesComplete.find(jobimg => jobimg.id == jobItem[2])
@@ -300,6 +358,10 @@ function drawList() {
 
           tableRow.appendChild(cell)
           jobsBody.append(tableRow)
+
+          Array.from(document.querySelectorAll('.jobRow td:nth-child(3)')).filter(td => {
+            td.childNodes.length > 1 ? td.removeChild(td.childNodes[1]) : ''
+          })
         })
 }
 }
@@ -314,30 +376,10 @@ function check() {
     document.getElementById("prev").disabled = currentPage == 1 ? true : false;
     document.getElementById("first").disabled = currentPage == 1 ? true : false;
     document.getElementById("last").disabled = currentPage == numberOfPages ? true : false;
-    setTimeout(function() {
+//    setTimeout(function() {
 
-      var descFinaleSplit = descFinale.map(desc => desc.split(':'))
-      var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':'))
-      var switchCells =  document.getElementsByClassName('tooltiptext')
 
-      for (var i=0; i < switchCells.length; i++) {
-      var switchName = switchCells[i].parentNode.innerHTML
-      var indexof = switchName.indexOf('<')
-      switchName = switchName.substring(0, indexof)
-      var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
-      var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
-      tooltipsAb.map(desc => {
-        if (desc[0] == switchName) {
-          switchCells[i].innerHTML = desc[1]
-        }
-      })
-      tooltipsPass.map(desc => {
-        if (desc[0] == switchName) {
-          switchCells[i].innerHTML = desc[1]
-        }
-      })
-      }
-    }, 2000)
+//    }, 100)
 }
 
 function load() {
@@ -381,30 +423,19 @@ clear.onclick = function() {
   Array.from(filters).map(filter => filter.value = 'All')
   load()
 }
+
+
 //change stats on changing level
-let crystal = document.getElementById('jobmCrystal')
-let chooselvl = document.getElementById('chooselvl')
-let hp = Array.from(document.querySelectorAll('.jobRow td:nth-child(8)'))
-let str = Array.from(document.querySelectorAll('.jobRow td:nth-child(9)'))
-let agi = Array.from(document.querySelectorAll('.jobRow td:nth-child(10)'))
-let int = Array.from(document.querySelectorAll('.jobRow td:nth-child(11)'))
-
 function changeStat(arr, el) {
-  arr.map(cell => cell.innerHTML = Math.ceil(cell.id/10 * el.value) + Math.ceil((cell.id/10 * el.value) * crystal.value/10))
-}
-chooselvl.onchange = function() {
-
-//  hp.map(cell => cell.innerHTML = Math.ceil(cell.id/10 * this.value))
-  changeStat(hp, this)
-  changeStat(str, this)
-  changeStat(agi, this)
-  changeStat(int, this)
-}
-crystal.onchange = function() {
-  changeStat(hp, chooselvl)
-  changeStat(str, chooselvl)
-  changeStat(agi, chooselvl)
-  changeStat(int, chooselvl)
+  arr.map(cell => {
+    var raritycell = cell.parentNode.childNodes[3].childNodes
+    var rarity = raritycell[raritycell.length-1].innerHTML
+    if (rarity >= 5) {
+      cell.innerHTML = Math.ceil(cell.id/10 * el.value) + Math.ceil((cell.id/10 * el.value) * crystal.value/10)
+    } else {
+      cell.innerHTML = Math.ceil(cell.id/10 * el.value)
+    }
+  })
 }
 //let str = document.querySelectorAll()
 }) // end of getsheetdone.then

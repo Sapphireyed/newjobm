@@ -6,18 +6,24 @@
 #traitsdivPassive h5:first-child {
   //text-align: center;
 }
-#passiveDesc { margin: 10px 5px 40px 5px}
+#passiveDesc { margin: 10px 5px 10px 5px}
 #passiveSkill { text-align: center }
-#switchDesc { margin: 10px 5px 40px 5px}
+#switchDesc { margin: 10px 5px 30px 5px}
 #switchSkill { text-align: center}
+#switchimg img { width: 45px; margin-bottom: 7px }
 #deckdiv {
   margin: 10px 0;
+  img {
+    width: 45px;
+    display: block;
+    margin:auto;
+  }
 }
 
 .jobattrs {margin: auto}
 .job1star {
-  background-color: #f4ffed;
-
+  background-color: #6a8d55;
+  section:nth-child(3) {background-color: #f4ffed;}
   h1 {
       background-color: #6a8d55;
       margin-right: auto;
@@ -38,11 +44,12 @@
     color: white
   }
   #deck { background-color: rgba(106, 141, 85, .7) }
-  #deckH {background-color: #6a8d55 }
+
 }
 
 .job2star {
-    background-color: #eef7ff;
+    background-color: #4b7396;
+    section:nth-child(3) {background-color: #eef7ff;}
     h1
     {
         background-color: #4b7396;
@@ -67,7 +74,8 @@
 }
 
 .job3star {
-    background-color: #f5eefd;
+    background-color: #584b67; //#f5eefd;
+    section:nth-child(3) {background-color: #f5eefd;}
     h1 {
         background-color: #584b67;
         margin-right:auto;
@@ -91,7 +99,8 @@
 }
 
 .job4star {
-    background-color: #fff0ec;
+    background-color: #954e3a;
+    section:nth-child(3) {background-color: #fff0ec;}
     h1 {
         background-color: #954e3a;
         margin-right:auto;
@@ -115,7 +124,8 @@
 }
 
 .job5star {
-    background-color: #fffaef;
+    background-color: #e0c369;
+    section:nth-child(3) {background-color: #fffaef;}
     h1 {
         background-color: #e0c369;
         margin-right:auto;
@@ -137,7 +147,6 @@
       color: white
     }
     #deck { background-color: #e0c369 }
-    #deckH {background-color: #e0c369 }
 }
 
 #passiveSkillsH, #passiveSkills { display: inline}
@@ -149,6 +158,8 @@
 
 #jobimg div:first-child {
   max-width: 195px;
+  display: block;
+  margin: auto;
   img:first-child {
     max-width: 195px;
     height: auto;

@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
 //const CompressionPlugin = require("compression-webpack-plugin");
-var HtmlWebpackPreconnectPlugin = require('html-webpack-preconnect-plugin')
+//var HtmlWebpackPreconnectPlugin = require('html-webpack-preconnect-plugin')
 
 module.exports = {
   entry: {
@@ -10,14 +10,16 @@ module.exports = {
 },
 output: {
   filename: '[name].[contenthash]bundle.js',
-  path: path.resolve(__dirname, 'deploy')
+//  path: path.resolve(__dirname, 'deploy'),
+  path: '/newjobm/',
 },
-optimization: {
-  runtimeChunk: 'single',
-},
+//optimization: {
+//  runtimeChunk: 'single',
+//},
 devServer: {
   contentBase: './deploy',
-  open: true
+  compress: true,
+//  open: true,
 },
 module: {
   rules: [
@@ -56,9 +58,9 @@ module: {
       title: "Webpack Output",
       filename: 'index.html',
       chunks: ['app'],
-      preconnect: [
-        'https://docs.google.com/spreadsheets/d/1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g/edit?usp=sharing',
-      ]
+    //  preconnect: [
+    //    'https://docs.google.com/spreadsheets/d/1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g/edit?usp=sharing',
+    //  ]
     }),
     new HtmlWebpackPlugin({
       filename: 'job.html',

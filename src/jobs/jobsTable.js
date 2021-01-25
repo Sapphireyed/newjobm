@@ -2,7 +2,7 @@ import sword from '../img/other/blades.png'
 
 var jobsTable = document.createElement('table');
 jobsTable.id = 'jobsTable';
-jobsTable.classList.add('tablesorter', 'myTable', 'w-100', 'shadow')
+jobsTable.classList.add('section', 'tablesorter', 'myTable', 'w-100', 'shadow')
 var thead = document.createElement('thead')
 thead.classList.add('thead', 'shadow-lg', 'w-100')
 thead.id = 'thead'

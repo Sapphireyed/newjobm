@@ -9,48 +9,96 @@ import 'tablesorter'
 import nav from './nav/nav';
 import { jobmain } from './jobs/job/jobmain.js'
 import { init } from './jobs/jobsjs.js'
-import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete} from './img/imgsHTML.js'
-import {jobsData, jobsDataAll, jobsStats, craft, mats} from './abilitiesData.js'
+import { jobsImgs } from './importImgs.js'
+import {getMatImgs, getJobImgs, getAbilImgs, matImagesComplete, jobImagesComplete, abilImagesComplete} from './img/imgsHTML.js'
+import {abilities, jobsData, jobsDataAll, jobsStats, craft, mats} from './abilitiesData.js'
 
 document.body.append(nav(), jobmain)
-jobsData.materials().then(d => {
-  jobsData.jobs().then(j => {
+
+window.onload = function() {
+jobsData.jobs().then(j => {
+  getJobImgs()
+  // jobicon
+  let jobmain = document.getElementById('jobimg')
+  var header = document.getElementById('jobheader')
+  let currentjobImg = jobImagesComplete.filter(img => img.id == jobheader.innerHTML)
+
+  jobmain.innerHTML = currentjobImg[0].outerHTML
+  //bg imgs
+  let jobsrc = Object.entries(jobsImgs).filter(img => img[0] == jobheader.innerHTML + '.png')
+console.log(jobsrc[0][1])
+  document.body.style.backgroundImage = 'url("' + jobsrc[0][1] + '")'
+  document.body.style.backgroundSize = '190px'
+  document.body.style.backgroundSpace = '0 0'
+  //document.body.style.backgroundSize = 'contain'
+}).then(d => {
+  jobsData.materials().then(d => {
     getMatImgs()
-    getJobImgs()
-      // jobicon
-      let jobmain = document.getElementById('jobimg')
-      var header = document.getElementById('jobheader')
-      let currentjobImg = jobImagesComplete.filter(img => img.id == jobheader.innerHTML)
+    // crafting
+    let matName = document.getElementById('craftmat').nextElementSibling.innerHTML
+    let craftmat = document.querySelectorAll('.craftmat span:nth-child(2)')
+    let craftmatparent = document.getElementById('craftmat')
+    let craftmatPic = document.querySelectorAll('.craftmat span:nth-child(1)')
 
-      jobmain.innerHTML = currentjobImg[0].outerHTML
-      // crafting
-      let matName = document.getElementById('craftmat').nextElementSibling.innerHTML
-      let craftmat = document.querySelectorAll('.craftmat span:nth-child(2)')
-      let craftmatparent = document.getElementById('craftmat')
-      let craftmatPic = document.querySelectorAll('.craftmat span:nth-child(1)')
+    let craftjob = document.querySelectorAll('.craftjob span:nth-child(2)')
+    let craftjobPic = document.querySelectorAll('.craftjob span:nth-child(1)')
+    for (var i=0; i<craftmat.length; i++) {  // matimgs
+      let name = craftmat[i].innerHTML
+      matImagesComplete.map(m => {
+          name == m.id ? craftmatPic[i].innerHTML = m.outerHTML + '<br>': ''
+      })
+      craftmatPic[i].innerHTML == '' ? craftmatPic[i].parentNode.parentNode.nextSibling.remove() : ''
+      craftmatPic[i].innerHTML == '' ? craftmatPic[i].parentNode.parentNode.remove() : ''
 
-      let craftjob = document.querySelectorAll('.craftjob span:nth-child(2)')
-      let craftjobPic = document.querySelectorAll('.craftjob span:nth-child(1)')
-      for (var i=0; i<craftmat.length; i++) {  // matimgs
-        let name = craftmat[i].innerHTML
-        matImagesComplete.map(m => {
-            name == m.id ? craftmatPic[i].innerHTML = m.outerHTML + '<br>': ''
+    }
+    for (var i=0; i<craftjob.length; i++) {  //jobimgs
+      let name = craftjob[i].innerHTML
+      jobImagesComplete.map(m => {
+          name == m.id ? craftjobPic[i].innerHTML = m.outerHTML + '<br>': ''
         })
-        craftmatPic[i].innerHTML == '' ? craftmatPic[i].parentNode.parentNode.nextSibling.remove() : ''
-        craftmatPic[i].innerHTML == '' ? craftmatPic[i].parentNode.parentNode.remove() : ''
-
-      }
-      for (var i=0; i<craftjob.length; i++) {  //jobimgs
-        let name = craftjob[i].innerHTML
-        jobImagesComplete.map(m => {
-            name == m.id ? craftjobPic[i].innerHTML = m.outerHTML + '<br>': ''
-          })
-        craftjobPic[i].innerHTML == '' ? craftjobPic[i].parentNode.parentNode.nextSibling.remove() : ''
-        craftjobPic[i].innerHTML == '' ? craftjobPic[i].parentNode.parentNode.remove() : ''
-      }
-  })
-
+      craftjobPic[i].innerHTML == '' ? craftjobPic[i].parentNode.parentNode.nextSibling.remove() : ''
+      craftjobPic[i].innerHTML == '' ? craftjobPic[i].parentNode.parentNode.remove() : ''
+    }
 })
+
+
+}).then(d => {
+  abilities.abils().then(f=> {
+    getAbilImgs()
+  // abilities icons
+  let switchimg = document.getElementById('switchimg')
+  var switchH = document.getElementById('switchH')
+  switchH = switchH.innerHTML.split(':')[1].trim()
+
+  let currentSwitchImg = abilImagesComplete.filter(img => img.id == switchH)
+  switchimg.innerHTML = currentSwitchImg[0].outerHTML
+
+let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
+  let ext = h.innerHTML.indexOf('(')
+  let name = h.innerHTML.substring(0, ext-1)
+  return name
+})
+
+  let card1img = document.getElementById('card1img')
+  let currentCard1Img = abilImagesComplete.filter(img => img.id == cardHname[0])
+
+  card1img == null ? '' : card1img.innerHTML = currentCard1Img[0].outerHTML
+
+  let card2img = document.getElementById('card2img')
+  let currentCard2Img = abilImagesComplete.filter(img => img.id == cardHname[1])
+  card2img == null ? '' : card2img.innerHTML = currentCard2Img[0].outerHTML
+
+  let card3img = document.getElementById('card3img')
+  let currentCard3Img = abilImagesComplete.filter(img => img.id == cardHname[2] || img.id == cardHname[1])
+  card3img == null ? '' : card3img.innerHTML = currentCard3Img[0].outerHTML
+
+  let card4img = document.getElementById('card4img')
+  let currentCard4Img = abilImagesComplete.filter(img => img.id == cardHname[3] || img.id == cardHname[2] || img.id == cardHname[1])
+  card4img == null ? '' : card4img.innerHTML = currentCard4Img[0].outerHTML
+  })
+})
+}
+
 
 
 

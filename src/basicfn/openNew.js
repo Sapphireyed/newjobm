@@ -1,5 +1,5 @@
 import {jobmain} from '../jobs/job/jobmain.js'
-import {descFinale, abilSkills, abilEffects, abilTraits,
+import {abilities, descFinale, abilSkills, abilEffects, abilTraits,
         passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
         craft, jobsStats } from '../abilitiesData.js'
 import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete } from '../img/imgsHTML.js'
@@ -9,7 +9,10 @@ function splitDesc(arr, item){
   arr = Object.values(arr).map(ab => ab == undefined ? '' : ab.split(':'))
   return arr.filter(ab => item == ab[0])
 }
-
+abilities.units().then(unit => {
+  abilities.abils()
+  abilities.passivesFn()
+})
 
 export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, passivesarr, passivedesc, passiveskills,  passiveeffects, passivetraits) {
     var abil = abilArr
@@ -77,6 +80,7 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
         passive = passive.length == 0 ? '' : passive[0][1]
         passiveH.innerHTML = 'Passive: ' + jobItem[7] || ''
         passiveDesc.innerHTML = passive
+        passiveDesc.innerHTML = passiveDesc.innerHTML.replace(/<br><br>/, '')
         //passive skills
         let passiveSkills = win.document.getElementById('passiveSkills')
         var pskills = splitDesc(passiveskills, jobItem[7])
@@ -104,6 +108,7 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
         switchSkill = switchSkill.length == 0 ? '' : switchSkill[0][1]
         switchH.innerHTML = 'Switch: ' + jobItem[8] || ''
         switchDesc.innerHTML = switchSkill
+        switchDesc.innerHTML = switchDesc.innerHTML.replace(/<br><br>/, '')
         //switch skills
         let switchskills = win.document.getElementById('switchskills')
         var skills = splitDesc(abilskills, jobItem[8])
@@ -169,7 +174,8 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
                                 + 'Skills: ' + card1skills + '<br>'
                                 + 'Effects: ' + card1effects + '<br>'
                                 + 'Traits: ' + card1traits
-        card1desc.innerHTML = card1desc.innerHTML.replace(/, ,/, '')
+        card1desc.innerHTML = card1desc.innerHTML.replace(/, ,/g, '')
+        card1desc.innerHTML = card1desc.innerHTML.replace(/<br><br>/g, '')
 
         let card2H = win.document.getElementById('card2H')
         card2H.innerHTML = card2[0] + ' (x3)'
@@ -178,7 +184,8 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
                                 + 'Skills: ' + card2skills + '<br>'
                                 + 'Effects: ' + card2effects + '<br>'
                                 + 'Traits: ' + card2traits
-        card2desc.innerHTML = card2desc.innerHTML.replace(/, ,/, '')
+        card2desc.innerHTML = card2desc.innerHTML.replace(/, ,/g, '')
+        card2desc.innerHTML = card2desc.innerHTML.replace(/<br><br>/g, '')
 
         let card3H = win.document.getElementById('card3H')
         card3H.innerHTML = card3[0] + ' (x2)'
@@ -187,8 +194,9 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
                                 + 'Skills: ' + card3skills + '<br>'
                                 + 'Effects: ' + card3effects + '<br>'
                                 + 'Traits: ' + card3traits
-        card3desc.innerHTML = card3desc.innerHTML.replace(/, ,/, '')
-        
+        card3desc.innerHTML = card3desc.innerHTML.replace(/, ,/g, '')
+        card3desc.innerHTML = card3desc.innerHTML.replace(/<br><br>/g, '')
+
         let card4H = win.document.getElementById('card4H')
         card4H.innerHTML = card4[0] + ' (x1)'
         let card4desc = win.document.getElementById('card4desc')
@@ -196,7 +204,8 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
                                 + 'Skills: ' + card4skills + '<br>'
                                 + 'Effects: ' + card4effects + '<br>'
                                 + 'Traits: ' + card4traits
-        card4desc.innerHTML = card4desc.innerHTML.replace(/, ,/, '')
+        card4desc.innerHTML = card4desc.innerHTML.replace(/, ,/g, '')
+        card4desc.innerHTML = card4desc.innerHTML.replace(/<br><br>/g, '')
 
         let cards = [card1H, card2H, card3H, card4H]
         for (var i=0; i< cards.length; i++) {

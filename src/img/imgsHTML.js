@@ -1,13 +1,16 @@
 global.fetch = require('node-fetch');
 const GetSheetDone = require('get-sheet-done');
 const id = '1W-ptBX6fjkQcZXrrr4KTZRp2qNcer66Ak4VANW2dM8';
-import {jobsData, jobsDataAll, mats, jobsStats } from '../abilitiesData.js'
-import {jobsImgs, jobsFrames, jobsBg, matsImgs, matsFrames} from '../importImgs.js'
+import {jobsData, jobsDataAll, mats, jobsStats, abilitiesAllInfo, abilSkills} from '../abilitiesData.js'
+import {jobsImgs, jobsFrames, jobsBg,
+        matsImgs, matsFrames,
+        abilsImgs, abilsBg } from '../importImgs.js'
 
 let matImagesComplete = []
 let jobImagesComplete = []
+let abilImagesComplete = []
 
-export { matImagesComplete, jobImagesComplete } // full DOM element containing job/mat img
+export { matImagesComplete, jobImagesComplete, abilImagesComplete } // full DOM element containing job/mat img
 
 //mats frames
 let  common = Object.entries(matsFrames).filter(frame => frame[0] == 'Common.png')
@@ -164,14 +167,55 @@ export function getJobImgs() {
 }
 
 // abilities
-/*export {abilImages}
-// new spreadsheet with rules which pic to apply
-let abilImages = {
-  images:() => {
-    return GetSheetDone
-      .raw(id, 1).then(data => data.data).then(res => {
-        res.shift()
-        console.log(res)
-      })
-    }
-  }*/
+let  curse = Object.entries(abilsBg).filter(bg => bg[0] == 'Curse.jpg')
+curse = Object.values(curse)[0][1]
+let damage = Object.entries(abilsBg).filter(frame => frame[0] == 'Damage.jpg')
+damage = Object.values(damage)[0][1]
+let heal = Object.entries(abilsBg).filter(frame => frame[0] == 'Heal.jpg')
+heal = Object.values(heal)[0][1]
+let debuff = Object.entries(abilsBg).filter(frame => frame[0] == 'Debuff.jpg')
+debuff = Object.values(debuff)[0][1]
+let buff = Object.entries(abilsBg).filter(frame => frame[0] == 'Buff.jpg')
+buff = Object.values(buff)[0][1]
+
+let abilImgArr =[]
+
+
+export function getAbilImgs() {
+  let abilSkillsSplit = Object.values(abilSkills).map(ab => ab == undefined ? '' : ab.split(':'))
+  abilitiesAllInfo.map(img => {
+    let abilImgHtml = document.createElement('img');  //create abil img empty
+    abilImgHtml.classList.add(img[20])
+    abilImgHtml.id = img[2].trim()
+    abilImgArr.push(abilImgHtml)
+  })
+  Array.from(abilImgArr).map(img => {
+    let imgsrc = Object.entries(abilsImgs).filter(abil => abil[0] == img.classList[0] + '.png')
+    imgsrc.map(src => {
+      let ext = src[0].indexOf('.')
+      let name = src[0].substring(0, ext)
+      if (name == img.classList[0]) {
+         img.src = src[1]
+      }
+      let bgtype = abilSkillsSplit.filter(abil => abil[0] == img.id)
+
+      if (bgtype[0][1].includes('Curse')) {
+        img.style.backgroundImage = 'url("' + curse + '")'
+      } else if (bgtype[0][1].includes('Damage') == true) {
+        img.style.backgroundImage = 'url("' + damage + '")'
+      } else if (bgtype[0][1].includes('Heal')) {
+        img.style.backgroundImage = 'url("' + heal + '")'
+      } else if (bgtype[0][1].includes('Debuff')) {
+        img.style.backgroundImage = 'url("' + debuff + '")'
+      } else {
+        img.style.backgroundImage = 'url("' + buff + '")'
+      }
+      img.style.backgroundSize = 'cover'
+    })
+
+      return abilImagesComplete.push(img)
+  //    abilImagesComplete.push(abilImgHtml)
+
+    })
+
+}

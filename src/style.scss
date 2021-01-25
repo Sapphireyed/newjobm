@@ -8,10 +8,10 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 
 /*black in main nav bar, light to all*/
-$mainBg: #435761; //#a87f53;
+$mainBg: #33424a; //#435761;
 $mainBgLight: #f5f7f8; //#ebddca;
 /*brown headings bg*/
-$secondBg: #282623;
+$secondBg: #151b1f;
 $secondBgLight: #c4c2bf;
 
 @mixin title {
@@ -33,8 +33,10 @@ $secondBgLight: #c4c2bf;
 
 
 body {
-    background-color: $mainBgLight;
-    font-size: 18px
+  background: rgb(245,247,248);
+background: radial-gradient(circle, #a5c6d6 0, rgba(21,27,31,1) 60%, rgba(51,66,74,1) 100%);
+    font-size: 18px;
+    position: relative;
 }
 
 img { max-width: 100%}
@@ -69,15 +71,24 @@ img { max-width: 100%}
     max-width: 90vw;
     margin: auto;
 }
-
+ nav { z-index: 101}
 nav:nth-child(2) {
     background-color: $secondBg;
     margin-bottom: 40px
 }
 
+#bgimg {
+  width: 100%;
+  position: fixed;
+  top: 90px;
+  z-index: -1
+}
 .tooltipMy {
     position: relative;
     opacity: 1;
+    img {
+      width: 25px;
+    }
 }
 
     .tooltipMy .tooltiptext {
@@ -94,7 +105,7 @@ nav:nth-child(2) {
         bottom: 85%;
         opacity: 0;
         transition: opacity 0.3s;
-        box-shadow: 2px 2px black;
+        box-shadow: 3px 3px #435761;
     }
 
         .tooltipMy .tooltiptext::after {
@@ -144,6 +155,7 @@ h1 {
     margin-bottom: 10px
 }
 
+#jobsmain { width: 70vw }
 #jobs select {
   box-shadow: 2px 2px #435761;
  }
@@ -190,14 +202,25 @@ img {
     height: auto;
   }
 }
-table { overflow-x: scroll}
+.sticky {
+  position: fixed;
+  top: 0;
+//  background-color: #435761;
+  width: 100%;
+  z-index: 100;
+}
+
 .thead {
     @include title;
     font-weight: bold;
     font-size: 20px;
     padding: 5px 0;
-    cursor: pointer
+    cursor: pointer;
+    position: sticky;
+    top: 0
+
 }
+
 
 #jobsTable tr td:nth-child(3) {
     font-weight: bold;
@@ -250,11 +273,14 @@ table { overflow-x: scroll}
 }
 #first img { transform: rotate(177deg)}
 #prev img { transform: rotate(177deg)}
+#next img { transform: rotate(-4deg)}
+#last img { transform: rotate(-4deg)}
 .jobimg {
   position: absolute;
   top: -18px;
   left: 4px;
   width: 33px;
+  padding: 5px;
   z-index: 99
 }
 
@@ -276,9 +302,9 @@ table { overflow-x: scroll}
 
 /*attr*/
 .maxhp { color: #e3a200 }
-.strength { color: red }
-.agility { color: green }
-.intelligence { color: blue }
+.strength, .str { color: red }
+.agility, .agi { color: #00FF00	 }
+.intelligence, .int { color: blue }
 /*elements*/
 .water { color: #3d9af2 }
 .fire { color: #ff4538 }
@@ -301,6 +327,7 @@ table { overflow-x: scroll}
 .seed { color: #520500 }
 
 @media only screen and (max-width: 1000px) {
+
   .tooltipMy .tooltiptext {
       left: -55%;
   }
