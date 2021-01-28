@@ -59,37 +59,37 @@ passiveH.id = 'passiveH'
 let passiveDesc = document.createElement('h5')
 passiveDesc.id = 'passiveDesc'
 //traits etc
-let traitsdivPassive = document.createElement('div')
-traitsdivPassive.id = 'traitsdivPassive'
+//let traitsdivPassive = document.createElement('div')
+//traitsdivPassive.id = 'traitsdivPassive'
 // skills
-let passiveSkillsDiv = document.createElement('div')
-passiveSkillsDiv.id = 'passiveSkillsDiv'
-let passiveSkillsH = document.createElement('h5')
-passiveSkillsH.innerHTML = 'Skills:'
-passiveSkillsH.id = 'passiveSkillsH'
-let passiveSkills = document.createElement('h6')
-passiveSkills.id = 'passiveSkills'
-passiveSkillsDiv.append(passiveSkillsH, passiveSkills)
+//let passiveSkillsDiv = document.createElement('div')
+//passiveSkillsDiv.id = 'passiveSkillsDiv'
+//let passiveSkillsH = document.createElement('h5')
+//passiveSkillsH.innerHTML = 'Skills:'
+//passiveSkillsH.id = 'passiveSkillsH'
+//let passiveSkills = document.createElement('h6')
+//passiveSkills.id = 'passiveSkills'
+//passiveSkillsDiv.append(passiveSkillsH, passiveSkills)
 // effects
-let passiveEffectsDiv = document.createElement('div')
-passiveEffectsDiv.id = 'passiveEffectsDiv'
-let passiveEffectsH = document.createElement('h5')
-passiveEffectsH.innerHTML = 'Effects:'
-passiveEffectsH.id = 'passiveEffectsH'
-let passiveEffects = document.createElement('h6')
-passiveEffects.id = 'passiveEffects'
-passiveEffectsDiv.append(passiveEffectsH, passiveEffects)
+//let passiveEffectsDiv = document.createElement('div')
+//passiveEffectsDiv.id = 'passiveEffectsDiv'
+//let passiveEffectsH = document.createElement('h5')
+//passiveEffectsH.innerHTML = 'Effects:'
+//passiveEffectsH.id = 'passiveEffectsH'
+//let passiveEffects = document.createElement('h6')
+//passiveEffects.id = 'passiveEffects'
+//passiveEffectsDiv.append(passiveEffectsH, passiveEffects)
 //traits
-let passiveTraitsDiv = document.createElement('div')
-passiveTraitsDiv.id = 'passiveTraitsDiv'
-let passiveTraitsH = document.createElement('h5')
-passiveTraitsH.innerHTML = 'Traits:'
-passiveTraitsH.id = 'passiveTraitsH'
-let passiveTraits = document.createElement('h6')
-passiveTraits.id = 'passiveTraits'
-passiveTraitsDiv.append(passiveTraitsH, passiveTraits)
-traitsdivPassive.append(passiveSkillsDiv, passiveEffectsDiv, passiveTraitsDiv)
-passiveSkill.append(passiveH, passiveDesc, traitsdivPassive)
+//let passiveTraitsDiv = document.createElement('div')
+//passiveTraitsDiv.id = 'passiveTraitsDiv'
+//let passiveTraitsH = document.createElement('h5')
+//passiveTraitsH.innerHTML = 'Traits:'
+//passiveTraitsH.id = 'passiveTraitsH'
+//let passiveTraits = document.createElement('h6')
+//passiveTraits.id = 'passiveTraits'
+//passiveTraitsDiv.append(passiveTraitsH, passiveTraits)
+//traitsdivPassive.append(passiveSkillsDiv, passiveEffectsDiv, passiveTraitsDiv)
+passiveSkill.append(passiveH, passiveDesc)
 
 let switchSkill = document.createElement('div')
 switchSkill.id = 'switchSkill'
@@ -101,7 +101,7 @@ switchimg.id = 'switchimg'
 let switchDesc = document.createElement('h5')
 switchDesc.id = 'switchDesc'
 //traits etc
-let traitsdiv = document.createElement('div')
+/*let traitsdiv = document.createElement('div')
 traitsdiv.id = 'traitsdiv'
 // switch
 let switchskillsdiv = document.createElement('div')
@@ -133,8 +133,8 @@ switchtraitsH.innerHTML = 'Traits:'
 let switchtraits = document.createElement('h6')
 switchtraits.id = 'switchtraits'
 switchtraitsdiv.append(switchtraitsH, switchtraits)
-traitsdiv.append(switchskillsdiv, switcheffectsdiv, switchtraitsdiv)
-switchSkill.append(switchH, switchDesc, switchimg, traitsdiv)
+traitsdiv.append(switchskillsdiv, switcheffectsdiv, switchtraitsdiv)*/
+switchSkill.append(switchH, switchDesc, switchimg)
 
 div2.append(passiveSkill, switchSkill)
 

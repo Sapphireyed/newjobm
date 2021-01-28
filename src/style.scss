@@ -33,14 +33,37 @@ $secondBgLight: #c4c2bf;
 
 
 body {
-  background: rgb(245,247,248);
-background: radial-gradient(circle, #a5c6d6 0, rgba(21,27,31,1) 60%, rgba(51,66,74,1) 100%);
+  background-color: rgb(245,247,248);
+  background-image: radial-gradient(circle, #a5c6d6 0, rgba(21,27,31,1) 60%, rgba(51,66,74,1) 100%);
     font-size: 18px;
     position: relative;
 }
-
+body::after {
+  content: '';
+  background-size: 155px;
+  height:100px;
+  width:1200px;
+  position: absolute;
+  transform: scaleX(-1)
+}
 img { max-width: 100%}
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #9eb1bb;
+}
+::-webkit-scrollbar:hover {
+  width: 15px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    background-color: $mainBg;
+}
 .dropdown {
   position: relative;
   display: inline-block;
@@ -51,6 +74,7 @@ img { max-width: 100%}
   background-color: $secondBg;
   min-width: 140px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  //margin-top: 5px;
   z-index: 1;
 
   a {
@@ -60,7 +84,7 @@ img { max-width: 100%}
 }
 
 .dropdown-content a:hover {
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0,0,0,0.8);
   color: black;
 }
 .dropdown:hover .dropdown-content {display: block;}
@@ -74,7 +98,8 @@ img { max-width: 100%}
  nav { z-index: 101}
 nav:nth-child(2) {
     background-color: $secondBg;
-    margin-bottom: 40px
+    margin-bottom: 40px;
+    border-bottom: 4px solid #f5f7f8;
 }
 
 #bgimg {
@@ -83,46 +108,6 @@ nav:nth-child(2) {
   top: 90px;
   z-index: -1
 }
-.tooltipMy {
-    position: relative;
-    opacity: 1;
-    img {
-      width: 25px;
-    }
-}
-
-    .tooltipMy .tooltiptext {
-        visibility: hidden;
-        width: 200px;
-        background-color: rgb(77, 99, 111);
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 0;
-        position: absolute;
-        z-index: 1;
-        left: -35%;
-        bottom: 85%;
-        opacity: 0;
-        transition: opacity 0.3s;
-        box-shadow: 3px 3px #435761;
-    }
-
-        .tooltipMy .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-        }
-
-    .tooltipMy:hover .tooltiptext {
-        visibility: visible;
-        opacity: 1;
-    }
 
 .row {
     margin: 0
@@ -155,7 +140,7 @@ h1 {
     margin-bottom: 10px
 }
 
-#jobsmain { width: 70vw }
+#jobsmain { width: 80vw }
 #jobs select {
   box-shadow: 2px 2px #435761;
  }
@@ -165,35 +150,31 @@ select option {
 
 #jobtable {
     width: 100%;
-    tr: nth-child(even)
+    tr: nth-child(even) {
+      background-color: #9eb1bb;
+    }
 
-{
-    background-color: #9eb1bb;
-}
+  tr:nth-child(n+1):hover {
+      color: #fff;
+      background-color: $mainBg;
+  }
 
-td:nth-child(n+4) {
-    text-align: center;
-}
+  i {
+      margin-top: 5px;
+  }
 
-tr:nth-child(n+1):hover {
-    color: #fff;
-    background-color: $mainBg;
-}
-
-i {
-    margin-top: 5px;
-}
-
-img {
-    width: 40%
-}
+  img {
+    //  width: 40%
+  }
 
 }
+.tooltipMy:nth-child(even) { padding: 0 0 0 28px}
 #pic div:first-child {   // jobicon in the table
   max-width: 65px;
   img:first-child {
     max-width:50px;
     height: auto;
+    padding: 10px
   }
   img:nth-child(2) {
     max-width: 40px;
@@ -221,7 +202,7 @@ img {
 
 }
 
-
+#jobsTable tr td:not(:first-child) { padding: 0 0 0 31px; }
 #jobsTable tr td:nth-child(3) {
     font-weight: bold;
     cursor: pointer;
@@ -245,8 +226,9 @@ img {
     background-color: rgba(0, 0, 255, 0.7);
 }
 
-#jobsTable tr td:nth-child(n+4) {
+#jobsTable tr td:nth-child(n+8) {
   text-align: center;
+  padding: 0;
 }
 
 #jobs select { float: right }
@@ -271,8 +253,8 @@ img {
   font-size: 20px;
   margin: auto;
 }
-#first img { transform: rotate(177deg)}
-#prev img { transform: rotate(177deg)}
+#first img { transform: scaleX(-1)}
+#prev img { transform: scaleX(-1)}
 #next img { transform: rotate(-4deg)}
 #last img { transform: rotate(-4deg)}
 .jobimg {
@@ -299,6 +281,50 @@ img {
   width: 49px;
   z-index: 2
 }
+
+.tooltipMy {
+    position: relative;
+    opacity: 1;
+    img {
+      width: 25px;
+      position: absolute;
+      left: 0;
+      padding: 3px
+    }
+}
+
+    .tooltipMy .tooltiptext {
+        visibility: hidden;
+        width: 200px;
+        background-color: #33424a; //rgb(77, 99, 111);
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 0;
+        position: absolute;
+        z-index: 1;
+        left: -35%;
+        bottom: 85%;
+        opacity: 0;
+        transition: opacity 0.3s;
+        box-shadow: 3px 3px #435761;
+    }
+
+        .tooltipMy .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+    .tooltipMy:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
 
 /*attr*/
 .maxhp { color: #e3a200 }
@@ -331,7 +357,7 @@ img {
   .tooltipMy .tooltiptext {
       left: -55%;
   }
-
+  .tooltipMy img { position:inherit;}
   .jobBg {
     width: 35px;
   }

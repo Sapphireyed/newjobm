@@ -87,7 +87,7 @@ export function getJobImgs() {
     jobImgDiv.style.position = 'relative'
     let jobImgHtml = document.createElement('img'); // 1st img frame + shape as bg
   //  jobImgHtml.height = 'auto'
-    jobImgHtml.style.backgroundImage = "url('" + job[1] + "')";
+    jobImgHtml.src = job[1];
     jobImgHtml.classList.add('jobic')
     jobImgHtml.style.backgroundSize = 'contain'
     jobImgHtml.style.position = 'relative'
@@ -100,19 +100,19 @@ export function getJobImgs() {
           let rarity = data[2]
           switch (rarity) {
             case '1':
-              jobImgHtml.src = one
+              jobImgHtml.style.backgroundImage = "url('" + one + "')";
               break;
             case '2':
-              jobImgHtml.src = two
+              jobImgHtml.style.backgroundImage = "url('" + two + "')";
               break;
             case '3':
-              jobImgHtml.src = three
+              jobImgHtml.style.backgroundImage = "url('" + three + "')";
               break;
             case '4':
-              jobImgHtml.src = four
+              jobImgHtml.style.backgroundImage = "url('" + four + "')";
               break;
             case '5':
-              jobImgHtml.src = five
+              jobImgHtml.style.backgroundImage = "url('" + five + "')";
               break;
           default:
           }

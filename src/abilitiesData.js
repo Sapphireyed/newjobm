@@ -33,7 +33,6 @@ function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multip
 
  arrToGet.push(arrToMap.map(row => {
     desc = arrToCompare.filter(res => row[skill] == res.skill && row[effect] == res.type)
-
     row = row == undefined ? 'n/a' : row
     var multi1 = powlvl.filter(lvl => lvl.lvl == row[multiplier]) || ''
     var multi1maxhp = multi1.map(multi => multi.maxHP)
@@ -41,7 +40,7 @@ function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multip
   //  console.log(arrToCompare)
 
     row[skill] = row[skill] == undefined ? 'n/a' : row[skill]
-    if (arrToCompare == passives && row[skill] == 'Buff' && (row[effect] == 'MaxHP' || row[effect] == 'Strength' || row[effect] == 'Agility' || row[effect] == 'Intelligence')) {
+    if ((row[skill] == 'Buff' || row[skill] == 'Debuff') && (row[effect] == 'MaxHP' || row[effect] == 'Strength' || row[effect] == 'Agility' || row[effect] == 'Intelligence')) {
          desc[0] = desc.map(desc => desc.name)
          desc[0] = 'Gain ' + row[multiplier] +  ' ' + desc
          desc = desc[0]
@@ -69,6 +68,7 @@ function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multip
       desc = (row[skill] == 'Buff'|| row[skill] == 'InstantBoost') ?  desc.replace('Add/minus', 'Add') : desc
       desc = row[skill] == 'Debuff' ?  desc.replace('Add/minus', 'Minus') : desc
       desc = row[skill] == 'Buff' ?  desc.replace('10%', 10 * row[multiplier] + '%') : desc
+      desc = row[skill] == 'Vulnerable' ?  desc.replace('Apply', 'Apply ' + row[multiplier]) : desc
     }
     row[skill] = row[skill] == 'n/a' ? '' : row[skill]
     name = row[2]
@@ -134,12 +134,17 @@ let abilities = {
         })
         powlvl.length = 8
 
+
         unitDesc = res.map(row => {
           //attr
           row[9] = row[9].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
           row[9] = row[9].replace(/\bstr\b/gi, '<span class=\'strength\'>Strength</span>')
           row[9] = row[9].replace(/\bagi\b/gi, '<span class=\'agility\'>Agility</span>')
           row[9] = row[9].replace(/\bint\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
+          row[6] = row[6].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
+          row[6] = row[6].replace(/\bstr\b|\bStrength\b/gi, '<span class=\'strength\'>Strength</span>')
+          row[6] = row[6].replace(/\bagi\b|\bAgility\b/gi, '<span class=\'agility\'>Agility</span>')
+          row[6] = row[6].replace(/\bint\b|\bIntelligence\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
           //elements
           row[9] = row[9].replace(/\bwater\b/gi, '<span class=\'water\'>Water</span>')
           row[9] = row[9].replace(/\bfire\b/gi, '<span class=\'fire\'>Fire</span>')
@@ -148,6 +153,13 @@ let abilities = {
           row[9] = row[9].replace(/\bthunder\b/gi, '<span class=\'thunder\'>Thunder</span>')
           row[9] = row[9].replace(/\blight\b/gi, '<span class=\'light\'>Light</span>')
           row[9] = row[9].replace(/\bdark\b/gi, '<span class=\'dark\'>Dark</span>')
+          row[6] = row[6].replace(/\bwater\b/gi, '<span class=\'water\'>Water</span>')
+          row[6] = row[6].replace(/\bfire\b/gi, '<span class=\'fire\'>Fire</span>')
+          row[6] = row[6].replace(/\bearth\b/gi, '<span class=\'earth\'>Earth</span>')
+          row[6] = row[6].replace(/\bwind\b/gi, '<span class=\'wind\'>Wind</span>')
+          row[6] = row[6].replace(/\bthunder\b/gi, '<span class=\'thunder\'>Thunder</span>')
+          row[6] = row[6].replace(/\blight\b/gi, '<span class=\'light\'>Light</span>')
+          row[6] = row[6].replace(/\bdark\b/gi, '<span class=\'dark\'>Dark</span>')
           //debuffs
           row[9] = row[9].replace(/\bblind\b/gi, '<span class=\'blind\'>Blind</span>')
           row[9] = row[9].replace(/\bbleed\b/gi, '<span class=\'bleed\'>Bleed</span>')
@@ -160,14 +172,26 @@ let abilities = {
           row[9] = row[9].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'>Paralysis</span>')
           row[9] = row[9].replace(/\brestrain\b/gi, '<span class=\'restrain\'>Restrain</span>')
           row[9] = row[9].replace(/\bseed\b/gi, '<span class=\'seed\'>Seed</span>')
+          row[6] = row[6].replace(/\bblind\b/gi, '<span class=\'blind\'>Blind</span>')
+          row[6] = row[6].replace(/\bbleed\b/gi, '<span class=\'bleed\'>Bleed</span>')
+          row[6] = row[6].replace(/\binsane\b/gi, '<span class=\'insane\'>Insane</span>')
+          row[6] = row[6].replace(/\bdepress\b/gi, '<span class=\'depress\'>Depress</span>')
+          row[6] = row[6].replace(/\bburn\b/gi, '<span class=\'burn\'>Burn</span>')
+          row[6] = row[6].replace(/\bdizzy\b/gi, '<span class=\'dizzy\'>Dizzy</span>')
+          row[6] = row[6].replace(/\bchill\b/gi, '<span class=\'chill\'>Chill</span>')
+          row[6] = row[6].replace(/\binjury\b/gi, '<span class=\'injury\'>Injury</span>')
+          row[6] = row[6].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'>Paralysis</span>')
+          row[6] = row[6].replace(/\brestrain\b/gi, '<span class=\'restrain\'>Restrain</span>')
+          row[6] = row[6].replace(/\bseed\b/gi, '<span class=\'seed\'>Seed</span>')
 
           return {
             skill: row[7],
             type: row[8],
-            desc: row[9]
+            desc: row[9],
+            name: row[6]
           }
         })
-
+console.log(res)
         passives = res.map(row => {
           //attr
           row[30] = row[30] == undefined ? '' : row[30]
@@ -302,7 +326,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
             + (desc1[i].desc || '')
             + '<br>' + (desc2[i].desc || '')
             + '<br>' + (desc3[i].desc || '')
-            + '<br>' + (desc4[i].desc || ''))
+            + '<br>' + (desc4[i].desc || '') + '<br>')
             }
           changeColors(res)  // change colors of keywords in skills/effects/traits
 

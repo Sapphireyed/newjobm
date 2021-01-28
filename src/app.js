@@ -9,17 +9,20 @@ import './style.scss';
 import nav from './nav/nav';
 import { jobsmain } from './jobs/jobsmain.js'
 import { jobs} from './jobs/jobsjs.js'
-import {abilities, jobsData,} from './abilitiesData.js'
+import {abilities, jobsData,abilitiesAllInfo} from './abilitiesData.js'
 import {getMatImgs, getAbilImgs, getJobImgs, abilImagesComplete, jobImagesComplete} from './img/imgsHTML.js'
-import bg from './img/other/bgmain2.png'
 import { jobsTable } from './jobs/jobsTable.js'
+import theadimg from './img/Jobs/BG/inthp.jpg'
 
-let bgimg = document.createElement('img')
-bgimg.id = 'bgimg'
-bgimg.src = bg
+//let bgimg = document.createElement('img')
+//bgimg.id = 'bgimg'
+//bgimg.src = bg
 
-document.body.append(bgimg, nav(), jobsmain)
 
+document.body.append( nav(), jobsmain)
+document.body.style.backgroundImage = 'url("' + theadimg + '")'
+document.body.style.backgroundSize = 'cover'
+//document.body.style.backgroundPosition = 'center center'
 window.onscroll = function() {stickyHeader()};
 var header = document.getElementById("navMain");
 var sticky = header.offsetTop + 60;
@@ -28,12 +31,12 @@ var sticky = header.offsetTop + 60;
 function stickyHeader() {
   if (window.pageYOffset > sticky) {
     header.classList.add("sticky")
-    bgimg.style.top = '-10px'
+//    bgimg.style.top = '-10px'
 //          let width = document.getElementById('jobsBody').offsetWidth
 //          header.style.width = width + 'px'
   } else {
     header.classList.remove("sticky");
-    bgimg.style.top = '90px'
+//    bgimg.style.top = '90px'
   }
 }
 window.onload = function(){
@@ -42,7 +45,19 @@ abilities.units()
     .then(data => {
         abilities.abils().then(ab => {
           getAbilImgs()
+          //switch imgs
+          let switchskills = document.querySelectorAll('td .tooltipMy')
 
+          for (var i=0; i< switchskills.length; i++) {
+            let switchskillsimg = document.createElement('div')
+            let src = abilImagesComplete.filter(img => switchskills[i].parentNode.id == img.id)
+            if (src.length > 0) {
+              switchskills[i].parentNode.prepend(switchskillsimg)
+              switchskillsimg.innerHTML = src[0].outerHTML
+            }
+
+          //  if (switchskill[i].innerHTML)
+          }
         })
         abilities.passivesFn()
       })

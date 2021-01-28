@@ -4,10 +4,12 @@ var jobsTable = document.createElement('table');
 jobsTable.id = 'jobsTable';
 jobsTable.classList.add('section', 'tablesorter', 'myTable', 'w-100', 'shadow')
 var thead = document.createElement('thead')
+//thead.style.backgroundImage = 'url("' + theadimg + '")'
+//thead.style.backgroundSize = 'cover'
 thead.classList.add('thead', 'shadow-lg', 'w-100')
 thead.id = 'thead'
 thead.innerHTML = '<tr id="jobsThead">'
-    + '<th data-sort="number">Index<i class="fas fa-sort float-right"></i></th>'
+    + '<th data-sort="number">#<i class="fas fa-sort float-right"></i></th>'
     + '<th>Icon<i class="fas fa-sort float-right"></i></th>'
     + '<th>Name<i class="fas fa-sort float-right"></i></th>'
     + '<th>Rarity<i class="fas fa-sort float-right"></i></th>'

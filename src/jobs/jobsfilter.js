@@ -1,9 +1,14 @@
 //import 'tablesorter';
-import next from '../img/other/swordnext.png'
-import last from '../img/other/swordlast.png'
+import next from '../img/other/swordnext3.png'
+import last from '../img/other/swordlast3.png'
+import bgh1 from '../img/other/bgh1.png'
+import theadimg from '../img/Jobs/BG/inthp.jpg'
 
 const br = document.createElement('br')
 const jobsfilter = document.createElement('div');
+//jobsfilter.style.backgroundImage = 'url("' + theadimg + '")'
+//jobsfilter.style.backgroundSize = 'cover'
+//jobsfilter.style.backgroundPosition = 'center center'
 jobsfilter.classList.add('section', 'shadow', 'row')
 jobsfilter.id = 'jobs'
 
@@ -11,6 +16,8 @@ const header = document.createElement('h1')
 header.classList.add('col-12')
 header.innerHTML = 'JOBS'
 header.style.textShadow = '2px 2px grey'
+//header.style.backgroundImage = 'url("' + bgh1 +'")'
+//header.style.backgroundSize = 'cover'
 
 const filtersDiv = document.createElement('div');
 filtersDiv.id = 'jobsfilter'
@@ -90,15 +97,36 @@ const typeSel = document.createElement('select');
 //rarSel.classList.add('col-4')
 typeSel.id = 'type'
 typeSel.name = 'type'
+typeSel.value = 'All'
 typeSel.classList.add('filter', 'rounded')
-const typeOptionsArr = ['All', 'Buff', 'Curse', 'Damage', 'Debuff', 'Heal', 'InstantBoost', 'Protect', 'Sacrifice', 'Vulnerable'];
+typeSel.innerHTML = '<option value="All">All</option>'
+                + '<option value="Damage">Damage</option>'
+                + '<option value="Heal">Heal</option>'
+                + '<optgroup label="Negative">'
+                    + '<option value="Curse">Curse</option>'
+                    + '<option value="Sacrifice">Sacrifice</option>'
+                  + '</optgroup>'
+                + '<optgroup label="Buff">'
+                    + '<option value="Buff">Buff</option>'
+                    + '<option value="InstantBoost">InstantBoost</option>'
+                  + '</optgroup>'
+                  + '<optgroup label="Debuff">'
+                    + '<option value="Debuff">Debuff</option>'
+                    + '<option value="Vulnerable">Vulnerable</option>'
+                  + '</optgroup>'
+                  + '<optgroup label="Protect">'
+                    + '<option value="Protect">Protect</option>'
+                    + '<option value="Debuff Protection">Debuff Protection</option>'
+                    + '<option value="Other">Other</option>'
+                  + '</optgroup>'
+//const typeOptionsArr = ['All', 'Buff', 'Curse', 'Damage', 'Debuff', 'Heal', 'InstantBoost', 'Protect', 'Sacrifice', 'Vulnerable'];
 
-const optionsType = typeOptionsArr.map(opt => {
-  const value = opt
-  return `<option value="${value}">${opt}</option>`;
-});
+//const optionsType = typeOptionsArr.map(opt => {
+//  const value = opt
+//  return `<option value="${value}">${opt}</option>`;
+//});
 
-typeSel.innerHTML = optionsType;
+//typeSel.innerHTML = optionsType;
 typeFilterDiv.append(typeLabel, typeSel)
 
 // Apply filter
@@ -106,13 +134,13 @@ const applyFilterDiv = document.createElement('div');
 applyFilterDiv.classList.add('col-6')
 const applyLabel = document.createElement('label');
 applyLabel.for = 'apply'
-applyLabel.innerHTML = 'Trait: '
+applyLabel.innerHTML = 'Apply: '
 //applyLabel.className = 'col-12'
 const applySel = document.createElement('select');
 applySel.id = 'apply'
 applySel.name = 'apply'
 applySel.classList.add('filter', 'rounded')
-const applyOptionsArr = ['All', 'Combo', 'CreatureExpert', 'Exhaust', 'HumanoidExpert', 'LifeSteal'];
+const applyOptionsArr = ['All', 'Action', 'Turn Charge', 'Combo', 'CreatureExpert', 'Draw', 'Exhaust', 'HumanoidExpert', 'LifeSteal', 'MatterExpert', 'Multiply', 'SpiritExpert',    ].sort();
 
 const optionsApply = applyOptionsArr.map(opt => {
   const value = opt
