@@ -150,6 +150,22 @@ const optionsApply = applyOptionsArr.map(opt => {
 applySel.innerHTML = optionsApply;
 applyFilterDiv.append(applyLabel, applySel)
 
+// search in passive/switch/both
+const searchinDiv = document.createElement('div');
+searchinDiv.classList.add('col-12')
+searchinDiv.style.borderBottom = '2px solid #2a434a'
+const searchinLabel = document.createElement('label');
+searchinLabel.for = 'searchin'
+searchinLabel.innerHTML = 'Search in: '
+//applyLabel.className = 'col-12'
+const searchinSel = document.createElement('select');
+searchinSel.id = 'searchin'
+searchinSel.name = 'searchin'
+searchinSel.classList.add('rounded')
+searchinSel.innerHTML = '<option value="both">Both</option><option value="passive">Passive</option><option value="switch">Switch</option>'
+searchinDiv.append(searchinLabel, searchinSel)
+
+//clear filters button
 let cleardiv = document.createElement('div')
 cleardiv.className = 'col-6'
 let clear = document.createElement('button')
@@ -158,7 +174,7 @@ clear.innerHTML = 'Reset filters'
 clear.classList.add('rounded')
 clear.style.color = 'white'
 clear.style.fontSize = '18px'
-clear.style.backgroundColor = '#4d636f'
+clear.style.backgroundColor = '#3a5863'//'#4d636f'
 cleardiv.appendChild(clear)
 /*const filtersLabels = document.createElement('div');
 filtersLabels.classList.add('col-6')
@@ -167,7 +183,7 @@ const filtersSelect = document.createElement('div')
 filtersSelect.classList.add('col-6')
 filtersSelect.append(rarSel, br, elemSel, attrSel, typeSel, applySel)*/
 
-filtersDiv.append(rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, cleardiv)
+filtersDiv.append(searchinDiv, rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, cleardiv)
 
 const othersDiv = document.createElement('div');
 othersDiv.classList.add('col-12', 'col-lg-6', 'row');
@@ -190,7 +206,6 @@ chooseInput.value = 10
 chooseInput.type = 'number'
 chooseInput.min = 1
 chooseInput.step = 10
-width: '60px'
 chooseInput.classList.add('rounded')
 
 chooseLvlDiv.append(chooseLabel, chooseInput)

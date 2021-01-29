@@ -8,7 +8,7 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 
 
 /*black in main nav bar, light to all*/
-$mainBg: #33424a; //#435761;
+$mainBg: #2a434a; //#33424a;
 $mainBgLight: #f5f7f8; //#ebddca;
 /*brown headings bg*/
 $secondBg: #151b1f;
@@ -249,6 +249,10 @@ select option {
   }
 }
 #otherfilters div:first-child {text-align: right}
+#jobsfilter div:nth-child(3), #jobsfilter div:nth-child(2) {
+  margin-top: 5px;
+}
+
 .pages {
   font-size: 20px;
   margin: auto;
@@ -285,6 +289,7 @@ select option {
 .tooltipMy {
     position: relative;
     opacity: 1;
+    cursor: help;
     img {
       width: 25px;
       position: absolute;
@@ -296,7 +301,7 @@ select option {
     .tooltipMy .tooltiptext {
         visibility: hidden;
         width: 200px;
-        background-color: #33424a; //rgb(77, 99, 111);
+        background-color: $mainBg; //rgb(77, 99, 111);
         color: #fff;
         text-align: center;
         border-radius: 6px;
@@ -362,14 +367,16 @@ select option {
     width: 35px;
   }
   #jobs label { width: 100%}
-  #jobs select { float: none}
+  #jobs select { float: none; margin-right: 4px}
   #jobsclear {
     float: none;
     margin-top: 25px;
   }
   #otherfilters { margin: 20px 0 0 0 }
   #otherfilters div:first-child {text-align: left}
-  #jobsfilter div:nth-child(even) {text-align: right}
+  #jobsfilter div:nth-child(odd) {text-align: right}
+  #jobsfilter div:first-child {display: inline}
+  #jobsfilter div:first-child label {width: 50%; text-align: left; float: left}
 }
 
 @media only screen and (max-width: 760px) {
@@ -386,6 +393,7 @@ select option {
   }
   #otherfilters { margin: 20px 0 0 0 }
   #otherfilters div:first-child {text-align: left}
-  #jobsfilter div:nth-child(even) {text-align: right}
-
+  #jobsfilter div:nth-child(odd) {text-align: right}
+  #jobsfilter div:first-child { display: inline}
+  #jobsfilter div:first-child label {width: 50%; text-align: left}
 }

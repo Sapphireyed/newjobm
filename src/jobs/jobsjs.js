@@ -1,33 +1,38 @@
 //const Tabletop = require('tabletop');
 global.fetch = require('node-fetch');
 const GetSheetDone = require('get-sheet-done');
+const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 import { tbody } from './jobsTable.js'
 import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
-        passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from '../abilitiesData.js'
+        passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
+        jobsDataAll} from '../abilitiesData.js'
 var $ = require("jquery")
-//import 'tablesorter'
-import { rarityFilter, elementFilter, attrsFilter } from '../basicfn/rarityFilter.js'
 import { openNew } from '../basicfn/openNew.js'
-const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 import star from '../img/events/StarColor1.png'
 import { matImagesComplete, jobImagesComplete, abilImagesComplete} from '../img/imgsHTML.js'
 import {jobsfilter} from './jobsfilter'
 import tablesorter from 'tablesorter';
 import theadimg from '../img/Jobs/BG/inthp.jpg'
+import { changeStats } from '../basicfn/changeStats.js'
+import {singularFilter } from '../basicfn/filters.js'
 
+export { jobValues }
+let jobValues = []
 export function jobs() {
   GetSheetDone.raw(id, 7)
   .then((data) => {
+    // get mobile with to use later
     let w = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
     let targetWidth = 768;
-    var jobsSheet = data
-    //       J O B S
+    // filter elements
     var rarFilter = document.getElementById('rarity')
     var elemFilter = document.getElementById('element')
     var attrFilter = document.getElementById('attrSel')
     var filters = document.getElementsByClassName('filter')
     let crystal = document.getElementById('jobmCrystal')
     let chooselvl = document.getElementById('chooselvl')
+    //       J O B S
+    var jobsSheet = data
     var jobsSheetArrs = Object.entries(jobsSheet);
     var jobsRows = jobsSheetArrs[2][1];
     jobsRows.shift()
@@ -39,7 +44,7 @@ export function jobs() {
     })
     var job = Object.entries(jobsRows);
 
-    var jobValues = job.map(job => job[1])
+    job.map(job => jobValues.push(job[1]))
 
     // PAGINATIOM
     var pagesSel = document.getElementById('numOfPages')
@@ -127,16 +132,16 @@ function loadList() {
     let agi = Array.from(document.querySelectorAll('.jobRow td:nth-child(10)'))
     let int = Array.from(document.querySelectorAll('.jobRow td:nth-child(11)'))
     chooselvl.onchange = function() {
-      changeStat(hp, this)
-      changeStat(str, this)
-      changeStat(agi, this)
-      changeStat(int, this)
+      changeStats(hp, this)
+      changeStats(str, this)
+      changeStats(agi, this)
+      changeStats(int, this)
     }
     crystal.onchange = function() {
-      changeStat(hp, chooselvl)
-      changeStat(str, chooselvl)
-      changeStat(agi, chooselvl)
-      changeStat(int, chooselvl)
+      changeStats(hp, chooselvl)
+      changeStats(str, chooselvl)
+      changeStats(agi, chooselvl)
+      changeStats(int, chooselvl)
     }
 
     //switch imgs
@@ -178,7 +183,7 @@ function loadList() {
     }
   })
   }
-
+  let searchin = document.getElementById('searchin')
   // FILTERS
   function filter() {
     var elem = this.value
@@ -193,125 +198,23 @@ function loadList() {
     if (this.value == pageList[ind-1][2]) {  // rarity
       tableRows[ind].classList.add(this.id)
     }
+    // depending on searchin value
+    switch (searchin.value) {
+      case 'both':
+        singularFilter(abilitiesAllInfo, elem, filter, pageList, tableRows, ind, 8, 5);
+        singularFilter(passivesAllInfo, elem, filter, pageList, tableRows, ind, 7, 4)
+        break;
+      case 'passive':
+        singularFilter(passivesAllInfo, elem, filter, pageList, tableRows, ind, 7, 4)
+        break;
+      case 'switch':
+        singularFilter(abilitiesAllInfo, elem, filter, pageList, tableRows, ind, 8, 5);
+        break;
+      default:
 
-    pageList[ind-1][8] = pageList[ind-1][8] == '' ? 'n/a' : pageList[ind-1][8]  // switch name
-    var abilname = pageList[i-1][8]
-    // loop through abil all info to find matches
-    abilitiesAllInfo.map(a => {  //switch typa & traits
-      if (elem == 'Protect' || elem == 'Debuff Protection' || elem == 'Other') {
-        if (a[5] == 'Protect' || a[8] == 'Protect' || a[11] == 'Protect' || a[14] == 'Protect') { //skill == protect
-          let protectInd = a.indexOf('Protect')
-          if (elem == 'Debuff Protection') { //
-            if (a[2] == pageList[ind-1][8]) {
-              // effect includes any of elements or debuffs
-              if (a[protectInd+1].includes("<span class='thunder'>")
-                                                  || a[protectInd+1].includes("<span class='light'>")
-                                                  || a[protectInd+1].includes("<span class='dark'>")
-                                                  || a[protectInd+1].includes("<span class='wind'>")
-                                                  || a[protectInd+1].includes("<span class='fire'>")
-                                                  || a[protectInd+1].includes("<span class='earth'>")
-                                                  || a[protectInd+1].includes("<span class='bleed'>")
-                                                  || a[protectInd+1].includes("<span class='restrain'>")
-                                                  || a[protectInd+1].includes("<span class='venom'>")
-                                                  || a[protectInd+1].includes("<span class='insane'>")
-                                                  || a[protectInd+1].includes("<span class='injury'>")
-                                                  || a[protectInd+1].includes("Debuff")
-                                                  || a[protectInd+1].includes("Element")) {
-                tableRows[ind].classList.add(this.id)
-              }
-            }
-          } else if (elem == 'Protect') {
-            if (a[2] == pageList[ind-1][8]) {
-              // if skill == protect and effect == attr or null
-              if (a[protectInd+1].includes("<span class='maxhp'>") || a[protectInd+1].includes("<span class='strength'>")
-                  || a[protectInd+1].includes("<span class='agility'>") || a[protectInd+1].includes("<span class='intelligence'>")
-                  || a[protectInd+1].includes("Null")) {
-                tableRows[ind].classList.add(this.id)
-              }
-            }
-          }
-        }
-        // for apply search in column r s and t only
-      } else if (filter == 'apply') {
-        // if within <span
-        if (a[2] == pageList[ind-1][8] && [a[17], a[18], a[19]].some(el => el == undefined ? '' : el.includes("<span class='" + elem.toLowerCase() + "'>" + elem + "</span>"))) {
-          tableRows[ind].classList.add(this.id)
-        }
-        //if no span tag
-        if (a[2] == pageList[ind-1][8] && [a[17], a[18], a[19]].some(el => el == undefined ? '' : el.includes(elem)) && elem !== 'Protect' && elem !== '1' && elem !== '2' && elem !== '3' && elem !== 4 && elem !== '5') {
-          tableRows[ind].classList.add(this.id)
-        }
-      } else { // all other filters
-        // if within <span
-        if (a[2] == pageList[ind-1][8] &&  a.includes("<span class='" + elem.toLowerCase() + "'>" + elem + "</span>")) {
-          tableRows[ind].classList.add(this.id)
-        }
-        //if no span tag
-        if (a[2] == pageList[ind-1][8] && a.includes(elem) && elem !== 'Protect' && elem !== '1' && elem !== '2' && elem !== '3' && elem !== 4 && elem !== '5') {
-          tableRows[ind].classList.add(this.id)
-        }
-      }
-    })
+    }
 
-    pageList[ind-1][7] = pageList[ind-1][7] == '' ? 'n/a' : pageList[ind-1][7]  // passive name
 
-    passivesAllInfo.map(a => {  //switch typa & traits
-      if (elem == 'Protect' || elem == 'Debuff Protection' || elem == 'Other') {
-        if (a[4] == 'Protect' || a[7] == 'Protect' || a[10] == 'Protect' || a[13] == 'Protect') { //skill == protect
-          let protectInd = a.indexOf('Protect')
-          if (elem == 'Debuff Protection') { //
-            if (a[2] == pageList[ind-1][7]) {
-              // effect includes any of elements or debuffs
-              if (a[protectInd+1].includes("<span class='thunder'>")
-                                                  || a[protectInd+1].includes("<span class='light'>")
-                                                  || a[protectInd+1].includes("<span class='dark'>")
-                                                  || a[protectInd+1].includes("<span class='wind'>")
-                                                  || a[protectInd+1].includes("<span class='fire'>")
-                                                  || a[protectInd+1].includes("<span class='earth'>")
-                                                  || a[protectInd+1].includes("<span class='bleed'>")
-                                                  || a[protectInd+1].includes("<span class='restrain'>")
-                                                  || a[protectInd+1].includes("<span class='venom'>")
-                                                  || a[protectInd+1].includes("<span class='insane'>")
-                                                  || a[protectInd+1].includes("<span class='injury'>")
-                                                  || a[protectInd+1].includes("Debuff")
-                                                  || a[protectInd+1].includes("Element")) {
-                tableRows[ind].classList.add(this.id)
-              }
-            }
-
-          } else if (elem == 'Protect') {
-            if (a[2] == pageList[ind-1][7]) {
-              // if skill == protect and effect == attr or null
-              if (a[protectInd+1].includes("<span class='maxhp'>") || a[protectInd+1].includes("<span class='strength'>")
-                  || a[protectInd+1].includes("<span class='agility'>") || a[protectInd+1].includes("<span class='intelligence'>")
-                  || a[protectInd+1].includes("Null")) {
-                tableRows[ind].classList.add(this.id)
-              }
-            }
-          }
-        }
-        //aply filter to look only in 3 last columns
-      } else if (filter == 'apply') { //within <span>
-        elem == 'Turn Charge' ? elem = 'Charge' : ''
-        if (a[2] == pageList[ind-1][7] && [a[17], a[18], a[19]].some(el => el == undefined ? '' : el.includes("<span class='" + elem.toLowerCase() + "'>" + elem + "</span>"))) {
-          tableRows[ind].classList.add(this.id)
-        }
-        //if no span tag
-        if (a[2] == pageList[ind-1][7] && [a[17], a[18], a[19]].some(el => el == undefined ? '' : el.includes(elem)) && elem !== 'Protect' && elem !== '1' && elem !== '2' && elem !== '3' && elem !== 4 && elem !== '5')
-         {
-          tableRows[ind].classList.add(this.id)
-        }
-      } else { // all other filters
-        // if within <span
-        if (a[2] == pageList[ind-1][7] && a.includes("<span class='" + elem.toLowerCase() + "'>" + elem + "</span>")) {
-          tableRows[ind].classList.add(this.id)
-        }
-        //if no span tag
-        if (a[2] == pageList[ind-1][7] && a.includes(elem) && elem !== 'Protect' && elem !== '1' && elem !== '2' && elem !== '3' && elem !== 4 && elem !== '5') {
-          tableRows[ind].classList.add(this.id)
-        }
-      }
-    })
     // counter adds numeric classesfor each much
   var counter = 1
     for (var index=0; index < filters.length; index++) {
@@ -327,11 +230,16 @@ function loadList() {
     }
   }
   //fire filter function on any filter change
+
   for (var i=0; i< filters.length; i++) {
     filters[i].onchange = filter
     filters[i].value = 'All'
   }
-
+  searchin.onchange = function() {
+    for (var i=0; i< filters.length; i++) {
+      filters[i].onchange()
+    }
+  }
 
 /*    function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -563,19 +471,6 @@ clear.onclick = function() {
   load()
 }
 
-
-//change stats on changing level
-function changeStat(arr, el) {
-  arr.map(cell => {
-    var raritycell = cell.parentNode.childNodes[3].childNodes
-    var rarity = raritycell[raritycell.length-1].innerHTML
-    if (rarity >= 5) {
-      cell.innerHTML = Math.ceil(cell.id/10 * el.value) + Math.ceil((cell.id/10 * el.value) * crystal.value/10)
-    } else {
-      cell.innerHTML = Math.ceil(cell.id/10 * el.value)
-    }
-  })
-}
 //let str = document.querySelectorAll()
 }) // end of getsheetdone.then
 }

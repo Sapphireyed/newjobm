@@ -16,8 +16,10 @@ abilities.units().then(unit => {
 
 export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, passivesarr, passivedesc, passiveskills,  passiveeffects, passivetraits) {
     var abil = abilArr
+    console.log(arr)
+    var jobItem = arr[i-1]
 
-    var jobItem = Object.values(arr[i - 1])
+//    var jobItem = Object.values(arr[i - 1])
     var win = window.open('job.html')
     // fires in the new tab
     var newWin = setInterval(function(){
@@ -26,32 +28,32 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
       let rarity = win.document.getElementById('rarity')
       switch (jobItem[2]) {
           case "1":
-              rarity.innerHTML = '<img id="star" src="' + star + '" width="45">'
+              rarity.innerHTML = '<h4>Rarity: </h4><img id="star" src="' + star + '">'
               break;
           case "2":
-              rarity.innerHTML = '<img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45">'
+              rarity.innerHTML = '<h4>Rarity: </h4><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45">'
               break;
           case "3":
-              rarity.innerHTML = '<img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45">'
+              rarity.innerHTML = '<h4>Rarity: </h4><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45">'
               break;
           case "4":
-              rarity.innerHTML = '<img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45">'
+              rarity.innerHTML = '<h4>Rarity: </h4><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45"><img id="star" src="' + star + '" width="45">'
               break;
           case "5":
-              rarity.innerHTML = '<img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40">'
+              rarity.innerHTML = '<h4>Rarity: </h4><img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40"><img id="star" src="' + star + '" width="40">'
               break;
           }
 
     //  attributes
       let hp = win.document.getElementById('hp')
       console.log(hp)
-      hp.innerHTML = 'HP: ' + jobItem[3]
+      hp.innerHTML = ' <span class="spanattr" id="' + jobItem[3] + '">' + + jobItem[3] + '</span>'
       let str = win.document.getElementById('str')
-      str.innerHTML = 'STR: ' + jobItem[4]
+      str.innerHTML = 'Strength: <span class="spanattr"  id="' + jobItem[4] + '">' + jobItem[4] + '</span>'
       let agi = win.document.getElementById('agi')
-      agi.innerHTML = 'AGI: ' + jobItem[5]
+      agi.innerHTML = 'Agility: <span class="spanattr"  id="' + jobItem[5] + '">' + + jobItem[5] + '</span>'+ '</span>'
       let int = win.document.getElementById('int')
-      int.innerHTML = 'INT: ' + jobItem[6]
+      int.innerHTML = 'Intelligence: <span class="spanattr"  id="' + jobItem[6] + '">' + + jobItem[6] + '</span>'
 
         //change the new tab look based on job/char rarity
         switch (jobItem[2]) {
@@ -211,6 +213,7 @@ let myreg = /([A-Z])\w+/gi
         }
 
         // Craft
+        console.log(craft)
         let craftdiv = win.document.getElementById('craftCraft')
         let craftjob = Object.entries(craft).map(job => {
           job.shift()

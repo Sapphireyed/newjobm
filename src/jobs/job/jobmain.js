@@ -1,4 +1,5 @@
 //import { init } from '../jobsjs.js'
+import hpbar from '../../img/other/hpbar.png'
 
 let jobmain = document.createElement('section')
 jobmain.classList.add('section', 'shadow')
@@ -26,25 +27,97 @@ imgdiv.appendChild(jobimg)
 
 let attrs = document.createElement('div')
 attrs.classList.add('col-10', 'row', 'my-auto')
+let rarLvlOrb = document.createElement('div')
+rarLvlOrb.id = 'rarLvlOrb'
+rarLvlOrb.classList.add('col-6')
+//rarity
 let rarity = document.createElement('div')
 rarity.id = 'rarity'
-rarity.classList.add('col-12', 'jobattr', 'text-center')
+rarity.classList.add('jobattr',)
+//l3vel
+let level = document.createElement('div')
+level.id = 'level';
+level.style.marginTop = '10px'
+//level.classList.add('col-3')
+let labelh4 = document.createElement('h4')
+let levelLabel = document.createElement('label')
+levelLabel.innerHTML = 'Level: '
+let levelSel = document.createElement('input')
+levelSel.id = 'levelSel'
+levelSel.type = 'number'
+levelSel.min = 1
+levelSel.step = 10
+levelSel.value = 10
+levelSel.style.width = '50px'
+levelSel.classList.add('rounded')
+labelh4.append(levelLabel)
+level.append(labelh4, levelSel)
+//jobmania crystal
+const crystDiv = document.createElement('div');
+crystDiv.id = 'crystDiv'
+//crystDiv.classList.add('col-3')
+const crysth4 = document.createElement('h4')
+const jobmCrystal = document.createElement('label');
+jobmCrystal.for = 'jobmCrystal'
+jobmCrystal.innerHTML = 'Jobmania Orb: '
+//jobmCrystal.style.textAlign = 'right'
+jobmCrystal.style.marginRight = '4px'
+crysth4.appendChild(jobmCrystal)
+const numOfCryst = document.createElement('select');
+numOfCryst.id = 'jobmCrystal'
+numOfCryst.name = 'jobmCrystal'
+numOfCryst.value = 0
+numOfCryst.style.width = '50px'
+numOfCryst.classList.add('rounded')
+numOfCryst.style.textAlign = 'right'
+const crystOptArr = [0, 1, 2, 3, 4, 5];
 
-let hp = document.createElement('h4')
-hp.id = 'hp'
+const crystOpt = crystOptArr.map(opt => {
+  const value = opt
+  return `<option value="${value}">${opt}</option>`;
+});
+numOfCryst.innerHTML = crystOpt;
+crystDiv.append(crysth4, numOfCryst)
+
+rarLvlOrb.append(rarity, level, crystDiv)
+
+let attrsAttrs = document.createElement('div')
+attrsAttrs.id= 'attrsAttrs'
+attrsAttrs.className = 'col-5'
 let str = document.createElement('h4')
 str.id = 'str'
 let agi = document.createElement('h4')
 agi.id = 'agi'
 let int = document.createElement('h4')
 int.id = 'int'
-let attrsArr = [hp, str, agi, int]
+let attrsArr = [ str, agi, int]
 attrsArr.map(attr => {
-  attr.classList.add('col', 'col-sm', 'jobattr')
-  attrs.appendChild(attr)
+  attr.classList.add('jobattr')
+  attrsAttrs.appendChild(attr)
 })
-attrs.prepend(rarity)
-div1.append(imgdiv, attrs)
+
+let rarAndAttrs = document.createElement('div')
+rarAndAttrs.classList.add('col-8', 'row')
+rarAndAttrs.id = 'rarAndAttrs'
+
+let hpdiv = document.createElement('div')
+hpdiv.classList.add('col-12')
+let hpname = document.createElement('h4')
+hpname.innerHTML = 'HP'
+hpname.style.display = 'inline'
+let hpbarimg = document.createElement('img')
+hpbarimg.src = hpbar
+let hp = document.createElement('h4')
+hp.id = 'hp'
+hp.style.display = 'inline'
+hpdiv.append(hpname, hpbarimg, hp)
+
+rarAndAttrs.append(rarLvlOrb, attrsAttrs, hpdiv)
+
+let img2nd = imgdiv.cloneNode(true)
+img2nd.id = 'jobimg2'
+//attrs.prepend(rarLvlOrb)
+div1.append(imgdiv, rarAndAttrs, img2nd)
 
 //JOB PASSIVE & SWITCH
 let div2 = document.createElement('div')

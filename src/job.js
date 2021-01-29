@@ -8,28 +8,30 @@ var $ = require("jquery")
 import 'tablesorter'
 import nav from './nav/nav';
 import { jobmain } from './jobs/job/jobmain.js'
-import { init } from './jobs/jobsjs.js'
+import { init, jobValues } from './jobs/jobsjs.js'
 import { jobsImgs } from './importImgs.js'
 import {getMatImgs, getJobImgs, getAbilImgs, matImagesComplete, jobImagesComplete, abilImagesComplete} from './img/imgsHTML.js'
-import {abilities, jobsData, jobsDataAll, jobsStats, craft, mats} from './abilitiesData.js'
+import {abilities, jobsData, jobsDataAll, jobsStats, craft, mats, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from './abilitiesData.js'
+import { openNew } from './basicfn/openNew.js'
 
 document.body.append(nav(), jobmain)
 
 window.onload = function() {
+  jobsData.craft()
 jobsData.jobs().then(j => {
   getJobImgs()
   // jobicon
   let jobmain = document.getElementById('jobimg')
+  let jobmain2 = document.getElementById('jobimg2')
   var header = document.getElementById('jobheader')
   let currentjobImg = jobImagesComplete.filter(img => img.id == jobheader.innerHTML)
 
   jobmain.innerHTML = currentjobImg[0].outerHTML
+  jobmain2.innerHTML = currentjobImg[0].outerHTML
   //bg imgs
   let jobsrc = Object.entries(jobsImgs).filter(img => img[0] == jobheader.innerHTML + '.png')
-console.log(jobsrc[0][1])
   document.body.style.backgroundImage = 'url("' + jobsrc[0][1] + '")'
   document.body.style.backgroundSize = '190px'
-  document.body.style.backgroundSpace = '0 0'
   //document.body.style.backgroundSize = 'contain'
 }).then(d => {
   abilities.abils().then(f=> {
@@ -65,6 +67,17 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
   let currentCard4Img = abilImagesComplete.filter(img => img.id == cardHname[3] || img.id == cardHname[2] || img.id == cardHname[1])
   card4img == null ? '' : card4img.innerHTML = currentCard4Img[0].outerHTML
   })
+  // change jobsStats
+  let changelvl = document.getElementById('levelSel')
+  let stats = Array.from(document.getElementsByClassName('spanattr'))
+  changelvl.onchange = function() {
+    stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * this.value))
+  }
+  let jobmCryst = document.getElementById('jobmCrystal')
+  jobmCryst.onchange = function() {
+    stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
+  }
+
 }).then(d => {
   jobsData.materials().then(d => {
     getMatImgs()
@@ -93,9 +106,25 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
       craftjobPic[i].innerHTML == '' ? craftjobPic[i].parentNode.parentNode.nextSibling.remove() : ''
       craftjobPic[i].innerHTML == '' ? craftjobPic[i].parentNode.parentNode.remove() : ''
     }
+    //
+    let craftjobname = document.querySelectorAll('.craft.craftjob')
+    console.log(craftjobname)
+    for(var i=0; i< craftjobname.length; i++) {
+    let name = craftjobname[i].innerText
+
+      craftjobname[i].addEventListener('click', function() {
+
+        let ind = jobsDataAll.filter(job => job[1] == name.trim())
+        ind = parseInt(ind[0])
+        openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+      })
+    }
 })
 
+
+
 })
+
 }
 
 
