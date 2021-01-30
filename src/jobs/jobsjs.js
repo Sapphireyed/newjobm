@@ -3,18 +3,19 @@ global.fetch = require('node-fetch');
 const GetSheetDone = require('get-sheet-done');
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 import { tbody } from './jobsTable.js'
+import { openNew } from '../basicfn/openNew.js'
 import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
         jobsDataAll} from '../abilitiesData.js'
-var $ = require("jquery")
-import { openNew } from '../basicfn/openNew.js'
+//import { openNew } from '../basicfn/openNew.js'
 import star from '../img/events/StarColor1.png'
 import { matImagesComplete, jobImagesComplete, abilImagesComplete} from '../img/imgsHTML.js'
 import {jobsfilter} from './jobsfilter'
-import tablesorter from 'tablesorter';
 import theadimg from '../img/Jobs/BG/inthp.jpg'
 import { changeStats } from '../basicfn/changeStats.js'
 import {singularFilter } from '../basicfn/filters.js'
+var $ = require("jquery")
+import tablesorter from 'tablesorter';
 
 export { jobValues }
 let jobValues = []
@@ -227,6 +228,7 @@ function loadList() {
     } else {
       tableRows[ind].classList.add('d-none')
     }
+
     }
   }
   //fire filter function on any filter change

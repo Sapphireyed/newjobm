@@ -1,7 +1,7 @@
 // FILTERS
 export function singularFilter(arr, elem, filter, pageList, tableRows, ind, i, skill) {
   arr.map(a => {  //switch typa & traits
-    pageList[ind-1][i] = pageList[ind-1][i] == '' ? 'n/a' : pageList[ind-1][i] 
+    pageList[ind-1][i] = pageList[ind-1][i] == '' ? 'n/a' : pageList[ind-1][i]
     if (elem == 'Protect' || elem == 'Debuff Protection' || elem == 'Other') {
       if (a[skill] == 'Protect' || a[skill+3] == 'Protect' || a[skill+6] == 'Protect' || a[skill+9] == 'Protect') { //skill == protect
         let protectInd = a.map((el, i) => el.includes('Protect') ? i : '').filter(num => num == skill || num == skill + 3 || num == skill + 6 || num == skill + 9)
@@ -99,5 +99,6 @@ export function singularFilter(arr, elem, filter, pageList, tableRows, ind, i, s
         tableRows[ind].classList.add(filter)
       }
     }
+    pageList[ind-1][i] = pageList[ind-1][i] == 'n/a' ? '' : pageList[ind-1][i]
   })
 }

@@ -1,5 +1,6 @@
 //change stats on changing level
 export function changeStats(arr, el) {
+  let crystal = document.getElementById('jobmCrystal')
   arr.map(cell => {
     var raritycell = cell.parentNode.childNodes[3].childNodes
     var rarity = raritycell[raritycell.length-1].innerHTML

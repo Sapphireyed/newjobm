@@ -1,10 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+/*$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import '@fortawesome/fontawesome-free/scss/regular';
 @import '@fortawesome/fontawesome-free/scss/brands';
-@import '@fortawesome/fontawesome-free/scss/v4-shims';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';*/
 
 
 /*black in main nav bar, light to all*/
@@ -46,6 +46,14 @@ body::after {
   position: absolute;
   transform: scaleX(-1)
 }
+
+#bgimg {
+  width: 100%;
+  position: fixed;
+  top: 90px;
+  z-index: -1
+}
+
 img { max-width: 100%}
 ::-webkit-scrollbar {
     width: 12px;
@@ -64,6 +72,8 @@ img { max-width: 100%}
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
     background-color: $mainBg;
 }
+
+//navigation bar
 .dropdown {
   position: relative;
   display: inline-block;
@@ -90,23 +100,18 @@ img { max-width: 100%}
 .dropdown:hover .dropdown-content {display: block;}
 //.dropdown:hover .dropbtn {background-color: #3e8e41;}
 //.fas {line-height: 1.5;}
+nav { z-index: 101}
+nav:nth-child(2) {
+   background-color: $secondBg;
+   margin-bottom: 40px;
+   border-bottom: 4px solid #f5f7f8;
+}
+
+//main sections
 .section {
     padding: 10px 0;
     max-width: 90vw;
     margin: auto;
-}
- nav { z-index: 101}
-nav:nth-child(2) {
-    background-color: $secondBg;
-    margin-bottom: 40px;
-    border-bottom: 4px solid #f5f7f8;
-}
-
-#bgimg {
-  width: 100%;
-  position: fixed;
-  top: 90px;
-  z-index: -1
 }
 
 .row {
@@ -117,37 +122,53 @@ h1 {
     @include title;
 }
 
-.subtitle {
-    color: #fff;
-    background-color: $mainBg;
-}
-
-.subtitle2 {
-    @include subtitle;
-}
-
-.subtitle3 {
-    h2
-
-{
-    color: #fff;
-    background-color: $mainBg;
-}
-
-}
-
 .info {
     margin-bottom: 10px
 }
 
+//main jobstable section narrower than other sections
 #jobsmain { width: 80vw }
+
+// jobs filters div
 #jobs select {
   box-shadow: 2px 2px #435761;
+  float: right;
  }
-select option {
+#jobs select option {
    background-color: rgb(158, 177, 187);
 }
 
+#jobsclear { float: right }
+#pages {
+  display: inline;
+  button {
+    background-color: rgb(58, 88, 99);//rgb(77, 99, 111);
+    color: rgb(158, 177, 187)
+  }
+  select {
+    background-color: rgb(158, 177, 187);
+    float: none;
+  }
+  img {
+    width: 44px;
+    margin-bottom: 3px
+  }
+}
+#otherfilters div:first-child {text-align: right}
+#jobsfilter div:nth-child(3), #jobsfilter div:nth-child(2) {
+  margin-top: 5px;
+}
+
+.pages {
+  font-size: 20px;
+  margin: auto;
+}
+#first img { transform: scaleX(-1)}
+#prev img { transform: scaleX(-1)}
+#next img { transform: rotate(-4deg)}
+#last img { transform: rotate(-4deg)}
+
+//jobstable
 #jobtable {
     width: 100%;
     tr: nth-child(even) {
@@ -168,21 +189,7 @@ select option {
   }
 
 }
-.tooltipMy:nth-child(even) { padding: 0 0 0 28px}
-#pic div:first-child {   // jobicon in the table
-  max-width: 65px;
-  img:first-child {
-    max-width:50px;
-    height: auto;
-    padding: 10px
-  }
-  img:nth-child(2) {
-    max-width: 40px;
-    top: 5px;
-    left: 5px;
-    height: auto;
-  }
-}
+
 .sticky {
   position: fixed;
   top: 0;
@@ -231,36 +238,7 @@ select option {
   padding: 0;
 }
 
-#jobs select { float: right }
-#jobsclear { float: right }
-#pages {
-  display: inline;
-  button {
-    background-color: rgb(77, 99, 111);
-    color: rgb(158, 177, 187)
-  }
-  select {
-    background-color: rgb(158, 177, 187);
-    float: none;
-  }
-  img {
-    width: 44px;
-    margin-bottom: 3px
-  }
-}
-#otherfilters div:first-child {text-align: right}
-#jobsfilter div:nth-child(3), #jobsfilter div:nth-child(2) {
-  margin-top: 5px;
-}
 
-.pages {
-  font-size: 20px;
-  margin: auto;
-}
-#first img { transform: scaleX(-1)}
-#prev img { transform: scaleX(-1)}
-#next img { transform: rotate(-4deg)}
-#last img { transform: rotate(-4deg)}
 .jobimg {
   position: absolute;
   top: -18px;
@@ -298,6 +276,22 @@ select option {
     }
 }
 
+//tooltips in jobstable
+.tooltipMy:nth-child(even) { padding: 0 0 0 28px}
+#pic div:first-child {   // jobicon in the table
+  max-width: 65px;
+  img:first-child {
+    max-width:50px;
+    height: auto;
+    padding: 10px
+  }
+  img:nth-child(2) {
+    max-width: 40px;
+    top: 5px;
+    left: 5px;
+    height: auto;
+  }
+}
     .tooltipMy .tooltiptext {
         visibility: hidden;
         width: 200px;
@@ -331,6 +325,7 @@ select option {
         opacity: 1;
     }
 
+//keywords colors
 /*attr*/
 .maxhp { color: #e3a200 }
 .strength, .str { color: red }

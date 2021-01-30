@@ -8,11 +8,13 @@ import './style.scss';
 //var $ = require("jquery")
 import nav from './nav/nav';
 import { jobsmain } from './jobs/jobsmain.js'
-import { jobs} from './jobs/jobsjs.js'
 import {abilities, jobsData,abilitiesAllInfo} from './abilitiesData.js'
 import {getMatImgs, getAbilImgs, getJobImgs, abilImagesComplete, jobImagesComplete} from './img/imgsHTML.js'
 import { jobsTable } from './jobs/jobsTable.js'
 import theadimg from './img/Jobs/BG/inthp.jpg'
+import { stickyNav } from './basicfn/stickyNav.js'
+import { jobs} from './jobs/jobsjs.js'
+var $ = require("jquery")
 
 //let bgimg = document.createElement('img')
 //bgimg.id = 'bgimg'
@@ -22,23 +24,14 @@ import theadimg from './img/Jobs/BG/inthp.jpg'
 document.body.append( nav(), jobsmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
+//document.body.style.backgroundPosition= 'center center'
 //document.body.style.backgroundPosition = 'center center'
-window.onscroll = function() {stickyHeader()};
-var header = document.getElementById("navMain");
-var sticky = header.offsetTop + 60;
-
-// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function stickyHeader() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("sticky")
-//    bgimg.style.top = '-10px'
-//          let width = document.getElementById('jobsBody').offsetWidth
-//          header.style.width = width + 'px'
-  } else {
-    header.classList.remove("sticky");
-//    bgimg.style.top = '90px'
-  }
+//add sticky nav
+var headernav = document.getElementById("navMain");
+window.onscroll = function() {
+  stickyNav(headernav)
 }
+
 window.onload = function(){
 
 abilities.units()

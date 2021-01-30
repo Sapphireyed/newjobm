@@ -3,18 +3,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'popper.js';
 import './style.scss';
 import './job.scss';
-import fontawesome from '@fortawesome/fontawesome-free'
-var $ = require("jquery")
+//import fontawesome from '@fortawesome/fontawesome-free'
+//var $ = require("jquery")
 import 'tablesorter'
 import nav from './nav/nav';
 import { jobmain } from './jobs/job/jobmain.js'
 import { init, jobValues } from './jobs/jobsjs.js'
 import { jobsImgs } from './importImgs.js'
+import { openNew } from './basicfn/openNew.js'
 import {getMatImgs, getJobImgs, getAbilImgs, matImagesComplete, jobImagesComplete, abilImagesComplete} from './img/imgsHTML.js'
 import {abilities, jobsData, jobsDataAll, jobsStats, craft, mats, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from './abilitiesData.js'
-import { openNew } from './basicfn/openNew.js'
+
+import { stickyNav } from './basicfn/stickyNav.js'
 
 document.body.append(nav(), jobmain)
+var headernav = document.getElementById("navMain");
+window.onscroll = function() {
+  stickyNav(headernav)
+}
 
 window.onload = function() {
   jobsData.craft()
