@@ -113,7 +113,16 @@ function loadList() {
     drawList();
     check();
     jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)');
-    joblink()
+    for (var i = 0; i < jobLinks.length; i++) {
+      jobLinks[i].addEventListener('mousemove', function() {
+      //  loadList()
+        showIcon(this)
+      })
+      jobLinks[i].addEventListener('click', function() {
+        jobLink(this)
+      })
+      jobLinks[i].addEventListener('mouseleave', hideIcon)
+    }
 
     chooselvl.value = 10
     crystal.value = 0
@@ -162,6 +171,8 @@ function loadList() {
       $('.myTable').tablesorter();
 
     // TOOLTIP
+    document.getElementById('jobsTable').addEventListener('mouseenter', function() {
+console.log('here')
     tableRows = document.querySelectorAll('tr')
 
   var descFinaleSplit = descFinale.map(desc => desc.split(':'))
@@ -184,6 +195,7 @@ function loadList() {
     }
   })
   }
+})
   let searchin = document.getElementById('searchin')
   // FILTERS
   function filter() {
@@ -395,11 +407,11 @@ function check() {
 function load() {
     loadList();
 }
-
-//window.onload = load;
-document.getElementById('first').click()
+load()
+//window.addEventListener('load', load)
+//document.getElementById('first').click()
 var tableRows = document.querySelectorAll('tr')
-var jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)')
+var jobLinks //= document.querySelectorAll('#jobsTable tr td:nth-child(3)')
 let filtersdiv = document.getElementById('jobs')
   /*  //search
     document.getElementById('search').onfocus = function() {
@@ -415,55 +427,52 @@ let filtersdiv = document.getElementById('jobs')
         });
       });
 // jobLinks
-var x = document.createElement('body::after')
-function joblink() {
-  for (var i = 0; i < jobLinks.length;) {
-    jobLinks[i].addEventListener('mousemove', function() {
-      let mouseY = event.clientY; //get mouseposition to decide where to display img
-      let bgimg = jobImagesComplete.filter(img => img.id == this.innerHTML)
-      //on hovering on jobname disply jib icons on bot sides of the table
-      document.body.style.backgroundImage = 'url("' + bgimg[0].childNodes[0].currentSrc + '"), url("' + theadimg + '")'
-      document.body.style.backgroundSize = '155px, cover'
-      document.body.style.backgroundColor = 'rgba(51,66,74,1)'
-      document.body.style.backgroundRepeat = 'no-repeat'
-      document.body.style.backgroundAttachment = 'fixed'
-      document.body.style.backgroundPosition = '-15px ' + (mouseY-100) +'px, center center'
-    //  document.body.style.backgroundClip = 'content-box'
-      if ( w <= targetWidth) {
-        document.body.style.backgroundSize = '70px, cover';
-        document.body.style.backgroundPosition = '-15px ' + (mouseY-40) +'px, center center'
-      }
-      //add img on the other side of table for big screens only)
-      if ( w > targetWidth) {
-        $('head').append('<style>body::after '
-                        + '{background-image: url("' + bgimg[0].childNodes[0].currentSrc + '");'
-                        + 'background-repeat: no-repeat; '
-                        + 'background-attachment: fixed; '
-                        + 'background-size: 155px;'
-                        + 'background-position: ' + (window.innerWidth-(window.innerWidth-1)) + 'px ' + (mouseY - 100) + 'px ;'
-                        + 'height: 100%; width:100%; '
-                        + 'display: block; '
-                        + 'transform: scaleX(-1); '
-                        + 'top: 0; left: 0;} </style>')
-      }
-    })
-      //jobLinksIndex.push(jobLinks[i].previousElementSibling.previousElementSibling.innerHTML)
-      jobLinks[i].addEventListener("click", function() {
-        var i = this.parentNode.firstChild.innerHTML
-        openNew(jobValues, i, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
-      })
-      jobLinks[i].addEventListener("mouseleave", function() {
-        if ( w > targetWidth) {
-          $('head').append('<style>body::after{background-image: url("' + theadimg + '"); background-repeat: no-repeat; background-size: cover; background-position: center center ; height: 100%; width:100%; display: block; transform: none; top: 0; left: 0;z-index: -20}</style>')
-        }
-        document.body.style.backgroundColor = 'rgb(245,247,248)';
-        document.body.style.backgroundSize = 'cover'
-        document.body.style.backgroundPosition = 'center center'
-        document.body.style.backgroundImage = 'url("' + theadimg + '")'
-      })
-      i++
+
+
+
+function showIcon(item) {
+  let mouseY = event.clientY; //get mouseposition to decide where to display img
+  let bgimg = jobImagesComplete.filter(img => img.id == item.innerHTML)
+  //on hovering on jobname disply jib icons on bot sides of the table
+  document.body.style.backgroundImage = 'url("' + bgimg[0].childNodes[0].currentSrc + '"), url("' + theadimg + '")'
+  document.body.style.backgroundSize = '155px, cover'
+  document.body.style.backgroundColor = 'rgba(51,66,74,1)'
+  document.body.style.backgroundRepeat = 'no-repeat'
+  document.body.style.backgroundAttachment = 'fixed'
+  document.body.style.backgroundPosition = '-15px ' + (mouseY-100) +'px, center center'
+//  document.body.style.backgroundClip = 'content-box'
+  if ( w <= targetWidth) {
+    document.body.style.backgroundSize = '70px, cover';
+    document.body.style.backgroundPosition = '-15px ' + (mouseY-40) +'px, center center'
+  }
+  //add img on the other side of table for big screens only)
+  if ( w > targetWidth) {
+    $('head').append('<style>body::after '
+                    + '{background-image: url("' + bgimg[0].childNodes[0].currentSrc + '");'
+                    + 'background-repeat: no-repeat; '
+                    + 'background-attachment: fixed; '
+                    + 'background-size: 155px;'
+                    + 'background-position: ' + (window.innerWidth-(window.innerWidth-1)) + 'px ' + (mouseY - 100) + 'px ;'
+                    + 'height: 100%; width:100%; '
+                    + 'display: block; '
+                    + 'transform: scaleX(-1); '
+                    + 'top: 0; left: 0;} </style>')
   }
 }
+function jobLink(item) {
+  var i = item.parentNode.firstChild.innerHTML
+  openNew(jobValues, i, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+}
+function hideIcon() {
+  if ( w > targetWidth) {
+    $('head').append('<style>body::after{background-image: url("' + theadimg + '"); background-repeat: no-repeat; background-size: cover; background-position: center center ; height: 100%; width:100%; display: block; transform: none; top: 0; left: 0;z-index: -20}</style>')
+  }
+  document.body.style.backgroundColor = 'rgb(245,247,248)';
+  document.body.style.backgroundSize = 'cover'
+  document.body.style.backgroundPosition = 'center center'
+  document.body.style.backgroundImage = 'url("' + theadimg + '")'
+}
+
 
 
 //clear filters

@@ -61,25 +61,6 @@ jobsData.craft()
         //getMatImgs()
         getJobImgs()
         jobs()
-        // tooltips to work on first load
-        var switchCells =  document.getElementsByClassName('tooltiptext')
-        for (var i=0; i < switchCells.length; i++) {
-        var switchName = switchCells[i].parentNode.innerHTML
-        var indexof = switchName.indexOf('<')
-        switchName = switchName.substring(0, indexof)
-        var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
-        var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
-        tooltipsAb.map(desc => {
-          if (desc[0] == switchName) {
-            switchCells[i].innerHTML = desc[1]
-          }
-        })
-        tooltipsPass.map(desc => {
-          if (desc[0] == switchName) {
-            switchCells[i].innerHTML = desc[1]
-          }
-        })
-        }
       })
 
     })

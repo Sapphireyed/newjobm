@@ -49,6 +49,7 @@ body::after {
 
 #bgimg {
   width: 100%;
+  height: auto;
   position: fixed;
   top: 90px;
   z-index: -1
@@ -151,6 +152,7 @@ h1 {
   }
   img {
     width: 44px;
+    height: auto;
     margin-bottom: 3px
   }
 }
@@ -244,6 +246,7 @@ h1 {
   top: -18px;
   left: 4px;
   width: 33px;
+  height: 33px;
   padding: 5px;
   z-index: 99
 }
@@ -270,6 +273,7 @@ h1 {
     cursor: help;
     img {
       width: 25px;
+      height: 25px;
       position: absolute;
       left: 0;
       padding: 3px

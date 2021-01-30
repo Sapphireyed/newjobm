@@ -2,6 +2,11 @@ global.fetch = require('node-fetch');
 const GetSheetDone = require('get-sheet-done');
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
 
+window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+if (!window.indexedDB) {
+    console.log("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.");
+}
+
 export { powlvl, unitDesc,
          abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
          passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,

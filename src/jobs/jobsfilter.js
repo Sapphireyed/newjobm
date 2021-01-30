@@ -260,16 +260,16 @@ pages.classList.add('col-12')
 pages.innerHTML = '<!-- pager -->' +
     '<div></div>' +
     '<div id="pages" class="float-right">' +
-    '<button class="pages rounded" id="first"><img alt="first" src="' + last + '"></button>' +
-    '<button class="pages rounded" id="prev"><img alt="next" src="' + next + '"></button>'+
+    '<button class="pages rounded" id="first"><img alt="first" src="' + last + '" width="44" height="auto"></button>' +
+    '<button class="pages rounded" id="prev"><img alt="next" src="' + next + '" width="44" height="auto"></button>'+
     ' <select class="pagesize pages rounded" id="numOfPages">' +
         '<option selected="selected" value="10">10</option>'+
         '<option value="20">20</option>'+
         '<option value="50">50</option> '+
         '<option value="all">All</option>'+
     '</select> '+
-    '<button class="pages rounded" id="next"><img alt="next" src="' + next + '"></button>'+
-    '<button class="pages rounded" id="last"><img alt="last" src="' + last + '"></button>'+
+    '<button class="pages rounded" id="next"><img alt="next" src="' + next + '" width="44" height="auto"></button>'+
+    '<button class="pages rounded" id="last"><img alt="last" src="' + last + '" width="44" height="auto"></button>'+
     '</div>'
 //header.append(pages)
 othersDiv.append(chooseLvlDiv, crystDiv, searchDiv, pages)
