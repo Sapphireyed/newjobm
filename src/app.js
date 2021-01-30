@@ -20,7 +20,6 @@ var $ = require("jquery")
 //bgimg.id = 'bgimg'
 //bgimg.src = bg
 
-
 document.body.append( nav(), jobsmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
