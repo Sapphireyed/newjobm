@@ -310,6 +310,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
       return GetSheetDone
         .raw(id, 5).then(data => data.data).then(res => {
           res.shift()
+          console.log(res)
           res.map(inf => passivesAllInfo.push(inf))
 
           getDesc(passivesArr, res, passives, powlvl, 4, 5, 6)

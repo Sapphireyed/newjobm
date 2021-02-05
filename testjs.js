@@ -52,10 +52,7 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
       if ([a[17], a[18], a[19]].some(el => el = el.includes(elem))) {
         tableRows[ind].classList.add(filter)
       }
-    } else if (filter == 'whenSel') {
-      console.log('passive')
-    } else  {
-      filter == 'whenSel' ? tableRows[ind].classList.add(filter) : ''
+    } else {
       skills.some(s=> {
         a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
       })
@@ -163,10 +160,8 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
         if ([a[16], a[17], a[18]].some(el => el = el.includes(elem))) {
           tableRows[ind].classList.add(filter)
         }
-      } else if (filter == 'type') {
-        console.log('type')
       } else {
-        filter == 'type' ? tableRows[ind].classList.add(filter) : ''
+
         skills.some(s=> {
           a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
         })

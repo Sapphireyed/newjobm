@@ -5,12 +5,12 @@ import bgh1 from '../img/other/bgh1.png'
 import theadimg from '../img/Jobs/BG/inthp.jpg'
 
 const br = document.createElement('br')
-const jobsfilter = document.createElement('div');
-//jobsfilter.style.backgroundImage = 'url("' + theadimg + '")'
-//jobsfilter.style.backgroundSize = 'cover'
-//jobsfilter.style.backgroundPosition = 'center center'
-jobsfilter.classList.add('section', 'shadow', 'row')
-jobsfilter.id = 'jobs'
+const abilsfilter = document.createElement('div');
+//abilsfilter.style.backgroundImage = 'url("' + theadimg + '")'
+//abilsfilter.style.backgroundSize = 'cover'
+//abilsfilter.style.backgroundPosition = 'center center'
+abilsfilter.classList.add('section', 'shadow', 'row')
+abilsfilter.id = 'jobs'
 
 const header = document.createElement('h1')
 header.classList.add('col-12')
@@ -20,7 +20,7 @@ header.style.textShadow = '2px 2px grey'
 //header.style.backgroundSize = 'cover'
 
 const filtersDiv = document.createElement('div');
-filtersDiv.id = 'jobsfilter'
+filtersDiv.id = 'abilsfilter'
 filtersDiv.classList.add('col-12', 'col-lg-6', 'row');
 // RARITY filter
 const rarFilter = document.createElement('div');
@@ -102,16 +102,23 @@ typeSel.classList.add('filter', 'rounded')
 typeSel.innerHTML = '<option value="All">All</option>'
                 + '<option value="Damage">Damage</option>'
                 + '<option value="Heal">Heal</option>'
-                + '<option value="Buff">Buff</option>'
-                + '<option value="InstantBoost">Action Buff</option>'
-                + '<option value="Debuff">Debuff</option>'
-                + '<option value="Vulnerable">Vulnerable</option>'
-              //    + '<optgroup label="Protect">'
-                + '<option value="Protect">Protect</option>'
-                + '<option value="Remove Debuff">Remove Debuff</option>'
-                //  + '</optgroup>'
-                + '<option value="Negative">Negative</option>'
-                + '<option value="Other">Other</option>'
+                + '<optgroup label="Negative">'
+                    + '<option value="Curse">Curse</option>'
+                    + '<option value="Sacrifice">Sacrifice</option>'
+                  + '</optgroup>'
+                + '<optgroup label="Buff">'
+                    + '<option value="Buff">Buff</option>'
+                    + '<option value="InstantBoost">InstantBoost</option>'
+                  + '</optgroup>'
+                  + '<optgroup label="Debuff">'
+                    + '<option value="Debuff">Debuff</option>'
+                    + '<option value="Vulnerable">Vulnerable</option>'
+                  + '</optgroup>'
+                  + '<optgroup label="Protect">'
+                    + '<option value="Protect">Protect</option>'
+                    + '<option value="Debuff Protection">Debuff Protection</option>'
+                    + '<option value="Other">Other</option>'
+                  + '</optgroup>'
 //const typeOptionsArr = ['All', 'Buff', 'Curse', 'Damage', 'Debuff', 'Heal', 'InstantBoost', 'Protect', 'Sacrifice', 'Vulnerable'];
 
 //const optionsType = typeOptionsArr.map(opt => {
@@ -132,44 +139,21 @@ applyLabel.innerHTML = 'Apply: '
 const applySel = document.createElement('select');
 applySel.id = 'apply'
 applySel.name = 'apply'
-applySel.value = 'All'
 applySel.classList.add('filter', 'rounded')
-const applyOptionsArr = ['Action', 'Turn Charge', 'Combo', 'CreatureExpert', 'Draw', 'Exhaust', 'HumanoidExpert', 'LifeSteal', 'MatterExpert', 'Multiply', 'SpiritExpert',    ].sort();
+const applyOptionsArr = ['All', 'Action', 'Turn Charge', 'Combo', 'CreatureExpert', 'Draw', 'Exhaust', 'HumanoidExpert', 'LifeSteal', 'MatterExpert', 'Multiply', 'SpiritExpert',    ].sort();
 
 const optionsApply = applyOptionsArr.map(opt => {
   const value = opt
   return `<option value="${value}">${opt}</option>`;
 });
-optionsApply.unshift('<option value="All">All</option>')
+
 applySel.innerHTML = optionsApply;
 applyFilterDiv.append(applyLabel, applySel)
 
-//passives when apply
-// Attribute filter
-const whenFilterDiv = document.createElement('div');
-whenFilterDiv.classList.add('col-6')
-const whenLabel = document.createElement('label');
-whenLabel.for = 'whenSel'
-whenLabel.innerHTML = 'Passive: '
-//attrLabel.className = 'col-12'
-const whenSel = document.createElement('select');
-whenSel.id = 'whenSel'
-whenSel.name = 'whenSel'
-whenSel.classList.add('filter', 'rounded')
-const optionsArrWhen = ['Turn End', 'After Action', 'Combat Start', 'Master', 'Stat Boost', 'Reflect', 'Immune', 'HP Threshold', 'Heal', 'Dmg mitigate'].sort();
-
-const optionsWhen = optionsArrWhen.map(opt => {
-  const value = opt
-  return `<option value="${value}">${opt}</option>`;
-});
-optionsWhen.unshift('<option value="All">All</option>')
-whenSel.innerHTML = optionsWhen;
-whenFilterDiv.append(whenLabel, whenSel)
-
 // search in passive/switch/both
 const searchinDiv = document.createElement('div');
-searchinDiv.classList.add('col-6')
-//searchinDiv.style.borderBottom = '2px solid #2a434a'
+searchinDiv.classList.add('col-12')
+searchinDiv.style.borderBottom = '2px solid #2a434a'
 const searchinLabel = document.createElement('label');
 searchinLabel.for = 'searchin'
 searchinLabel.innerHTML = 'Search in: '
@@ -198,11 +182,8 @@ filtersLabels.append(rarLabel, br.cloneNode(true), elemLabel, br.cloneNode(true)
 const filtersSelect = document.createElement('div')
 filtersSelect.classList.add('col-6')
 filtersSelect.append(rarSel, br, elemSel, attrSel, typeSel, applySel)*/
-let navFiters = document.createElement('div')
-navFiters.id = 'navFiters'
-navFiters.classList.add('col-12', 'row')
-navFiters.append(searchinDiv, cleardiv)
-filtersDiv.append(rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, whenFilterDiv, navFiters)
+
+filtersDiv.append(searchinDiv, rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, cleardiv)
 
 const othersDiv = document.createElement('div');
 othersDiv.classList.add('col-12', 'col-lg-6', 'row');
@@ -293,5 +274,5 @@ pages.innerHTML = '<!-- pager -->' +
 //header.append(pages)
 othersDiv.append(chooseLvlDiv, crystDiv, searchDiv, pages)
 //add it all to the section
-jobsfilter.append(header, filtersDiv, othersDiv)
-export { jobsfilter}
+abilsfilter.append(header, filtersDiv, othersDiv)
+export { abilsfilter}

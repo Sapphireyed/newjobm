@@ -10,12 +10,13 @@ import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
 //import { openNew } from '../basicfn/openNew.js'
 import star from '../img/events/StarColor1.png'
 import { matImagesComplete, jobImagesComplete, abilImagesComplete} from '../img/imgsHTML.js'
-import {jobsfilter} from './jobsfilter'
+import { jobsfilter } from './jobsfilter'
 import theadimg from '../img/Jobs/BG/inthp.jpg'
 import { changeStats } from '../basicfn/changeStats.js'
-import {singularFilter } from '../basicfn/filters.js'
+import {filterAb,  filterPass} from '../basicfn/filters.js'
 var $ = require("jquery")
 import tablesorter from 'tablesorter';
+
 
 export { jobValues }
 let jobValues = []
@@ -46,6 +47,7 @@ export function jobs() {
     var job = Object.entries(jobsRows);
 
     job.map(job => jobValues.push(job[1]))
+
 
     // PAGINATIOM
     var pagesSel = document.getElementById('numOfPages')
@@ -110,6 +112,15 @@ function loadList() {
     }
     var end = begin + numberPerPage;
     pageList = list.slice(begin, end);
+
+//    searchin.onchange = function() {
+//      for (var i=0; i< filters.length; i++) {
+//        filters[i].onchange()
+//      }
+//    }
+
+    ///////
+
     drawList();
     check();
     jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)');
@@ -168,66 +179,50 @@ function loadList() {
   //  console.log(switchskills.map(skill => skill.id))
 
     //SORT
-      $('.myTable').tablesorter();
+      $('.myTable').tablesorter();  // FILTERS (explained in filters onchange gunction)
+  Array.from(filters).map(f => f.value = 'All')
 
-    // TOOLTIP
-    document.getElementById('jobsTable').addEventListener('mouseenter', function() {
-console.log('here')
-    tableRows = document.querySelectorAll('tr')
+// filters
+//filters = Array.from(filters)
+//filters.map(f=> f.value = 'All')
+tableRows = document.querySelectorAll('tr')
+// FILTERS
+function filter(el) {
+  var elem = el.value
+  let filter = el.id
+  tableRows = Array.from(tableRows)
+  for (var ind = 1; ind < tableRows.length; ind++) {
+    //hide all rows. Particular rowswill be isplayed as per filters
+    tableRows[ind].classList.add('d-none')
+    //remove all classes added during preious filter run.
+    tableRows[ind].classList.remove('7', '6', '5', '4', '3', '2', '1', filter)
 
-  var descFinaleSplit = descFinale.map(desc => desc.split(':'))
-  var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':'))
-  var switchCells =  document.getElementsByClassName('tooltiptext')
-
-  for (var i=0; i < switchCells.length; i++) {
-  var switchName = switchCells[i].parentNode.innerText
-  var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
-  var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
-
-  tooltipsAb.map(desc => {
-    if (desc[0] == switchName) {
-      switchCells[i].innerHTML = desc[1]
+    if (elem == pageList[ind-1][2]) {  // rarity
+      tableRows[ind].classList.add(filter)
     }
-  })
-  tooltipsPass.map(desc => {
-    if (desc[0] == switchName) {
-      switchCells[i].innerHTML = desc[1]
-    }
-  })
-  }
-})
-  let searchin = document.getElementById('searchin')
-  // FILTERS
-  function filter() {
-    var elem = this.value
-    let filter = this.id
-
-    for (var ind = 1; ind < tableRows.length; ind++) {
-      //hide all rows. Particular rowswill be isplayed as per filters
-      tableRows[ind].classList.add('d-none')
-      //remove all classes added during preious filter run.
-      tableRows[ind].classList.remove('6', '5', '4', '3', '2', '1', this.id)
-
-    if (this.value == pageList[ind-1][2]) {  // rarity
-      tableRows[ind].classList.add(this.id)
-    }
-    // depending on searchin value
+    let pageList2 = pageList
     switch (searchin.value) {
-      case 'both':
-        singularFilter(abilitiesAllInfo, elem, filter, pageList, tableRows, ind, 8, 5);
-        singularFilter(passivesAllInfo, elem, filter, pageList, tableRows, ind, 7, 4)
+      case 'switch':
+        filterAb(abilitiesAllInfo, elem, filter, tableRows, pageList, filters,ind, 8, 5)
+        document.getElementById('whenSel').disabled = true;
+        document.getElementById('type').disabled = false;
+        document.getElementById("whenSel").value = 'All'
         break;
       case 'passive':
-        singularFilter(passivesAllInfo, elem, filter, pageList, tableRows, ind, 7, 4)
+        filterPass(passivesAllInfo, elem, filter, tableRows, pageList2, filters,ind, 7, 4)
+        document.getElementById("type").disabled = true;
+        document.getElementById('whenSel').disabled = false;
+        document.getElementById("type").value = 'All'
         break;
-      case 'switch':
-        singularFilter(abilitiesAllInfo, elem, filter, pageList, tableRows, ind, 8, 5);
+      case 'both':
+        filterAb(abilitiesAllInfo, elem, filter, tableRows, pageList, filters,ind, 8, 5)
+        filterPass(passivesAllInfo, elem, filter, tableRows, pageList2, filters,ind, 7, 4)
+        document.getElementById("type").disabled = false;
+        document.getElementById('whenSel').disabled = false;
         break;
       default:
 
     }
-
-
     // counter adds numeric classesfor each much
   var counter = 1
     for (var index=0; index < filters.length; index++) {
@@ -235,25 +230,59 @@ console.log('here')
         tableRows[ind].classList.add(counter += 1)
       }
     }
-    if (tableRows[ind].classList.contains('6')) {
+    if (tableRows[ind].classList.contains('7')) {
       tableRows[ind].classList.remove('d-none')
     } else {
       tableRows[ind].classList.add('d-none')
     }
 
-    }
   }
-  //fire filter function on any filter change
+}
 
+ //fire filter function on any filter change
+function cursorLoad() {
+  document.body.style.cursor = 'progress'
+}
+//function cursorDef() {
+//  document.body.style.cursor = 'default'
+//}
+
+let searchin = document.getElementById('searchin')
+const eventChange = new Event('change')
+ for (var i=0; i< filters.length; i++) {
+
+   filters[i].addEventListener('change', function() {
+     if (Array.from(filters).filter(f => f.value == 'All').length == filters.length - 1 && this.value !== 'All') {
+       let pagesVal = pagesSel.value
+       pagesSel.value = 'all'
+       let val = this.value
+       pagesSel.onchange()
+       this.value = val
+       pagesSel.value = pagesVal
+       numberPerPage = pagesVal
+     }
+   })
+
+   filters[i].addEventListener('change', function() {
+     let el = this
+     filter(el)
+     let displayed = Array.from(document.querySelectorAll('#jobsBody tr')).filter(tr => tr.classList.contains('d-none') == false)
+     displayed.map((tr, index) => {
+       index >= pagesSel.value ? tr.classList.add('d-none') : ''
+     })
+    // cursorDef()
+   })
+   filters[i].value = 'All'
+ }
+ searchin.onchange = function() {
   for (var i=0; i< filters.length; i++) {
-    filters[i].onchange = filter
-    filters[i].value = 'All'
+    filters[i].dispatchEvent(eventChange)
   }
-  searchin.onchange = function() {
-    for (var i=0; i< filters.length; i++) {
-      filters[i].onchange()
-    }
-  }
+}
+
+tooltips()
+
+
 
 /*    function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -316,11 +345,56 @@ console.log('here')
         $(".myTable").tablesorter();
     })*/
 }
+// TOOLTIP
+function tooltips() {
+tableRows = document.querySelectorAll('tr')
+
+var descFinaleSplit = descFinale.map(desc => desc.split(':'))
+var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':'))
+var switchCells =  document.getElementsByClassName('tooltiptext')
+
+for (var i=0; i < switchCells.length; i++) {
+var switchName = switchCells[i].parentNode.innerText
+var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
+var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
+var tooltipsApply = abilTraits.map(trait => trait.split(':')).filter(desc=> desc[0] == switchName)
+var passApply = passiveTraits.map(trait => trait.split(':')).filter(desc=> desc[0] == switchName)
+
+tooltipsAb.map((desc, ind) => {
+if (desc[0] == switchName) {
+  switchCells[i].innerHTML = desc[1] + '<br> <span class="tipApply">(' + tooltipsApply[ind][1] + ')</span>'
+  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\(, , , \)|, ,|, , ,|\(, , , \)|\(\)|<br><br>/g, '')
+  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\( \)/g, '')
+  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
+}
+})
+/*  tooltipsApply.map(desc => {
+if (desc[0] == switchName) {
+  switchCells[i].innerHTML = switchCells[i].innerHTML + '<br> <span class="tipApply">(' + desc[1] + ')</span>'
+  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, ,|, , ,|\(,|\(\)|^(, \))|<br><br>/g, '')
+  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
+}
+})*/
+tooltipsPass.map((desc, ind) => {
+if (desc[0] == switchName) {
+  switchCells[i].innerHTML = desc[1] + '<br> <span class="tipApply">(' + passApply[ind][1] + ')</span>'
+  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\(, , , \)|, ,|, , ,|\(, , , \)|\(\)|<br><br>/g, '')
+  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\( \)/g, '')
+  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
+}
+})
+}
+}
+//FILTERS
+
 
 function drawList() {
     document.getElementById("jobsBody").innerHTML = "";
       for (var i=0; i < pageList.length; i++) {
+        let sep = pageList[i].indexOf('sep')
+        pageList[i].includes('sep') ? pageList[i].splice(sep, pageList[i].length) : pageList[i]
         var jobItem = Object.values(pageList[i])
+
       //  jobItem[i] = jobItem[i] == undefined ? '' : jobItem[i]
         jobItem.splice(1, 0, "pic")
         var attrs = jobItem.splice(4, 4)

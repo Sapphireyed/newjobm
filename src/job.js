@@ -17,10 +17,11 @@ import {abilities, jobsData, jobsDataAll, jobsStats, craft, mats, descFinale, ab
 import { stickyNav } from './basicfn/stickyNav.js'
 
 document.body.append(nav(), jobmain)
-var headernav = document.getElementById("navMain");
-window.onscroll = function() {
-  stickyNav(headernav)
-}
+
+abilities.units().then(unit => {
+  abilities.abils()
+  abilities.passivesFn()
+})
 
 window.onload = function() {
   jobsData.craft()
@@ -41,7 +42,12 @@ jobsData.jobs().then(j => {
   //document.body.style.backgroundSize = 'contain'
 }).then(d => {
   abilities.abils().then(f=> {
+    abilities.passivesFn()
     getAbilImgs()
+
+
+
+}).then(d => {
   // abilities icons
   let switchimg = document.getElementById('switchimg')
   var switchH = document.getElementById('switchH')
@@ -83,8 +89,6 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
   jobmCryst.onchange = function() {
     stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
   }
-
-}).then(d => {
   jobsData.materials().then(d => {
     getMatImgs()
     // crafting
@@ -114,7 +118,6 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
     }
     //
     let craftjobname = document.querySelectorAll('.craft.craftjob')
-    console.log(craftjobname)
     for(var i=0; i< craftjobname.length; i++) {
     let name = craftjobname[i].innerText
 
@@ -132,8 +135,7 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
 })
 
 }
-
-
-
-
-//p.innerHTML = newHTML
+var headernav = document.getElementById("navMain");
+window.onscroll = function() {
+  stickyNav(headernav)
+}

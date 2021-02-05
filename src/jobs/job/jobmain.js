@@ -84,13 +84,19 @@ rarLvlOrb.append(rarity, level, crystDiv)
 let attrsAttrs = document.createElement('div')
 attrsAttrs.id= 'attrsAttrs'
 attrsAttrs.className = 'col-5'
+let hp = document.createElement('h4')
+hp.id = 'hp'
+//hp.className = 'maxhp'
 let str = document.createElement('h4')
 str.id = 'str'
+//str.className = 'str'
 let agi = document.createElement('h4')
 agi.id = 'agi'
+//agi.className = 'agi'
 let int = document.createElement('h4')
 int.id = 'int'
-let attrsArr = [ str, agi, int]
+//int.className = 'int'
+let attrsArr = [ hp, str, agi, int]
 attrsArr.map(attr => {
   attr.classList.add('jobattr')
   attrsAttrs.appendChild(attr)
@@ -100,7 +106,7 @@ let rarAndAttrs = document.createElement('div')
 rarAndAttrs.classList.add('col-8', 'row')
 rarAndAttrs.id = 'rarAndAttrs'
 
-let hpdiv = document.createElement('div')
+/*let hpdiv = document.createElement('div')
 hpdiv.classList.add('col-12')
 let hpname = document.createElement('h4')
 hpname.innerHTML = 'HP'
@@ -110,9 +116,9 @@ hpbarimg.src = hpbar
 let hp = document.createElement('h4')
 hp.id = 'hp'
 hp.style.display = 'inline'
-hpdiv.append(hpname, hpbarimg, hp)
+hpdiv.append(hpname, hpbarimg, hp)*/
 
-rarAndAttrs.append(rarLvlOrb, attrsAttrs, hpdiv)
+rarAndAttrs.append(rarLvlOrb, attrsAttrs)
 
 let img2nd = imgdiv.cloneNode(true)
 img2nd.id = 'jobimg2'
