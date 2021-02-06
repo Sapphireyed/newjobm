@@ -284,8 +284,10 @@ const eventChange = new Event('change')
     filters[i].dispatchEvent(eventChange)
   }
 }
+setTimeout(function() {
+  tooltips()
+},200)
 
-tooltips()
 
 
 

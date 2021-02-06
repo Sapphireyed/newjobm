@@ -58,5 +58,9 @@ th { background-color: $darkBg}
   }
 }
 
-.low {background-color: green}
-.medium {background-color: blue}
+.Low { color: green;font-weight: bold}
+.Medium { color: blue;font-weight: bold}
+.High { color: red;font-weight: bold}
+.Master { color: goldenrod;font-weight: bold}
+.Curse { color: #404040;font-weight: bold}
+.Null { color: grey;font-weight: bold}

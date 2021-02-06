@@ -102,6 +102,8 @@ function loadList() {
         jobItem.splice(1, 1, "pic")
         jobItem.splice(5, 12, 'n/a')
         jobItem.pop()
+        console.log(jobItem)
+        jobItem[3] = '<span class="' + jobItem[3] + '">' + jobItem[3] + '</span>'
         jobItem[6] = ((jobItem[6] == '' ? '' : jobItem[6] + '<br>')
                     + (jobItem[7] == '' ? '' : jobItem[7] + '<br>') + jobItem[8])
 
@@ -117,6 +119,7 @@ function loadList() {
           cell.id = cell.innerHTML
           switch (job) {
             case 'Low':
+            console.log('low')
               cell.innerHTML = '<td class="low">Low</td>'
               break;
             case 'Medium':
