@@ -58,6 +58,8 @@ th { background-color: $darkBg}
   }
 }
 
+table tr td:nth-child(6) {padding: 3px 0 2px 31px}
+
 .Low { color: green;font-weight: bold}
 .Medium { color: blue;font-weight: bold}
 .High { color: red;font-weight: bold}

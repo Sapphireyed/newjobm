@@ -78,6 +78,7 @@ function loadList() {
     check();
     $('.myTable').tablesorter();
 
+// Icons on sides of the table
     let abilrows = Array.from(document.querySelectorAll('tr'))
     abilrows.shift()
     for (var i = 0; i < abilrows.length; i++) {
@@ -85,13 +86,19 @@ function loadList() {
       let name = abilrows[i].children[2]
 
       abilrows[i].addEventListener('mousemove', function() {
-      //  loadList()
         showIcon(name, abilImagesComplete)
       })
       abilrows[i].addEventListener('mouseleave', function(){
         hideIcon(abilImagesComplete)
       })
+      // Description
+      let desc = descFinale.map(desc => desc.split(':<br>'))
+      desc = desc.filter(d => d[0] == name.innerText)[0]
+      abilrows[i].children[5].innerHTML = desc[1].replace(/<br><br>/, '')
     }
+
+
+
   }
 
   function drawList() {
@@ -111,7 +118,8 @@ function loadList() {
 
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#5291a6'
+        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#a5d9e3'
+    //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
 
 
         jobItem.map( (job, ind) => {
@@ -127,12 +135,12 @@ function loadList() {
               break;
             default: cell.innerHTML = '<td>' + job + '</td>'
           }
-          var tooltip = document.createElement('span')
+        /*  var tooltip = document.createElement('span')
           tooltip.classList.add('tooltipMy', 'tooltiptext')
 
 
             cell.innerHTML == jobItem[5] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
-            cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
+            cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''*/
 
           //add images to pic cell
           var imgComplete = abilImagesComplete.find(jobimg => jobimg.id == jobItem[2])
