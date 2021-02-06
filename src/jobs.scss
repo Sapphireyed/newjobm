@@ -1,0 +1,22 @@
+$mainBg: #2a434a; //#33424a;
+@mixin title {
+    text-align: center;
+    color: #fff;
+    background-color: $mainBg;
+}
+
+.filtersSub div:nth-child(3), .filtersSub div:nth-child(2) {
+  margin-top: 5px;
+}
+
+.thead {
+    @include title;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+table tr td:nth-child(3) {
+    cursor: pointer;
+}

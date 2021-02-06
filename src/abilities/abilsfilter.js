@@ -9,19 +9,19 @@ const abilsfilter = document.createElement('div');
 //abilsfilter.style.backgroundImage = 'url("' + theadimg + '")'
 //abilsfilter.style.backgroundSize = 'cover'
 //abilsfilter.style.backgroundPosition = 'center center'
-abilsfilter.classList.add('section', 'shadow', 'row')
-abilsfilter.id = 'jobs'
+abilsfilter.classList.add('section', 'shadow', 'row', 'filtersmain')
+abilsfilter.id = 'abils'
 
 const header = document.createElement('h1')
 header.classList.add('col-12')
-header.innerHTML = 'JOBS'
-header.style.textShadow = '2px 2px grey'
+header.innerHTML = 'Abilities'
+header.style.textShadow = '2px 2px #005470'
 //header.style.backgroundImage = 'url("' + bgh1 +'")'
 //header.style.backgroundSize = 'cover'
 
 const filtersDiv = document.createElement('div');
 filtersDiv.id = 'abilsfilter'
-filtersDiv.classList.add('col-12', 'col-lg-6', 'row');
+filtersDiv.classList.add('col-12', 'col-lg-6', 'row', 'filtersSub');
 // RARITY filter
 const rarFilter = document.createElement('div');
 rarFilter.classList.add('col-6')
@@ -102,23 +102,16 @@ typeSel.classList.add('filter', 'rounded')
 typeSel.innerHTML = '<option value="All">All</option>'
                 + '<option value="Damage">Damage</option>'
                 + '<option value="Heal">Heal</option>'
-                + '<optgroup label="Negative">'
-                    + '<option value="Curse">Curse</option>'
-                    + '<option value="Sacrifice">Sacrifice</option>'
-                  + '</optgroup>'
-                + '<optgroup label="Buff">'
-                    + '<option value="Buff">Buff</option>'
-                    + '<option value="InstantBoost">InstantBoost</option>'
-                  + '</optgroup>'
-                  + '<optgroup label="Debuff">'
-                    + '<option value="Debuff">Debuff</option>'
-                    + '<option value="Vulnerable">Vulnerable</option>'
-                  + '</optgroup>'
-                  + '<optgroup label="Protect">'
-                    + '<option value="Protect">Protect</option>'
-                    + '<option value="Debuff Protection">Debuff Protection</option>'
-                    + '<option value="Other">Other</option>'
-                  + '</optgroup>'
+                + '<option value="Buff">Buff</option>'
+                + '<option value="InstantBoost">Action Buff</option>'
+                + '<option value="Debuff">Debuff</option>'
+                + '<option value="Vulnerable">Vulnerable</option>'
+              //    + '<optgroup label="Protect">'
+                + '<option value="Protect">Protect</option>'
+                + '<option value="Remove Debuff">Remove Debuff</option>'
+                //  + '</optgroup>'
+                + '<option value="Negative">Negative</option>'
+                + '<option value="Other">Other</option>'
 //const typeOptionsArr = ['All', 'Buff', 'Curse', 'Damage', 'Debuff', 'Heal', 'InstantBoost', 'Protect', 'Sacrifice', 'Vulnerable'];
 
 //const optionsType = typeOptionsArr.map(opt => {
@@ -139,31 +132,17 @@ applyLabel.innerHTML = 'Apply: '
 const applySel = document.createElement('select');
 applySel.id = 'apply'
 applySel.name = 'apply'
+applySel.value = 'All'
 applySel.classList.add('filter', 'rounded')
-const applyOptionsArr = ['All', 'Action', 'Turn Charge', 'Combo', 'CreatureExpert', 'Draw', 'Exhaust', 'HumanoidExpert', 'LifeSteal', 'MatterExpert', 'Multiply', 'SpiritExpert',    ].sort();
+const applyOptionsArr = ['Action', 'Turn Charge', 'Combo', 'CreatureExpert', 'Draw', 'Exhaust', 'HumanoidExpert', 'LifeSteal', 'MatterExpert', 'Multiply', 'SpiritExpert',    ].sort();
 
 const optionsApply = applyOptionsArr.map(opt => {
   const value = opt
   return `<option value="${value}">${opt}</option>`;
 });
-
+optionsApply.unshift('<option value="All">All</option>')
 applySel.innerHTML = optionsApply;
 applyFilterDiv.append(applyLabel, applySel)
-
-// search in passive/switch/both
-const searchinDiv = document.createElement('div');
-searchinDiv.classList.add('col-12')
-searchinDiv.style.borderBottom = '2px solid #2a434a'
-const searchinLabel = document.createElement('label');
-searchinLabel.for = 'searchin'
-searchinLabel.innerHTML = 'Search in: '
-//applyLabel.className = 'col-12'
-const searchinSel = document.createElement('select');
-searchinSel.id = 'searchin'
-searchinSel.name = 'searchin'
-searchinSel.classList.add('rounded')
-searchinSel.innerHTML = '<option value="both">Both</option><option value="passive">Passive</option><option value="switch">Switch</option>'
-searchinDiv.append(searchinLabel, searchinSel)
 
 //clear filters button
 let cleardiv = document.createElement('div')
@@ -174,7 +153,6 @@ clear.innerHTML = 'Reset filters'
 clear.classList.add('rounded')
 clear.style.color = 'white'
 clear.style.fontSize = '18px'
-clear.style.backgroundColor = '#3a5863'//'#4d636f'
 cleardiv.appendChild(clear)
 /*const filtersLabels = document.createElement('div');
 filtersLabels.classList.add('col-6')
@@ -182,59 +160,15 @@ filtersLabels.append(rarLabel, br.cloneNode(true), elemLabel, br.cloneNode(true)
 const filtersSelect = document.createElement('div')
 filtersSelect.classList.add('col-6')
 filtersSelect.append(rarSel, br, elemSel, attrSel, typeSel, applySel)*/
-
-filtersDiv.append(searchinDiv, rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, cleardiv)
+let navFiters = document.createElement('div')
+navFiters.id = 'navFiters'
+navFiters.classList.add('col-6')
+navFiters.appendChild(cleardiv)
+filtersDiv.append(rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, navFiters)
 
 const othersDiv = document.createElement('div');
 othersDiv.classList.add('col-12', 'col-lg-6', 'row');
 othersDiv.id = 'otherfilters'
-
-// choose Lvl
-const chooseLvlDiv = document.createElement('div');
-chooseLvlDiv.classList.add('col-6', 'col-lg-12')
-//chooseLvlDiv.style.textAlign = 'right'
-const chooseLabel = document.createElement('label');
-chooseLabel.for = 'chooselvl'
-chooseLabel.innerHTML = 'Change lvl: '
-chooseLabel.style.marginRight = '4px'
-const chooseInput = document.createElement('input');
-chooseInput.id = 'chooselvl'
-chooseInput.name = 'chooseInput'
-//chooseInput.style.textAlign = 'right'
-chooseInput.style.width = '50px'
-chooseInput.value = 10
-chooseInput.type = 'number'
-chooseInput.min = 1
-chooseInput.step = 10
-chooseInput.classList.add('rounded')
-
-chooseLvlDiv.append(chooseLabel, chooseInput)
-
-//jobmania crystal
-const crystDiv = document.createElement('div');
-crystDiv.classList.add('col-6','col-lg-12')
-crystDiv.style.textAlign = 'right'
-const jobmCrystal = document.createElement('label');
-jobmCrystal.for = 'jobmCrystal'
-jobmCrystal.innerHTML = 'Jobmania Crystal: '
-jobmCrystal.style.textAlign = 'right'
-jobmCrystal.style.marginRight = '4px'
-const numOfCryst = document.createElement('select');
-numOfCryst.id = 'jobmCrystal'
-numOfCryst.name = 'jobmCrystal'
-numOfCryst.value = 0
-numOfCryst.style.width = '50px'
-numOfCryst.classList.add('rounded')
-numOfCryst.style.textAlign = 'right'
-const crystOptArr = [0, 1, 2, 3, 4, 5];
-
-const crystOpt = crystOptArr.map(opt => {
-  const value = opt
-  return `<option value="${value}">${opt}</option>`;
-});
-numOfCryst.innerHTML = crystOpt;
-
-crystDiv.append(jobmCrystal, numOfCryst)
 
 // SEARCH
 const searchDiv = document.createElement('div')
@@ -272,7 +206,10 @@ pages.innerHTML = '<!-- pager -->' +
     '<button class="pages rounded" id="last"><img alt="last" src="' + last + '" width="44" height="auto"></button>'+
     '</div>'
 //header.append(pages)
-othersDiv.append(chooseLvlDiv, crystDiv, searchDiv, pages)
+let emptyDiv = document.createElement('div')
+emptyDiv.innerHTML = '...'
+
+othersDiv.append(emptyDiv, searchDiv, pages)
 //add it all to the section
 abilsfilter.append(header, filtersDiv, othersDiv)
 export { abilsfilter}

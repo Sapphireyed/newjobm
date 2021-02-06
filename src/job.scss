@@ -28,7 +28,7 @@
 .job1star::-webkit-scrollbar { background-color: #f4ffed; }
 .job1star {
   background-color: #6a8d55;
-  section:nth-child(3) {background-color: #f4ffed;}
+  #jobmainsect {background-color: #f4ffed;}
   #crystDiv { visibility: hidden}
   h1 {
       background-color: #6a8d55;
@@ -54,7 +54,7 @@
 .job2star::-webkit-scrollbar { background-color: #eef7ff; }
 .job2star {
     background-color: #4b7396;
-    section:nth-child(3) {background-color: #eef7ff;}
+    #jobmainsect {background-color: #eef7ff;}
     #crystDiv { visibility: hidden}
     h1
     {
@@ -79,7 +79,7 @@
 .job3star::-webkit-scrollbar { background-color: #f5eefd; }
 .job3star {
     background-color: #584b67; //#f5eefd;
-    section:nth-child(3) {background-color: #f5eefd;}
+    #jobmainsect {background-color: #f5eefd;}
     #crystDiv { visibility: hidden}
     h1 {
         background-color: #584b67;
@@ -103,7 +103,7 @@
 .job4star::-webkit-scrollbar { background-color: #fff0ec; }
 .job4star {
     background-color: #954e3a;
-    section:nth-child(3) {background-color: #fff0ec;}
+    #jobmainsect {background-color: #fff0ec;}
     #crystDiv { visibility: hidden}
     h1 {
         background-color: #954e3a;
@@ -127,7 +127,7 @@
 .job5star::-webkit-scrollbar { background-color: #fffaef; }
 .job5star {
     background-color: #e0c369;
-    section:nth-child(3) {background-color: #fffaef;}
+    #jobmainsect {background-color: #fffaef;}
     #crystDiv { visibility: visible}
     h1 {
         background-color: #e0c369;

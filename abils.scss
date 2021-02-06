@@ -1,1 +1,62 @@
-#jobsmain { width: 80vw }
+$darkBg: #003b4e;//#262626;
+
+@mixin abtitle {
+    text-align: center;
+    color: #fff;
+    background-color: $darkBg;
+}
+
+h1 {
+    @include abtitle;
+}
+
+::-webkit-scrollbar {
+    background-color: #9eb1bb;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $darkBg;
+}
+#abils { background-color: #5291a6}
+
+#abilsmain {
+  width: 80vw;
+  button {background-color: $darkBg;}
+}
+
+#pages select {background-color: #b5d1db}
+.pages {font-size: 18px}
+.filtersmain select option {
+   background-color: #b5d1db;
+}
+
+#navFiters {
+  padding: 3px 0 0 0;
+  border-top: 0 solid $darkBg;
+  div:first-child {float: right }
+}
+
+// TABLE
+table{color: black}
+
+.thead {
+  @include abtitle;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+th { background-color: $darkBg}
+#pic {
+  padding: 6px;
+  img {
+    width: 40px;
+    padding: 5px;
+    display: block;
+    margin: auto;
+  }
+}
+
+.low {background-color: green}
+.medium {background-color: blue}

@@ -60,9 +60,6 @@ img { max-width: 100%}
     width: 12px;
     background-color: #9eb1bb;
 }
-::-webkit-scrollbar:hover {
-  width: 15px;
-}
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     border-radius: 10px;
@@ -134,11 +131,11 @@ h1 {
 #jobsmain { width: 80vw }
 
 // jobs filters div
-#jobs select {
+.filtersmain select {
   box-shadow: 2px 2px #435761;
   float: right;
  }
-#jobs select option {
+.filtersmain select option {
    background-color: rgb(158, 177, 187);
 }
 #navFiters {
@@ -163,9 +160,7 @@ h1 {
   }
 }
 #otherfilters div:first-child {text-align: right}
-#jobsfilter div:nth-child(3), #jobsfilter div:nth-child(2) {
-  margin-top: 5px;
-}
+
 
 .pages {
   font-size: 20px;
@@ -214,18 +209,9 @@ th {
   z-index: 100;
 }
 
-.thead {
-    @include title;
+table tr td:not(:first-child) { padding: 0 0 0 31px; }
+table tr td:nth-child(3) {
     font-weight: bold;
-    font-size: 20px;
-    padding: 5px 0;
-    cursor: pointer;
-}
-
-#jobsTable tr td:not(:first-child) { padding: 0 0 0 31px; }
-#jobsTable tr td:nth-child(3) {
-    font-weight: bold;
-    cursor: pointer;
 }
 #jobsTable tr td:nth-child(4) {
     color: gold;
@@ -340,6 +326,12 @@ th {
         opacity: 1;
     }
 
+#up {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  display: none;
+}
 //keywords colors
 /*attr*/
 .maxhp { color: #e3a200 }
@@ -376,17 +368,17 @@ th {
   .jobBg {
     width: 35px;
   }
-  #jobs label { width: 100%}
-  #jobs select { float: none; margin-right: 4px}
+  .filtersmain label { width: 100%}
+  .filtersmain select { float: none; margin-right: 4px}
   #jobsclear {
     float: none;
     margin-top: 25px;
   }
   #otherfilters { margin: 20px 0 0 0 }
   #otherfilters div:first-child {text-align: left}
-  #jobsfilter div:nth-child(odd) {text-align: right}
-  #jobsfilter div:first-child {display: inline}
-  #jobsfilter div:first-child label {width: 50%; text-align: left; float: left}
+  .filtersSub div:nth-child(odd) {text-align: right}
+  .filtersSub div:first-child {display: inline}
+  .filtersSub div:first-child label {width: 50%; text-align: left; float: left}
 }
 
 @media only screen and (max-width: 760px) {
@@ -397,13 +389,13 @@ th {
   .jobBg {
     width: 35px;
   }
-  #jobs label { width: 100%}
+  .filtersmain label { width: 100%}
   #jobsclear {
     margin-top: 25px;
   }
   #otherfilters { margin: 20px 0 0 0 }
   #otherfilters div:first-child {text-align: left}
-  #jobsfilter div:nth-child(odd) {text-align: right}
-  #jobsfilter div:first-child { display: inline}
-  #jobsfilter div:first-child label {width: 50%; text-align: left}
+  .filtersSub div:nth-child(odd) {text-align: right}
+  .filtersSub div:first-child { display: inline}
+  .filtersSub div:first-child label {width: 50%; text-align: left}
 }

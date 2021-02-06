@@ -9,19 +9,20 @@ const jobsfilter = document.createElement('div');
 //jobsfilter.style.backgroundImage = 'url("' + theadimg + '")'
 //jobsfilter.style.backgroundSize = 'cover'
 //jobsfilter.style.backgroundPosition = 'center center'
-jobsfilter.classList.add('section', 'shadow', 'row')
+jobsfilter.classList.add('section', 'shadow', 'row', 'filtersmain')
 jobsfilter.id = 'jobs'
 
 const header = document.createElement('h1')
 header.classList.add('col-12')
 header.innerHTML = 'JOBS'
 header.style.textShadow = '2px 2px grey'
+header.id = 'top'
 //header.style.backgroundImage = 'url("' + bgh1 +'")'
 //header.style.backgroundSize = 'cover'
 
 const filtersDiv = document.createElement('div');
 filtersDiv.id = 'jobsfilter'
-filtersDiv.classList.add('col-12', 'col-lg-6', 'row');
+filtersDiv.classList.add('col-12', 'col-lg-6', 'row', 'filtersSub');
 // RARITY filter
 const rarFilter = document.createElement('div');
 rarFilter.classList.add('col-6')

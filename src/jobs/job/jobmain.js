@@ -3,6 +3,7 @@ import hpbar from '../../img/other/hpbar.png'
 
 let jobmain = document.createElement('section')
 jobmain.classList.add('section', 'shadow')
+jobmain.id= 'jobmainsect'
 //HEADER
 let maindiv = document.createElement('div');
 maindiv.id = 'jobmaindiv'

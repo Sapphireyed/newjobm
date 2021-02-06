@@ -18,7 +18,7 @@ thead.innerHTML = '<tr id="abilsThead">'
     + '<th>Apply<i class="fas fa-sort float-right"></i></th>'
     + '</tr>'
   var tbody = document.createElement('tbody')
-
+  tbody.id = 'abilsBody'
   tbody.id = 'abilsBody'
 //  tbody.style.backgroundImage = 'url("' + sword + '")'
 //  tbody.style.backgroundSize = 'contain'
