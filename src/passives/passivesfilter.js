@@ -5,29 +5,29 @@ import bgh1 from '../img/other/bgh1.png'
 import theadimg from '../img/Jobs/BG/inthp.jpg'
 
 const br = document.createElement('br')
-const abilsfilter = document.createElement('div');
-//abilsfilter.style.backgroundImage = 'url("' + theadimg + '")'
-//abilsfilter.style.backgroundSize = 'cover'
-//abilsfilter.style.backgroundPosition = 'center center'
-abilsfilter.classList.add('section', 'shadow', 'row', 'filtersmain')
-abilsfilter.id = 'abils'
+const passivesfilter = document.createElement('div');
+//passivesfilter.style.backgroundImage = 'url("' + theadimg + '")'
+//passivesfilter.style.backgroundSize = 'cover'
+//passivesfilter.style.backgroundPosition = 'center center'
+passivesfilter.classList.add('section', 'shadow', 'row', 'filtersmain')
+passivesfilter.id = 'passives'
 
 const header = document.createElement('h1')
 header.classList.add('col-12')
-header.innerHTML = 'Abilities'
-header.style.textShadow = '2px 2px #005470'
+header.innerHTML = 'Passives'
+header.style.textShadow = '2px 1px #728bbc'
 //header.style.backgroundImage = 'url("' + bgh1 +'")'
 //header.style.backgroundSize = 'cover'
 
 const filtersDiv = document.createElement('div');
-filtersDiv.id = 'abilsfilter'
+filtersDiv.id = 'passivesfilter'
 filtersDiv.classList.add('col-12', 'col-lg-6', 'row', 'filtersSub');
 // RARITY filter
 const rarFilter = document.createElement('div');
 rarFilter.classList.add('col-6')
 const rarLabel = document.createElement('label');
 rarLabel.for = 'rarity'
-rarLabel.innerHTML = 'Tier: '
+rarLabel.innerHTML = 'Skill Rank: '
 const rarSel = document.createElement('select');
 rarSel.id = 'rarity'
 rarSel.name = 'rarity'
@@ -86,41 +86,27 @@ const optionsAttr = optionsArrAttr.map(opt => {
 attrSel.innerHTML = optionsAttr;
 attrFilterDiv.append(attrLabel, attrSel)
 
-// TYPE filter
-const typeFilterDiv = document.createElement('div');
-typeFilterDiv.classList.add('col-6')
-const typeLabel = document.createElement('label');
-typeLabel.for = 'type'
-typeLabel.innerHTML = 'Type: '
-//typeLabel.className = 'col-12'
-const typeSel = document.createElement('select');
-//rarSel.classList.add('col-4')
-typeSel.id = 'type'
-typeSel.name = 'type'
-typeSel.value = 'All'
-typeSel.classList.add('filter', 'rounded')
-typeSel.innerHTML = '<option value="All">All</option>'
-                + '<option value="Damage">Damage</option>'
-                + '<option value="Heal">Heal</option>'
-                + '<option value="Buff">Buff</option>'
-                + '<option value="InstantBoost">Action Buff</option>'
-                + '<option value="Debuff">Debuff</option>'
-                + '<option value="Vulnerable">Vulnerable</option>'
-              //    + '<optgroup label="Protect">'
-                + '<option value="Protect">Protect</option>'
-                + '<option value="Remove Debuff">Remove Debuff</option>'
-                //  + '</optgroup>'
-                + '<option value="Negative">Negative</option>'
-                + '<option value="Other">Other</option>'
-//const typeOptionsArr = ['All', 'Buff', 'Curse', 'Damage', 'Debuff', 'Heal', 'InstantBoost', 'Protect', 'Sacrifice', 'Vulnerable'];
+//passives when apply
+// Attribute filter
+const whenFilterDiv = document.createElement('div');
+whenFilterDiv.classList.add('col-6')
+const whenLabel = document.createElement('label');
+whenLabel.for = 'whenSel'
+whenLabel.innerHTML = 'Passive: '
+//attrLabel.className = 'col-12'
+const whenSel = document.createElement('select');
+whenSel.id = 'whenSel'
+whenSel.name = 'whenSel'
+whenSel.classList.add('filter', 'rounded')
+const optionsArrWhen = ['Turn End', 'After Action', 'Combat Start', 'Master', 'Stat Boost', 'Reflect', 'Immune', 'HP Threshold', 'Heal', 'Dmg mitigate'].sort();
 
-//const optionsType = typeOptionsArr.map(opt => {
-//  const value = opt
-//  return `<option value="${value}">${opt}</option>`;
-//});
-
-//typeSel.innerHTML = optionsType;
-typeFilterDiv.append(typeLabel, typeSel)
+const optionsWhen = optionsArrWhen.map(opt => {
+  const value = opt
+  return `<option value="${value}">${opt}</option>`;
+});
+optionsWhen.unshift('<option value="All">All</option>')
+whenSel.innerHTML = optionsWhen;
+whenFilterDiv.append(whenLabel, whenSel)
 
 // Apply filter
 const applyFilterDiv = document.createElement('div');
@@ -164,7 +150,7 @@ let navFiters = document.createElement('div')
 navFiters.id = 'navFiters'
 navFiters.classList.add('col-6')
 navFiters.appendChild(cleardiv)
-filtersDiv.append(rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, navFiters)
+filtersDiv.append(rarFilter, elemFilter, attrFilterDiv, whenFilterDiv, applyFilterDiv, navFiters)
 
 const othersDiv = document.createElement('div');
 othersDiv.classList.add('col-12', 'col-lg-6', 'row');
@@ -211,5 +197,5 @@ emptyDiv.innerHTML = '...'
 
 othersDiv.append(emptyDiv, searchDiv, pages)
 //add it all to the section
-abilsfilter.append(header, filtersDiv, othersDiv)
-export { abilsfilter}
+passivesfilter.append(header, filtersDiv, othersDiv)
+export { passivesfilter}

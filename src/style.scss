@@ -99,7 +99,8 @@ img { max-width: 100%}
 //.dropdown:hover .dropbtn {background-color: #3e8e41;}
 //.fas {line-height: 1.5;}
 nav {
-  z-index: 101;
+  position: inherit;
+  z-index: 10001;
   img { padding: 0 0 10px 0}
 }
 nav:nth-child(2) {
@@ -206,7 +207,7 @@ th {
   top: 0;
 //  background-color: #435761;
   width: 100%;
-  z-index: 100;
+//  z-index: 10000;
 }
 
 table tr td:not(:first-child) { padding: 0 0 0 31px; }
@@ -268,7 +269,7 @@ table tr td:nth-child(3) {
     position: relative;
     opacity: 1;
     cursor: help;
-    img {
+    img:not(.element) {
       width: 25px;
       height: 25px;
       position: absolute;
@@ -334,18 +335,18 @@ table tr td:nth-child(3) {
 }
 //keywords colors
 /*attr*/
-.maxhp { color: #e3a200 }
-.strength, .str { color: red }
-.agility, .agi { color: #00FF00	 }
-.intelligence, .int { color: blue }
+.maxhp { color: #e3a200;font-weight: 550 }
+.strength, .str { color: red;font-weight: 550 }
+.agility, .agi { color: #00FF00;font-weight: 550	 }
+.intelligence, .int { color: blue;font-weight: 550 }
 /*elements*/
-.water { color: #3d9af2 }
-.fire { color: #ff4538 }
-.earth { color: #520500 }
-.thunder { color: #b5a45b }
-.wind { color: #5ee6a9 }
-.dark { color: #7436ba }
-.light { color: #ccc7d1 }
+.water { color: #9394fe;font-weight: 550 }
+.fire { color: #d85c3a;font-weight: 550 }
+.earth { color: #6a4201;font-weight: 550 }
+.thunder { color: #f4ee90;font-weight: 550 }
+.wind { color: #47b577;font-weight: 550 }
+.dark { color: #544981;font-weight: 550 }
+.light { color: #ccc7d1;font-weight: 550 }
 /*debuffs*/
 .blind { color: #ccc7d1 }
 .bleed { color: #ad2424 }
@@ -359,12 +360,20 @@ table tr td:nth-child(3) {
 .injury { color: #cfae72 }
 .seed { color: #520500 }
 
+.Low { color: green;font-weight: bold}
+.Medium { color: blue;font-weight: bold}
+.High { color: red;font-weight: bold}
+.Master { color: goldenrod;font-weight: bold}
+.Curse { color: #404040;font-weight: bold}
+.Null { color: grey;font-weight: bold}
 @media only screen and (max-width: 1000px) {
 
+  .tooltipMy img { position:inherit;}
   .tooltipMy .tooltiptext {
       left: -55%;
+  //    img { position:inline-block;}
   }
-  .tooltipMy img { position:inherit;}
+
   .jobBg {
     width: 35px;
   }

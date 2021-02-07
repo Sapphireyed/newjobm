@@ -1,20 +1,20 @@
-import { tbody } from './abilsTable.js'
+import { tbody } from './passivesTable.js'
 import { openNew } from '../basicfn/openNew.js'
 import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
         jobsDataAll} from '../abilitiesData.js'
 //import { openNew } from '../basicfn/openNew.js'
-import { abilImagesComplete} from '../img/imgsHTML.js'
-import { abilsfilter } from './abilsfilter'
-import {filterAb} from '../basicfn/filters.js'
+//import { abilImagesComplete} from '../img/imgsHTML.js'
+import { passivesfilter } from './passivesfilter'
+import {filterPass} from '../basicfn/filters.js'
 import { showIcon, hideIcon } from '../basicfn/hoverIcons.js'
 var $ = require("jquery")
 import tablesorter from 'tablesorter';
 
-export function abilitiesFn() {
+export function passivesFn() {
 
   var pagesSel = document.getElementById('numOfPages')
-  var list = abilitiesAllInfo
+  var list = passivesAllInfo
   var pageList = [];
   var currentPage = 1;
   var numberPerPage = pagesSel.value;
@@ -84,24 +84,25 @@ function loadList() {
     for (var i = 0; i < abilrows.length; i++) {
       let name = abilrows[i].children[2]
 
-      abilrows[i].addEventListener('mousemove', function() {
+    /*  abilrows[i].addEventListener('mousemove', function() {
         showIcon(name, abilImagesComplete)
       })
       abilrows[i].addEventListener('mouseleave', function(){
         hideIcon(abilImagesComplete)
-      })
+      })*/
       // Description
-      let desc = descFinale.map(desc => desc.split(':<br>'))
+      let desc = passiveFinale.map(desc => desc.split(':<br>'))
       desc = desc.filter(d => d[0] == name.innerText)[0]
-      abilrows[i].children[5].innerHTML = desc[1].replace(/<br><br>/, '')
+      abilrows[i].children[4].innerHTML = desc[1].replace(/<br><br>/, '')
       // Jobs
 
-      let jobs = jobsDataAll.filter(job => job[8] == name.innerText)
+      let jobs = jobsDataAll.filter(job => job[7] == name.innerText)
       jobs = jobs == [] ? '' : jobs
       let ind = jobs == '' ? '' : jobs[0][0]
-      console.log(ind)
-      abilrows[i].children[7].innerHTML = jobs == '' ? '' : jobs[0][1]
-      abilrows[i].children[7].onclick = function(){
+
+      abilrows[i].children[6].innerHTML = jobs == '' ? '' : jobs[0][1]
+      abilrows[i].children[6].onclick = function(){
+            console.log(ind)
         openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
       }
     }
@@ -116,17 +117,18 @@ function loadList() {
         var jobItem = Object.values(pageList[i])
       //  jobItem[i] = jobItem[i] == undefined ? '' : jobItem[i]
         jobItem.splice(1, 1, "pic")
-        jobItem.splice(5, 12, 'n/a')
-        jobItem.pop()
-        console.log(jobItem)
+        jobItem.splice(4, 12, 'n/a')
+      //  jobItem.pop()
+
         jobItem[3] = '<span class="' + jobItem[3] + '">' + jobItem[3] + '</span>'
-        jobItem[6] = ((jobItem[6] == '' ? '' : jobItem[6] + '<br>')
-                    + (jobItem[7] == '' ? '' : jobItem[7] + '<br>') + jobItem[8])
+        jobItem[5] = ((jobItem[5] == undefined ? '' : jobItem[5] + '<br>')
+                    + (jobItem[6] == undefined ? '' : jobItem[6] + '<br>')
+                     + (jobItem[7] == undefined ? '' : jobItem[7]))
 
         jobItem.splice(7, 2, '', '')
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#a5d9e3'
+        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#abbcde'
     //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
 
 
@@ -135,7 +137,6 @@ function loadList() {
           cell.id = cell.innerHTML
           switch (job) {
             case 'Low':
-            console.log('low')
               cell.innerHTML = '<td class="low">Low</td>'
               break;
             case 'Medium':
@@ -149,6 +150,7 @@ function loadList() {
               break;
             default: cell.innerHTML = '<td>' + job + '</td>'
           }
+
         /*  var tooltip = document.createElement('span')
           tooltip.classList.add('tooltipMy', 'tooltiptext')
 
@@ -157,13 +159,13 @@ function loadList() {
             cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''*/
 
           //add images to pic cell
-          var imgComplete = abilImagesComplete.find(jobimg => jobimg.id == jobItem[2])
+        /*  var imgComplete = abilImagesComplete.find(jobimg => jobimg.id == jobItem[2])
 
           if (cell.innerHTML == 'pic') {
             cell.id = 'pic'
             cell.innerHTML = ''
             cell.append(imgComplete)
-          }
+          }*/
 
           tableRow.appendChild(cell)
           abilsBody.append(tableRow)

@@ -1,4 +1,4 @@
-$darkBg: #003b4e;//#262626;
+$darkBg: #0f1e3c;//#262626;
 
 @mixin abtitle {
     text-align: center;
@@ -17,9 +17,8 @@ h1 {
 ::-webkit-scrollbar-thumb {
     background-color: $darkBg;
 }
-#abils { background-color: #5291a6}
 
-#abilsmain {
+#passivesmain {
   width: 80vw;
   button {background-color: $darkBg;}
 }
@@ -36,6 +35,7 @@ h1 {
   div:first-child {float: right }
 }
 
+#passives { background-color: #728bbc}
 // TABLE
 table{color: black}
 
@@ -48,14 +48,3 @@ table{color: black}
 }
 
 th { background-color: $darkBg}
-#pic {
-  padding: 6px;
-  img {
-    width: 40px;
-    padding: 5px;
-    display: block;
-    margin: auto;
-  }
-}
-
-table tr td:nth-child(6) {padding: 3px 0 2px 31px}

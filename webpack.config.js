@@ -8,6 +8,8 @@ module.exports = {
   app: path.resolve(__dirname, './src/app.js'),
   job: path.resolve(__dirname, './src/job.js'),
   abilities: path.resolve(__dirname, './src/abilities.js'),
+  passives: path.resolve(__dirname, './src/passives.js'),
+  glossary: path.resolve(__dirname, './src/glossary.js'),
 },
 output: {
   filename: '[name].[contenthash]bundle.js',
@@ -58,10 +60,7 @@ module: {
     new HtmlWebpackPlugin({
       title: "Webpack Output",
       filename: 'index.html',
-      chunks: [
-        'app',
-    //    'runtime',
-      ],
+      chunks: ['app',],
   //    inject: false ,
     //  preconnect: [
     //    'https://docs.google.com/spreadsheets/d/1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g/edit?usp=sharing',
@@ -75,7 +74,14 @@ module: {
     new HtmlWebpackPlugin({
       filename: 'abilities.html',
       chunks: ['abilities'],
-    //  inject: false ,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'passives.html',
+      chunks: ['passives'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'glossary.html',
+      chunks: ['glossary'],
     }),
     /*new CompressionPlugin({
       test: /\.js(\?.*)?$/i

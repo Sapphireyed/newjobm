@@ -6,7 +6,7 @@ import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete } from '../
 import star from '../img/events/StarColor.png'
 
 function splitDesc(arr, item){
-  arr = Object.values(arr).map(ab => ab == undefined ? '' : ab.split(':'))
+  arr = Object.values(arr).map(ab => ab == undefined ? '' : ab.split(':<br>'))
   return arr.filter(ab => item == ab[0])
 }
 
@@ -79,7 +79,7 @@ let myreg = /([A-Z])\w+/gi
         ptraits = ptraits.length == 0 ? '' : ptraits[0][1]
         var passive = splitDesc(passivedesc, jobItem[7])
         passive = passive.length == 0 ? '' : passive[0][1]
-        passiveH.innerHTML = 'Passive: ' + jobItem[7] || ''
+        passiveH.innerHTML = 'Passive: ' + (jobItem[7] || '')
         passiveDesc.innerHTML = passive + '<br>(' + ptraits + ')'
         myreg.test(ptraits) ? passiveDesc.innerHTML = passive + '<br>(' + ptraits + ')' : passiveDesc.innerHTML = passive
         passiveDesc.innerHTML = passiveDesc.innerHTML.replace(/, ,|, , ,|\(,|\(\)|<br><br>/g, '')
@@ -107,6 +107,7 @@ let myreg = /([A-Z])\w+/gi
         //switch desc
         let switchDesc = win.document.getElementById('switchDesc')
         var switchSkill = splitDesc(abil, jobItem[8])
+        console.log(switchSkill)
         switchSkill = switchSkill.length == 0 ? '' : switchSkill[0][1]
         //let switchtraits = win.document.getElementById('switchtraits')
         var traits = splitDesc(abiltraits, jobItem[8])

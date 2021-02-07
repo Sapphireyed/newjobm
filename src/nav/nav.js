@@ -32,6 +32,7 @@ export default () => {
         + '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./materials.html">Materials</a></li>'
         + '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./chapters.html">Chapters</a></li>'
         + '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./gachas.html">Gachas</a></li>'
+        + '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./glossary.html">Glossary</a></li>'
       +  '</div>'
   + '</div>'
   + '<div class="dropdown">'

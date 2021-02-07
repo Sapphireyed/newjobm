@@ -4,12 +4,12 @@ import '../abils.scss';
 //var $ = require("jquery")
 import nav from './nav/nav';
 import { abilsmain } from './abilities/abilsmain.js'
-import {abilities, jobsData,abilitiesAllInfo} from './abilitiesData.js'
+import {abilities, jobsData, abilitiesAllInfo} from './abilitiesData.js'
 import { getAbilImgs, abilImagesComplete, getJobImgs } from './img/imgsHTML.js'
 import { abilitiesFn } from './abilities/abilitiesjs.js'
 import theadimg from './img/Traits/Dumb.png'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
-import { jobs } from './abilities/abilitiesjs.js'
+import { jobs } from './abilitiesData.js'
 //import { jobs} from './jobs/jobsjs.js'
 var $ = require("jquery")
 //import { jobsTable } from './jobs/jobsTable'
@@ -27,9 +27,16 @@ window.onscroll = function() {
 }
 abilities.units()
     .then(data => {
+        abilities.passivesFn()
         abilities.abils()
           .then(res => {
               getAbilImgs()
               abilitiesFn()
             })
           })
+
+jobsData.jobs()
+jobsData.craft()
+    .then(data => {
+        jobsData.materials()
+    })

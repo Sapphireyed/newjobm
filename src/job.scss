@@ -15,7 +15,7 @@
 #switchimg img { width: 45px; margin-bottom: 7px; padding: 5px }
 #deckdiv {
   margin: 10px 0;
-  img {
+  img:not(.element) {
     width: 45px;
     display: block;
     margin:auto;

@@ -356,41 +356,41 @@ setTimeout(function() {
 function tooltips() {
 tableRows = document.querySelectorAll('tr')
 
-var descFinaleSplit = descFinale.map(desc => desc.split(':'))
-var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':'))
+var descFinaleSplit = descFinale.map(desc => desc.split(':<br>'))
+var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':<br>'))
 var switchCells =  document.getElementsByClassName('tooltiptext')
 
 for (var i=0; i < switchCells.length; i++) {
-var switchName = switchCells[i].parentNode.innerText
-var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
-var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
-var tooltipsApply = abilTraits.map(trait => trait.split(':')).filter(desc=> desc[0] == switchName)
-var passApply = passiveTraits.map(trait => trait.split(':')).filter(desc=> desc[0] == switchName)
-
-tooltipsAb.map((desc, ind) => {
-if (desc[0] == switchName) {
-  switchCells[i].innerHTML = desc[1] + '<br> <span class="tipApply">(' + tooltipsApply[ind][1] + ')</span>'
-  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\(, , , \)|, ,|, , ,|\(, , , \)|\(\)|<br><br>/g, '')
-  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\( \)/g, '')
-  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
-}
-})
-/*  tooltipsApply.map(desc => {
-if (desc[0] == switchName) {
-  switchCells[i].innerHTML = switchCells[i].innerHTML + '<br> <span class="tipApply">(' + desc[1] + ')</span>'
-  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, ,|, , ,|\(,|\(\)|^(, \))|<br><br>/g, '')
-  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
-}
-})*/
-tooltipsPass.map((desc, ind) => {
-if (desc[0] == switchName) {
-  switchCells[i].innerHTML = desc[1] + '<br> <span class="tipApply">(' + passApply[ind][1] + ')</span>'
-  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\(, , , \)|, ,|, , ,|\(, , , \)|\(\)|<br><br>/g, '')
-  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\( \)/g, '')
-  switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
-}
-})
-}
+    var switchName = switchCells[i].parentNode.innerText
+    var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
+    var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
+    var tooltipsApply = abilTraits.map(trait => trait.split(':')).filter(desc=> desc[0] == switchName)
+    var passApply = passiveTraits.map(trait => trait.split(':')).filter(desc=> desc[0] == switchName)
+    tooltipsAb.map((desc, ind) => {
+      if (desc[0] == switchName) {
+      //  console.log(desc[1])
+        switchCells[i].innerHTML = desc[1] + '<br> <span class="tipApply">(' + tooltipsApply[ind][1] + ')</span>'
+        switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\(, , , \)|, ,|, , ,|\(, , , \)|\(\)|<br><br>/g, '')
+        switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\( \)/g, '')
+        switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
+      }
+    })
+    /*  tooltipsApply.map(desc => {
+    if (desc[0] == switchName) {
+      switchCells[i].innerHTML = switchCells[i].innerHTML + '<br> <span class="tipApply">(' + desc[1] + ')</span>'
+      switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, ,|, , ,|\(,|\(\)|^(, \))|<br><br>/g, '')
+      switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
+    }
+    })*/
+    tooltipsPass.map((desc, ind) => {
+      if (desc[0] == switchName) {
+        switchCells[i].innerHTML = desc[1] + '<br> <span class="tipApply">(' + passApply[ind][1] + ')</span>'
+        switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\(, , , \)|, ,|, , ,|\(, , , \)|\(\)|<br><br>/g, '')
+        switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\( \)/g, '')
+        switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
+      }
+    })
+  }
 }
 //FILTERS
 

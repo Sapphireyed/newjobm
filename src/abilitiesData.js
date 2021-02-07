@@ -1,6 +1,13 @@
 global.fetch = require('node-fetch');
 const GetSheetDone = require('get-sheet-done');
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
+import fire from './img/icons/fire.png'
+import water from './img/icons/water.png'
+import earth from './img/icons/earth.png'
+import wind from './img/icons/wind.png'
+import thunder from './img/icons/thunder.png'
+import light from './img/icons/light.png'
+import dark from './img/icons/dark.png'
 
 export { powlvl, unitDesc,
          abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
@@ -93,13 +100,13 @@ function changeColors(arr) {
         r[i] = r[i].replace(/\bagi\b|\bagility\b/gi, '<span class=\'agility\'>Agility</span>')
         r[i] = r[i].replace(/\bint\b|\bintelligence\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
         // elements change color
-        r[i] = r[i].replace(/\bwater\b/gi, '<span class=\'water\'>Water</span>')
-        r[i] = r[i].replace(/\bfire\b/gi, '<span class=\'fire\'>Fire</span>')
-        r[i] = r[i].replace(/\bearth\b/gi, '<span class=\'earth\'>Earth</span>')
-        r[i] = r[i].replace(/\bwind\b/gi, '<span class=\'wind\'>Wind</span>')
-        r[i] = r[i].replace(/\bthunder\b/gi, '<span class=\'thunder\'>Thunder</span>')
-        r[i] = r[i].replace(/\blight\b/gi, '<span class=\'light\'>Light</span>')
-        r[i] = r[i].replace(/\bdark\b/gi, '<span class=\'dark\'>Dark</span>')
+        r[i] = r[i].replace(/\bwater\b/gi, '<span class=\'water\'><img class="element" src="' + water + '" alt="water"/> Water</span>')
+        r[i] = r[i].replace(/\bfire\b/gi, '<span class=\'fire\'><img class="element" src="' + fire + '" alt="fire"/> Fire</span>')
+        r[i] = r[i].replace(/\bearth\b/gi, '<span class=\'earth\'><img class="element" src="' + earth + '" alt="earth"/> Earth</span>')
+        r[i] = r[i].replace(/\bwind\b/gi, '<span class=\'wind\'><img class="element" src="' + wind + '" alt="wind"/> Wind</span>')
+        r[i] = r[i].replace(/\bthunder\b/gi, '<span class=\'thunder\'><img class="element" src="' + thunder + '" alt="thunder"/> Thunder</span>')
+        r[i] = r[i].replace(/\blight\b/gi, '<span class=\'light\'><img class="element" src="' + light + '" alt="light"/> Light</span>')
+        r[i] = r[i].replace(/\bdark\b/gi, '<span class=\'dark\'><img class="element" src="' + dark + '" alt="dark"/> Dark</span>')
         // apply debuffs change col
         r[i] = r[i].replace(/\bbleed\b/gi, '<span class=\'bleed\'>Bleed</span>')
         r[i] = r[i].replace(/\binsane\b/gi, '<span class=\'insane\'>Insane</span>')
@@ -146,20 +153,20 @@ let abilities = {
           row[6] = row[6].replace(/\bagi\b|\bAgility\b/gi, '<span class=\'agility\'>Agility</span>')
           row[6] = row[6].replace(/\bint\b|\bIntelligence\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
           //elements
-          row[9] = row[9].replace(/\bwater\b/gi, '<span class=\'water\'>Water</span>')
-          row[9] = row[9].replace(/\bfire\b/gi, '<span class=\'fire\'>Fire</span>')
-          row[9] = row[9].replace(/\bearth\b/gi, '<span class=\'earth\'>Earth</span>')
-          row[9] = row[9].replace(/\bwind\b/gi, '<span class=\'wind\'>Wind</span>')
-          row[9] = row[9].replace(/\bthunder\b/gi, '<span class=\'thunder\'>Thunder</span>')
-          row[9] = row[9].replace(/\blight\b/gi, '<span class=\'light\'>Light</span>')
-          row[9] = row[9].replace(/\bdark\b/gi, '<span class=\'dark\'>Dark</span>')
-          row[6] = row[6].replace(/\bwater\b/gi, '<span class=\'water\'>Water</span>')
-          row[6] = row[6].replace(/\bfire\b/gi, '<span class=\'fire\'>Fire</span>')
-          row[6] = row[6].replace(/\bearth\b/gi, '<span class=\'earth\'>Earth</span>')
-          row[6] = row[6].replace(/\bwind\b/gi, '<span class=\'wind\'>Wind</span>')
-          row[6] = row[6].replace(/\bthunder\b/gi, '<span class=\'thunder\'>Thunder</span>')
-          row[6] = row[6].replace(/\blight\b/gi, '<span class=\'light\'>Light</span>')
-          row[6] = row[6].replace(/\bdark\b/gi, '<span class=\'dark\'>Dark</span>')
+          row[9] = row[9].replace(/\bwater\b/gi, '<span class=\'water\'><img class="element" src="' + water + '" alt="water"/> Water</span>')
+          row[9] = row[9].replace(/\bfire\b/gi, '<span class=\'fire\'><img class="element" src="' + fire + '" alt="fire"/> Fire</span>')
+          row[9] = row[9].replace(/\bearth\b/gi, '<span class=\'earth\'><img class="element" src="' + earth + '" alt="earth"/> Earth</span>')
+          row[9] = row[9].replace(/\bwind\b/gi, '<span class=\'wind\'><img class="element" src="' + wind + '" alt="wind"/> Wind</span>')
+          row[9] = row[9].replace(/\bthunder\b/gi, '<span class=\'thunder\'><img class="element" src="' + thunder + '" alt="thunder"/> Thunder</span>')
+          row[9] = row[9].replace(/\blight\b/gi, '<span class=\'light\'><img class="element" src="' + light + '" alt="light"/> Light</span>')
+          row[9] = row[9].replace(/\bdark\b/gi, '<span class=\'dark\'><img class="element" src="' + dark + '" alt="dark"/> Dark</span>')
+          row[6] = row[6].replace(/\bwater\b/gi, '<span class=\'water\'><img class="element" src="' + water + '" alt="water"/> Water</span>')
+          row[6] = row[6].replace(/\bfire\b/gi, '<span class=\'fire\'><img class="element" src="' + fire + '" alt="fire"/> Fire</span>')
+          row[6] = row[6].replace(/\bearth\b/gi, '<span class=\'earth\'><img class="element" src="' + earth + '" alt="earth"/> Earth</span>')
+          row[6] = row[6].replace(/\bwind\b/gi, '<span class=\'wind\'><img class="element"src="' + wind + '" alt="wind"/> Wind</span>')
+          row[6] = row[6].replace(/\bthunder\b/gi, '<span class=\'thunder\'><img class="element" src="' + thunder + '" alt="thunder"/> Thunder</span>')
+          row[6] = row[6].replace(/\blight\b/gi, '<span class=\'light\'><img class="element" src="' + light + '" alt="light"/> Light</span>')
+          row[6] = row[6].replace(/\bdark\b/gi, '<span class=\'dark\'><img class="element" src="' + dark + '" alt="dark"/> Dark</span>')
           //debuffs
           row[9] = row[9].replace(/\bblind\b/gi, '<span class=\'blind\'>Blind</span>')
           row[9] = row[9].replace(/\bbleed\b/gi, '<span class=\'bleed\'>Bleed</span>')
@@ -205,13 +212,13 @@ console.log(res)
           row[24] = row[24].replace(/\bstr\b|\bstrength\b/gi, '<span class=\'strength\'>Strength</span>')
           row[24] = row[24].replace(/\bint\b|\bintelligence\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
           //elements
-          row[30] = row[30].replace(/\bwater\b/gi, '<span class=\'water\'>Water</span>')
-          row[30] = row[30].replace(/\bfire\b/gi, '<span class=\'fire\'>Fire</span>')
-          row[30] = row[30].replace(/\bearth\b/gi, '<span class=\'earth\'>Earth</span>')
-          row[30] = row[30].replace(/\bwind\b/gi, '<span class=\'wind\'>Wind</span>')
-          row[30] = row[30].replace(/\bthunder\b/gi, '<span class=\'thunder\'>Thunder</span>')
-          row[30] = row[30].replace(/\blight\b/gi, '<span class=\'light\'>Light</span>')
-          row[30] = row[30].replace(/\bdark\b/gi, '<span class=\'dark\'>Dark</span>')
+          row[30] = row[30].replace(/\bwater\b/gi, '<span class=\'water\'><img class="element" src="' + water + '" alt="water"/> Water</span>')
+          row[30] = row[30].replace(/\bfire\b/gi, '<span class=\'fire\'><img class="element" src="' + fire + '" alt="fire"/> Fire</span>')
+          row[30] = row[30].replace(/\bearth\b/gi, '<span class=\'earth\'><img class="element" src="' + earth + '" alt="earth"/> Earth</span>')
+          row[30] = row[30].replace(/\bwind\b/gi, '<span class=\'wind\'><img class="element" src="' + wind + '" alt="wind"/> Wind</span>')
+          row[30] = row[30].replace(/\bthunder\b/gi, '<span class=\'thunder\'><img class="element" src="' + thunder + '" alt="thunder"/> Thunder</span>')
+          row[30] = row[30].replace(/\blight\b/gi, '<span class=\'light\'><img class="element" src="' + light + '" alt="light"/> Light</span>')
+          row[30] = row[30].replace(/\bdark\b/gi, '<span class=\'dark\'><img class="element" src="' + dark + '" alt="dark"/> Dark</span>')
           //debuffs
           row[30] = row[30].replace(/\bblind\b/gi, '<span class=\'blind\'>Blind</span>')
           row[30] = row[30].replace(/\bbleed\b/gi, '<span class=\'bleed\'>Bleed</span>')
