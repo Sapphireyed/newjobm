@@ -4,7 +4,7 @@ import {abilities, descFinale, abilSkills, abilEffects, abilTraits,
         craft, jobsStats } from '../abilitiesData.js'
 import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete } from '../img/imgsHTML.js'
 import star from '../img/events/StarColor.png'
-import hpimg from '../img/other/hp.PNG'
+import hpimg from '../img/other/hp.png'
 import strimg from '../img/other/str.png'
 import agiimg from '../img/other/agi.png'
 import intimg from '../img/attr/int.png'

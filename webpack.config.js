@@ -13,8 +13,8 @@ module.exports = {
 },
 output: {
   filename: '[name].[contenthash]bundle.js',
-  path: path.resolve(__dirname, 'deploy'),
-//  path: '/newjobm/',
+//  path: path.resolve(__dirname, 'deploy'),
+  path: '/newjobm/',
 },
 //optimization: {
 //  runtimeChunk: 'single',

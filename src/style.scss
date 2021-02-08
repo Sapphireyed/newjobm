@@ -270,7 +270,7 @@ table tr td:nth-child(3) {
     position: relative;
     opacity: 1;
     cursor: help;
-    img:not(.element) {
+    img:not(.icon) {
       width: 25px;
       height: 25px;
       position: absolute;
@@ -420,7 +420,7 @@ table tr td:nth-child(3) {
 .Curse { color: #404040;font-weight: 550}
 .Null { color: grey;font-weight: 550}
 
-.element {
+.icon {
   width: 18px;
   height: 18px;
   margin-top: -4px;

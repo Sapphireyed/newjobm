@@ -6,11 +6,16 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
   let chosenAttr = document.getElementById('attrSel').value
   let typeVal = document.getElementById('type').value
   // type
+
   let filtered = arr.filter(a => a[2] == pageList[ind-1][i])
+
   filtered.map(a => {
+    a = a.map(ab => ab.replace(/[0-9]|icon|class|img|.png|:/g, ''))
+    console.log(a.map(ab => ab.replace(/[0-9]/g, '')))
     const elemRegex = /fire|water|earth|thunder|wind|light|dark|bleed|injury|venom|restrain|insane|Element|Debuff|Null/g;
     const attrRegex = /MaxHp|Strength|Agility|Intelligence/gi
   if (filter == 'type') {
+
     switch (elem) {
       case 'Other':
         skills.some((unit) => a[unit] == 'Null' && a[unit+1] == 'Null') ? tableRows[ind].classList.add(filter) : ''
@@ -31,11 +36,12 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
     }
     } else if (filter == 'attrSel') {
       if (typeVal == 'All') {
-        console.log('boo')
         skills.some(s=> {
+          a[s] = a[s] == undefined ? 'n/a' : a[s]
           a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
         })
         effects.some(s=> {
+          a[s] = a[s] == undefined ? 'n/a' : a[s]
           a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
         })
       } else {
@@ -43,6 +49,7 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
           skills.some(s => a[s].includes('Protect') && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter,'type') : ''
         } else {
           skills.some(s=> {
+            a[s] = a[s] == undefined ? 'n/a' : a[s]
             (a[s] == typeVal && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'type') : ''
         //    a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
           })
@@ -53,13 +60,15 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
         tableRows[ind].classList.add(filter)
       }
     } else if (filter == 'whenSel') {
-      console.log('passive')
+
     } else  {
       filter == 'whenSel' ? tableRows[ind].classList.add(filter) : ''
       skills.some(s=> {
+        a[s] = a[s] == undefined ? 'n/a' : a[s]
         a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
       })
       effects.some(s=> {
+        a[s] = a[s] == undefined ? 'n/a' : a[s]
         a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
       })
     }
@@ -84,6 +93,7 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
       while (a.length < 19) {
         a.push('')
       }
+      a = a.map(ab => ab.replace(/[0-9]|icon|class|img|.png|:/g, ''))
       a = a.map(cell => cell == '' ? 'n/a' : cell)
       const elemRegex = /fire|water|earth|thunder|wind|light|dark|bleed|injury|venom|restrain|insane|Element|Debuff/g;
       const attrRegex = /MaxHp|Strength|Agility|Intelligence/gi
@@ -153,9 +163,11 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
             break;
           default:
             skills.some(s=> {
+              a[s] = a[s] == undefined ? 'n/a' : a[s]
               a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
             })
             effects.some(s=> {
+              a[s] = a[s] == undefined ? 'n/a' : a[s]
               a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
             })
         }
@@ -168,9 +180,11 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
       } else {
         filter == 'type' ? tableRows[ind].classList.add(filter) : ''
         skills.some(s=> {
+          a[s] = a[s] == undefined ? 'n/a' : a[s]
           a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
         })
         effects.some(s=> {
+          a[s] = a[s] == undefined ? 'n/a' : a[s]
           a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
         })
       }

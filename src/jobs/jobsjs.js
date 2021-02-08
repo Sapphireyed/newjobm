@@ -189,14 +189,17 @@ function loadList() {
 //filters = Array.from(filters)
 //filters.map(f=> f.value = 'All')
 tableRows = document.querySelectorAll('tr')
+
 // FILTERS
 function filter(el) {
+
   var elem = el.value
   let filter = el.id
   tableRows = Array.from(tableRows)
   for (var ind = 1; ind < tableRows.length; ind++) {
     //hide all rows. Particular rowswill be isplayed as per filters
-    tableRows[ind].classList.add('d-none')
+    tableRows[ind].classList.add('d-none', 'boo')
+  //  console.log(tableRows[ind].classList)
     //remove all classes added during preious filter run.
     tableRows[ind].classList.remove('7', '6', '5', '4', '3', '2', '1', filter)
 
