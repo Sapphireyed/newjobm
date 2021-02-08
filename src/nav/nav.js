@@ -1,5 +1,7 @@
 import logo from "./logo.png";
+
 export default () => {
+
   const section = document.createElement('section') //the entire navbar
   const img = document.createElement("img"); // logo at the top
   img.src = logo;
@@ -51,5 +53,6 @@ export default () => {
   + '</div>'
 
   section.append(logonav, navitm) //append logo and menu to navbar
+
   return section;
 };

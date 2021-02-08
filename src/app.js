@@ -13,6 +13,7 @@ import {abilities, jobsData} from './abilitiesData.js'
 import {getMatImgs, getAbilImgs, getJobImgs, abilImagesComplete, jobImagesComplete} from './img/imgsHTML.js'
 import { jobsTable } from './jobs/jobsTable.js'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
+import { toggle} from './basicfn/toggle.js'
 import { jobs} from './jobs/jobsjs.js'
 import theadimg from './img/Jobs/BG/inthp.jpg'
 var $ = require("jquery")
@@ -74,6 +75,6 @@ jobsData.craft()
 
 
 //console.log(gsheet)
-//let button = document.getElementById('navbtn')
-//let menu = document.getElementById('collapsemenu')
-//toggle(menu, button)
+let button = document.getElementById('navbtn')
+let menu = document.getElementById('collapsemenu')
+toggle(menu, button)

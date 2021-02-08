@@ -15,13 +15,13 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
       case 'Other':
         skills.some((unit) => a[unit] == 'Null' && a[unit+1] == 'Null') ? tableRows[ind].classList.add(filter) : ''
         skills.some((unit) => a[unit] == 'InstantBoost' && a[unit+1] == 'Direct') ? tableRows[ind].classList.add(filter) : ''
-        skills.some((unit) => (a[unit] == 'Protect' && (a[unit+1] == 'Direct' || a[unit+1] == 'Guard' || a[unit+1] == 'Draw'))) ? tableRows[ind].classList.add(filter) : ''
+        skills.some((unit) => (a[unit].includes('Protect') && (a[unit+1] == 'Direct' || a[unit+1] == 'Guard' || a[unit+1] == 'Draw'))) ? tableRows[ind].classList.add(filter) : ''
         break;
       case 'Remove Debuff':
-        skills.some((unit) => a[unit] == 'Protect' && a[unit+1].match(elemRegex)) ? tableRows[ind].classList.add(filter) : ''
+        skills.some((unit) => a[unit].includes('Protect') && a[unit+1].match(elemRegex)) ? tableRows[ind].classList.add(filter) : ''
         break;
       case 'Protect':
-        skills.some((unit) => a[unit] == 'Protect' && (chosenAttr == 'All' ? a[unit+1].match(attrRegex) : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
+        skills.some((unit) => a[unit].includes('Protect') && (chosenAttr == 'All' ? a[unit+1].match(attrRegex) : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
         break;
       case 'Negative':
         skills.some((unit) => a[unit] == 'Curse' || a[unit] == 'Sacrifice') ? tableRows[ind].classList.add(filter) : ''
@@ -40,7 +40,7 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
         })
       } else {
         if (typeVal == 'Protect') {
-          skills.some(s => a[s] == 'Protect' && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter,'type') : ''
+          skills.some(s => a[s].includes('Protect') && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter,'type') : ''
         } else {
           skills.some(s=> {
             (a[s] == typeVal && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'type') : ''
@@ -93,7 +93,7 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
           skills.some((unit) => a[unit] == 'Reflect' && (chosenAttr == 'All' ? (a[unit+1].match(attrRegex) || a[unit+1].match(elemRegex)) : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
           break;
         case 'Immune':
-          skills.some((unit) => a[unit] == 'Protect' && a[unit+1].match(elemRegex)) ? tableRows[ind].classList.add(filter) : ''
+          skills.some((unit) => a[unit].includes('Protect') && a[unit+1].match(elemRegex)) ? tableRows[ind].classList.add(filter) : ''
           break;
         case 'After Action':
           skills.some((unit) => a[unit].includes('Action') && (chosenAttr == 'All' ? true : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
@@ -101,14 +101,14 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
         case 'Combat Start':
           skills.some((unit) => a[unit] == 'Curse' && (chosenAttr == 'All' ? true : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
           skills.some((unit) => a[unit] == 'InstantBoost' && (chosenAttr == 'All' ? true : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
-          skills.some((unit) => a[unit] == 'Protect' && (chosenAttr == 'All' ? a[unit+1].match(attrRegex) : (a[unit+1].includes(chosenAttr) || a[unit+1] == 'Guard'))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
+          skills.some((unit) => a[unit].includes('Protect') && (chosenAttr == 'All' ? a[unit+1].match(attrRegex) : (a[unit+1].includes(chosenAttr) || a[unit+1] == 'Guard'))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
           break;
         case 'Dmg mitigate':
-          skills.some((unit) => a[unit] == 'Buff' && a[unit+1] == 'Protect') ? tableRows[ind].classList.add(filter) : ''
+          skills.some((unit) => a[unit] == 'Buff' && a[unit+1].includes('Protect')) ? tableRows[ind].classList.add(filter) : ''
           break;
         case 'HP Threshold':
           skills.some((unit) => a[unit] == 'Sacrifice') ? tableRows[ind].classList.add(filter) : ''
-          skills.some(unit => a[unit] == 'Protect' && (a[unit+1] == 'Direct' /*|| a[unit+1] == 'Guard'*/)) ? tableRows[ind].classList.add(filter) : ''
+          skills.some(unit => a[unit].includes('Protect') && (a[unit+1] == 'Direct' /*|| a[unit+1] == 'Guard'*/)) ? tableRows[ind].classList.add(filter) : ''
           break;
         case 'Heal':
           skills.some((unit) => a[unit].includes('Heal') && (chosenAttr == 'All' ? true : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
@@ -118,7 +118,7 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
           skills.some((unit) => a[unit] == 'Upgrade' && (chosenAttr == 'All' ? true : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
           break;
         case 'Stat Boost':
-          skills.some((unit) => a[unit] == 'Buff' && a[unit+1] !== 'Protect' && (chosenAttr == 'All' ? true : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
+          skills.some((unit) => a[unit] == 'Buff' && (a[unit+1].includes('Protect')==false) && (chosenAttr == 'All' ? true : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
           skills.some((unit) => a[unit] == 'Debuff' && (chosenAttr == 'All' ? true : a[unit+1].includes(chosenAttr))) ? tableRows[ind].classList.add(filter, 'attrSel') : ''
           break;
         case 'Turn End':
@@ -135,7 +135,7 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
             skills.some(s => a[s].includes('Action') && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'whenSel') : ''
             break;
           case 'Combat Start':
-            skills.some(s => (a[s] == 'Curse' || a[s] == 'InstantBoost' || a[s] == 'Protect')&& a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'whenSel') : ''
+            skills.some(s => (a[s] == 'Curse' || a[s] == 'InstantBoost' || a[s].includes('Protect')) && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'whenSel') : ''
           //  skills.some(s => a[s] == 'InstantBoost' && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'whenSel') : ''
             break;
           case 'Heal':
@@ -145,7 +145,7 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
             skills.some(s => a[s] == 'Upgrade' && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'whenSel') : ''
             break;
           case 'Master':
-            skills.some(s => a[s] == 'Buff' && a[s+1] !== 'Protect' && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'whenSel') : ''
+            skills.some(s => a[s] == 'Buff' && (a[s+1].includes('Protect')==false) && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'whenSel') : ''
             skills.some(s => a[s] == 'Debuff' && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'whenSel') : ''
             break;
           case 'Turn End':

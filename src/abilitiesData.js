@@ -8,11 +8,29 @@ import wind from './img/icons/wind.png'
 import thunder from './img/icons/thunder.png'
 import light from './img/icons/light.png'
 import dark from './img/icons/dark.png'
+import blind from './img/abilities/blind.png'
+import depress from './img/abilities/depress.png'
+import burn from './img/abilities/burn.png'
+import chill from './img/abilities/chill.png'
+import dizzy from './img/abilities/dizzy.png'
+import seed from './img/abilities/seed.png'
+import restrain from './img/abilities/restrain.png'
+import bleed from './img/abilities/bleed.png'
+import injury from './img/abilities/injury.png'
+import insane from './img/abilities/insane.png'
+import paralysis from './img/abilities/paralysis.png'
+import venom from './img/abilities/venom.png'
+import maxhpimg from './img/attr/hp.png'
+import strimg from './img/attr/str.png'
+import agiimg from './img/attr/agi.png'
+import intimg from './img/attr/int.png'
+import protect from './img/attr/protect.png'
 
 export { powlvl, unitDesc,
          abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
          passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
-         jobsData, jobsStats, jobsDataAll, craft, mats}
+         jobsData, jobsStats, jobsDataAll, craft, mats,
+          glossAllInfo,appliesAllInfo}
 
 let powlvl;     // power level table from sheet 4
 let unitDesc;  // unit desc table from sheet 4
@@ -34,6 +52,9 @@ let jobsDataAll = []//jobs
 let jobsStats;
 let craft = [];
 let mats = [];   //materials to craft jobs
+let glossAllInfo = [];
+let appliesAllInfo = []
+//glossAllInfo.length = 63
 
 var name, desc, desc1, desc2, desc3, desc4
 function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multiplier) {
@@ -87,7 +108,25 @@ function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multip
   }))
 
 }
-
+function changeApply(arr, i) {
+  arr.map(r => {
+    r[i] = r[i] == undefined ? 'n/a' : r[i]
+    r[i] = r[i].replace('Strength', 'Strength Synergy')
+    r[i] = r[i].replace('Agility', 'Agility Synergy')
+    r[i] = r[i].replace('Intelligence', 'Intelligence Synergy')
+    r[i] = r[i].replace('MaxHP', 'MaxHP Synergy')
+    r[i] = r[i].replace('Draw', 'Last Resort')
+    r[i] = r[i].replace('Multiply', 'Overloaded')
+    r[i] = r[i].replace('Charge', 'Turn Charge')
+    r[i] = r[i].replace('Action', 'Practice Perfect')
+    r[i] = r[i].replace('Buff', 'Focus Power')
+    r[i] = r[i].replace('Debuff', 'Negative Energy')
+    r[i] = r[i].replace('Combo', 'Combo Blend')
+    r[i] = r[i].replace('Delay', 'Scheduled')
+    r[i] = r[i].replace('Direct', 'Auto Fire')
+    r[i] = r[i] == 'n/a' ? '' : r[i]
+  })
+}
 function changeColors(arr) {
   arr.map(r => {
     for (var i=0; i<r.length; i++) {
@@ -95,10 +134,11 @@ function changeColors(arr) {
         r[i] = r[i]
       } else if ((i !== 2) && (r[i] !== undefined)) {
         // attr change colors
-        r[i] = r[i].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
-        r[i] = r[i].replace(/\bstr\b|\bstrength\b/gi, '<span class=\'strength\'>Strength</span>')
-        r[i] = r[i].replace(/\bagi\b|\bagility\b/gi, '<span class=\'agility\'>Agility</span>')
-        r[i] = r[i].replace(/\bint\b|\bintelligence\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
+        r[i] = r[i].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'><img class="element" src="' + maxhpimg + '" alt="hp"/> MaxHP</span>')
+        r[i] = r[i].replace(/\bstr\b|\bstrength\b/gi, '<span class=\'strength\'><img class="element" src="' + strimg + '" alt="str"/> Strength</span>')
+        r[i] = r[i].replace(/\bagi\b|\bagility\b/gi, '<span class=\'agility\'><img class="element" src="' + agiimg + '" alt="agi"/> Agility</span>')
+        r[i] = r[i].replace(/\bint\b|\bintelligence\b/gi, '<span class=\'intelligence\'><img class="element" src="' + intimg + '" alt="int"/> Intelligence</span>')
+        r[i] = r[i].replace(/\bprotect\b/gi, '<span class=\'protect\'><img class="element" src="' + protect + '" alt="protect"/> Protect</span>')
         // elements change color
         r[i] = r[i].replace(/\bwater\b/gi, '<span class=\'water\'><img class="element" src="' + water + '" alt="water"/> Water</span>')
         r[i] = r[i].replace(/\bfire\b/gi, '<span class=\'fire\'><img class="element" src="' + fire + '" alt="fire"/> Fire</span>')
@@ -108,15 +148,17 @@ function changeColors(arr) {
         r[i] = r[i].replace(/\blight\b/gi, '<span class=\'light\'><img class="element" src="' + light + '" alt="light"/> Light</span>')
         r[i] = r[i].replace(/\bdark\b/gi, '<span class=\'dark\'><img class="element" src="' + dark + '" alt="dark"/> Dark</span>')
         // apply debuffs change col
-        r[i] = r[i].replace(/\bbleed\b/gi, '<span class=\'bleed\'>Bleed</span>')
-        r[i] = r[i].replace(/\binsane\b/gi, '<span class=\'insane\'>Insane</span>')
-        r[i] = r[i].replace(/\bdepress\b/gi, '<span class=\'depress\'>Depress</span>')
-        r[i] = r[i].replace(/\bburn\b/gi, '<span class=\'burn\'>Burn</span>')
-        r[i] = r[i].replace(/\bchill\b/gi, '<span class=\'chill\'>Chill</span>')
-        r[i] = r[i].replace(/\binjury\b/gi, '<span class=\'injury\'>Injury</span>')
-        r[i] = r[i].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'>Paralysis</span>')
-        r[i] = r[i].replace(/\brestrain\b/gi, '<span class=\'restrain\'>Restrain</span>')
-        r[i] = r[i].replace(/\bseed\b/gi, '<span class=\'seed\'>Seed</span>')
+        r[i] = r[i].replace(/\bbleed\b/gi, '<span class=\'bleed\'><img class="element" src="' + bleed + '" alt="bleed"/>Bleed</span>')
+        r[i] = r[i].replace(/\binsane\b/gi, '<span class=\'insane\'><img class="element" src="' + insane + '" alt="insane"/>Insane</span>')
+        r[i] = r[i].replace(/\bdepress\b/gi, '<span class=\'depress\'><img class="element" src="' + depress + '" alt="depress"/>Depress</span>')
+        r[i] = r[i].replace(/\bburn\b/gi, '<span class=\'burn\'><img class="element" src="' + burn + '" alt="burn"/>Burn</span>')
+        r[i] = r[i].replace(/\bchill\b/gi, '<span class=\'chill\'><img class="element" src="' + chill + '" alt="chill"/>Chill</span>')
+        r[i] = r[i].replace(/\binjury\b/gi, '<span class=\'injury\'><img class="element" src="' + injury + '" alt="injury"/>Injury</span>')
+        r[i] = r[i].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'><img class="element" src="' + paralysis + '" alt="paralysis"/>Paralysis</span>')
+        r[i] = r[i].replace(/\brestrain\b/gi, '<span class=\'restrain\'><img class="element" src="' + restrain + '" alt="restrain"/>Restrain</span>')
+        r[i] = r[i].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="element" src="' + seed + '" alt="seed"/>Seed</span>')
+        r[i] = r[i].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="element" src="' + blind + '" alt="blind"/>Blind</span>')
+        r[i] = r[i].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="element" src="' + venom + '" alt="venom"/>Venom</span>')
       } else if (i == 2){
         r[i] = r[2]
       } else {
@@ -128,6 +170,33 @@ function changeColors(arr) {
 
 // merge skill unitis andabilities data to get full info on every ability
 let abilities = {
+  glossary:() => {
+    return GetSheetDone
+      .raw(id, 4).then(data => data.data).then(res => {
+        res.shift()
+        jobsStats = res.map(job => {
+          return {
+            name: job[1],
+            hp: job[3]/5,
+            str: job[4]/1,
+            agi: job[5]/1,
+            int: job[6]/1,
+          }
+        })
+
+      res.map((row, ind) => {
+        res[ind].splice(0,11)
+        res[ind].splice(12)
+      })
+      changeColors(res)
+        res.map(inf => glossAllInfo.push(inf))
+        let end = res.findIndex(r => r[0] == 'Applies')
+        glossAllInfo.length = end
+        res.map(inf => appliesAllInfo.push(inf))
+        appliesAllInfo.splice(0,end +1)
+      })
+
+  },
   units:() => {
     return GetSheetDone
       .raw(id, 4).then(data => data.data).then(res => {
@@ -144,14 +213,16 @@ let abilities = {
 
         unitDesc = res.map(row => {
           //attr
-          row[9] = row[9].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
-          row[9] = row[9].replace(/\bstr\b/gi, '<span class=\'strength\'>Strength</span>')
-          row[9] = row[9].replace(/\bagi\b/gi, '<span class=\'agility\'>Agility</span>')
-          row[9] = row[9].replace(/\bint\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
-          row[6] = row[6].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
-          row[6] = row[6].replace(/\bstr\b|\bStrength\b/gi, '<span class=\'strength\'>Strength</span>')
-          row[6] = row[6].replace(/\bagi\b|\bAgility\b/gi, '<span class=\'agility\'>Agility</span>')
-          row[6] = row[6].replace(/\bint\b|\bIntelligence\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
+          row[9] = row[9].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'><img class="element" src="' + maxhpimg + '" alt="hp"/> MaxHP</span>')
+          row[9] = row[9].replace(/\bstr\b/gi, '<span class=\'strength\'><img class="element" src="' + strimg + '" alt="str"/> Strength</span>')
+          row[9] = row[9].replace(/\bagi\b/gi, '<span class=\'agility\'><img class="element" src="' + agiimg + '" alt="agi"/> Agility</span>')
+          row[9] = row[9].replace(/\bint\b/gi, '<span class=\'intelligence\'><img class="element" src="' + intimg + '" alt="int"/> Intelligence</span>')
+          row[9] = row[9].replace(/\bprotect\b/gi, '<span class=\'protect\'><img class="element" src="' + protect + '" alt="protect"/> Protect</span>')
+          row[6] = row[6].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'><img class="element" src="' + maxhpimg + '" alt="hp"/> MaxHP</span>')
+          row[6] = row[6].replace(/\bstr\b|\bStrength\b/gi, '<span class=\'strength\'><img class="element" src="' + strimg + '" alt="str"/> Strength</span>')
+          row[6] = row[6].replace(/\bagi\b|\bAgility\b/gi, '<span class=\'agility\'><img class="element" src="' + agiimg + '" alt="agi"/> Agility</span>')
+          row[6] = row[6].replace(/\bint\b|\bIntelligence\b/gi, '<span class=\'intelligence\'><img class="element" src="' + intimg + '" alt="int"/> Intelligence</span>')
+          row[6] = row[6].replace(/\bprotect\b/gi, '<span class=\'protect\'><img class="element" src="' + protect + '" alt="protect"/> Protect</span>')
           //elements
           row[9] = row[9].replace(/\bwater\b/gi, '<span class=\'water\'><img class="element" src="' + water + '" alt="water"/> Water</span>')
           row[9] = row[9].replace(/\bfire\b/gi, '<span class=\'fire\'><img class="element" src="' + fire + '" alt="fire"/> Fire</span>')
@@ -168,28 +239,30 @@ let abilities = {
           row[6] = row[6].replace(/\blight\b/gi, '<span class=\'light\'><img class="element" src="' + light + '" alt="light"/> Light</span>')
           row[6] = row[6].replace(/\bdark\b/gi, '<span class=\'dark\'><img class="element" src="' + dark + '" alt="dark"/> Dark</span>')
           //debuffs
-          row[9] = row[9].replace(/\bblind\b/gi, '<span class=\'blind\'>Blind</span>')
-          row[9] = row[9].replace(/\bbleed\b/gi, '<span class=\'bleed\'>Bleed</span>')
-          row[9] = row[9].replace(/\binsane\b/gi, '<span class=\'insane\'>Insane</span>')
-          row[9] = row[9].replace(/\bdepress\b/gi, '<span class=\'depress\'>Depress</span>')
-          row[9] = row[9].replace(/\bburn\b/gi, '<span class=\'burn\'>Burn</span>')
-          row[9] = row[9].replace(/\bdizzy\b/gi, '<span class=\'dizzy\'>Dizzy</span>')
-          row[9] = row[9].replace(/\bchill\b/gi, '<span class=\'chill\'>Chill</span>')
-          row[9] = row[9].replace(/\binjury\b/gi, '<span class=\'injury\'>Injury</span>')
-          row[9] = row[9].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'>Paralysis</span>')
-          row[9] = row[9].replace(/\brestrain\b/gi, '<span class=\'restrain\'>Restrain</span>')
-          row[9] = row[9].replace(/\bseed\b/gi, '<span class=\'seed\'>Seed</span>')
-          row[6] = row[6].replace(/\bblind\b/gi, '<span class=\'blind\'>Blind</span>')
-          row[6] = row[6].replace(/\bbleed\b/gi, '<span class=\'bleed\'>Bleed</span>')
-          row[6] = row[6].replace(/\binsane\b/gi, '<span class=\'insane\'>Insane</span>')
-          row[6] = row[6].replace(/\bdepress\b/gi, '<span class=\'depress\'>Depress</span>')
-          row[6] = row[6].replace(/\bburn\b/gi, '<span class=\'burn\'>Burn</span>')
-          row[6] = row[6].replace(/\bdizzy\b/gi, '<span class=\'dizzy\'>Dizzy</span>')
-          row[6] = row[6].replace(/\bchill\b/gi, '<span class=\'chill\'>Chill</span>')
-          row[6] = row[6].replace(/\binjury\b/gi, '<span class=\'injury\'>Injury</span>')
-          row[6] = row[6].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'>Paralysis</span>')
-          row[6] = row[6].replace(/\brestrain\b/gi, '<span class=\'restrain\'>Restrain</span>')
-          row[6] = row[6].replace(/\bseed\b/gi, '<span class=\'seed\'>Seed</span>')
+          row[9] = row[9].replace(/\bblind\b/gi, '<span class=\'blind\'><img class="element" src="' + blind + '" alt="blind"/>Blind</span>')
+          row[9] = row[9].replace(/\bbleed\b/gi, '<span class=\'bleed\'><img class="element" src="' + bleed + '" alt="bleed"/>Bleed</span>')
+          row[9] = row[9].replace(/\binsane\b/gi, '<span class=\'insane\'><img class="element" src="' + insane + '" alt="insane"/>Insane</span>')
+          row[9] = row[9].replace(/\bdepress\b/gi, '<span class=\'depress\'><img class="element" src="' + depress + '" alt="depress"/>Depress</span>')
+          row[9] = row[9].replace(/\bburn\b/gi, '<span class=\'burn\'><img class="element" src="' + burn + '" alt="burn"/>Burn</span>')
+          row[9] = row[9].replace(/\bdizzy\b/gi, '<span class=\'dizzy\'><img class="element" src="' + dizzy + '" alt="dizzy"/>Dizzy</span>')
+          row[9] = row[9].replace(/\bchill\b/gi, '<span class=\'chill\'><img class="element" src="' + chill + '" alt="chill"/>Chill</span>')
+          row[9] = row[9].replace(/\binjury\b/gi, '<span class=\'injury\'><img class="element" src="' + injury + '" alt="injury"/>Injury</span>')
+          row[9] = row[9].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'><img class="element" src="' + paralysis + '" alt="paralysis"/>Paralysis</span>')
+          row[9] = row[9].replace(/\brestrain\b/gi, '<span class=\'restrain\'><img class="element" src="' + restrain + '" alt="restrained"/>Restrained</span>')
+          row[9] = row[9].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="element" src="' + seed + '" alt="seed"/>Seed</span>')
+          row[9] = row[9].replace(/\bvenom\b/gi, '<span class=\'venom\'><img class="element" src="' + venom + '" alt="venom"/>Venom</span>')
+          row[6] = row[6].replace(/\bblind\b/gi, '<span class=\'blind\'><img class="element" src="' + blind + '" alt="blind"/>Blind</span>')
+          row[6] = row[6].replace(/\bbleed\b/gi, '<span class=\'bleed\'><img class="element" src="' + bleed + '" alt="bleed"/>Bleed</span>')
+          row[6] = row[6].replace(/\binsane\b/gi, '<span class=\'insane\'><img class="element" src="' + insane + '" alt="insane"/>Insane</span>')
+          row[6] = row[6].replace(/\bdepress\b/gi, '<span class=\'depress\'><img class="element" src="' + depress + '" alt="depress"/>Depress</span>')
+          row[6] = row[6].replace(/\bburn\b/gi, '<span class=\'burn\'><img class="element" src="' + burn + '" alt="burn"/>Burn</span>')
+          row[6] = row[6].replace(/\bdizzy\b/gi, '<span class=\'dizzy\'><img class="element" src="' + dizzy + '" alt="dizzy"/>Dizzy</span>')
+          row[6] = row[6].replace(/\bchill\b/gi, '<span class=\'chill\'><img class="element" src="' + chill + '" alt="chill"/>Chill</span>')
+          row[6] = row[6].replace(/\binjury\b/gi, '<span class=\'injury\'><img class="element" src="' + injury + '" alt="injury"/>Injury</span>')
+          row[6] = row[6].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'><img class="element" src="' + paralysis + '" alt="paralysis"/>Paralysis</span>')
+          row[6] = row[6].replace(/\brestrain\b/gi, '<span class=\'restrain\'><img class="element" src="' + restrain + '" alt="restrain"/>Restrain</span>')
+          row[6] = row[6].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="element" src="' + seed + '" alt="seed"/>Seed</span>')
+          row[6] = row[6].replace(/\bvenom\b/gi, '<span class=\'venom\'><img class="element" src="' + venom + '" alt="venom"/>Venom</span>')
 
           return {
             skill: row[7],
@@ -198,19 +271,21 @@ let abilities = {
             name: row[6]
           }
         })
-console.log(res)
+
         passives = res.map(row => {
           //attr
           row[30] = row[30] == undefined ? '' : row[30]
           row[24] = row[24] == undefined ? '' : row[24]
-          row[30] = row[30].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
-          row[30] = row[30].replace(/\bagi\b/gi, '<span class=\'agi\'>Agility</span>')
-          row[30] = row[30].replace(/\bstr\b/gi, '<span class=\'str\'>Strength</span>')
-          row[30] = row[30].replace(/\bint\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
-          row[24] = row[24].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>')
-          row[24] = row[24].replace(/\bagi\b|\bagility\b/gi, '<span class=\'agility\'>Agility</span>')
-          row[24] = row[24].replace(/\bstr\b|\bstrength\b/gi, '<span class=\'strength\'>Strength</span>')
-          row[24] = row[24].replace(/\bint\b|\bintelligence\b/gi, '<span class=\'intelligence\'>Intelligence</span>')
+          row[30] = row[30].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'><img class="element" src="' + maxhpimg + '" alt="hp"/> MaxHP</span>')
+          row[30] = row[30].replace(/\bagi\b/gi, '<span class=\'agi\'><img class="element" src="' + agiimg + '" alt="agi"/> Agility</span>')
+          row[30] = row[30].replace(/\bstr\b/gi, '<span class=\'str\'><img class="element" src="' + strimg + '" alt="str"/> Strength</span>')
+          row[30] = row[30].replace(/\bint\b/gi, '<span class=\'intelligence\'><img class="element" src="' + intimg + '" alt="int"/> Intelligence</span>')
+          row[30] = row[30].replace(/\bprotect\b/gi, '<span class=\'protect\'><img class="element" src="' + protect + '" alt="protect"/> Protect</span>')
+          row[24] = row[24].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'><img class="element" src="' + maxhpimg + '" alt="hp"/> MaxHP</span>')
+          row[24] = row[24].replace(/\bagi\b|\bagility\b/gi, '<span class=\'agility\'><img class="element" src="' + agiimg + '" alt="agi"/> Agility</span>')
+          row[24] = row[24].replace(/\bstr\b|\bstrength\b/gi, '<span class=\'strength\'><img class="element" src="' + strimg + '" alt="str"/> Strength</span>')
+          row[24] = row[24].replace(/\bint\b|\bintelligence\b/gi, '<span class=\'intelligence\'><img class="element" src="' + intimg + '" alt="int"/> Intelligence</span>')
+          row[24] = row[24].replace(/\bprotect\b/gi, '<span class=\'protect\'><img class="element" src="' + protect + '" alt="protect"/> Protect</span>')
           //elements
           row[30] = row[30].replace(/\bwater\b/gi, '<span class=\'water\'><img class="element" src="' + water + '" alt="water"/> Water</span>')
           row[30] = row[30].replace(/\bfire\b/gi, '<span class=\'fire\'><img class="element" src="' + fire + '" alt="fire"/> Fire</span>')
@@ -220,17 +295,18 @@ console.log(res)
           row[30] = row[30].replace(/\blight\b/gi, '<span class=\'light\'><img class="element" src="' + light + '" alt="light"/> Light</span>')
           row[30] = row[30].replace(/\bdark\b/gi, '<span class=\'dark\'><img class="element" src="' + dark + '" alt="dark"/> Dark</span>')
           //debuffs
-          row[30] = row[30].replace(/\bblind\b/gi, '<span class=\'blind\'>Blind</span>')
-          row[30] = row[30].replace(/\bbleed\b/gi, '<span class=\'bleed\'>Bleed</span>')
-          row[30] = row[30].replace(/\binsane\b/gi, '<span class=\'insane\'>Insane</span>')
-          row[30] = row[30].replace(/\bdepress\b/gi, '<span class=\'depress\'>Depress</span>')
-          row[30] = row[30].replace(/\bburn\b/gi, '<span class=\'burn\'>Burn</span>')
-          row[30] = row[30].replace(/\bdizzy\b/gi, '<span class=\'dizzy\'>Dizzy</span>')
-          row[30] = row[30].replace(/\bchill\b/gi, '<span class=\'chill\'>Chill</span>')
-          row[30] = row[30].replace(/\binjury\b/gi, '<span class=\'injury\'>Injury</span>')
-          row[30] = row[30].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'>Paralysis</span>')
-          row[30] = row[30].replace(/\brestrain\b/gi, '<span class=\'restrain\'>Restrain</span>')
-          row[30] = row[30].replace(/\bseed\b/gi, '<span class=\'seed\'>Seed</span>')
+          row[30] = row[30].replace(/\bblind\b/gi, '<span class=\'blind\'><img class="element" src="' + blind + '" alt="blind"/>Blind</span>')
+          row[30] = row[30].replace(/\bbleed\b/gi, '<span class=\'bleed\'><img class="element" src="' + bleed + '" alt="bleed"/>Bleed</span>')
+          row[30] = row[30].replace(/\binsane\b/gi, '<span class=\'insane\'><img class="element" src="' + insane + '" alt="insane"/>Insane</span>')
+          row[30] = row[30].replace(/\bdepress\b/gi, '<span class=\'depress\'><img class="element" src="' + depress + '" alt="depress"/>Depress</span>')
+          row[30] = row[30].replace(/\bburn\b/gi, '<span class=\'burn\'><img class="element" src="' + burn + '" alt="burn"/>Burn</span>')
+          row[30] = row[30].replace(/\bdizzy\b/gi, '<span class=\'dizzy\'><img class="element" src="' + dizzy + '" alt="dizzy"/>Dizzy</span>')
+          row[30] = row[30].replace(/\bchill\b/gi, '<span class=\'chill\'><img class="element" src="' + chill + '" alt="chill"/>Chill</span>')
+          row[30] = row[30].replace(/\binjury\b/gi, '<span class=\'injury\'><img class="element" src="' + injury + '" alt="injury"/>Injury</span>')
+          row[30] = row[30].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'><img class="element" src="' + paralysis + '" alt="paralysis"/>Paralysis</span>')
+          row[30] = row[30].replace(/\brestrain\b/gi, '<span class=\'restrain\'><img class="element" src="' + restrain + '" alt="restrain"/>Restrain</span>')
+          row[30] = row[30].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="element" src="' + seed + '" alt="seed"/>Seed</span>')
+          row[30] = row[30].replace(/\bvenom\b/gi, '<span class=\'venom\'><img class="element" src="' + venom + '" alt="venom"/>venom</span>')
           return {
             skill: row[25],
             type: row[26],
@@ -268,12 +344,19 @@ console.log(res)
           }
 
           changeColors(res)  // change colors of keywords in skills/effects/traits
-
+          changeApply(res, 17)
+          changeApply(res, 18)
+          changeApply(res, 19)
+console.log(res)
         //get cost+tier / skills / effects / TRAITS arrays
 res.map(res=> abilBasic.push(res[2] + ':' + res[3]/*tier*/ + '\t\t' + res[4]/*cost*/))
 res.map(res=> abilSkills.push(res[2] + ':' + (res[5] || '') + ', ' + (res[8] || '') + ', ' + (res[11] || '') + ', ' + (res[14] || '')))
 res.map(res=> abilEffects.push(res[2] + ':' + (res[6] || '') + ', ' + (res[9] || '') + ', ' + (res[12] || '') + ', ' + (res[15] || '')))
 res.map(res=> abilTraits.push(res[2] + ':' + (res[17] || '') + ', ' + (res[18] || '') + ', ' + (res[19] || '')))
+
+/*Draw = Last Resort
+  Multiply = Overloaded
+  */
 /*descFinale = descFinale.map(data => data.replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'>MaxHP</span>'))
 descFinale = descFinale.map(data => data.replace(/\bStr\b/gi, '<span class=\'str\'>Strength</span>'))
 descFinale = descFinale.map(data => data.replace(/\bAgi\b/gi, '<span class=\'agi\'>Agility</span>'))
@@ -336,7 +419,9 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
             + '<br>' + (desc4[i].desc || '') + '<br>')
             }
           changeColors(res)  // change colors of keywords in skills/effects/traits
-
+          changeApply(res, 16)
+          changeApply(res, 17)
+          changeApply(res, 18)
           //  res.map(res=> abilBasic.push(res[2] + ':' + res[3]/*tier*/ + '\t\t' + res[4]/*cost*/))
           res.map(res=> passiveSkills.push(res[2] + ':' + (res[4] || '') + ', ' + (res[7] || '') + ', ' + (res[10] || '') + ', ' + (res[13] || '')))
           res.map(res=> passiveEffects.push(res[2] + ':' + (res[5] || '') + ', ' + (res[8] || '') + ', ' + (res[11] || '') + ', ' + (res[14] || '')))
@@ -344,9 +429,8 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
 
         })
     },
-
-
   };
+
 
   let jobsData = {
     jobs:() => {

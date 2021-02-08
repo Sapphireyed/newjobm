@@ -1,0 +1,47 @@
+/*$mainBg: #92832c;
+@mixin title {
+    text-align: center;
+    color: #fff;
+    background-color: $mainBg;
+}
+
+h1 {
+    @include title;
+}*/
+
+h1 {background-color: rgba(200, 177, 47,.5)}
+#glossarymain {
+  width: 80vw;
+  padding: 10px 0;
+//  button {background-color: $mainBg;}
+}
+
+#pages select {background-color:#99acb4}
+
+.pages {font-size: 18px}
+.filtersmain select option {
+   background-color: rgba(42, 67, 74, .5);
+}
+
+#applyTable { display: none}
+//thead {background-color: $mainBg}
+th {text-align:center;}
+#tabs {
+  width: 100%;
+  button {
+    width: 50%;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    padding: 7px 0;
+    background-color: rgba(42, 67, 74, .5)
+  }
+//  border-bottom: 3px solid #2a434a // $mainBg
+}
+
+
+#otherfilters {
+  padding: 70px 0 0 0;
+  div:first-child {text-align: left}
+}
+#pages button {background-color: rgb(200, 177, 47)}

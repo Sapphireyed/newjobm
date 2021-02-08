@@ -1,7 +1,5 @@
 import './style.scss';
 import '../abils.scss';
-//import fontawesome from '@fortawesome/fontawesome-free'
-//var $ = require("jquery")
 import nav from './nav/nav';
 import { abilsmain } from './abilities/abilsmain.js'
 import {abilities, jobsData, abilitiesAllInfo} from './abilitiesData.js'
@@ -9,9 +7,10 @@ import { getAbilImgs, abilImagesComplete, getJobImgs } from './img/imgsHTML.js'
 import { abilitiesFn } from './abilities/abilitiesjs.js'
 import theadimg from './img/Traits/Dumb.png'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
+import { toggle} from './basicfn/toggle.js'
 import { jobs } from './abilitiesData.js'
 //import { jobs} from './jobs/jobsjs.js'
-var $ = require("jquery")
+//var $ = require("jquery")
 //import { jobsTable } from './jobs/jobsTable'
 
 document.body.append( nav(), abilsmain)
@@ -40,3 +39,8 @@ jobsData.craft()
     .then(data => {
         jobsData.materials()
     })
+
+
+let button = document.getElementById('navbtn')
+let menu = document.getElementById('collapsemenu')
+toggle(menu, button)

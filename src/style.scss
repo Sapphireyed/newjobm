@@ -83,7 +83,7 @@ img { max-width: 100%}
   min-width: 140px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   //margin-top: 5px;
-  z-index: 1;
+  z-index: 10000;
 
   a {
     text-align: left;
@@ -111,7 +111,7 @@ nav:nth-child(2) {
 
 //main sections
 .section {
-    padding: 10px 0;
+  //  padding: 10px 0;
     max-width: 90vw;
     margin: auto;
 }
@@ -180,6 +180,7 @@ th {
   background-color: $mainBg;
   z-index: 9000;
 }
+tbody { color: black}
 #jobtable {
     width: 100%;
 
@@ -218,19 +219,19 @@ table tr td:nth-child(3) {
     color: gold;
 }
 #jobsTable tr td:nth-child(8) {
-    background-color: rgba(245, 241, 15, 0.7);
+    background-color: rgba(216, 216, 51, .7);
 }
 
 #jobsTable tr td:nth-child(9) {
-    background-color: rgba(255, 101, 101, 0.7);
+    background-color: rgba(183, 38, 25,.7)//rgba(255, 101, 101, 0.7);
 }
 
 #jobsTable tr td:nth-child(10) {
-    background-color: rgba(101, 255, 101, 0.7);
+    background-color: rgba(51, 204, 76, 0.7);
 }
 
 #jobsTable tr td:nth-child(11) {
-    background-color: rgba(0, 0, 255, 0.7);
+    background-color: rgba(51, 82, 171, 0.7);
 }
 
 #jobsTable tr td:nth-child(n+8) {
@@ -335,37 +336,106 @@ table tr td:nth-child(3) {
 }
 //keywords colors
 /*attr*/
-.maxhp { color: #e3a200;font-weight: 550 }
-.strength, .str { color: red;font-weight: 550 }
-.agility, .agi { color: #00FF00;font-weight: 550	 }
-.intelligence, .int { color: blue;font-weight: 550 }
+.maxhp {
+  color: rgb(216, 216, 51);
+  font-weight: 550;
+  img {
+    border-radius: 50%;
+    background-color: rgb(216, 216, 51);
+    padding: 2px
+  }
+}
+.strength, .str {
+  color: #b72619;
+  font-weight: 550;
+  img {
+    border-radius: 50%;
+    background-color:  #b72619;
+    padding: 2px
+  }
+}
+.agility, .agi {
+  color: rgb(51, 204, 76);
+  font-weight: 550;
+  img {
+    border-radius: 50%;
+    background-color:  rgb(51, 204, 76);;
+    padding: 2px
+  }
+ }
+.intelligence, .int {
+  color: rgb(51, 82, 171);
+  font-weight: 550;
+  img {
+    border-radius: 50%;
+    background-color:  rgb(51, 82, 171);
+    padding: 2px
+  }
+}
+.protect {
+  color: rgb(217, 217, 217);
+  font-weight: 550;
+  img {
+    border-radius: 50%;
+    background-color:  rgb(217, 217, 217);
+    padding: 2px
+  }
+}
 /*elements*/
-.water { color: #9394fe;font-weight: 550 }
-.fire { color: #d85c3a;font-weight: 550 }
-.earth { color: #6a4201;font-weight: 550 }
-.thunder { color: #f4ee90;font-weight: 550 }
-.wind { color: #47b577;font-weight: 550 }
-.dark { color: #544981;font-weight: 550 }
-.light { color: #ccc7d1;font-weight: 550 }
+.water, .chill {
+  color: rgb(150, 140, 242);
+  font-weight: 550;
+  img {
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid #9394fe
+  }
+}
+.fire, .burn { color:rgb(229, 89, 38);font-weight: 550 }
+.earth, .seed { color: rgb(102, 64, 0);font-weight: 550 }
+.thunder, .paralysis { color: rgb(245, 232, 135) ;font-weight: 550 }
+.wind, .dizzy { color: rgb(89, 229, 153);font-weight: 550 }
+.dark, .depress { color: rgb(82, 76, 166);font-weight: 550 }
+.light, .blind { color: rgb(204, 229, 217);font-weight: 550 }
 /*debuffs*/
-.blind { color: #ccc7d1 }
-.bleed { color: #ad2424 }
-.dizzy { color: #5ee6a9 }
-.insane { color: #d86de8 }
-.depress { color: #7436ba }
-.burn { color: #ff4538 }
-.chill { color: #3d9af2 }
-.paralysis { color: #c2ae55 }
-.restrain { color: #8fc9c3 }
-.injury { color: #cfae72 }
-.seed { color: #520500 }
+.bleed { color: rgb(115, 0, 0);font-weight: 550 }
+.insane { color: rgb(153, 76, 191);font-weight: 550 }
+.restrain {
+  color: rgb(150, 196, 186);
+  font-weight: 550;
+  img {
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid rgb(150, 196, 186)
+  //  padding: 3px;
+  }
+ }
+.injury { color: rgb(199, 156, 107);font-weight: 550 }
+.venom {color: rgb(217, 148, 84);font-weight: 550}
 
-.Low { color: green;font-weight: bold}
-.Medium { color: blue;font-weight: bold}
-.High { color: red;font-weight: bold}
-.Master { color: goldenrod;font-weight: bold}
-.Curse { color: #404040;font-weight: bold}
-.Null { color: grey;font-weight: bold}
+.Low { color: green;font-weight: 550}
+.Medium { color: blue;font-weight: 550}
+.High { color: red;font-weight: 550}
+.Master { color: goldenrod;font-weight: 550}
+.Curse { color: #404040;font-weight: 550}
+.Null { color: grey;font-weight: 550}
+
+.element {
+  width: 18px;
+  height: 18px;
+  margin-top: -4px;
+}
+.hpicon, .stricon, .agiicon, .inticon {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  margin-top: -4px
+}
+.hpicon {background-color: rgb(216, 216, 51); padding: 1px}
+.stricon {background-color: #b72619; padding: 1px}
+.agiicon {background-color: rgb(51, 204, 76); padding: 1px}
+.inticon {background-color: rgb(51, 82, 171); padding: 1px}
+
 @media only screen and (max-width: 1000px) {
 
   .tooltipMy img { position:inherit;}
@@ -391,6 +461,18 @@ table tr td:nth-child(3) {
 }
 
 @media only screen and (max-width: 760px) {
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    margin-left:35%;
+    background-color: $secondBg;
+    min-width: 140px;
+
+  }
   .tooltipMy .tooltiptext {
       left: -65%;
   }

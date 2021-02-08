@@ -1,20 +1,21 @@
-import { tbody } from './abilsTable.js'
-import { openNew } from '../basicfn/openNew.js'
+import { tbody } from './glossTable.js'
+import { applyBody } from './glossTable2.js'
+//import { openNew } from '../basicfn/openNew.js'
 import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
-        jobsDataAll} from '../abilitiesData.js'
+        jobsDataAll, glossAllInfo, appliesAllInfo} from '../abilitiesData.js'
 //import { openNew } from '../basicfn/openNew.js'
-import { abilImagesComplete} from '../img/imgsHTML.js'
-import { abilsfilter } from './abilsfilter'
-import {filterAb} from '../basicfn/filters.js'
+//import { abilImagesComplete} from '../img/imgsHTML.js'
+//import { passivesfilter } from './passivesfilter'
+import {filterPass} from '../basicfn/filters.js'
 import { showIcon, hideIcon } from '../basicfn/hoverIcons.js'
 var $ = require("jquery")
 import tablesorter from 'tablesorter';
 
-export function abilitiesFn() {
+export function glossFn() {
 
   var pagesSel = document.getElementById('numOfPages')
-  var list = abilitiesAllInfo
+  var list = glossAllInfo
   var pageList = [];
   var currentPage = 1;
   var numberPerPage = pagesSel.value;
@@ -83,25 +84,13 @@ function loadList() {
     for (var i = 0; i < abilrows.length; i++) {
       let name = abilrows[i].children[2]
 
-      abilrows[i].addEventListener('mousemove', function() {
+    /*  abilrows[i].addEventListener('mousemove', function() {
         showIcon(name, abilImagesComplete)
       })
       abilrows[i].addEventListener('mouseleave', function(){
         hideIcon(abilImagesComplete)
-      })
-      // Description
-      let desc = descFinale.map(desc => desc.split(':<br>'))
-      desc = desc.filter(d => d[0] == name.innerText)[0]
-      abilrows[i].children[5].innerHTML = desc[1].replace(/<br><br>/, '')
-      // Jobs
+      })*/
 
-      let jobs = jobsDataAll.filter(job => job[8] == name.innerText)
-      jobs = jobs == [] ? '' : jobs
-      let ind = jobs == '' ? '' : jobs[0][0]
-      abilrows[i].children[7].innerHTML = jobs == '' ? '' : jobs[0][1]
-      abilrows[i].children[7].onclick = function(){
-        openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
-      }
     }
 
 
@@ -112,18 +101,20 @@ function loadList() {
     document.getElementById("abilsBody").innerHTML = "";
       for (var i=0; i < pageList.length; i++) {
         var jobItem = Object.values(pageList[i])
-      //  jobItem[i] = jobItem[i] == undefined ? '' : jobItem[i]
-        jobItem.splice(1, 1, "pic")
-        jobItem.splice(5, 12, 'n/a')
         jobItem.pop()
-        jobItem[3] = '<span class="' + jobItem[3] + '">' + jobItem[3] + '</span>'
-        jobItem[6] = ((jobItem[6] == '' ? '' : jobItem[6] + '<br>')
-                    + (jobItem[7] == '' ? '' : jobItem[7] + '<br>') + jobItem[8])
+        let desc = jobItem.pop()
+      //  jobItem[i] = jobItem[i] == undefined ? '' : jobItem[i]
+        jobItem.splice(1, 0, "pic")
+        jobItem.splice(3, 2)
+        jobItem.splice(3, 0, desc)
+        jobItem.splice(6,1)
+      //  jobItem.pop()
 
-        jobItem.splice(7, 2, '', '')
+
+    //    jobItem.splice(7, 2, '', '')
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#a5d9e3'
+        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#a6b7be'
     //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
 
 
@@ -143,8 +134,9 @@ function loadList() {
             case 'Master':
               cell.innerHTML = '<td class="master">master</td>'
               break;
-            default: cell.innerHTML = '<td>' + job + '</td>'
+            default: cell.innerHTML = '<td>' + job.replace('N/A', '') + '</td>'
           }
+
         /*  var tooltip = document.createElement('span')
           tooltip.classList.add('tooltipMy', 'tooltiptext')
 
@@ -153,20 +145,20 @@ function loadList() {
             cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''*/
 
           //add images to pic cell
-          var imgComplete = abilImagesComplete.find(jobimg => jobimg.id == jobItem[2])
+        /*  var imgComplete = abilImagesComplete.find(jobimg => jobimg.id == jobItem[2])
 
           if (cell.innerHTML == 'pic') {
             cell.id = 'pic'
             cell.innerHTML = ''
             cell.append(imgComplete)
-          }
+          }*/
 
           tableRow.appendChild(cell)
           abilsBody.append(tableRow)
 
-          Array.from(document.querySelectorAll('.jobRow td:nth-child(3)')).filter(td => {
+      /*    Array.from(document.querySelectorAll('.jobRow td:nth-child(3)')).filter(td => {
             td.childNodes.length > 1 ? td.removeChild(td.childNodes[1]) : ''
-          })
+          })*/
         })
   }
 } // end of drawList
@@ -197,3 +189,78 @@ $("#search").on("keyup", function() {
     });
   });
 }
+
+export function applyTableFn() {
+
+    document.getElementById("applyBody").innerHTML = "";
+    var applyBody = document.getElementById('applyBody');
+    let pageList = appliesAllInfo
+    let end = pageList.findIndex(a => a[0] == undefined)
+    pageList.length = end +1
+    pageList.pop()
+      for (var i=0; i < pageList.length; i++) {
+        var jobItem = Object.values(pageList[i])
+        jobItem.pop()
+        let desc = jobItem.pop()
+        jobItem.splice(1, 0, "pic")
+        jobItem.splice(3, 2)
+        jobItem.splice(3, 0, desc)
+        jobItem.splice(6,1)
+
+      //  jobItem.pop()
+
+
+    //    jobItem.splice(7, 2, '', '')
+        var tableRow = document.createElement('tr')
+        tableRow.classList.add('jobRow')
+        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#cfc165'
+    //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
+
+
+        jobItem.map( (job, ind) => {
+          var cell = document.createElement('td')
+          cell.id = cell.innerHTML
+          switch (job) {
+            case 'Low':
+              cell.innerHTML = '<td class="low">Low</td>'
+              break;
+            case 'Medium':
+              cell.innerHTML = '<td class="medium">Low</td>'
+              break;
+            case 'High':
+              cell.innerHTML = '<td class="high">High</td>'
+              break;
+            case 'Master':
+              cell.innerHTML = '<td class="master">master</td>'
+              break;
+            default: cell.innerHTML = '<td>' + job + '</td>'
+          }
+
+        /*  var tooltip = document.createElement('span')
+          tooltip.classList.add('tooltipMy', 'tooltiptext')
+
+
+            cell.innerHTML == jobItem[5] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
+            cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''*/
+
+          //add images to pic cell
+        /*  var imgComplete = abilImagesComplete.find(jobimg => jobimg.id == jobItem[2])
+
+          if (cell.innerHTML == 'pic') {
+            cell.id = 'pic'
+            cell.innerHTML = ''
+            cell.append(imgComplete)
+          }*/
+
+          tableRow.appendChild(cell)
+          applyBody.append(tableRow)
+
+        })
+  }
+  $("#search").on("keyup", function() {
+    var input = $(this).val().toLowerCase();
+      $("#abilsBody tr").filter(function(){
+        $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1)
+      });
+    });
+  }

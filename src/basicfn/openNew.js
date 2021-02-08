@@ -4,6 +4,10 @@ import {abilities, descFinale, abilSkills, abilEffects, abilTraits,
         craft, jobsStats } from '../abilitiesData.js'
 import {getMatImgs, getJobImgs, matImagesComplete, jobImagesComplete } from '../img/imgsHTML.js'
 import star from '../img/events/StarColor.png'
+import hpimg from '../img/other/hp.PNG'
+import strimg from '../img/other/str.png'
+import agiimg from '../img/other/agi.png'
+import intimg from '../img/attr/int.png'
 
 function splitDesc(arr, item){
   arr = Object.values(arr).map(ab => ab == undefined ? '' : ab.split(':<br>'))
@@ -42,14 +46,13 @@ export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, pa
 
     //  attributes
       let hp = win.document.getElementById('hp')
-      console.log(hp)
-      hp.innerHTML = 'HP: <span class="spanattr" id="' + jobItem[3] + '">' + + jobItem[3] + '</span>'
+      hp.innerHTML = '<img src="' + hpimg + '" alt="hp" class="hpicon"> HP: <span class="spanattr" id="' + jobItem[3] + '">' + + jobItem[3] + '</span>'
       let str = win.document.getElementById('str')
-      str.innerHTML = 'Strength: <span class="spanattr"  id="' + jobItem[4] + '">' + jobItem[4] + '</span>'
+      str.innerHTML = '<img src="' + strimg + '" alt="str" class="stricon"> Strength: <span class="spanattr"  id="' + jobItem[4] + '">' + jobItem[4] + '</span>'
       let agi = win.document.getElementById('agi')
-      agi.innerHTML = 'Agility: <span class="spanattr"  id="' + jobItem[5] + '">' + + jobItem[5] + '</span>'+ '</span>'
+      agi.innerHTML = '<img src="' + agiimg + '" alt="agi" class="agiicon"> Agility: <span class="spanattr"  id="' + jobItem[5] + '">' + + jobItem[5] + '</span>'+ '</span>'
       let int = win.document.getElementById('int')
-      int.innerHTML = 'Intelligence: <span class="spanattr"  id="' + jobItem[6] + '">' + + jobItem[6] + '</span>'
+      int.innerHTML = '<img src="' + intimg + '" alt="int" class="inticon"> Intelligence: <span class="spanattr"  id="' + jobItem[6] + '">' + + jobItem[6] + '</span>'
 
         //change the new tab look based on job/char rarity
         switch (jobItem[2]) {
