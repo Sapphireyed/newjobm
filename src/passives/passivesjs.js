@@ -98,13 +98,20 @@ function loadList() {
 
       let jobs = jobsDataAll.filter(job => job[7] == name.innerText)
       jobs = jobs == [] ? '' : jobs
-      let ind = jobs == '' ? '' : jobs[0][0]
-
-      abilrows[i].children[6].innerHTML = jobs == '' ? '' : jobs[0][1]
-      abilrows[i].children[6].onclick = function(){
-            console.log(ind)
-        openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
-      }
+      jobs = jobs.map(j=> '<br><span class="openNew">' + j[1] + '</span>')
+      abilrows[i].children[6].innerHTML = jobs == '' ? '' : jobs
+      let jobLinks = Array.from(document.getElementsByClassName('openNew'))
+      jobLinks.map(link =>{
+        link.onclick = function() {
+          let job = jobsDataAll.filter(job => job[1] == this.innerText)
+          let ind = job[0][0]
+          console.log(ind)
+          openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+        }
+      })
+    //  abilrows[i].children[6].onclick = function(){
+    //    openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+    //  }
     }
 
 

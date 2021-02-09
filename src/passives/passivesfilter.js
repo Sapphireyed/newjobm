@@ -15,6 +15,7 @@ passivesfilter.id = 'passives'
 const header = document.createElement('h1')
 header.classList.add('col-12')
 header.innerHTML = 'Passives'
+header.id = 'top'
 header.style.textShadow = '2px 1px #728bbc'
 //header.style.backgroundImage = 'url("' + bgh1 +'")'
 //header.style.backgroundSize = 'cover'

@@ -13,6 +13,12 @@ document.body.appendChild(uplink)
 
 export function cursor() {
   document.body.style.cursor = 'url("' + custCursor + '"), auto'
+  let selects = Array.from(document.getElementsByTagName('select'))
+  selects.map(sel => sel.style.cursor = 'url("' + custCursor + '"), auto')
+  let buttons = Array.from(document.getElementsByTagName('button'))
+  buttons.map(btn => btn.style.cursor = 'url("' + custCursor + '"), auto')
+  let links = Array.from(document.getElementsByTagName('a'))
+  links.map(link => link.style.cursor = 'url("' + custCursor + '"), auto')
 }
 export function stickyNav(nav) {
   var sticky = nav.offsetTop + 60;

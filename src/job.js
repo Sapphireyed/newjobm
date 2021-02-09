@@ -13,11 +13,10 @@ import { jobsImgs } from './importImgs.js'
 import { openNew } from './basicfn/openNew.js'
 import {getMatImgs, getJobImgs, getAbilImgs, matImagesComplete, jobImagesComplete, abilImagesComplete} from './img/imgsHTML.js'
 import {abilities, jobsData, jobsDataAll, jobsStats, craft, mats, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from './abilitiesData.js'
-
-import { stickyNav } from './basicfn/stickyNav.js'
+import { stickyNav, cursor } from './basicfn/stickyNav.js'
 
 document.body.append(nav(), jobmain)
-
+cursor()
 abilities.units().then(unit => {
   abilities.abils()
   abilities.passivesFn()
@@ -79,6 +78,8 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
   let currentCard4Img = abilImagesComplete.filter(img => img.id == cardHname[3] || img.id == cardHname[2] || img.id == cardHname[1])
   card4img == null ? '' : card4img.innerHTML = currentCard4Img[0].outerHTML
   })
+  // tooltips
+  let apply = document.getElementById
   // change jobsStats
   let changelvl = document.getElementById('levelSel')
   let stats = Array.from(document.getElementsByClassName('spanattr'))

@@ -382,16 +382,20 @@ table tr td:nth-child(3) {
   }
 }
 /*elements*/
-.water, .chill {
-  color: rgb(150, 140, 242);
-  font-weight: 550;
-  img {
-    border-radius: 50%;
-    background-color: transparent;
-    border: 2px solid #9394fe
-  }
+.water, .chill {color: rgb(150, 140, 242); font-weight: 550;
+//  img {
+//    border-radius: 50%;
+//    background-color:  rgb(150, 140, 242);
+//    padding: 2px
+//  }
 }
-.fire, .burn { color:rgb(229, 89, 38);font-weight: 550 }
+.fire, .burn { color:rgb(229, 89, 38);font-weight: 550;
+//  img {
+//    border-radius: 50%;
+//    background-color: rgb(229, 89, 38);
+//    padding: 2px
+//  }
+}
 .earth, .seed { color: rgb(102, 64, 0);font-weight: 550 }
 .thunder, .paralysis { color: rgb(245, 232, 135) ;font-weight: 550 }
 .wind, .dizzy { color: rgb(89, 229, 153);font-weight: 550 }
@@ -400,16 +404,11 @@ table tr td:nth-child(3) {
 /*debuffs*/
 .bleed { color: rgb(115, 0, 0);font-weight: 550 }
 .insane { color: rgb(153, 76, 191);font-weight: 550 }
-.restrain {
-  color: rgb(150, 196, 186);
-  font-weight: 550;
-  img {
-    border-radius: 50%;
-    background-color: transparent;
-    border: 2px solid rgb(150, 196, 186)
-  //  padding: 3px;
-  }
- }
+.restrain {color: rgb(150, 196, 186); font-weight: 550;
+  img{
+    
+     padding: 1px
+  }}
 .injury { color: rgb(199, 156, 107);font-weight: 550 }
 .venom {color: rgb(217, 148, 84);font-weight: 550}
 

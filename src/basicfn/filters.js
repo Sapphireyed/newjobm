@@ -1,7 +1,8 @@
 
 export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,skill) {
 
-  let skills = [skill, skill+3, skill+6, skill+9]
+  let skills = [skill, skill+3, skill+6, skill+9, /*skill+12, skill+13, skill+14*/]
+
   let effects = [skill+1, skill + 4, skill+7, skill+10]
   let chosenAttr = document.getElementById('attrSel').value
   let typeVal = document.getElementById('type').value
@@ -11,9 +12,8 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
 
   filtered.map(a => {
     a = a.map(ab => ab.replace(/[0-9]|icon|class|img|.png|:/g, ''))
-    console.log(a.map(ab => ab.replace(/[0-9]/g, '')))
     const elemRegex = /fire|water|earth|thunder|wind|light|dark|bleed|injury|venom|restrain|insane|Element|Debuff|Null/g;
-    const attrRegex = /MaxHp|Strength|Agility|Intelligence/gi
+    const attrRegex = /MaxHp|Strength|Agility|Intelligence|Protect/gi
   if (filter == 'type') {
 
     switch (elem) {
@@ -48,11 +48,18 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
         if (typeVal == 'Protect') {
           skills.some(s => a[s].includes('Protect') && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter,'type') : ''
         } else {
-          skills.some(s=> {
-            a[s] = a[s] == undefined ? 'n/a' : a[s]
-            (a[s] == typeVal && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'type') : ''
-        //    a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
-          })
+          if (elem == 'All') {
+console.log(tableRows[ind])
+            //  a[s] = a[s] == undefined ? 'n/a' : a[s]
+               tableRows[ind].classList.add(filter)
+console.log(tableRows[ind])
+          } else {
+            skills.some(s=> {
+              (a[s] == typeVal && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'type') : ''
+          //    a[s].includes(elem) ? tableRows[ind].classList.add(filter) : ''
+            })
+          }
+
         }
         }
     } else if (filter == 'apply') {
@@ -96,7 +103,7 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
       a = a.map(ab => ab.replace(/[0-9]|icon|class|img|.png|:/g, ''))
       a = a.map(cell => cell == '' ? 'n/a' : cell)
       const elemRegex = /fire|water|earth|thunder|wind|light|dark|bleed|injury|venom|restrain|insane|Element|Debuff/g;
-      const attrRegex = /MaxHp|Strength|Agility|Intelligence/gi
+      const attrRegex = /MaxHp|Strength|Agility|Intelligence|Protect/gi
     if (filter == 'whenSel') {
       switch (elem) {
         case 'Reflect':

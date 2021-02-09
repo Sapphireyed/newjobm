@@ -367,8 +367,9 @@ for (var i=0; i < switchCells.length; i++) {
     var switchName = switchCells[i].parentNode.innerText
     var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
     var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
-    var tooltipsApply = abilTraits.map(trait => trait.split(':')).filter(desc=> desc[0] == switchName)
-    var passApply = passiveTraits.map(trait => trait.split(':')).filter(desc=> desc[0] == switchName)
+    var tooltipsApply = abilTraits.map(trait => trait.split(': ')).filter(desc=> desc[0] == switchName)
+    var passApply = passiveTraits.map(trait => trait.split(': ')).filter(desc=> desc[0] == switchName)
+    
     tooltipsAb.map((desc, ind) => {
       if (desc[0] == switchName) {
       //  console.log(desc[1])

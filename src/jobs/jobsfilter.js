@@ -135,7 +135,13 @@ applySel.id = 'apply'
 applySel.name = 'apply'
 applySel.value = 'All'
 applySel.classList.add('filter', 'rounded')
-const applyOptionsArr = ['Action', 'Turn Charge', 'Combo', 'CreatureExpert', 'Draw', 'Exhaust', 'HumanoidExpert', 'LifeSteal', 'MatterExpert', 'Multiply', 'SpiritExpert',    ].sort();
+const applyOptionsArr = [
+        'Practice Perfect','Exhaust',  'LifeSteal','Last Resort','Turn Charge', 'Combo Blend', 'Overloaded',
+        'Focus Energy', 'Negative Power', 'Curse', 'Scheduled', 'Auto Fire',
+        'CreatureExpert',  'HumanoidExpert',  'MatterExpert',  'SpiritExpert',
+        'Strength Synergy', 'Agility Synergy', 'MaxHP Synergy', 'Intelligence Synergy',
+        'Fire', 'Water', 'Earth', 'Wind', 'Thunder', 'Dark', 'Light'
+        ].sort();
 
 const optionsApply = applyOptionsArr.map(opt => {
   const value = opt

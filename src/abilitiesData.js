@@ -1,25 +1,25 @@
 global.fetch = require('node-fetch');
 const GetSheetDone = require('get-sheet-done');
 const id = '1_emNAbXp89s3jhjl5Ko-7pHJIcCtjL6PGEfVP1th_6g';
-import fire from './img/icons/fire.png'
-import water from './img/icons/water.png'
-import earth from './img/icons/earth.png'
-import wind from './img/icons/wind.png'
-import thunder from './img/icons/thunder.png'
-import light from './img/icons/light.png'
-import dark from './img/icons/dark.png'
-import blind from './img/abilities/blind.png'
-import depress from './img/abilities/depress.png'
-import burn from './img/abilities/burn.png'
-import chill from './img/abilities/chill.png'
-import dizzy from './img/abilities/dizzy.png'
-import seed from './img/abilities/seed.png'
-import restrain from './img/abilities/restrain.png'
-import bleed from './img/abilities/bleed.png'
-import injury from './img/abilities/injury.png'
-import insane from './img/abilities/insane.png'
-import paralysis from './img/abilities/paralysis.png'
-import venom from './img/abilities/venom.png'
+import fire from './img/icons/fireCol.png'
+import water from './img/icons/waterCol.png'
+import earth from './img/icons/earthCol.png'
+import wind from './img/icons/windCol.png'
+import thunder from './img/icons/thunderCol.png'
+import light from './img/icons/lightCol.png'
+import dark from './img/icons/darkCol.png'
+import blind from './img/abilities/blindCol.png'
+import depress from './img/abilities/depressCol.png'
+import burn from './img/abilities/burnCol.png'
+import chill from './img/abilities/chillCol.png'
+import dizzy from './img/abilities/dizzyCol.png'
+import seed from './img/abilities/seedCol.png'
+import restrain from './img/abilities/restrainCol.png'
+import bleed from './img/abilities/bleedCol.png'
+import injury from './img/abilities/injuryCol.png'
+import insane from './img/abilities/insaneCol.png'
+import paralysis from './img/abilities/paralysisCol.png'
+import venom from './img/abilities/venomCol.png'
 import maxhpimg from './img/attr/hp.png'
 import strimg from './img/attr/str.png'
 import agiimg from './img/attr/agi.png'
@@ -352,7 +352,7 @@ console.log(res)
 res.map(res=> abilBasic.push(res[2] + ':' + res[3]/*tier*/ + '\t\t' + res[4]/*cost*/))
 res.map(res=> abilSkills.push(res[2] + ':' + (res[5] || '') + ', ' + (res[8] || '') + ', ' + (res[11] || '') + ', ' + (res[14] || '')))
 res.map(res=> abilEffects.push(res[2] + ':' + (res[6] || '') + ', ' + (res[9] || '') + ', ' + (res[12] || '') + ', ' + (res[15] || '')))
-res.map(res=> abilTraits.push(res[2] + ':' + (res[17] || '') + ', ' + (res[18] || '') + ', ' + (res[19] || '')))
+res.map(res=> abilTraits.push(res[2] + ': ' + (res[17] || '') + ', ' + (res[18] || '') + ', ' + (res[19] || '')))
 
 /*Draw = Last Resort
   Multiply = Overloaded
@@ -423,7 +423,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
           //  res.map(res=> abilBasic.push(res[2] + ':' + res[3]/*tier*/ + '\t\t' + res[4]/*cost*/))
           res.map(res=> passiveSkills.push(res[2] + ':' + (res[4] || '') + ', ' + (res[7] || '') + ', ' + (res[10] || '') + ', ' + (res[13] || '')))
           res.map(res=> passiveEffects.push(res[2] + ':' + (res[5] || '') + ', ' + (res[8] || '') + ', ' + (res[11] || '') + ', ' + (res[14] || '')))
-          res.map(res=> passiveTraits.push(res[2] + ':' + (res[16] || '') + ', ' + (res[17] || '') + ', ' + (res[18] || '')))
+          res.map(res=> passiveTraits.push(res[2] + ': ' + (res[16] || '') + ', ' + (res[17] || '') + ', ' + (res[18] || '')))
 
         })
     },

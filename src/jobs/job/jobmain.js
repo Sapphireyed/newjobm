@@ -12,7 +12,9 @@ maindiv.className = 'row'
 let header = document.createElement('h1')
 header.classList.add('col-12')
 header.id = 'jobheader'
-maindiv.append(header)
+let span = document.createElement('span')
+span.id = 'top'
+maindiv.append(span, header)
 
 //JOB BASIC INFO
 let div1 = document.createElement('div')

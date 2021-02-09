@@ -13,12 +13,14 @@ function splitDesc(arr, item){
   arr = Object.values(arr).map(ab => ab == undefined ? '' : ab.split(':<br>'))
   return arr.filter(ab => item == ab[0])
 }
+function splitApply(arr, item){
+  arr = Object.values(arr).map(ab => ab == undefined ? '' : ab.split(': '))
+  return arr.filter(ab => item == ab[0])
+}
 
 export function openNew(arr, i, abilArr, abilskills, abileffects, abiltraits, passivesarr, passivedesc, passiveskills,  passiveeffects, passivetraits) {
     var abil = abilArr
-    console.log(arr)
     var jobItem = arr[i-1]
-
 //    var jobItem = Object.values(arr[i - 1])
     var win = window.open('job.html')
     // fires in the new tab
@@ -113,7 +115,7 @@ let myreg = /([A-Z])\w+/gi
         console.log(switchSkill)
         switchSkill = switchSkill.length == 0 ? '' : switchSkill[0][1]
         //let switchtraits = win.document.getElementById('switchtraits')
-        var traits = splitDesc(abiltraits, jobItem[8])
+        var traits = splitApply(abiltraits, jobItem[8])
         traits = traits.length == 0 ? '' : traits[0][1]
         switchH.innerHTML = 'Switch: ' + jobItem[8] || ''
         switchDesc.innerHTML = switchSkill + '<br>(' + traits + ')'
@@ -146,7 +148,7 @@ let myreg = /([A-Z])\w+/gi
         card1skills = card1skills.length == 0 ? '' : card1skills[0][1]
         let card1effects = splitDesc(abilEffects, jobItem[9])
         card1effects = card1effects.length == 0 ? '' : card1effects[0][1]*/
-        let card1traits = splitDesc(abiltraits, jobItem[9])
+        let card1traits = splitApply(abiltraits, jobItem[9])
         card1traits = card1traits.length == 0 ? '' : card1traits[0][1]
 
         let card2 = splitDesc(abil, jobItem[10])
@@ -155,7 +157,7 @@ let myreg = /([A-Z])\w+/gi
         card2skills = card2skills.length == 0 ? '' : card2skills[0][1]
         let card2effects = splitDesc(abilEffects, jobItem[10])
         card2effects = card2effects.length == 0 ? '' : card2effects[0][1]*/
-        let card2traits = splitDesc(abiltraits, jobItem[10])
+        let card2traits = splitApply(abiltraits, jobItem[10])
         card2traits = card2traits.length == 0 ? '' : card2traits[0][1]
 
         let card3 = splitDesc(abil, jobItem[11])
@@ -164,7 +166,7 @@ let myreg = /([A-Z])\w+/gi
         card3skills = card3skills.length == 0 ? '' : card3skills[0][1]
         let card3effects = splitDesc(abilEffects, jobItem[11])
         card3effects = card3effects.length == 0 ? '' : card3effects[0][1]*/
-        let card3traits = splitDesc(abiltraits, jobItem[11])
+        let card3traits = splitApply(abiltraits, jobItem[11])
         card3traits = card3traits.length == 0 ? '' : card3traits[0][1]
 
         let card4 = splitDesc(abil, jobItem[12])
@@ -173,7 +175,7 @@ let myreg = /([A-Z])\w+/gi
         card4skills = card4skills.length == 0 ? '' : card4skills[0][1]
         let card4effects = splitDesc(abilEffects, jobItem[12])
         card4effects = card4effects.length == 0 ? '' : card4effects[0][1]*/
-        let card4traits = splitDesc(abiltraits, jobItem[12])
+        let card4traits = splitApply(abiltraits, jobItem[12])
         card4traits = card4traits.length == 0 ? '' : card4traits[0][1]
 
         let card1H = win.document.getElementById('card1H')

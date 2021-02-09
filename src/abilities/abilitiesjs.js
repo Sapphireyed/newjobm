@@ -94,14 +94,20 @@ function loadList() {
       desc = desc.filter(d => d[0] == name.innerText)[0]
       abilrows[i].children[5].innerHTML = desc[1].replace(/<br><br>/, '')
       // Jobs
-
       let jobs = jobsDataAll.filter(job => job[8] == name.innerText)
       jobs = jobs == [] ? '' : jobs
-      let ind = jobs == '' ? '' : jobs[0][0]
-      abilrows[i].children[7].innerHTML = jobs == '' ? '' : jobs[0][1]
-      abilrows[i].children[7].onclick = function(){
-        openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
-      }
+      jobs = jobs.map(j=> '<br><span class="openNew">' + j[1] + '</span>')
+      abilrows[i].children[6].innerHTML = jobs == '' ? '' : jobs
+      let jobLinks = Array.from(document.getElementsByClassName('openNew'))
+      jobLinks.map(link =>{
+        link.onclick = function() {
+          let job = jobsDataAll.filter(job => job[1] == this.innerText)
+          let ind = job[0][0]
+          console.log(ind)
+          openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+        }
+      })
+
     }
 
 
@@ -116,7 +122,7 @@ function loadList() {
         jobItem.splice(1, 1, "pic")
         jobItem.splice(5, 12, 'n/a')
         jobItem.pop()
-        jobItem[3] = '<span class="' + jobItem[3] + '">' + jobItem[3] + '</span>'
+    //    jobItem[3] = '<span class="' + jobItem[3] + '">' + jobItem[3] + '</span>'
         jobItem[6] = ((jobItem[6] == '' ? '' : jobItem[6] + '<br>')
                     + (jobItem[7] == '' ? '' : jobItem[7] + '<br>') + jobItem[8])
 
@@ -127,15 +133,17 @@ function loadList() {
     //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
 
 
-        jobItem.map( (job, ind) => {
+        jobItem.map( (job) => {
           var cell = document.createElement('td')
-          cell.id = cell.innerHTML
+
           switch (job) {
             case 'Low':
-              cell.innerHTML = '<td class="low">Low</td>'
+              cell.innerHTML = 'Low'
+              cell.className = 'Low'
               break;
             case 'Medium':
-              cell.innerHTML = '<td class="medium">Low</td>'
+            cell.innerHTML = 'Medium'
+            cell.className = 'Medium'
               break;
             case 'High':
               cell.innerHTML = '<td class="high">High</td>'
@@ -144,6 +152,7 @@ function loadList() {
               cell.innerHTML = '<td class="master">master</td>'
               break;
             default: cell.innerHTML = '<td>' + job + '</td>'
+            cell.id = cell.innerHTML
           }
         /*  var tooltip = document.createElement('span')
           tooltip.classList.add('tooltipMy', 'tooltiptext')
