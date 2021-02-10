@@ -118,7 +118,7 @@ let myreg = /([A-Z])\w+/gi
         var traits = splitApply(abiltraits, jobItem[8])
         traits = traits.length == 0 ? '' : traits[0][1]
         switchH.innerHTML = 'Switch: ' + jobItem[8] || ''
-        switchDesc.innerHTML = switchSkill + '<br>(' + traits + ')'
+      //  switchDesc.innerHTML = switchSkill + '<br>(' + traits + ')'
         myreg.test(traits) ? switchDesc.innerHTML = switchSkill + '<br>(' + traits + ')' : switchDesc.innerHTML = switchSkill
         switchDesc.innerHTML = switchDesc.innerHTML.replace(/, ,|, , ,|\(,|\(\)|<br><br>/g, '')
         switchDesc.innerHTML = switchDesc.innerHTML.replace(/, \)/g, ')')

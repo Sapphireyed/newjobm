@@ -34,7 +34,9 @@ $secondBgLight: #c4c2bf;
 
 body {
   background-color: rgb(245,247,248);
-  background-image: radial-gradient(circle, #a5c6d6 0, rgba(21,27,31,1) 60%, rgba(51,66,74,1) 100%);
+//  background-image: radial-gradient(circle, #a5c6d6 0, rgba(21,27,31,1) 60%, rgba(51,66,74,1) 100%);
+
+  //  background-image: url('img/other/bgdefault.png');
     font-size: 18px;
     position: relative;
 }
@@ -99,7 +101,7 @@ img { max-width: 100%}
 //.dropdown:hover .dropbtn {background-color: #3e8e41;}
 //.fas {line-height: 1.5;}
 nav {
-  position: inherit;
+  position: relative;
   z-index: 10001;
   img { padding: 0 0 10px 0}
 }
@@ -109,6 +111,48 @@ nav:nth-child(2) {
    border-bottom: 4px solid #f5f7f8;
 }
 
+#sideDiv {
+  position: fixed;
+  top: 0;
+  right: -20%;
+  width: 20%;
+  height: 100%;
+  border-left: 3px solid white;
+  background-color: $mainBg;
+  color: white;
+  z-index: 9000;
+  #listDiv {
+    margin-top: 170px;
+    position: sticky;
+    top:50px
+  }
+  h4 {
+    text-align: center;
+    padding: 10px 0 0 0;
+  }
+  ul {
+    text-decoration: none;
+  }
+  a {
+    width: 35px;
+    height: 35px;
+    position: fixed;
+    top: 48%;
+    right: 0;
+    z-index:30000;
+    cursor: pointer !important;
+  }
+}
+#sideDiv::after {
+  content: "";
+  position: absolute;
+  top: 49%;
+  right: 101%;
+  border-width: 10px;
+  border-style: solid;
+  border-color:  transparent #fff transparent transparent;
+  z-index: -1;
+}
 //main sections
 .section {
   //  padding: 10px 0;
@@ -328,6 +372,68 @@ table tr td:nth-child(3) {
         opacity: 1;
     }
 
+    .applyTip {
+        position: relative;
+        opacity: 1;
+        cursor: help;
+        img:not(.icon) {
+          width: 25px;
+          height: 25px;
+          position: absolute;
+          left: 0;
+          padding: 3px
+        }
+    }
+
+    //tooltips in jobstable
+    .applyTip:nth-child(even) { padding: 0 0 0 28px}
+  /*  #pic div:first-child {   // jobicon in the table
+      max-width: 65px;
+      img:first-child {
+        max-width:50px;
+        height: auto;
+        padding: 10px
+      }
+      img:nth-child(2) {
+        max-width: 40px;
+        top: 5px;
+        left: 5px;
+        height: auto;
+      }
+    }*/
+        .applyTip .applyText {
+            visibility: hidden;
+            width: 200px;
+            background-color: $mainBg; //rgb(77, 99, 111);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 0;
+            position: absolute;
+            z-index: 9009;
+            left: -35%;
+            bottom: 85%;
+            opacity: 0;
+            transition: opacity 0.3s;
+            box-shadow: 3px 3px #435761;
+        }
+
+            .applyTip .applyText::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #555 transparent transparent transparent;
+            }
+
+        .applyTip:hover .applyText {
+            visibility: visible;
+            opacity: 1;
+        }
+
 #up {
   position: fixed;
   bottom: 20px;
@@ -406,7 +512,7 @@ table tr td:nth-child(3) {
 .insane { color: rgb(153, 76, 191);font-weight: 550 }
 .restrain {color: rgb(150, 196, 186); font-weight: 550;
   img{
-    
+
      padding: 1px
   }}
 .injury { color: rgb(199, 156, 107);font-weight: 550 }

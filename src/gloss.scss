@@ -1,4 +1,4 @@
-/*$mainBg: #92832c;
+$mainBg: #264553;
 @mixin title {
     text-align: center;
     color: #fff;
@@ -7,9 +7,8 @@
 
 h1 {
     @include title;
-}*/
+}
 
-h1 {background-color: rgba(200, 177, 47,.5)}
 #glossarymain {
   width: 80vw;
   padding: 10px 0;
@@ -24,8 +23,8 @@ h1 {background-color: rgba(200, 177, 47,.5)}
 }
 
 #applyTable { display: none}
-//thead {background-color: $mainBg}
-th {text-align:center;}
+thead {background-color: $mainBg}
+th {text-align:center; background-color: $mainBg}
 #tabs {
   width: 100%;
   button {
@@ -34,14 +33,14 @@ th {text-align:center;}
     font-weight: bold;
     border-style: none;
     padding: 7px 0;
-    background-color: rgba(42, 67, 74, .5)
+    background-color: rgba(38, 69, 83, .4)
   }
 //  border-bottom: 3px solid #2a434a // $mainBg
 }
 
 
 #otherfilters {
-  padding: 70px 0 0 0;
+  padding: 10px 0;
   div:first-child {text-align: left}
 }
-#pages button {background-color: rgb(200, 177, 47)}
+#pages button {background-color: $mainBg}

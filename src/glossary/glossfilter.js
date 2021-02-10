@@ -6,7 +6,7 @@ import theadimg from '../img/Jobs/BG/inthp.jpg'
 
 
 const glossfilter = document.createElement('div');
-glossfilter.style.backgroundColor = 'rgba(42, 67, 74, .3)'
+glossfilter.style.backgroundColor = '#5b707a'
 //glossfilter.style.backgroundSize = 'cover'
 //glossfilter.style.backgroundPosition = 'center center'
 glossfilter.classList.add('section', 'shadow', 'row', 'filtersmain')

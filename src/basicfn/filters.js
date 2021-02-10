@@ -9,9 +9,9 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
   // type
 
   let filtered = arr.filter(a => a[2] == pageList[ind-1][i])
-
   filtered.map(a => {
-    a = a.map(ab => ab.replace(/[0-9]|icon|class|img|.png|:/g, ''))
+
+    a = a.map(ab => ab == '' ? 'n/a' : ab.replace(/[0-9]|icon|class|img|.png|:/g, ''))
     const elemRegex = /fire|water|earth|thunder|wind|light|dark|bleed|injury|venom|restrain|insane|Element|Debuff|Null/g;
     const attrRegex = /MaxHp|Strength|Agility|Intelligence|Protect/gi
   if (filter == 'type') {

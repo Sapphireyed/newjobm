@@ -192,11 +192,94 @@ $("#search").on("keyup", function() {
 
 export function applyTableFn() {
 
+  var pagesSel = document.getElementById('numOfPages')
+  var list = appliesAllInfo
+  var pageList = [];
+  var currentPage = 1;
+  var numberPerPage = pagesSel.value;
+  var numberOfPages = 0;
+  numberOfPages = getNumberOfPages(list)
+
+  function getNumberOfPages(arr) {
+      return Math.ceil(arr.length / numberPerPage);
+  }
+  function pagesNum() {
+        numberPerPage = pagesSel.value
+        numberPerPage = parseInt(numberPerPage)
+        numberOfPages = getNumberOfPages(list)
+        load()
+      }
+
+  pagesSel.onchange = pagesNum
+  function nextPage() {
+  currentPage += 1;
+  loadList();
+  }
+
+  function previousPage() {
+  currentPage -= 1;
+  loadList();
+  }
+
+  function firstPage() {
+  currentPage = 1;
+  loadList();
+  }
+
+  function lastPage() {
+  currentPage = numberOfPages;
+  loadList();
+  }
+
+  function loadList() {
+
+  numberPerPage = parseInt(numberPerPage) || 'all'
+    var abilsBody = document.getElementById('abilsBody');
+
+    // pagination
+    var begin
+    if (numberPerPage == 10) {
+      $("table").trigger("destroy");
+      begin = ((currentPage - 1) * numberPerPage);
+    } else if ( numberPerPage == 'all') {
+      begin = 0
+      numberPerPage = list.length
+      $("table").trigger("destroy");
+
+    } else {
+      $("table").trigger("destroy");
+       begin = currentPage == 1 ? currentPage - 1 : (currentPage-1)*numberPerPage
+    }
+    var end = begin + numberPerPage;
+    pageList = list.slice(begin, end);
+    drawList();
+    check();
+    $('.myTable').tablesorter();
+
+  // Icons on sides of the table
+    let abilrows = Array.from(document.querySelectorAll('tr'))
+    abilrows.shift()
+    for (var i = 0; i < abilrows.length; i++) {
+      let name = abilrows[i].children[2]
+
+    /*  abilrows[i].addEventListener('mousemove', function() {
+        showIcon(name, abilImagesComplete)
+      })
+      abilrows[i].addEventListener('mouseleave', function(){
+        hideIcon(abilImagesComplete)
+      })*/
+
+    }
+
+
+
+  }
+
+  function drawList() {
     document.getElementById("applyBody").innerHTML = "";
     var applyBody = document.getElementById('applyBody');
-    let pageList = appliesAllInfo
-    let end = pageList.findIndex(a => a[0] == undefined)
-    pageList.length = end +1
+//    let pageList = appliesAllInfo
+
     pageList.pop()
       for (var i=0; i < pageList.length; i++) {
         var jobItem = Object.values(pageList[i])
@@ -213,7 +296,7 @@ export function applyTableFn() {
     //    jobItem.splice(7, 2, '', '')
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#cfc165'
+        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#a6b7be'
     //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
 
 
@@ -257,6 +340,28 @@ export function applyTableFn() {
 
         })
   }
+  }
+
+  document.getElementById('next').onclick = nextPage
+  document.getElementById('first').onclick = firstPage
+  document.getElementById('last').onclick = lastPage
+  document.getElementById('prev').onclick = previousPage
+  function check() {
+      document.getElementById("next").disabled = currentPage == numberOfPages ? true : false;
+      document.getElementById("prev").disabled = currentPage == 1 ? true : false;
+      document.getElementById("first").disabled = currentPage == 1 ? true : false;
+      document.getElementById("last").disabled = currentPage == numberOfPages ? true : false;
+  //    setTimeout(function() {
+
+
+  //    }, 100)
+  }
+
+  function load() {
+      loadList();
+  }
+  load()
+
   $("#search").on("keyup", function() {
     var input = $(this).val().toLowerCase();
       $("#abilsBody tr").filter(function(){

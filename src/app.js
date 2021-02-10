@@ -15,6 +15,7 @@ import { jobsTable } from './jobs/jobsTable.js'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
 import { toggle} from './basicfn/toggle.js'
 import { jobs} from './jobs/jobsjs.js'
+import { sideDiv, toggleSide } from './side/side.js'
 import theadimg from './img/Jobs/BG/inthp.jpg'
 var $ = require("jquery")
 
@@ -22,9 +23,12 @@ var $ = require("jquery")
 //bgimg.id = 'bgimg'
 //bgimg.src = bg
 
-document.body.append( nav(), jobsmain)
-
+document.body.append( nav(), jobsmain, sideDiv)
 cursor()
+let sidenav = document.getElementById('sidenav')
+sidenav.addEventListener('click', function() {
+  toggleSide(document.getElementById('jobsmain'))
+})
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
 document.body.style.backgroundAttachment = 'fixed'

@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'popper.js';
 import './style.scss';
 import './job.scss';
+//import { sideDiv, toggleSide } from './side/side.js'
 //import fontawesome from '@fortawesome/fontawesome-free'
 //var $ = require("jquery")
 import 'tablesorter'
@@ -12,18 +13,23 @@ import { init, jobValues } from './jobs/jobsjs.js'
 import { jobsImgs } from './importImgs.js'
 import { openNew } from './basicfn/openNew.js'
 import {getMatImgs, getJobImgs, getAbilImgs, matImagesComplete, jobImagesComplete, abilImagesComplete} from './img/imgsHTML.js'
-import {abilities, jobsData, jobsDataAll, jobsStats, craft, mats, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits} from './abilitiesData.js'
+import {abilities,
+        jobsData, jobsDataAll, jobsStats, craft, mats,
+        descFinale, abilSkills, abilEffects, abilTraits,
+        passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
+        appliesAllInfo} from './abilitiesData.js'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
 
 document.body.append(nav(), jobmain)
 cursor()
+
 abilities.units().then(unit => {
   abilities.abils()
   abilities.passivesFn()
 })
 
 window.onload = function() {
-  jobsData.craft()
+jobsData.craft()
 jobsData.jobs().then(j => {
   getJobImgs()
   // jobicon
@@ -39,13 +45,12 @@ jobsData.jobs().then(j => {
   document.body.style.backgroundImage = 'url("' + jobsrc[0][1] + '")'
   document.body.style.backgroundSize = '190px'
   //document.body.style.backgroundSize = 'contain'
+
 }).then(d => {
   abilities.abils().then(f=> {
     abilities.passivesFn()
+
     getAbilImgs()
-
-
-
 }).then(d => {
   // abilities icons
   let switchimg = document.getElementById('switchimg')
@@ -129,6 +134,25 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
         openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
       })
     }
+    // apply tooltips
+    abilities.glossary().then(p=>{
+      let switchDesc= document.getElementById('switchDesc')
+      if (switchDesc.innerText.includes('(')) {
+        let start= switchDesc.innerHTML.indexOf('(')
+        let des = switchDesc.innerHTML.substring(0, start)
+        let apply = switchDesc.innerHTML.substring(start).replace(/\)|\(/g, '').split(',')
+        apply = apply.map(a=> a = '<span class="applyTip">' + a + '<span class="applyTip applyText"></span></span>')
+        switchDesc.innerHTML = des + '(' + (apply[0] || '') +  (apply[1]  == undefined ? '' : ',' + apply[1]) + (apply[2] == undefined ? '' : ',' + apply[2]) + ')'
+        let applyTip = Array.from(document.querySelectorAll('.applyTip:not(.applyText)'))
+        applyTip.map(a => {
+          let inf = appliesAllInfo.filter(row => row[1].includes(a.innerText.replace(/\)|\(|,/g, '').trim()))
+
+          a.getElementsByClassName('applyText')[0].innerHTML = inf[0][10]
+        })
+      }
+      switchDesc.innerHTML = switchDesc.innerHTML.replace('  ', ' ')
+    })
+
 })
 
 

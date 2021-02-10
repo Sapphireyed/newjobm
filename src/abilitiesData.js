@@ -30,7 +30,7 @@ export { powlvl, unitDesc,
          abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
          passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
          jobsData, jobsStats, jobsDataAll, craft, mats,
-          glossAllInfo,appliesAllInfo}
+          glossAllInfo,appliesAllInfo, glossRaw}
 
 let powlvl;     // power level table from sheet 4
 let unitDesc;  // unit desc table from sheet 4
@@ -54,6 +54,7 @@ let craft = [];
 let mats = [];   //materials to craft jobs
 let glossAllInfo = [];
 let appliesAllInfo = []
+let glossRaw = []
 //glossAllInfo.length = 63
 
 var name, desc, desc1, desc2, desc3, desc4
@@ -130,8 +131,8 @@ function changeApply(arr, i) {
 function changeColors(arr) {
   arr.map(r => {
     for (var i=0; i<r.length; i++) {
-      if ( i == 20 ) {
-        r[i] = r[i]
+      if ( i == 20 || i == 1 ) {
+        
       } else if ((i !== 2) && (r[i] !== undefined)) {
         // attr change colors
         r[i] = r[i].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'><img class="icon" src="' + maxhpimg + '" alt="hp"/> MaxHP</span>')
@@ -174,28 +175,27 @@ let abilities = {
     return GetSheetDone
       .raw(id, 4).then(data => data.data).then(res => {
         res.shift()
-        jobsStats = res.map(job => {
-          return {
-            name: job[1],
-            hp: job[3]/5,
-            str: job[4]/1,
-            agi: job[5]/1,
-            int: job[6]/1,
-          }
-        })
 
       res.map((row, ind) => {
         res[ind].splice(0,11)
         res[ind].splice(12)
       })
       changeColors(res)
-        res.map(inf => glossAllInfo.push(inf))
-        let end = res.findIndex(r => r[0] == 'Applies')
-        glossAllInfo.length = end
-        res.map(inf => appliesAllInfo.push(inf))
-        appliesAllInfo.splice(0,end +1)
-      })
+      res.map(inf => glossAllInfo.push(inf))
+      let end = res.findIndex(r => r[0] == 'Applies')
+      glossAllInfo.length = end
+      res.map(inf => appliesAllInfo.push(inf))
+      appliesAllInfo.splice(0,end +1)
+      appliesAllInfo.length = 27
 
+      glossRaw = glossAllInfo.filter(gl => gl[1].includes('Boost') == false
+                                              && gl[1].includes('Buff') == false
+                                              && gl[1].includes('Debuff') == false
+                                              && gl[1].includes('Element') == false
+                                              && gl[1].includes('Vulnerable') == false)
+      glossRaw.splice(2,2)
+      console.log(glossRaw)
+      })
   },
   units:() => {
     return GetSheetDone

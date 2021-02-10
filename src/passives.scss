@@ -23,10 +23,10 @@ h1 {
   button {background-color: $darkBg;}
 }
 
-#pages select {background-color: #b5d1db}
+#pages select {background-color: rgb(114, 139, 188)}
 .pages {font-size: 18px}
 .filtersmain select option {
-   background-color: #b5d1db;
+   background-color: rgb(114, 139, 188);
 }
 
 #navFiters {
@@ -35,7 +35,7 @@ h1 {
   div:first-child {float: right }
 }
 
-#passives { background-color: #728bbc}
+#passives { background-color: #1a3569}
 // TABLE
 table{color: black}
 

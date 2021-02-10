@@ -135,7 +135,7 @@ function loadList() {
         jobItem.splice(7, 2, '', '')
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#abbcde'
+        i % 2 == 0 ? tableRow.style.backgroundColor = '#b7b7c4' : tableRow.style.backgroundColor = 'rgb(114 139 188)'
     //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
 
 
