@@ -28,7 +28,7 @@ export default () => {
       +  '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="#">Database</a></li>'
       +  '<div class="dropdown-content">'
         +  '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./jobs.html">Jobs</a></li>'
-        +  '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./chars.html">Characters</a></li>'
+        +  '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./characters.html">Characters</a></li>'
         +  '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./abilities.html">Abilities</a></li>'
         + '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./passives.html">Passives</a></li>'
         + '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./materials.html">Materials</a></li>'

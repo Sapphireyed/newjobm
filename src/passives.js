@@ -9,9 +9,15 @@ import theadimg from './img/Materials/Guardian Necklace.png'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
 import { toggle} from './basicfn/toggle.js'
 import { jobs } from './abilitiesData.js'
+import { sideDiv, toggleSide } from './side/side.js'
+var $ = require("jquery")
 
-document.body.append( nav(), passivesmain)
+document.body.append( nav(), passivesmain,sideDiv)
 cursor()
+let sidenav = document.getElementById('sidenav')
+let section = $('#jobmainsect')
+let navmain = document.getElementById('abilsmain')
+toggleSide(sidenav, section,navmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
 document.body.style.backgroundAttachment = 'fixed'
@@ -28,12 +34,16 @@ jobsData.craft()
 abilities.units()
     .then(data => {
         abilities.abils()
-        abilities.passivesFn()
-          .then(res => {
-            //  getAbilImgs()
-              passivesFn()
-            })
+        abilities.glossary()
+          .then(p => {
+            abilities.passivesFn()
+              .then(res => {
+                //  getAbilImgs()
+                  passivesFn()
+                })
+              })
           })
+
 
 
 let button = document.getElementById('navbtn')

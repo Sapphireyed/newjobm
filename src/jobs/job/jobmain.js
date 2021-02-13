@@ -81,8 +81,18 @@ const crystOpt = crystOptArr.map(opt => {
 });
 numOfCryst.innerHTML = crystOpt;
 crystDiv.append(crysth4, numOfCryst)
-
-rarLvlOrb.append(rarity, level, crystDiv)
+//level buttons
+let lvlbtns = document.createElement('div')
+lvlbtns.classList.add('col-12')
+lvlbtns.id = 'lvlbtns'
+let applybtn = document.createElement('button')
+applybtn.classList.add('rounded')
+applybtn.innerHTML = 'Apply'
+let reset = document.createElement('button')
+reset.classList.add('rounded')
+reset.innerHTML = 'Reset'
+lvlbtns.append(applybtn, reset)
+rarLvlOrb.append(rarity, level, crystDiv,lvlbtns)
 
 let attrsAttrs = document.createElement('div')
 attrsAttrs.id= 'attrsAttrs'
@@ -135,7 +145,7 @@ div2.id = 'passiveAndSwitch'
 
 let passiveSkill = document.createElement('div')
 passiveSkill.id = 'passiveSkill'
-passiveSkill.classList.add('col')
+passiveSkill.classList.add('col-sm', 'col-12')
 let passiveH = document.createElement('h4')
 passiveH.id = 'passiveH'
 let passiveDesc = document.createElement('h5')
@@ -175,7 +185,7 @@ passiveSkill.append(passiveH, passiveDesc)
 
 let switchSkill = document.createElement('div')
 switchSkill.id = 'switchSkill'
-switchSkill.classList.add('col')
+switchSkill.classList.add('col-sm', 'col-12')
 let switchH = document.createElement('h4')
 switchH.id = 'switchH'
 let switchimg = document.createElement('div')

@@ -9,6 +9,16 @@ jobsfilter.style.backgroundColor = '#4d636f'
 jobsfilter.style.color = 'white'
 jobsmain.classList.add('section')
 //jobsTable.classList.add('w-100')
-jobsmain.append(jobsfilter, jobsTable)
+let dialogBox = document.createElement('div')
+dialogBox.id = 'dialog'
+dialogBox.classList.add('rounded')
+dialogBox.title = 'No results'
+dialogBox.innerHTML = 'No matching results'
+let close = document.createElement('button')
+close.id = 'closedialog'
+close.classNam = 'rounded'
+close.innerHTML = 'X'
+dialogBox.appendChild(close)
+jobsmain.append(jobsfilter, jobsTable, dialogBox)
 
 export {jobsmain}

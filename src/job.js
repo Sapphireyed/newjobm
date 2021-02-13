@@ -3,9 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'popper.js';
 import './style.scss';
 import './job.scss';
-//import { sideDiv, toggleSide } from './side/side.js'
-//import fontawesome from '@fortawesome/fontawesome-free'
-//var $ = require("jquery")
+import { sideDiv, toggleSide } from './side/side.js'
+var $ = require("jquery")
 import 'tablesorter'
 import nav from './nav/nav';
 import { jobmain } from './jobs/job/jobmain.js'
@@ -20,8 +19,12 @@ import {abilities,
         appliesAllInfo} from './abilitiesData.js'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
 
-document.body.append(nav(), jobmain)
+document.body.append(nav(), jobmain, sideDiv)
 cursor()
+let sidenav = document.getElementById('sidenav')
+let section = $('#jobmainsect')
+let navmain = document.getElementById('navMain')
+toggleSide(sidenav, section,navmain)
 
 abilities.units().then(unit => {
   abilities.abils()
@@ -83,18 +86,29 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
   let currentCard4Img = abilImagesComplete.filter(img => img.id == cardHname[3] || img.id == cardHname[2] || img.id == cardHname[1])
   card4img == null ? '' : card4img.innerHTML = currentCard4Img[0].outerHTML
   })
-  // tooltips
-  let apply = document.getElementById
+
   // change jobsStats
   let changelvl = document.getElementById('levelSel')
   let stats = Array.from(document.getElementsByClassName('spanattr'))
-  changelvl.onchange = function() {
-    stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * this.value))
-  }
   let jobmCryst = document.getElementById('jobmCrystal')
-  jobmCryst.onchange = function() {
-    stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
+  if (document.getElementById('rarity').children.length == 6) {
+    document.querySelectorAll('#lvlbtns button')[0].onclick = function() {
+      stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
+    }
+    document.querySelectorAll('#lvlbtns button')[1].onclick = function() {
+      changelvl.value = 10
+      document.getElementById('jobmCrystal').value = 0
+      stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
+    }
+  } else {
+    changelvl.onchange = function() {
+      stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * this.value))
+    }
+    jobmCryst.onchange = function() {
+      stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
+    }
   }
+
   jobsData.materials().then(d => {
     getMatImgs()
     // crafting
@@ -135,23 +149,37 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
       })
     }
     // apply tooltips
-    abilities.glossary().then(p=>{
+    /*abilities.glossary().then(p=>{
       let switchDesc= document.getElementById('switchDesc')
-      if (switchDesc.innerText.includes('(')) {
-        let start= switchDesc.innerHTML.indexOf('(')
-        let des = switchDesc.innerHTML.substring(0, start)
-        let apply = switchDesc.innerHTML.substring(start).replace(/\)|\(/g, '').split(',')
-        apply = apply.map(a=> a = '<span class="applyTip">' + a + '<span class="applyTip applyText"></span></span>')
-        switchDesc.innerHTML = des + '(' + (apply[0] || '') +  (apply[1]  == undefined ? '' : ',' + apply[1]) + (apply[2] == undefined ? '' : ',' + apply[2]) + ')'
-        let applyTip = Array.from(document.querySelectorAll('.applyTip:not(.applyText)'))
-        applyTip.map(a => {
-          let inf = appliesAllInfo.filter(row => row[1].includes(a.innerText.replace(/\)|\(|,/g, '').trim()))
+      switchDesc == undefined ? '' : switchDesc.onmouseenter = tip(switchDesc)
+      let passiveDesc= document.getElementById('passiveDesc')
+      passiveDesc == undefined ? '' : passiveDesc.onmouseenter = tip(passiveDesc)
+      let card1desc= document.getElementById('card1desc')
+      card1desc == undefined ? '' : card1desc.onmouseenter = tip(card1desc)
+      let card2desc= document.getElementById('card2desc')
+      card2desc == undefined ? '' : card2desc.onmouseenter = tip(card2desc)
+      let card3desc= document.getElementById('card3desc')
+      card3desc == undefined ? '' : card3desc.onmouseenter = tip(card3desc)
+      let card4desc= document.getElementById('card4desc')
+      card4desc == undefined ? '' :card4desc.onmouseenter = tip(card4desc)
+      function tip(desc) {
+        if (desc.innerText.includes('(')) {
+          let start= desc.innerHTML.indexOf('(')
+          let des = desc.innerHTML.substring(0, start)
+          let apply = desc.innerHTML.substring(start).replace(/\)|\(/g, '').split(',')
+          apply = apply.map(a=> a = '<span class="applyTip">' + a + '<span class="applyTip applyText"></span></span>')
+          desc.innerHTML = des + '(' + (apply[0] || '') +  (apply[1]  == undefined ? '' : ',' + apply[1]) + (apply[2] == undefined ? '' : ',' + apply[2]) + ')'
+          let applyTip = Array.from(document.querySelectorAll('.applyTip:not(.applyText)'))
+          applyTip.map(a => {
+            let inf = appliesAllInfo.filter(row => row[1].includes(a.innerText.replace(/\)|\(|,/g, '').trim()))
 
-          a.getElementsByClassName('applyText')[0].innerHTML = inf[0][10]
-        })
+            a.getElementsByClassName('applyText')[0].innerHTML = inf[0][10]
+          })
+        }
+        desc.innerHTML = desc.innerHTML.replace('  ', ' ')
       }
-      switchDesc.innerHTML = switchDesc.innerHTML.replace('  ', ' ')
-    })
+
+    })*/
 
 })
 

@@ -114,45 +114,71 @@ nav:nth-child(2) {
 #sideDiv {
   position: fixed;
   top: 0;
-  right: -20%;
-  width: 20%;
+  right: -25%;
+  width: 25%;
   height: 100%;
-  border-left: 3px solid white;
+  border-left: 4px solid white;
   background-color: $mainBg;
   color: white;
+  overflow-y:scroll;
   z-index: 9000;
+  box-shadow:1px 1px black;
   #listDiv {
-    margin-top: 170px;
-    position: sticky;
-    top:50px
+    margin-top: 260px;
+  //  position: sticky;
+  //  top:50px;
+    li:not(.subgloss) {
+      font-weight: 550;
+      margin-left: -10px;
+      padding: 4px 0;
+    }
+    li:hover {font-size: 22px}
+    .subgloss {
+      font-size: 18px;
+      background-color: rgba(128, 152, 158, .3);
+    //  margin-left: -19px;
+      font-weight: 400;
+      display: none;
+    //  margin-right: 5px;
+    }
   }
   h4 {
+    position: fixed;
+    top: 170px;
     text-align: center;
-    padding: 10px 0 0 0;
+    padding: 10px 0 7px 0;
+    box-shadow: 2px 2px 1px 1px #313b40;
+    font-weight: 700;
+    //margin: 7px 15px;
+    background-color: rgb(158, 177, 187);
+    color: $mainBg
+  }
+  h5 {
+    text-align: center;
+    text-decoration: underline;
+
   }
   ul {
     text-decoration: none;
   }
   a {
-    width: 35px;
-    height: 35px;
+    position: relative;
+    transform: rotate(270deg);
+    background-color: $mainBg;
     position: fixed;
+    padding: 0 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
     top: 48%;
-    right: 0;
+    right: -3.5%;
     z-index:30000;
+    box-shadow: 1px 1px black;
     cursor: pointer !important;
+    border: 2px solid white;
   }
 }
-#sideDiv::after {
-  content: "";
-  position: absolute;
-  top: 49%;
-  right: 101%;
-  border-width: 10px;
-  border-style: solid;
-  border-color:  transparent #fff transparent transparent;
-  z-index: -1;
-}
+
+.hidden {display: block}
 //main sections
 .section {
   //  padding: 10px 0;
@@ -187,7 +213,15 @@ h1 {
   padding: 3px 0 0 0;
   border-top: 2px solid rgb(42, 67, 74)
 }
-#jobsclear { float: right; margin-top:-4px }
+
+#jobsclear { float: none; margin-top:-4px; width: 80%}
+#start { float: right; margin-top: -4px;  width: 80%}
+
+#lvlbtns button {
+  background-color:  rgb(58, 88, 99);
+  color: white;
+  float: right;
+}
 #pages {
   display: inline;
   button {
@@ -385,22 +419,6 @@ table tr td:nth-child(3) {
         }
     }
 
-    //tooltips in jobstable
-    .applyTip:nth-child(even) { padding: 0 0 0 28px}
-  /*  #pic div:first-child {   // jobicon in the table
-      max-width: 65px;
-      img:first-child {
-        max-width:50px;
-        height: auto;
-        padding: 10px
-      }
-      img:nth-child(2) {
-        max-width: 40px;
-        top: 5px;
-        left: 5px;
-        height: auto;
-      }
-    }*/
         .applyTip .applyText {
             visibility: hidden;
             width: 200px;
@@ -415,7 +433,7 @@ table tr td:nth-child(3) {
             bottom: 85%;
             opacity: 0;
             transition: opacity 0.3s;
-            box-shadow: 3px 3px #435761;
+            box-shadow: 2px 2px #435761;
         }
 
             .applyTip .applyText::after {
@@ -440,42 +458,93 @@ table tr td:nth-child(3) {
   right: 30px;
   display: none;
 }
+#dialog {
+  position: absolute;
+  background-color: $mainBg;
+  box-shadow: 3px 3px grey;
+  color: white;
+  top: 40%;
+  left: 45%;
+  padding: 20px 10px;
+  display: none;
+  z-index: 10000;
+}
+#closedialog {
+  color: white;
+  position: absolute;
+  top:0;
+  right:0;
+  font-size: 12px;
+}
+#preload {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  //opacity: 1;
+  z-index: 11111;
+}
 //keywords colors
 /*attr*/
+@mixin hpimg {
+  border-radius: 50%;
+  background-color: rgb(216, 216, 51);
+  padding: 2px
+}
+@mixin strimg {
+  border-radius: 50%;
+  background-color: #b72619;
+  padding: 2px
+}
+@mixin agiimg {
+  border-radius: 50%;
+  background-color: rgb(51, 204, 76);
+  padding: 2px
+}
+@mixin intimg {
+  border-radius: 50%;
+  background-color: rgb(51, 82, 171);
+  padding: 2px
+}
+.hpimg {
+  @include hpimg
+}
+.strimg {
+  @include strimg
+}
+.agiimg {
+  @include agiimg
+}
+.intimg {
+  @include intimg
+}
 .maxhp {
   color: rgb(216, 216, 51);
   font-weight: 550;
   img {
-    border-radius: 50%;
-    background-color: rgb(216, 216, 51);
-    padding: 2px
+    @include hpimg;
   }
 }
 .strength, .str {
   color: #b72619;
   font-weight: 550;
   img {
-    border-radius: 50%;
-    background-color:  #b72619;
-    padding: 2px
+    @include strimg;
   }
 }
 .agility, .agi {
   color: rgb(51, 204, 76);
   font-weight: 550;
   img {
-    border-radius: 50%;
-    background-color:  rgb(51, 204, 76);;
-    padding: 2px
+    @include agiimg;
   }
  }
 .intelligence, .int {
   color: rgb(51, 82, 171);
   font-weight: 550;
   img {
-    border-radius: 50%;
-    background-color:  rgb(51, 82, 171);
-    padding: 2px
+    @include intimg;
   }
 }
 .protect {
@@ -554,15 +623,10 @@ table tr td:nth-child(3) {
   }
   .filtersmain label { width: 100%}
   .filtersmain select { float: none; margin-right: 4px}
-  #jobsclear {
-    float: none;
-    margin-top: 25px;
-  }
   #otherfilters { margin: 20px 0 0 0 }
   #otherfilters div:first-child {text-align: left}
-  .filtersSub div:nth-child(odd) {text-align: right}
-  .filtersSub div:first-child {display: inline}
-  .filtersSub div:first-child label {width: 50%; text-align: left; float: left}
+  .filtersSub div:nth-child(even) {text-align: right}
+//  .filtersSub div:first-child label {width: 50%; text-align: left; float: left}
 }
 
 @media only screen and (max-width: 760px) {
@@ -585,13 +649,19 @@ table tr td:nth-child(3) {
   .jobBg {
     width: 35px;
   }
+
   .filtersmain label { width: 100%}
-  #jobsclear {
-    margin-top: 25px;
+  #navFiters {
+    margin-top: 5px;
+    border-top: 2px solid $mainBg;
+    button { margin-top: 0}
   }
+  #jobsclear {float: left}
   #otherfilters { margin: 20px 0 0 0 }
   #otherfilters div:first-child {text-align: left}
-  .filtersSub div:nth-child(odd) {text-align: right}
-  .filtersSub div:first-child { display: inline}
-  .filtersSub div:first-child label {width: 50%; text-align: left}
+
+  #emptydiv {display: none}
+  //.filtersSub div:nth-child(even) {text-align: right}
+//  .filtersSub div:first-child { display: inline}
+//  .filtersSub div:first-child label {width: 50%; text-align: left}
 }

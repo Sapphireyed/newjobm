@@ -5,6 +5,10 @@
 }
 #jobmaindiv { margin: 10px}
 #basicinfo { margin: 20px 5px 20px 5px}
+#lvlbtns {
+  padding: 0;
+  button { float: left }
+}
 #traitsdivPassive h5:first-child {
   //text-align: center;
 }
@@ -24,36 +28,70 @@
 }
 
 //.jobattrs {text-align: left}
+$main1star: #6a8d55;
 .job1star::-webkit-scrollbar-thumb { background-color: #6a8d55; }
 .job1star::-webkit-scrollbar { background-color: #f4ffed; }
 .job1star {
-  background-color: #6a8d55;
+  background-color: $main1star;
+  #sideDiv {
+    background-color: $main1star;
+    overflow-y:scroll;
+    h4 {
+      background-color: #f4ffed;
+      color:  $main1star;
+      box-shadow: 2px 2px 1px 1px #6a8d55;
+    }
+    a {
+      background-color: $main1star;
+    }
+  }
+  #sideDiv::-webkit-scrollbar-thumb { background-color: $main1star; }
+  #sideDiv::-webkit-scrollbar { background-color: #f4ffed; }
   #jobmainsect {background-color: #f4ffed;}
   #crystDiv { visibility: hidden}
   h1 {
-      background-color: #6a8d55;
+      background-color:   $main1star;
       margin-right: auto;
       margin-left: auto;
   }
+  #lvlbtns button { background-color: $main1star; display: none }
   h4:not(.jobattr){ text-align: center }
-  h4 {color: #6a8d55;}
+//  h4 {color: #6a8d55;}
 
   #passiveH {
-    background-color: #6a8d55;
+    background-color: $main1star;
     color: white
   }
-  #passiveSkill { border-right: 2px solid #6a8d55}
+  #passiveSkill { border-right: 2px solid $main1star}
   #switchH {
-    background-color: #6a8d55;
+    background-color: $main1star;
     color: white
   }
   #deck { background-color: rgba(106, 141, 85, .5) }
-
+  .applyTip .applyText {
+    background-color: #6a8d55;
+    font-weight: normal;
+  }
 }
+$main2star: #4b7396;
 .job2star::-webkit-scrollbar-thumb { background-color: #4b7396; }
 .job2star::-webkit-scrollbar { background-color: #eef7ff; }
 .job2star {
     background-color: #4b7396;
+    #sideDiv {
+      background-color: $main2star;
+      overflow-y:scroll;
+      h4 {
+        background-color: #4b7396;
+        color:  $main2star;
+        box-shadow: 2px 2px 1px 1px rgba(75, 115, 150, .7);
+      }
+      a {
+        background-color: $main2star;
+      }
+    }
+    #sideDiv::-webkit-scrollbar-thumb { background-color: $main2star; }
+    #sideDiv::-webkit-scrollbar { background-color: #eef7ff; }
     #jobmainsect {background-color: #eef7ff;}
     #crystDiv { visibility: hidden}
     h1
@@ -63,6 +101,7 @@
         margin-left: auto;
     }
     h4:not(.jobattr){ text-align: center }
+    #lvlbtns button { background-color: #4b7396;display: none }
     h4 {color: #4b7396;}
     #passiveH {
       background-color: #4b7396;
@@ -74,11 +113,31 @@
       color: white
     }
     #deck { background-color: rgba(75, 115, 150, .7) }
+    .applyTip .applyText {
+      background-color: #4b7396;
+      color: white;
+      font-weight: normal;
+    }
 }
+$main3star: #584b67;
 .job3star::-webkit-scrollbar-thumb { background-color: #584b67; }
 .job3star::-webkit-scrollbar { background-color: #f5eefd; }
 .job3star {
     background-color: #584b67; //#f5eefd;
+    #sideDiv {
+      background-color: $main3star;
+      overflow-y:scroll;
+      h4 {
+        background-color: #f5eefd;
+        color:  $main3star;
+        box-shadow: 2px 2px 1px 1px rgba(88, 75, 103, .7);
+      }
+      a {
+        background-color: $main3star;
+      }
+    }
+    #sideDiv::-webkit-scrollbar-thumb { background-color: $main3star; }
+    #sideDiv::-webkit-scrollbar { background-color: #f5eefd; }
     #jobmainsect {background-color: #f5eefd;}
     #crystDiv { visibility: hidden}
     h1 {
@@ -86,6 +145,7 @@
         margin-right:auto;
         margin-left: auto;
     }
+    #lvlbtns button { background-color: #584b67; display: none}
     h4:not(.jobattr){ text-align: center }
     h4 {color: #584b67;}
     #passiveH {
@@ -98,11 +158,31 @@
       color: white
     }
     #deck { background-color: rgba(88, 75, 103, .7) }
+    .applyTip .applyText {
+      background-color: #584b67;
+      color: white;
+      font-weight: normal;
+    }
 }
+$main4star: #954e3a;
 .job4star::-webkit-scrollbar-thumb { background-color: #954e3a; }
 .job4star::-webkit-scrollbar { background-color: #fff0ec; }
 .job4star {
     background-color: #954e3a;
+    #sideDiv {
+      background-color: $main4star;
+      overflow-y:scroll;
+      h4 {
+        background-color: #fff0ec;
+        color:  $main4star;
+        box-shadow: 2px 2px 1px 1px rgba(149, 78, 58, .7);
+      }
+      a {
+        background-color: $main4star;
+      }
+    }
+    #sideDiv::-webkit-scrollbar-thumb { background-color: $main4star; }
+    #sideDiv::-webkit-scrollbar { background-color: #fff0ec; }
     #jobmainsect {background-color: #fff0ec;}
     #crystDiv { visibility: hidden}
     h1 {
@@ -110,6 +190,7 @@
         margin-right:auto;
         margin-left: auto;
     }
+    #lvlbtns button { background-color: #954e3a; display: none}
     h4:not(.jobattr){ text-align: center }
     h4 {color: #954e3a;}
     #passiveH {
@@ -122,11 +203,30 @@
       color: white
     }
     #deck { background-color: rgba(149, 78, 58, .7) }
+    .applyTip .applyText {
+      background-color: #954e3a;
+      color: white;
+      font-weight: normal;
+    }
 }
+$main5star: #e0c369;
 .job5star::-webkit-scrollbar-thumb { background-color: #e0c369; }
 .job5star::-webkit-scrollbar { background-color: #fffaef; }
 .job5star {
     background-color: #e0c369;
+    #sideDiv {
+      background-color: $main5star;
+      h4 {
+        background-color: #fffaef;
+        color:  $main5star;
+        box-shadow: 2px 2px 1px 1px rgba(224, 195, 105, .5);
+      }
+      a {
+        background-color: $main5star;
+      }
+    }
+    #sideDiv::-webkit-scrollbar-thumb { background-color: $main5star; }
+    #sideDiv::-webkit-scrollbar { background-color: #fffaef; }
     #jobmainsect {background-color: #fffaef;}
     #crystDiv { visibility: visible}
     h1 {
@@ -134,6 +234,7 @@
         margin-right:auto;
         margin-left: auto;
     }
+    #lvlbtns button { background-color: #e0c369; }
     h4:not(.jobattr){ text-align: center }
     h4 {color: #e0c369;}
     #passiveH {
@@ -146,6 +247,11 @@
       color: white
     }
     #deck { background-color: rgba(224, 195, 105, .5) }
+    .applyTip .applyText {
+      background-color: #e0c369;
+      color: black;
+      font-weight: normal;
+    }
 }
 
 #passiveSkillsH, #passiveSkills { display: inline}
@@ -210,4 +316,7 @@
   max-width: 60px;
   display: block;
   margin: 20px auto;
+}
+@media only screen and (max-width: 760px) {
+  #jobimg2{display:none}
 }

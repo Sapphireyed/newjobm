@@ -7,7 +7,16 @@ abilsmain.id = 'abilsmain'
 abilsfilter.style.color = 'white'
 abilsfilter.append(abilsTable)
 abilsmain.classList.add('section')
-//jobsTable.classList.add('w-100')
-abilsmain.append(abilsfilter)
+let dialogBox = document.createElement('div')
+dialogBox.id = 'dialog'
+dialogBox.classList.add('rounded')
+dialogBox.title = 'There\'s no results,<br> Only doom, doom doom...'
+dialogBox.innerHTML = 'There\'s no results,<br> Only doom, doom doom...'
+let close = document.createElement('button')
+close.id = 'closedialog'
+close.classNam = 'rounded'
+close.innerHTML = 'X'
+dialogBox.appendChild(close)
+abilsmain.append(abilsfilter, dialogBox)
 
 export {abilsmain}

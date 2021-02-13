@@ -49,10 +49,8 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
           skills.some(s => a[s].includes('Protect') && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter,'type') : ''
         } else {
           if (elem == 'All') {
-console.log(tableRows[ind])
             //  a[s] = a[s] == undefined ? 'n/a' : a[s]
                tableRows[ind].classList.add(filter)
-console.log(tableRows[ind])
           } else {
             skills.some(s=> {
               (a[s] == typeVal && a[s+1].includes(elem)) ? tableRows[ind].classList.add(filter, 'type') : ''
@@ -183,7 +181,7 @@ export function filterPass(arr, elem, filter, tableRows,pageList,filters, ind, i
           tableRows[ind].classList.add(filter)
         }
       } else if (filter == 'type') {
-        console.log('type')
+        
       } else {
         filter == 'type' ? tableRows[ind].classList.add(filter) : ''
         skills.some(s=> {

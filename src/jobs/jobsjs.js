@@ -32,6 +32,8 @@ export function jobs() {
     var elemFilter = document.getElementById('element')
     var attrFilter = document.getElementById('attrSel')
     var filters = document.getElementsByClassName('filter')
+    let changelvl = document.querySelectorAll('#lvlbtns button')[0]
+    let resetlvl = document.querySelectorAll('#lvlbtns button')[1]
     let crystal = document.getElementById('jobmCrystal')
     let chooselvl = document.getElementById('chooselvl')
     //       J O B S
@@ -114,14 +116,6 @@ function loadList() {
     var end = begin + numberPerPage;
     pageList = list.slice(begin, end);
 
-//    searchin.onchange = function() {
-//      for (var i=0; i< filters.length; i++) {
-//        filters[i].onchange()
-//      }
-//    }
-
-    ///////
-
     drawList();
     check();
     jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)');
@@ -141,31 +135,25 @@ function loadList() {
     chooselvl.value = 10
     crystal.value = 0
 
-      if (numOfPages.value == 'all') {
-        document.getElementById("next").disabled = true
-        document.getElementById("prev").disabled = true
-        document.getElementById("first").disabled = true
-        document.getElementById("last").disabled = true
-      } else {
-        check()
-      }
-
     //adjust stats
     let hp = Array.from(document.querySelectorAll('.jobRow td:nth-child(8)'))
     let str = Array.from(document.querySelectorAll('.jobRow td:nth-child(9)'))
     let agi = Array.from(document.querySelectorAll('.jobRow td:nth-child(10)'))
     let int = Array.from(document.querySelectorAll('.jobRow td:nth-child(11)'))
-    chooselvl.onchange = function() {
-      changeStats(hp, this)
-      changeStats(str, this)
-      changeStats(agi, this)
-      changeStats(int, this)
+
+    changelvl.onclick = function() {
+      changeStats(hp)
+      changeStats(str)
+      changeStats(agi)
+      changeStats(int)
     }
-    crystal.onchange = function() {
-      changeStats(hp, chooselvl)
-      changeStats(str, chooselvl)
-      changeStats(agi, chooselvl)
-      changeStats(int, chooselvl)
+    resetlvl.onclick = function() {
+      chooselvl.vlaue = 10;
+      crystal.value = 0
+      changeStats(hp)
+      changeStats(str)
+      changeStats(agi)
+      changeStats(int)
     }
 
     //switch imgs
@@ -186,174 +174,110 @@ function loadList() {
   Array.from(filters).map(f => f.value = 'All')
 
 // filters
-//filters = Array.from(filters)
-//filters.map(f=> f.value = 'All')
+filters = Array.from(filters)
 tableRows = document.querySelectorAll('tr')
 
 // FILTERS
-function filter(el) {
+function filter() {
+  filters.map(f => {
+    if (f.value == 'All') {
 
-  var elem = el.value
-  let filter = el.id
-  tableRows = Array.from(tableRows)
-  for (var ind = 1; ind < tableRows.length; ind++) {
-    //hide all rows. Particular rowswill be isplayed as per filters
-    tableRows[ind].classList.add('d-none', 'boo')
-  //  console.log(tableRows[ind].classList)
-    //remove all classes added during preious filter run.
-    tableRows[ind].classList.remove('7', '6', '5', '4', '3', '2', '1', filter)
+    } else {
+      var elem = f.value
+      let filter = f.id
+      tableRows = Array.from(tableRows)
+      for (var ind = 1; ind < tableRows.length; ind++) {
+        //hide all rows. Particular rowswill be isplayed as per filters
+        tableRows[ind].classList.add('d-none', 'boo')
+      //  console.log(tableRows[ind].classList)
+        //remove all classes added during preious filter run.
+        tableRows[ind].classList.remove('7', '6', '5', '4', '3', '2', '1', filter)
 
-    if (elem == pageList[ind-1][2]) {  // rarity
-      tableRows[ind].classList.add(filter)
-    }
-    let pageList2 = pageList
-    switch (searchin.value) {
-      case 'switch':
-        filterAb(abilitiesAllInfo, elem, filter, tableRows, pageList, filters,ind, 8, 5)
-        document.getElementById('whenSel').disabled = true;
-        document.getElementById('type').disabled = false;
-        document.getElementById("whenSel").value = 'All'
-        break;
-      case 'passive':
-        filterPass(passivesAllInfo, elem, filter, tableRows, pageList2, filters,ind, 7, 4)
-        document.getElementById("type").disabled = true;
-        document.getElementById('whenSel').disabled = false;
-        document.getElementById("type").value = 'All'
-        break;
-      case 'both':
-        filterAb(abilitiesAllInfo, elem, filter, tableRows, pageList, filters,ind, 8, 5)
-        filterPass(passivesAllInfo, elem, filter, tableRows, pageList2, filters,ind, 7, 4)
-        document.getElementById("type").disabled = false;
-        document.getElementById('whenSel').disabled = false;
-        break;
-      default:
+        if (elem == pageList[ind-1][2]) {  // rarity
+          tableRows[ind].classList.add(filter)
+        }
+        let pageList2 = pageList
+        switch (searchin.value) {
+          case 'switch':
+            filterAb(abilitiesAllInfo, elem, filter, tableRows, pageList, filters,ind, 8, 5)
+            document.getElementById('whenSel').disabled = true;
+            document.getElementById('type').disabled = false;
+            document.getElementById("whenSel").value = 'All'
+            break;
+          case 'passive':
+            filterPass(passivesAllInfo, elem, filter, tableRows, pageList2, filters,ind, 7, 4)
+            document.getElementById("type").disabled = true;
+            document.getElementById('whenSel').disabled = false;
+            document.getElementById("type").value = 'All'
+            break;
+          case 'both':
+            filterAb(abilitiesAllInfo, elem, filter, tableRows, pageList, filters,ind, 8, 5)
+            filterPass(passivesAllInfo, elem, filter, tableRows, pageList2, filters,ind, 7, 4)
+            document.getElementById("type").disabled = false;
+            document.getElementById('whenSel').disabled = false;
+            break;
+          default:
 
-    }
-    // counter adds numeric classesfor each much
-  var counter = 1
-    for (var index=0; index < filters.length; index++) {
-      if (tableRows[ind].classList.contains(filters[index].id) || filters[index].value == 'All') {
-        tableRows[ind].classList.add(counter += 1)
+        }
+        // counter adds numeric classesfor each much
+      var counter = 1
+        for (var index=0; index < filters.length; index++) {
+          if (tableRows[ind].classList.contains(filters[index].id) || filters[index].value == 'All') {
+            tableRows[ind].classList.add(counter += 1)
+          }
+        }
+        if (tableRows[ind].classList.contains('7')) {
+          tableRows[ind].classList.remove('d-none')
+        } else {
+          tableRows[ind].classList.add('d-none')
+        }
+
       }
     }
-    if (tableRows[ind].classList.contains('7')) {
-      tableRows[ind].classList.remove('d-none')
-    } else {
-      tableRows[ind].classList.add('d-none')
-    }
 
-  }
+  })
+
 }
 
- //fire filter function on any filter change
-function cursorLoad() {
-  document.body.style.cursor = 'progress'
-}
-//function cursorDef() {
-//  document.body.style.cursor = 'default'
-//}
 
-let searchin = document.getElementById('searchin')
-const eventChange = new Event('change')
- for (var i=0; i< filters.length; i++) {
+//const eventChange = new Event('change')
+let start = document.getElementById('start')
+  start.addEventListener('click',function() {
+    alert('wait')
+    setTimeout(function() {
 
-   filters[i].addEventListener('change', function() {
-     if (Array.from(filters).filter(f => f.value == 'All').length == filters.length - 1 && this.value !== 'All') {
        let pagesVal = pagesSel.value
-       pagesSel.value = 'all'
-       let val = this.value
-       pagesSel.onchange()
-       this.value = val
-       pagesSel.value = pagesVal
-       numberPerPage = pagesVal
-       document.getElementById("next").disabled = false;
-       document.getElementById("last").disabled = false
-     }
-   })
+        pagesSel.value = 'all'
+        let val = filters.map(f => f.value)
+        pagesSel.onchange()
+        filters.map((f, ind) => f.value = val[ind])
+        pagesSel.value = pagesVal
+        numberPerPage = pagesVal
+        document.getElementById("next").disabled = false;
+        document.getElementById("last").disabled = false
 
-   filters[i].addEventListener('change', function() {
-     let el = this
-     filter(el)
-     let displayed = Array.from(document.querySelectorAll('#jobsBody tr')).filter(tr => tr.classList.contains('d-none') == false)
-     displayed.map((tr, index) => {
-       index >= pagesSel.value ? tr.classList.add('d-none') : ''
-     })
-    // cursorDef()
-   })
-   filters[i].value = 'All'
- }
- searchin.onchange = function() {
-  for (var i=0; i< filters.length; i++) {
-    filters[i].dispatchEvent(eventChange)
-  }
-}
+
+
+        filter()
+        let displayed = Array.from(document.querySelectorAll('#jobsBody tr')).filter(tr => tr.classList.contains('d-none') == false)
+        displayed.map((tr, index) => {
+          index >= pagesSel.value ? tr.classList.add('d-none') : ''
+        })
+       // cursorDef()
+
+    }, 10)
+  })
+
+//   filters[i].value = 'All'
+
+
 setTimeout(function() {
   tooltips()
 },200)
 
 
-
-
-/*    function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("jobsTable");
-  switching = true;
-  // Set the sorting direction to ascending:
-  dir = "asc";
-  // Make a loop that will continue until
-  //no switching has been done:
-  while (switching) {
-    // Start by saying: no switching is done:
-    switching = false;
-    rows = table.rows;
-    rows = Array.from(rows)
-
-    // Loop through all table rows (except the
-    //first, which contains table headers):
-    for (i = 1; i < (rows.length - 1); i++) {
-      // Start by saying there should be no switching:
-      shouldSwitch = false;
-      // Get the two elements you want to compare,
-      //one from current row and one from the next:
-      x = rows[i].getElementsByTagName("TD")[n];
-      y = rows[i + 1].getElementsByTagName("TD")[n];
-      // Check if the two rows should switch place,
-      //based on the direction, asc or desc:
-      if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-          // If so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-          // If so, mark as a switch and break the loop:
-          shouldSwitch = true;
-          break;
-        }
-      }
-    }
-    if (shouldSwitch) {
-      // If a switch has been marked, make the switch
-      //and mark that a switch has been done:
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      // Each time a switch is done, increase this count by 1:
-      switchcount ++;
-    } else {
-      // If no switching has been done AND the direction is "asc",
-      //set the direction to "desc" and run the while loop again.
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
-    }
-  }
-}*/
-
-/*    $(document).ready(function() {
-        $(".myTable").tablesorter();
-    })*/
+    $('#preload').animate({width:'0'},400);
+  //  document.body.style.cursor = 'default'
 }
 // TOOLTIP
 function tooltips() {
@@ -369,7 +293,7 @@ for (var i=0; i < switchCells.length; i++) {
     var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
     var tooltipsApply = abilTraits.map(trait => trait.split(': ')).filter(desc=> desc[0] == switchName)
     var passApply = passiveTraits.map(trait => trait.split(': ')).filter(desc=> desc[0] == switchName)
-    
+
     tooltipsAb.map((desc, ind) => {
       if (desc[0] == switchName) {
       //  console.log(desc[1])
@@ -479,11 +403,17 @@ document.getElementById('last').onclick = lastPage
 document.getElementById('prev').onclick = previousPage
 
 function check() {
+  if (numOfPages.value == 'all') {
+    document.getElementById("next").disabled = true
+    document.getElementById("prev").disabled = true
+    document.getElementById("first").disabled = true
+    document.getElementById("last").disabled = true
+  } else {
     document.getElementById("next").disabled = currentPage == numberOfPages ? true : false;
     document.getElementById("prev").disabled = currentPage == 1 ? true : false;
     document.getElementById("first").disabled = currentPage == 1 ? true : false;
     document.getElementById("last").disabled = currentPage == numberOfPages ? true : false;
-//    setTimeout(function() {
+  }
 
 
 //    }, 100)
@@ -511,6 +441,12 @@ let filtersdiv = document.getElementById('jobs')
           $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1)
         });
       });
+      $("#searchGloss").on("keyup", function() {
+        var input = $(this).val().toLowerCase();
+          $("#sideDiv li:not(.subgloss)").filter(function(){
+            $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1)
+          });
+        });
 // jobLinks
 
 function jobLink(item) {

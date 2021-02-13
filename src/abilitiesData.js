@@ -30,7 +30,7 @@ export { powlvl, unitDesc,
          abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
          passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
          jobsData, jobsStats, jobsDataAll, craft, mats,
-          glossAllInfo,appliesAllInfo, glossRaw}
+          glossAllInfo,appliesAllInfo, glossRaw,applyRaw}
 
 let powlvl;     // power level table from sheet 4
 let unitDesc;  // unit desc table from sheet 4
@@ -55,6 +55,7 @@ let mats = [];   //materials to craft jobs
 let glossAllInfo = [];
 let appliesAllInfo = []
 let glossRaw = []
+let applyRaw = [];
 //glossAllInfo.length = 63
 
 var name, desc, desc1, desc2, desc3, desc4
@@ -69,10 +70,14 @@ function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multip
   //  console.log(arrToCompare)
 
     row[skill] = row[skill] == undefined ? 'n/a' : row[skill]
-    if ((row[skill] == 'Buff' || row[skill] == 'Debuff') && (row[effect] == 'MaxHP' || row[effect] == 'Strength' || row[effect] == 'Agility' || row[effect] == 'Intelligence')) {
+    if (row[skill] == 'Buff' && (row[effect] == 'MaxHP' || row[effect] == 'Strength' || row[effect] == 'Agility' || row[effect] == 'Intelligence')) {
          desc[0] = desc.map(desc => desc.name)
          desc[0] = 'Gain ' + row[multiplier] +  ' ' + desc
          desc = desc[0]
+    } else if (row[skill] == 'Debuff' && (row[effect] == 'MaxHP' || row[effect] == 'Strength' || row[effect] == 'Agility' || row[effect] == 'Intelligence')) {
+      desc[0] = desc.map(desc => desc.name)
+      desc[0] = 'Apply ' + row[multiplier] +  ' ' + desc + ' to the enemy'
+      desc = desc[0]
     } else if (arrToCompare == passives && row[skill] == 'Upgrade') {
         desc[0] = desc.map(desc => desc.name)
         desc[0] = 'Become ' + desc
@@ -120,20 +125,20 @@ function changeApply(arr, i) {
     r[i] = r[i].replace('Multiply', 'Overloaded')
     r[i] = r[i].replace('Charge', 'Turn Charge')
     r[i] = r[i].replace('Action', 'Practice Perfect')
-    r[i] = r[i].replace('Buff', 'Focus Power')
-    r[i] = r[i].replace('Debuff', 'Negative Energy')
+    r[i] = r[i].replace('Buff', 'Focus Energy')
+    r[i] = r[i].replace('Debuff', 'Negative Power')
     r[i] = r[i].replace('Combo', 'Combo Blend')
     r[i] = r[i].replace('Delay', 'Scheduled')
     r[i] = r[i].replace('Direct', 'Auto Fire')
     r[i] = r[i] == 'n/a' ? '' : r[i]
   })
 }
-function changeColors(arr) {
+function changeColors(arr, nameind) {
   arr.map(r => {
     for (var i=0; i<r.length; i++) {
-      if ( i == 20 || i == 1 ) {
-        
-      } else if ((i !== 2) && (r[i] !== undefined)) {
+      if ( i == 20) {
+
+      }  else if ((i !== nameind) && (r[i] !== undefined)) {
         // attr change colors
         r[i] = r[i].replace(/\bMaxHp\b/gi, '<span class=\'maxhp\'><img class="icon" src="' + maxhpimg + '" alt="hp"/> MaxHP</span>')
         r[i] = r[i].replace(/\bstr\b|\bstrength\b/gi, '<span class=\'strength\'><img class="icon" src="' + strimg + '" alt="str"/> Strength</span>')
@@ -160,9 +165,9 @@ function changeColors(arr) {
         r[i] = r[i].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="icon" src="' + seed + '" alt="seed"/>Seed</span>')
         r[i] = r[i].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="icon" src="' + blind + '" alt="blind"/>Blind</span>')
         r[i] = r[i].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="icon" src="' + venom + '" alt="venom"/>Venom</span>')
-      } else if (i == 2){
-        r[i] = r[2]
-      } else {
+      } else if (i == nameind){
+        r[i] = r[nameind]
+      }  else {
         r[i] = ''
       }
     }
@@ -180,7 +185,7 @@ let abilities = {
         res[ind].splice(0,11)
         res[ind].splice(12)
       })
-      changeColors(res)
+      changeColors(res, 1)
       res.map(inf => glossAllInfo.push(inf))
       let end = res.findIndex(r => r[0] == 'Applies')
       glossAllInfo.length = end
@@ -191,10 +196,148 @@ let abilities = {
       glossRaw = glossAllInfo.filter(gl => gl[1].includes('Boost') == false
                                               && gl[1].includes('Buff') == false
                                               && gl[1].includes('Debuff') == false
+                                              && gl[1].includes('Vulnerable') == false)
+
+      glossRaw.splice(2,2)
+      glossRaw.splice(0, 0, res[0], res[14], res[31], res[49])
+    //  glossRaw = glossRaw.map((row, ind)=> {
+    //    if (ind < 6) {
+    //      row[1] = row[1].replace(/Strength|Fire|Intelligence/, '')
+    //    }
+    //  })
+      })
+  },
+  glossRaw:() => {
+    return GetSheetDone
+      .raw(id, 4).then(data => data.data).then(res => {
+        res.shift()
+
+      res.map((row, ind) => {
+        res[ind].splice(0,11)
+        res[ind].splice(12)
+      })
+      changeColors(res, 1)
+      let end = res.findIndex(r => r[0] == 'Applies')
+      res.length = end
+      glossRaw = res.filter(gl => gl[1].includes('Boost') == false
+                                              && gl[1].includes('Buff') == false
+                                              && gl[1].includes('Debuff') == false
                                               && gl[1].includes('Element') == false
                                               && gl[1].includes('Vulnerable') == false)
+
       glossRaw.splice(2,2)
-      console.log(glossRaw)
+      let rage = ['', 'Rage']
+      let instinct = ['', 'Instinct']
+      let master = ['', 'Master']
+      let element = ['', 'Element']
+
+      glossRaw.splice(0, 0, res[0], res[14], res[31], res[49], rage, instinct, master, element)
+      glossRaw.map((row, ind)=> {
+            row.length = 12;
+            row[1] = row[1].replace(/Strength|Fire|Intelligence/, '')
+            switch (row[1].trim()) {
+              case 'InstantBoost':
+                row[10] = 'Buff next action\'s <em>attribute/ element</em> attack, heal and protect by 5X% (Max 75%, 100% if upgraded)'
+                break;
+              case 'Buff':
+                row[10] = 'Buff <em>attribute</em> by 10X% for x turn'
+                break;
+              case 'Debuff':
+                row[10] = 'For next action\'s <em>element</em> attack or heal, boost 5X% (Max 75%, 100% if upgraded)'
+                break;
+              case 'Vulnerable':
+                row[10] = 'Received 5X% more damage from <em>attribute/element</em> damage, boost <em>element corresponding debuff</em> effect by 10%'
+                break;
+              case 'Protect Pierce: ':
+                row[10] = '10X% damage will pierce through Protect (Max 100%)'
+                break;
+              case 'Rage':
+                row[10] = 'HP below 50%, buff attack damage by 5x% (Max 50%)'
+                break;
+              case 'Instinct':
+                row[10] = 'HP below 50%, damage mitigate by 5x% (Max 50%)'
+                break;
+              case 'Element':
+                row[10] = 'Deal 5X% more damage to target <em>corresponding debuff</em> and <em>element</em>, and reduce 5X% damage from <em>element</em>.<br><br>'
+                        + '<img class="icon" src="' + fire + '" alt="water"/>Fire</span>: <img class="icon" src="' + burn + '" alt="chill"/>Burn</span><br>'
+                        + '<img class="icon" src="' + water + '" alt="water"/>Water</span>: <img class="icon" src="' + chill + '" alt="chill"/>Chill</span><br>'
+                        + '<img class="icon" src="' + thunder + '" alt="water"/>Thunder</span>: <img class="icon" src="' + paralysis + '" alt="chill"/>Paralysis</span><br>'
+                        + '<img class="icon" src="' + earth + '" alt="water"/>Earth</span>: <img class="icon" src="' + seed + '" alt="chill"/>Seed</span><br>'
+                        + '<img class="icon" src="' + wind + '" alt="water"/>Wind</span>: <img class="icon" src="' + dizzy + '" alt="chill"/>Dizzy</span><br>'
+                        + '<img class="icon" src="' + dark + '" alt="water"/>Dark</span>: <img class="icon" src="' + depress + '" alt="chill"/>Depress</span><br>'
+                        + '<img class="icon" src="' + light + '" alt="water"/>Light</span>: <img class="icon" src="' + blind + '" alt="chill"/>Blind</span>'
+                break;
+              case 'Master':
+                row[10] = 'Attribute: buff/act buff max stack increase, required combo -1<br><br>'
+                        + 'Debuff: Max stack increase for stat debuff, Venom, Restrain and Insane<br><br>'
+                        + 'Combo: All Stat combo required decrease<br><br>'
+                        + 'Skill Stack: Max stack increase for turn charge, practice perfect<br><br>'
+                        + 'Charge/Guard: Upgrade Charge and Stack Charge/Guard and Stack Guadr<br><br>'
+                        + 'LifeSteal: Normal attack gain 25% lifesteal, buff life steal skills<br><br>'
+                        + 'Race: Apply race Expert to every attack and heal<br><br>'
+                        + 'Element: Increase max stack for element, corresponding debuff boost <br><br>'
+                        + 'Normal:On every Hero level up, increase direct damage, heal and protect value by 10% <br><br>'
+                break;
+              default:
+            }
+          })
+
+      glossRaw = Array.from(glossRaw).sort(function(a, b) {
+        return a[1] > b[1] ? 1 : -1;
+    })
+    /*console.log(Array.from(glossRaw).sort(function(a, b) {
+      return a[1] > b[1] ? 1 : -1;
+    }))*/
+
+      })
+  },
+  apply:() => {
+      return GetSheetDone
+        .raw(id, 4).then(data => data.data).then(res => {
+          res.shift()
+        res.map((row, ind) => {
+          res[ind].splice(0,11)
+          res[ind].splice(12)
+        })
+        changeColors(res, 1)
+        let end = res.findIndex(r => r[0] == 'Applies')
+        res = res.slice(end+17,res.length)
+        res.length = 11
+        let attr = ['', 'Attribute Synergy']
+        let expert = ['', 'Race Expert']
+        let element = ['', 'Element']
+        let lifesteal = ['', 'Life Steal']
+        res.splice(0,0, attr, expert, element, lifesteal)
+        applyRaw = res
+        applyRaw.map((row, ind)=> {
+          row.length = 12
+              switch (row[1].trim()) {
+                case 'Attribute Synergy':
+                  row[10] = 'Boost <em>attribute</em> damage/heal<br>'
+                           + '<img class="icon strimg" src="' + strimg + '" alt="water"/>Strength</span><img class="icon hpimg" src="' + maxhpimg + '" alt="water"/>MaxHP: 2X%</span><br>'
+                           + '<img class="icon agiimg" src="' + agiimg + '" alt="water"/>Agility</span><img class="icon intimg" src="' + intimg + '" alt="water"/>Intelligence: 1X%</span><br>'
+                           +'X = attr Combo Counter (Max 100%)'
+                  break;
+                case 'Race Expert':
+                  row[10] = 'If race matches, 30% more damage for enemy, 30% more heal on self'
+                  break;
+                case 'Life Steal':
+                  row[10] = 'Add 50%, 100% if upgraeded life steal on ability\'s attack.'
+                  break;
+                case 'Element':
+                  row[10] = 'Deal 5X% more damage to target <em>corresponding debuff</em> and <em>element</em>, and reduce 5X% damage from <em>element</em>.<br><br>'
+                          + '<img class="icon" src="' + fire + '" alt="water"/>Fire</span>: <img class="icon" src="' + burn + '" alt="chill"/>Burn</span><br>'
+                          + '<img class="icon" src="' + water + '" alt="water"/>Water</span>: <img class="icon" src="' + chill + '" alt="chill"/>Chill</span><br>'
+                          + '<img class="icon" src="' + thunder + '" alt="water"/>Thunder</span>: <img class="icon" src="' + paralysis + '" alt="chill"/>Paralysis</span><br>'
+                          + '<img class="icon" src="' + earth + '" alt="water"/>Earth</span>: <img class="icon" src="' + seed + '" alt="chill"/>Seed</span><br>'
+                          + '<img class="icon" src="' + wind + '" alt="water"/>Wind</span>: <img class="icon" src="' + dizzy + '" alt="chill"/>Dizzy</span><br>'
+                          + '<img class="icon" src="' + dark + '" alt="water"/>Dark</span>: <img class="icon" src="' + depress + '" alt="chill"/>Depress</span><br>'
+                          + '<img class="icon" src="' + light + '" alt="water"/>Light</span>: <img class="icon" src="' + blind + '" alt="chill"/>Blind</span>'
+                  break;
+                default:
+              }
+            })
+
       })
   },
   units:() => {
@@ -343,11 +486,11 @@ let abilities = {
             + '<br>' + (desc4[i].desc || ''))
           }
 
-          changeColors(res)  // change colors of keywords in skills/effects/traits
+          changeColors(res, 2)  // change colors of keywords in skills/effects/traits
           changeApply(res, 17)
           changeApply(res, 18)
           changeApply(res, 19)
-console.log(res)
+
         //get cost+tier / skills / effects / TRAITS arrays
 res.map(res=> abilBasic.push(res[2] + ':' + res[3]/*tier*/ + '\t\t' + res[4]/*cost*/))
 res.map(res=> abilSkills.push(res[2] + ':' + (res[5] || '') + ', ' + (res[8] || '') + ', ' + (res[11] || '') + ', ' + (res[14] || '')))
@@ -416,7 +559,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
             + '<br>' + (desc3[i].desc || '')
             + '<br>' + (desc4[i].desc || '') + '<br>')
             }
-          changeColors(res)  // change colors of keywords in skills/effects/traits
+          changeColors(res, 2)  // change colors of keywords in skills/effects/traits
           changeApply(res, 16)
           changeApply(res, 17)
           changeApply(res, 18)
@@ -463,6 +606,16 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
             res.map(inf => mats.push(inf))
           })
         },
+  }
+  let characters = {
+    chars:() => {
+      return GetSheetDone
+        .raw(id, 9).then(data => data.data).then(res => {
+          res.shift()
+        changeColors(res, 1)
+        console.log(res)
+        })
+    }
   }
   //console.log(abilitiesArr)
   /*find:() => {

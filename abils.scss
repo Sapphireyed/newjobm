@@ -17,6 +17,17 @@ h1 {
 ::-webkit-scrollbar-thumb {
     background-color: $darkBg;
 }
+#sideDiv {
+  background-color: $darkBg;
+  h4 {
+    background-color: rgb(237, 251, 255);
+    color:  $darkBg;
+    box-shadow: 2px 2px 1px 1px rgba(114, 139, 188, .3);
+  }
+  a {
+    background-color: $darkBg;
+  }
+}
 #abils { background-color: #286a80}
 
 #abilsmain {
@@ -33,7 +44,7 @@ h1 {
 #navFiters {
   padding: 3px 0 0 0;
   border-top: 0 solid $darkBg;
-  div:first-child {float: right }
+  //div:nth-child(2) {float: right }
 }
 
 // TABLE
@@ -59,3 +70,7 @@ th { background-color: $darkBg}
 }
 
 table tr td:nth-child(6) {padding: 3px 0 2px 31px}
+
+.applyTip .applyText {
+    background-color: $darkBg; //rgb(77, 99, 111);
+  }

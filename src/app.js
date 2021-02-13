@@ -22,13 +22,14 @@ var $ = require("jquery")
 //let bgimg = document.createElement('img')
 //bgimg.id = 'bgimg'
 //bgimg.src = bg
-
-document.body.append( nav(), jobsmain, sideDiv)
+let preload = document.createElement('div')
+preload.id = 'preload'
+document.body.append(preload, nav(), jobsmain, sideDiv)
 cursor()
 let sidenav = document.getElementById('sidenav')
-sidenav.addEventListener('click', function() {
-  toggleSide(document.getElementById('jobsmain'))
-})
+let section = $('#jobsmain')
+let navmain = document.getElementById('navMain')
+toggleSide(sidenav, section, navmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
 document.body.style.backgroundAttachment = 'fixed'
@@ -70,6 +71,7 @@ jobsData.craft()
         //getMatImgs()
         getJobImgs()
         jobs()
+
       })
 
     })

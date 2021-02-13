@@ -80,7 +80,7 @@ let myreg = /([A-Z])\w+/gi
         let passiveH = win.document.getElementById('passiveH')
         let passiveDesc = win.document.getElementById('passiveDesc')
         let passiveTraits = win.document.getElementById('passiveTraits')
-        var ptraits = splitDesc(passivetraits, jobItem[7])
+        var ptraits = splitApply(passivetraits, jobItem[7])
         ptraits = ptraits.length == 0 ? '' : ptraits[0][1]
         var passive = splitDesc(passivedesc, jobItem[7])
         passive = passive.length == 0 ? '' : passive[0][1]
@@ -112,7 +112,6 @@ let myreg = /([A-Z])\w+/gi
         //switch desc
         let switchDesc = win.document.getElementById('switchDesc')
         var switchSkill = splitDesc(abil, jobItem[8])
-        console.log(switchSkill)
         switchSkill = switchSkill.length == 0 ? '' : switchSkill[0][1]
         //let switchtraits = win.document.getElementById('switchtraits')
         var traits = splitApply(abiltraits, jobItem[8])
@@ -215,7 +214,6 @@ let myreg = /([A-Z])\w+/gi
         }
 
         // Craft
-        console.log(craft)
         let craftdiv = win.document.getElementById('craftCraft')
         let craftjob = Object.entries(craft).map(job => {
           job.shift()

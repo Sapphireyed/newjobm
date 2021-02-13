@@ -17,7 +17,17 @@ h1 {
 ::-webkit-scrollbar-thumb {
     background-color: $darkBg;
 }
-
+#sideDiv {
+  background-color: $darkBg;
+  h4 {
+    background-color: rgb(237, 251, 255);
+    color:  $darkBg;
+    box-shadow: 2px 2px 1px 1px rgba(114, 139, 188, .3);
+  }
+  a {
+    background-color: $darkBg;
+  }
+}
 #passivesmain {
   width: 80vw;
   button {background-color: $darkBg;}
@@ -48,3 +58,7 @@ table{color: black}
 }
 
 th { background-color: $darkBg}
+
+.applyTip .applyText {
+    background-color: $darkBg; //rgb(77, 99, 111);
+  }

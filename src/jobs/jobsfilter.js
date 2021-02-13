@@ -22,7 +22,7 @@ header.id = 'top'
 
 const filtersDiv = document.createElement('div');
 filtersDiv.id = 'jobsfilter'
-filtersDiv.classList.add('col-12', 'col-lg-6', 'row', 'filtersSub');
+filtersDiv.classList.add('col-12', 'col-lg-7', 'row', 'filtersSub');
 // RARITY filter
 const rarFilter = document.createElement('div');
 rarFilter.classList.add('col-6')
@@ -175,8 +175,7 @@ whenFilterDiv.append(whenLabel, whenSel)
 
 // search in passive/switch/both
 const searchinDiv = document.createElement('div');
-searchinDiv.classList.add('col-6')
-//searchinDiv.style.borderBottom = '2px solid #2a434a'
+searchinDiv.classList.add('col-12')
 const searchinLabel = document.createElement('label');
 searchinLabel.for = 'searchin'
 searchinLabel.innerHTML = 'Search in: '
@@ -189,16 +188,31 @@ searchinSel.innerHTML = '<option value="both">Both</option><option value="passiv
 searchinDiv.append(searchinLabel, searchinSel)
 
 //clear filters button
+//let filtBtns= document.createElement('div')
+//filtBtns.classList.add('col-6', 'row')
+//filtersBtns.id = 'startClear'
 let cleardiv = document.createElement('div')
-cleardiv.className = 'col-6'
+cleardiv.classList.add('col-6', 'sol-sm-3')
 let clear = document.createElement('button')
 clear.id = 'jobsclear'
-clear.innerHTML = 'Reset filters'
+clear.innerHTML = 'Reset'
 clear.classList.add('rounded')
 clear.style.color = 'white'
 clear.style.fontSize = '18px'
 clear.style.backgroundColor = '#3a5863'//'#4d636f'
 cleardiv.appendChild(clear)
+//clear filters button
+let filterStart = document.createElement('div')
+filterStart.classList.add('col-6', 'sol-sm-3')
+let start = document.createElement('button')
+start.id = 'start'
+start.innerHTML = 'Start'
+start.classList.add('rounded')
+start.style.color = 'white'
+start.style.fontSize = '18px'
+start.style.backgroundColor = '#3a5863'//'#4d636f'
+filterStart.appendChild(start)
+//filtBtns.append(cleardiv, filterStart)
 /*const filtersLabels = document.createElement('div');
 filtersLabels.classList.add('col-6')
 filtersLabels.append(rarLabel, br.cloneNode(true), elemLabel, br.cloneNode(true), attrLabel, br.cloneNode(true), typeLabel, br.cloneNode(true), applyLabel)
@@ -208,11 +222,11 @@ filtersSelect.append(rarSel, br, elemSel, attrSel, typeSel, applySel)*/
 let navFiters = document.createElement('div')
 navFiters.id = 'navFiters'
 navFiters.classList.add('col-12', 'row')
-navFiters.append(searchinDiv, cleardiv)
+navFiters.append(searchinDiv, cleardiv, filterStart)
 filtersDiv.append(rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, whenFilterDiv, navFiters)
 
 const othersDiv = document.createElement('div');
-othersDiv.classList.add('col-12', 'col-lg-6', 'row');
+othersDiv.classList.add('col-12', 'col-sm-5', 'row');
 othersDiv.id = 'otherfilters'
 
 // choose Lvl
@@ -261,7 +275,17 @@ const crystOpt = crystOptArr.map(opt => {
 numOfCryst.innerHTML = crystOpt;
 
 crystDiv.append(jobmCrystal, numOfCryst)
-
+// level buttons
+let lvlbtns = document.createElement('div')
+lvlbtns.classList.add('col-12')
+lvlbtns.id = 'lvlbtns'
+let applybtn = document.createElement('button')
+applybtn.classList.add('rounded')
+applybtn.innerHTML = 'Apply'
+let reset = document.createElement('button')
+reset.classList.add('rounded')
+reset.innerHTML = 'Reset'
+lvlbtns.append(applybtn, reset)
 // SEARCH
 const searchDiv = document.createElement('div')
 searchDiv.classList.add('col-12')
@@ -298,7 +322,7 @@ pages.innerHTML = '<!-- pager -->' +
     '<button class="pages rounded" id="last"><img alt="last" src="' + last + '" width="44" height="auto"></button>'+
     '</div>'
 //header.append(pages)
-othersDiv.append(chooseLvlDiv, crystDiv, searchDiv, pages)
+othersDiv.append(chooseLvlDiv, crystDiv, lvlbtns, searchDiv, pages)
 //add it all to the section
 jobsfilter.append(header, filtersDiv, othersDiv)
 export { jobsfilter}

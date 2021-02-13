@@ -13,7 +13,7 @@ var $ = require("jquery")
 import tablesorter from 'tablesorter';
 
 export function glossFn() {
-
+//console.log(glossRaw)
   var pagesSel = document.getElementById('numOfPages')
   var list = glossAllInfo
   var pageList = [];

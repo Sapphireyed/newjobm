@@ -34,7 +34,7 @@ rarSel.name = 'rarity'
 rarSel.classList.add('filter', 'rounded')
 //rarSel.style.float = 'right'
 //rarSel.style.width = '100px'
-const optionsArr = ['All', 1, 2, 3, 4, 5];
+const optionsArr = ['All', 'Low', 'Medium', 'High', 'Master'];
 
 const options = optionsArr.map(opt => {
   const value = opt
@@ -134,7 +134,13 @@ applySel.id = 'apply'
 applySel.name = 'apply'
 applySel.value = 'All'
 applySel.classList.add('filter', 'rounded')
-const applyOptionsArr = ['Action', 'Turn Charge', 'Combo', 'CreatureExpert', 'Draw', 'Exhaust', 'HumanoidExpert', 'LifeSteal', 'MatterExpert', 'Multiply', 'SpiritExpert',    ].sort();
+const applyOptionsArr = [
+        'Practice Perfect','Exhaust',  'LifeSteal','Last Resort','Turn Charge', 'Combo Blend', 'Overloaded',
+        'Focus Energy', 'Negative Power', 'Curse', 'Scheduled', 'Auto Fire',
+        'CreatureExpert',  'HumanoidExpert',  'MatterExpert',  'SpiritExpert',
+        'Strength Synergy', 'Agility Synergy', 'MaxHP Synergy', 'Intelligence Synergy',
+        'Fire', 'Water', 'Earth', 'Wind', 'Thunder', 'Dark', 'Light'
+        ].sort();
 
 const optionsApply = applyOptionsArr.map(opt => {
   const value = opt
@@ -149,21 +155,27 @@ let cleardiv = document.createElement('div')
 cleardiv.className = 'col-6'
 let clear = document.createElement('button')
 clear.id = 'jobsclear'
-clear.innerHTML = 'Reset filters'
+clear.innerHTML = 'Reset'
 clear.classList.add('rounded')
 clear.style.color = 'white'
 clear.style.fontSize = '18px'
 cleardiv.appendChild(clear)
-/*const filtersLabels = document.createElement('div');
-filtersLabels.classList.add('col-6')
-filtersLabels.append(rarLabel, br.cloneNode(true), elemLabel, br.cloneNode(true), attrLabel, br.cloneNode(true), typeLabel, br.cloneNode(true), applyLabel)
-const filtersSelect = document.createElement('div')
-filtersSelect.classList.add('col-6')
-filtersSelect.append(rarSel, br, elemSel, attrSel, typeSel, applySel)*/
+//start filters
+let filterStart = document.createElement('div')
+filterStart.className = 'col-6'
+let start = document.createElement('button')
+start.id = 'start'
+start.innerHTML = 'Start'
+start.classList.add('rounded')
+start.style.color = 'white'
+start.style.fontSize = '18px'
+//start.style.backgroundColor = '#3a5863'//'#4d636f'
+filterStart.appendChild(start)
+
 let navFiters = document.createElement('div')
 navFiters.id = 'navFiters'
-navFiters.classList.add('col-6')
-navFiters.appendChild(cleardiv)
+navFiters.classList.add('col-12','col-sm-6', 'row')
+navFiters.append(cleardiv, filterStart)
 filtersDiv.append(rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, navFiters)
 
 const othersDiv = document.createElement('div');
