@@ -30,7 +30,9 @@ $secondBgLight: #c4c2bf;
         background-color: $mainBg;
     }
 }
-
+h1 {
+    @include title;
+}
 
 body {
   background-color: rgb(245,247,248);
@@ -190,10 +192,6 @@ nav:nth-child(2) {
     margin: 0
 }
 
-h1 {
-    @include title;
-}
-
 .info {
     margin-bottom: 10px
 }
@@ -292,9 +290,6 @@ tbody { color: black}
 table tr td:not(:first-child) { padding: 0 0 0 31px; }
 table tr td:nth-child(3) {
     font-weight: bold;
-}
-#jobsTable tr td:nth-child(4) {
-    color: gold;
 }
 #jobsTable tr td:nth-child(8) {
     background-color: rgba(216, 216, 51, .7);

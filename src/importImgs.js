@@ -11,6 +11,9 @@ const matsImgs = importAll(require.context('./img/materials', false, /\.(png|jpg
 const matsFrames = importAll(require.context('./img/materials/Frames', false, /\.(png|jpg|JPG|svg)$/));
 const abilsImgs = importAll(require.context('./img/Abilities', false, /\.(png|jpg|JPG|svg|WEBP|web|WEB|webp)$/));
 const abilsBg = importAll(require.context('./img/Abilities/Bg', false, /\.(png|jpg|JPG|svg)$/));
+const charsImgs = importAll(require.context('./img/Character', false, /\.(png|jpg|JPG|svg)$/));
+const charsBg = importAll(require.context('./img/Character/Frames', false, /\.(png|jpg|JPG|svg)$/));
 export { jobsImgs, jobsFrames, jobsBg,
          matsImgs,matsFrames,
-         abilsImgs, abilsBg }
+         abilsImgs, abilsBg,
+         charsImgs,charsBg}

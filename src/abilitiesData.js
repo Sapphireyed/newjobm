@@ -30,10 +30,13 @@ export { powlvl, unitDesc,
          abilitiesAllInfo, abilitiesArr, descFinale, abilBasic, abilSkills, abilEffects, abilTraits,
          passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
          jobsData, jobsStats, jobsDataAll, craft, mats,
-          glossAllInfo,appliesAllInfo, glossRaw,applyRaw}
+         glossAllInfo,appliesAllInfo, glossRaw,applyRaw,
+         characters, charsAllInfo }
 
+//skillunits
 let powlvl;     // power level table from sheet 4
 let unitDesc;  // unit desc table from sheet 4
+//abilities
 let abilitiesArr = [];   // abilites from sheet 6
 let abilitiesAllInfo = [];
 let descFinale = []; // name +desc with changed color and X value
@@ -41,6 +44,7 @@ let abilSkills = [];  // Damage/Sacrifice/Heal etc
 let abilEffects = []  // attr, element etc
 let abilTraits = []; // draw, multiply, element, exhaust etc
 let abilBasic = [];   // name +rarity+ cost
+//passives
 let passives = [];  // passives skillunits
 let passivesArr = [];
 let passivesAllInfo = [];
@@ -48,14 +52,18 @@ let passiveFinale = []  // passiveswith changed color and x value
 let passiveSkills = []; // turnDamage/turnHeal etc
 let passiveEffects = [] // attr, element etc
 let passiveTraits = [];
+//jobs
 let jobsDataAll = []//jobs
 let jobsStats;
 let craft = [];
 let mats = [];   //materials to craft jobs
+//glossary
 let glossAllInfo = [];
 let appliesAllInfo = []
 let glossRaw = []
 let applyRaw = [];
+//characters
+let charsAllInfo = [];
 //glossAllInfo.length = 63
 
 var name, desc, desc1, desc2, desc3, desc4
@@ -163,8 +171,8 @@ function changeColors(arr, nameind) {
         r[i] = r[i].replace(/\bparalysis\b/gi, '<span class=\'paralysis\'><img class="icon" src="' + paralysis + '" alt="paralysis"/>Paralysis</span>')
         r[i] = r[i].replace(/\brestrain\b/gi, '<span class=\'restrain\'><img class="icon" src="' + restrain + '" alt="restrain"/>Restrain</span>')
         r[i] = r[i].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="icon" src="' + seed + '" alt="seed"/>Seed</span>')
-        r[i] = r[i].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="icon" src="' + blind + '" alt="blind"/>Blind</span>')
-        r[i] = r[i].replace(/\bseed\b/gi, '<span class=\'seed\'><img class="icon" src="' + venom + '" alt="venom"/>Venom</span>')
+        r[i] = r[i].replace(/\bblind\b/gi, '<span class=\'blind\'><img class="icon" src="' + blind + '" alt="blind"/>Blind</span>')
+        r[i] = r[i].replace(/\bvenom\b/gi, '<span class=\'venom\'><img class="icon" src="' + venom + '" alt="venom"/>Venom</span>')
       } else if (i == nameind){
         r[i] = r[nameind]
       }  else {
@@ -613,6 +621,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
         .raw(id, 9).then(data => data.data).then(res => {
           res.shift()
         changeColors(res, 1)
+        charsAllInfo = res;
         console.log(res)
         })
     }

@@ -1,16 +1,18 @@
 global.fetch = require('node-fetch');
 const GetSheetDone = require('get-sheet-done');
 const id = '1W-ptBX6fjkQcZXrrr4KTZRp2qNcer66Ak4VANW2dM8';
-import {jobsData, jobsDataAll, mats, jobsStats, abilitiesAllInfo, abilSkills} from '../abilitiesData.js'
+import {jobsData, jobsDataAll, mats, jobsStats, abilitiesAllInfo, abilSkills, charsAllInfo} from '../abilitiesData.js'
 import {jobsImgs, jobsFrames, jobsBg,
         matsImgs, matsFrames,
-        abilsImgs, abilsBg } from '../importImgs.js'
+        abilsImgs, abilsBg,
+        charsImgs, charsBg} from '../importImgs.js'
 
 let matImagesComplete = []
 let jobImagesComplete = []
 let abilImagesComplete = []
+let charsImagesComplete = []
 
-export { matImagesComplete, jobImagesComplete, abilImagesComplete } // full DOM element containing job/mat img
+export { matImagesComplete, jobImagesComplete, abilImagesComplete, charsImagesComplete } // full DOM element containing job/mat img
 
 //mats frames
 let  common = Object.entries(matsFrames).filter(frame => frame[0] == 'Common.png')
@@ -218,4 +220,56 @@ export function getAbilImgs() {
 
     })
 
+}
+
+//chars
+//frames
+let cone = Object.entries(charsBg).filter(frame => frame[0] == '1.png')
+cone = Object.values(cone)[0][1]
+let ctwo = Object.entries(charsBg).filter(frame => frame[0] == '2.png')
+ctwo = Object.values(ctwo)[0][1]
+let cthree = Object.entries(charsBg).filter(frame => frame[0] == '3.png')
+cthree = Object.values(cthree)[0][1]
+let cfour = Object.entries(charsBg).filter(frame => frame[0] == '4.png')
+cfour = Object.values(cfour)[0][1]
+let cfive = Object.entries(charsBg).filter(frame => frame[0] == '5.png')
+cfive = Object.values(cfive)[0][1]
+// mats img complete
+export function getCharsImages() {
+  Object.entries(charsImgs).map(mat => {
+    let ext = mat[0].indexOf('.')
+    let name = mat[0].substring(0, ext)
+    let matImgHtml = document.createElement('img');  //create mat img empty
+    matImgHtml.src=  mat[1]  // set shape as backgrond
+    matImgHtml.id = name;
+    matImgHtml.className = 'material'
+    matImgHtml.style.transform= 'scaleX(-1)'
+    matImgHtml.style.backgroundSize = 'cover'
+    charsAllInfo.map(material => {
+      if (material[1] == matImgHtml.id) { // set frame as img src dep on rarity
+        let rarity = material[2]
+      /*  switch (rarity) {
+          case 'Beginner':
+            matImgHtml.style.backgroundImage = 'url("' + cone + '")'
+            break;
+          case 'Easy':
+            matImgHtml.style.backgroundImage = 'url("' + ctwo + '")'
+            break;
+          case 'Medium':
+            matImgHtml.style.backgroundImage = 'url("' + cthree + '")'
+            break;
+          case 'Hard':
+            matImgHtml.style.backgroundImage = 'url("' + cfour + '")'
+            break;
+          case 'Boss':
+            matImgHtml.style.backgroundImage = 'url("' + cfive + '")'
+            break;
+        default:
+      }*/
+        charsImagesComplete.push(matImgHtml)
+      }
+
+    })
+
+  })
 }

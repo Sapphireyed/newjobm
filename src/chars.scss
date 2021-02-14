@@ -1,0 +1,104 @@
+$mainBg: #031a2a;
+@mixin title {
+    text-align: center;
+    color: #fff;
+    background-color: $mainBg;
+}
+h1 {
+    @include title;
+}
+#navFiters button { background-color: $mainBg}
+#pages {
+  button {
+    background-color:$mainBg;
+    color: rgb(158, 177, 187)
+  }
+  select {
+    background-color: rgb(158, 177, 187);
+    float: none;
+  }
+}
+#navFiters { border-top: 2px solid $mainBg;}
+#tabs {
+  width: 100%;
+  button {
+    width: 50%;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    padding: 7px 0;
+    background-color: rgba(38, 69, 83, .4)
+  }
+//  border-bottom: 3px solid #2a434a // $mainBg
+}
+
+#tabs button { background-color: rgba(3, 26, 42,.5)}
+thead { background-color: $mainBg}
+th { background-color: $mainBg}
+#jobs {background-color: #0c3551}
+#enemiesTable {display: none}
+#enemiesTable tr td:nth-child(6){padding-left: 30px;}
+#enemiesTable tr td:nth-child(10) {
+    background-color: rgba(216, 216, 51, .7);
+}
+
+#enemiesTable tr td:nth-child(11) {
+    background-color: rgba(183, 38, 25,.7)//rgba(255, 101, 101, 0.7);
+}
+
+#enemiesTable tr td:nth-child(12) {
+    background-color: rgba(51, 204, 76, 0.7);
+}
+
+#enemiesTable tr td:nth-child(13) {
+    background-color: rgba(51, 82, 171, 0.7);
+}
+#enemiesTable tr td:nth-child(n+8) {
+  text-align: center;
+  padding: 0;
+}
+//HEROES table
+#heroesTable tr td:nth-child(6){padding-left: 30px;}
+#heroesTable tr td:nth-child(8) {
+    background-color: rgba(216, 216, 51, .7);
+}
+
+#heroesTable tr td:nth-child(9) {
+    background-color: rgba(183, 38, 25,.7)//rgba(255, 101, 101, 0.7);
+}
+
+#heroesTable tr td:nth-child(10) {
+    background-color: rgba(51, 204, 76, 0.7);
+}
+
+#heroesTable tr td:nth-child(11) {
+    background-color: rgba(51, 82, 171, 0.7);
+}
+#heroesTable tr td:nth-child(n+8) {
+  text-align: center;
+  padding: 0;
+}
+table tr td:not(:first-child) {
+ padding: 0 0 0 0;
+}
+#pic {
+  width: 80px;
+  img{
+   display: block;
+   margin: auto;
+   width: 49px;
+   height: auto;
+ }
+}
+
+.abil div:first-child, .enabil div:first-child {
+  display: inline;
+  margin-right: 5px;
+  img { position: inherit}
+}
+
+.Beginner {color: #6a8d55; font-weight: 600}
+.Easy { color: #4b7396; font-weight: 600}
+.Medium {color: #584b67; font-weight: 600}
+.Hard { color: #954e3a; font-weight: 600}
+.Boss { color: #e0c369; font-weight: 600}

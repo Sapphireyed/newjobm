@@ -27,10 +27,6 @@ window.onscroll = function() {
   stickyNav(headernav)
 }
 
-let button = document.getElementById('navbtn')
-let menu = document.getElementById('collapsemenu')
-toggle(menu, button)
-
 abilities.units()
     .then(data => {
       //  abilities.passivesFn()
@@ -66,3 +62,7 @@ abilities.units()
               }
             })
           })
+
+let togglebtn = document.getElementById('navbtn')
+let menu = document.getElementById('collapsemenu')
+toggle(menu, togglebtn)

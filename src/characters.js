@@ -1,13 +1,14 @@
 import './style.scss';
-import './gloss.scss';
+//import './gloss.scss';
+import './chars.scss';
 import nav from './nav/nav';
-import { glossarymain } from './glossary/glossarymain.js'
-import {abilities, jobsData} from './abilitiesData.js'
-import {getMatImgs, getAbilImgs, getJobImgs, abilImagesComplete, jobImagesComplete} from './img/imgsHTML.js'
-import { jobsTable } from './jobs/jobsTable.js'
+import { glossarymain } from './chars/charsmain.js'
+import {abilities, jobsData, characters, charsAllInfo} from './abilitiesData.js'
+import {getMatImgs, getAbilImgs, getCharsImages, abilImagesComplete, charsImagesComplete} from './img/imgsHTML.js'
+//import { jobsTable } from './jobs/jobsTable.js'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
-import { glossFn, applyTableFn } from './glossary/glossjs.js'
-import theadimg from './img/traits/Protective.png'
+import { glossFn, applyTableFn } from './chars/charsjs.js'
+import theadimg from './img/materials/Space Stone.png'
 var $ = require("jquery")
 import { toggle} from './basicfn/toggle.js'
 
@@ -26,43 +27,60 @@ var headernav = document.getElementById("navMain");
 window.onscroll = function() {
   stickyNav(headernav)
 }
+ window.addEventListener('load', function() {
+   abilities.units()
+    .then(unit => {
+      abilities.passivesFn()
+      abilities.abils()
+       .then(ab => {
+         getAbilImgs()
+         characters.chars()
+           .then(res => {
+             getCharsImages()
+          console.log(charsImagesComplete)
+             glossFn()
+             let heroesTable = document.getElementById('heroesTable')
+             let enemiesTable = document.getElementById('enemiesTable')
+             let button1= document.getElementById('glossButton')
+             let button2= document.getElementById('applyButton')
+             button1.style.backgroundColor = 'rgb(3, 26, 42)'
+             let heroes = true
+             button1.onclick = function(){
+               if (heroes == false) {
+                 glossFn()
+                 switchTable(heroesTable, enemiesTable)
+                 this.style.backgroundColor = 'rgb(3, 26, 42)'
+                 button2.style.backgroundColor = 'rgba(3, 26, 42, .5)'
+                 heroes = true
+               }
+             }
+             button2.onclick = function(){
+               if (heroes == true) {
+                 console.log('poo')
+                 this.style.backgroundColor = 'rgb(3, 26, 42)'
+                 button1.style.backgroundColor = 'rgba(3, 26, 42, .5)'
+                 let trs = document.querySelectorAll('#applyTable tr')
+                 if (trs.length < 3) {
+                   applyTableFn()
+                //   document.querySelectorAll('#enemiesTable thead').style.display = 'block'
+                 }
+                 switchTable(enemiesTable, heroesTable)
+                 heroes = false
+               }
+             }
+             function switchTable(table, table2) {
+               table.style.display = 'table';
+               table2.style.display = 'none'
+             }
+           })
+           })
+       })
+    })
+
+
+
+
 
 let button = document.getElementById('navbtn')
 let menu = document.getElementById('collapsemenu')
 toggle(menu, button)
-
-abilities.units()
-    .then(data => {
-      //  abilities.passivesFn()
-        abilities.glossary()
-          .then(res => {
-              getAbilImgs()
-              glossFn()
-
-              let glossTable = document.getElementById('glossTable')
-              let applyTable = document.getElementById('applyTable')
-              let button1= document.getElementById('glossButton')
-              let button2= document.getElementById('applyButton')
-              button1.style.backgroundColor = '#264553'
-
-              button1.onclick = function(){
-                switchTable(glossTable, applyTable)
-                this.style.backgroundColor = '#264553'
-                button2.style.backgroundColor = 'rgba(38, 69, 83, .5)'
-              }
-              button2.onclick = function(){
-                this.style.backgroundColor = '#264553'
-                button1.style.backgroundColor = 'rgba(38, 69, 83, .5)'
-                let trs = document.querySelectorAll('#applyTable tr')
-                if (trs.length < 3) {
-                  applyTableFn()
-                }
-
-                switchTable(applyTable, glossTable)
-              }
-              function switchTable(table, table2) {
-                table.style.display = 'block';
-                table2.style.display = 'none'
-              }
-            })
-          })
