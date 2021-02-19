@@ -60,7 +60,7 @@ const optionsRace = optionsArrRace.map(opt => {
   return `<option value="${value}">${opt}</option>`;
 });
 
-raceSel.innerHTML = options;
+raceSel.innerHTML = optionsRace;
 racefilter.append(raceLabel, raceSel)
 // Element filter
 const elemFilter = document.createElement('div');
@@ -201,7 +201,7 @@ const searchinSel = document.createElement('select');
 searchinSel.id = 'searchin'
 searchinSel.name = 'searchin'
 searchinSel.classList.add('rounded')
-searchinSel.innerHTML = '<option value="both">Both</option><option value="passive">Passive</option><option value="switch">Switch</option>'
+searchinSel.innerHTML = '<option value="both">Both</option><option value="passive">Passive</option><option value="ability">Ability</option>'
 searchinDiv.append(searchinLabel, searchinSel)
 
 //clear filters button
@@ -238,7 +238,7 @@ let navFiters = document.createElement('div')
 navFiters.id = 'navFiters'
 navFiters.classList.add('col-12', 'row')
 navFiters.append(searchinDiv, cleardiv, filterStart)
-filtersDiv.append(rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, whenFilterDiv, navFiters)
+filtersDiv.append(rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, whenFilterDiv, racefilter, navFiters)
 
 const othersDiv = document.createElement('div');
 othersDiv.classList.add('col-12', 'col-sm-5', 'row');
@@ -250,7 +250,7 @@ chooseLvlDiv.classList.add('col-6', 'col-lg-12')
 //chooseLvlDiv.style.textAlign = 'right'
 const chooseLabel = document.createElement('label');
 chooseLabel.for = 'chooselvl'
-chooseLabel.innerHTML = 'Change lvl: '
+chooseLabel.innerHTML = 'Dungeon lvl: '
 chooseLabel.style.marginRight = '4px'
 const chooseInput = document.createElement('input');
 chooseInput.id = 'chooselvl'
@@ -265,31 +265,27 @@ chooseInput.classList.add('rounded')
 
 chooseLvlDiv.append(chooseLabel, chooseInput)
 
-//jobmania crystal
-/*const crystDiv = document.createElement('div');
-crystDiv.classList.add('col-6','col-lg-12')
-crystDiv.style.textAlign = 'right'
-const jobmCrystal = document.createElement('label');
-jobmCrystal.for = 'jobmCrystal'
-jobmCrystal.innerHTML = 'Jobmania Crystal: '
-jobmCrystal.style.textAlign = 'right'
-jobmCrystal.style.marginRight = '4px'
-const numOfCryst = document.createElement('select');
-numOfCryst.id = 'jobmCrystal'
-numOfCryst.name = 'jobmCrystal'
-numOfCryst.value = 0
-numOfCryst.style.width = '50px'
-numOfCryst.classList.add('rounded')
-numOfCryst.style.textAlign = 'right'
-const crystOptArr = [0, 1, 2, 3, 4, 5];
+// choose Lvl
+const heroLvlDiv = document.createElement('div');
+heroLvlDiv.classList.add('col-6', 'col-lg-12')
+//chooseLvlDiv.style.textAlign = 'right'
+const heroLabel = document.createElement('label');
+heroLabel.for = 'herolvl'
+heroLabel.innerHTML = 'Hero lvl: '
+heroLabel.style.marginRight = '4px'
+const heroInput = document.createElement('input');
+heroInput.id = 'herolvl'
+heroInput.name = 'herolvl'
+//chooseInput.style.textAlign = 'right'
+heroInput.style.width = '50px'
+heroInput.value = 1
+heroInput.type = 'number'
+heroInput.min = 1
+heroInput.step = 5
+heroInput.classList.add('rounded')
 
-const crystOpt = crystOptArr.map(opt => {
-  const value = opt
-  return `<option value="${value}">${opt}</option>`;
-});
-numOfCryst.innerHTML = crystOpt;
+heroLvlDiv.append(heroLabel, heroInput)
 
-crystDiv.append(jobmCrystal, numOfCryst)*/
 // level buttons
 let lvlbtns = document.createElement('div')
 lvlbtns.classList.add('col-12')
@@ -337,18 +333,22 @@ pages.innerHTML = '<!-- pager -->' +
     '<button class="pages rounded" id="last"><img alt="last" src="' + last + '" width="44" height="auto"></button>'+
     '</div>'
 //header.append(pages)
-othersDiv.append(chooseLvlDiv, lvlbtns, searchDiv, pages)
+let empty =document.createElement('div')
+empty.innerHTML = '...'
+empty.className = 'col-12'
+empty.style.color= 'transparent'
+othersDiv.append(heroLvlDiv, chooseLvlDiv,lvlbtns, searchDiv, pages)
 //add it all to the section
 // tabs to switch between buff/debuff keywords and applies keywords
 let tabs = document.createElement('div')
 tabs.id = 'tabs'
 let buffs = document.createElement('button')
 //buffs.classList.add('rounded')
-buffs.innerHTML = 'Buff/Debbuf Keywords'
+buffs.innerHTML = 'Heroes'
 buffs.id = 'glossButton'
 let applies = document.createElement('button')
 //applies.classList.add('rounded')
-applies.innerHTML = 'Apply Keywords'
+applies.innerHTML = 'Enemies'
 applies.id = 'applyButton'
 tabs.append(buffs, applies)
 charsfilter.append(header, filtersDiv, othersDiv, tabs)

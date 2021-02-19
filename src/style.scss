@@ -456,13 +456,15 @@ table tr td:nth-child(3) {
 #dialog {
   position: absolute;
   background-color: $mainBg;
-  box-shadow: 3px 3px grey;
+  box-shadow: 2px 2px grey;
   color: white;
   top: 40%;
   left: 45%;
-  padding: 20px 10px;
+  padding: 30px;
   display: none;
+  text-align: center;
   z-index: 10000;
+  img { width: 200px; padding-bottom:13px}
 }
 #closedialog {
   color: white;

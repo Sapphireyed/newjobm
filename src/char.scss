@@ -1,0 +1,378 @@
+#rarity {
+  img { width: 30px}
+}
+#jobmaindiv { margin: 10px}
+#basicinfo { margin: 20px 5px 20px 5px}
+.navbtns {
+  width: 50%;
+  color: white;
+  position: sticky;
+}
+#acq { margin-left: -14px}
+#lvlbtns {
+  width: 100%;
+  padding: 0;
+  button { float: left }
+}
+#traitsdivPassive h5:first-child {
+  //text-align: center;
+}
+#passiveDesc { margin: 10px 5px 10px 5px}
+#passiveSkill { text-align: center }
+#switchDesc { margin: 10px 5px 30px 5px}
+#switchSkill { text-align: center}
+#switchimg img { width: 45px; margin-bottom: 7px; padding: 5px }
+#deckdiv {
+  margin: 10px 0;
+  img:not(.icon) {
+    width: 45px;
+    display: block;
+    margin:auto;
+    padding: 5px;
+  }
+}
+
+//.jobattrs {text-align: left}
+$main1star: #6a8d55;
+.job1star::-webkit-scrollbar-thumb { background-color: #6a8d55; }
+.job1star::-webkit-scrollbar { background-color: #f4ffed; }
+.job1star {
+  background-color: $main1star;
+  #sideDiv {
+    background-color: $main1star;
+    overflow-y:scroll;
+    #rarAndAttrs h4:not(#rarity) { color: $main1star}
+    h4 {
+      background-color: #f4ffed;
+      color:  $main1star;
+      box-shadow: 2px 2px 1px 1px #6a8d55;
+    }
+    a {
+      background-color: $main1star;
+    }
+  }
+  #sideDiv::-webkit-scrollbar-thumb { background-color: $main1star; }
+  #sideDiv::-webkit-scrollbar { background-color: #f4ffed; }
+  #jobmainsect {background-color: #f4ffed;}
+  button {
+    background-color: $main1star;
+  }
+  #crystDiv { visibility: hidden}
+  h1 {
+      background-color:   $main1star;
+      margin-right: auto;
+      margin-left: auto;
+  }
+  #lvlbtns button { background-color: $main1star; display: none }
+  h4:not(.jobattr){ text-align: center }
+  #passiveAndSwitch h4,#passiveAndSwitchEn h4 {
+    background-color: $main1star;
+    color: white;
+    border-radius: 5px;
+  }
+  #passiveAndSwitch h5 {
+    padding: 5px 10px;
+  }
+
+  #deck { background-color: rgba(106, 141, 85, .5) }
+  .applyTip .applyText {
+    background-color: #6a8d55;
+    font-weight: normal;
+  }
+}
+$main2star: #4b7396;
+.job2star::-webkit-scrollbar-thumb { background-color: #4b7396; }
+.job2star::-webkit-scrollbar { background-color: #eef7ff; }
+.job2star {
+    background-color: #4b7396;
+    #sideDiv {
+      background-color: $main2star;
+      overflow-y:scroll;
+      h4 {
+        background-color: #4b7396;
+        color:  $main2star;
+        box-shadow: 2px 2px 1px 1px rgba(75, 115, 150, .7);
+      }
+      a {
+        background-color: $main2star;
+      }
+    }
+    #sideDiv::-webkit-scrollbar-thumb { background-color: $main2star; }
+    #sideDiv::-webkit-scrollbar { background-color: #eef7ff; }
+    #jobmainsect {background-color: #eef7ff;}
+    #crystDiv { visibility: hidden}
+    h1
+    {
+        background-color: #4b7396;
+        margin-right:auto;
+        margin-left: auto;
+    }
+    h4:not(.jobattr){ text-align: center }
+    #lvlbtns button { background-color: #4b7396;display: none }
+    h4 {color: #4b7396;}
+    #passiveH {
+      background-color: #4b7396;
+      color: white
+    }
+    #passiveSkill { border-right: 2px solid #4b7396}
+    #switchH {
+      background-color: #4b7396;
+      color: white
+    }
+    #deck { background-color: rgba(75, 115, 150, .7) }
+    .applyTip .applyText {
+      background-color: #4b7396;
+      color: white;
+      font-weight: normal;
+    }
+}
+$main3star: #584b67;
+.job3star::-webkit-scrollbar-thumb { background-color: #584b67; }
+.job3star::-webkit-scrollbar { background-color: #f5eefd; }
+.job3star {
+    background-color: #584b67; //#f5eefd;
+    #sideDiv {
+      background-color: $main3star;
+      overflow-y:scroll;
+      h4 {
+        background-color: #f5eefd;
+        color:  $main3star;
+        box-shadow: 2px 2px 1px 1px rgba(88, 75, 103, .7);
+      }
+      a {
+        background-color: $main3star;
+      }
+    }
+    #sideDiv::-webkit-scrollbar-thumb { background-color: $main3star; }
+    #sideDiv::-webkit-scrollbar { background-color: #f5eefd; }
+    #jobmainsect {background-color: #f5eefd;}
+    #crystDiv { visibility: hidden}
+    h1 {
+        background-color: #584b67;
+        margin-right:auto;
+        margin-left: auto;
+    }
+    #lvlbtns button { background-color: #584b67; display: none}
+    h4:not(.jobattr){ text-align: center }
+    h4 {color: #584b67;}
+    #passiveH {
+      background-color: #584b67;
+      color: white
+    }
+    #passiveSkill { border-right: 2px solid #584b67}
+    #switchH {
+      background-color: #584b67;
+      color: white
+    }
+    #deck { background-color: rgba(88, 75, 103, .7) }
+    .applyTip .applyText {
+      background-color: #584b67;
+      color: white;
+      font-weight: normal;
+    }
+}
+$main4star: #954e3a;
+.job4star::-webkit-scrollbar-thumb { background-color: #954e3a; }
+.job4star::-webkit-scrollbar { background-color: #fff0ec; }
+.job4star {
+    background-color: #954e3a;
+    #sideDiv {
+      background-color: $main4star;
+      overflow-y:scroll;
+      h4 {
+        background-color: #fff0ec;
+        color:  $main4star;
+        box-shadow: 2px 2px 1px 1px rgba(149, 78, 58, .7);
+      }
+      a {
+        background-color: $main4star;
+      }
+    }
+    #sideDiv::-webkit-scrollbar-thumb { background-color: $main4star; }
+    #sideDiv::-webkit-scrollbar { background-color: #fff0ec; }
+    #jobmainsect {background-color: #fff0ec;}
+    #crystDiv { visibility: hidden}
+    h1 {
+        background-color: #954e3a;
+        margin-right:auto;
+        margin-left: auto;
+    }
+    #lvlbtns button { background-color: #954e3a; display: none}
+    h4:not(.jobattr){ text-align: center }
+    h4 {color: #954e3a;}
+    #passiveH {
+      background-color: #954e3a;
+      color: white
+    }
+    #passiveSkill { border-right: 2px solid #954e3a}
+    #switchH {
+      background-color: #954e3a;
+      color: white
+    }
+    #deck { background-color: rgba(149, 78, 58, .7) }
+    .applyTip .applyText {
+      background-color: #954e3a;
+      color: white;
+      font-weight: normal;
+    }
+}
+$main5star: #e0c369;
+$light5star: #fffaef;;
+.job5star::-webkit-scrollbar-thumb { background-color: #e0c369; }
+.job5star::-webkit-scrollbar { background-color: #fffaef; }
+.job5star {
+    background-color: $main5star;
+    #sideDiv {
+      background-color: $main5star;
+      h4 {
+        background-color: #fffaef;
+        color:  $main5star;
+        box-shadow: 2px 2px 1px 1px rgba(224, 195, 105, .5);
+      }
+      a {
+        background-color: $main5star;
+      }
+    }
+    #sideDiv::-webkit-scrollbar-thumb { background-color: $main5star; }
+    #sideDiv::-webkit-scrollbar { background-color: #fffaef; }
+    #jobmainsect {background-color: #fffaef;}
+    button { background-color: $main5star}
+    h1 {
+        background-color: $main5star;
+        margin-right:auto;
+        margin-left: auto;
+    }
+    #lvlbtns button { background-color: #e0c369; }
+    #passiveAndSwitch, #passiveAndSwitchBis {
+      h4 {
+        background-color: $main5star;
+        color: white;
+        border-radius: 5px;
+      }
+        div { margin-bottom: 8px }
+        #passiveSkill1, #passiveSkill2 {border-right: 2px solid $main5star}
+        .abilimg img {
+          display:block;
+          margin:auto;
+          width:40px;
+        }
+      }
+    #passiveDesc1, #passiveDesc2, #switchDesc1, #switchDesc2 { padding: 2px 15px}
+    #passiveAndSwitchEn {
+      h4 {
+        background-color: $main5star;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        position: relative;
+        box-shadow: 2px 1px grey;
+        a {
+          position: absolute;
+          right: 5%;
+          font-weight: bold;
+          box-shadow: 2px 1px grey;
+          width: 23px;
+          border-radius: 50%;
+          color: $main5star;
+          background-color: $light5star;
+        }
+      }
+      h5 {
+        background-color: $main5star;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        .abilimg {
+          margin: 10px 0;
+        }
+        img { width: 40px;}
+      }
+      h6 { background-color: rgba(224, 195, 105, 0.3); }
+    }
+    h4:not(.jobattr){ text-align: center }
+    h4 {color: #e0c369;}
+    #passiveH {
+      background-color: #e0c369;
+      color: white
+    }
+    #passiveSkill { border-right: 2px solid #e0c369}
+    #switchH {
+      background-color: #e0c369;
+      color: white
+    }
+    #threshdiv {
+      padding: 0 10px;
+      text-align: center;
+      h4 {
+        background-color: $main5star;
+        color: white;
+        a {
+          position: absolute;
+          right: 5%;
+          font-weight: bold;
+          box-shadow: 2px 1px grey;
+          width: 23px;
+          border-radius: 50%;
+          color: $main5star;
+          background-color: $light5star;
+        }
+      }
+      h5:first-child {
+        text-decoration: underline;
+        color: white;
+      }
+      h5 span { font-size:14px}
+      div:nth-child(2) {
+        background-color: rgb(159, 250, 157);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(55, 161, 53);
+        }
+      } //lightgreen
+      div:nth-child(3) {
+        background-color: rgb(255, 255, 168);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(255, 255, 66);
+        }
+      } //lightyellow
+      div:nth-child(4) {
+        background-color: rgb(255, 153, 153);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(250, 47, 47);
+        }
+      } //lightred
+
+    }
+    #chapt {
+      padding: 0 10px;
+      text-align: center;
+      h4 {display:none}
+      #chH { background-color: $main5star;color: white; margin-bottom: 10px;}
+      img {width:50px; filter:brightness(0)}
+      #chimg2 img{ transform: none !important}
+    }
+    #deck { background-color: rgba(224, 195, 105, .5) }
+}
+
+#passiveTraitsH, #passiveTraits { display: inline}
+#switchtraitsH, #switchtraits { display: inline}
+#basicinfo div:first-child, #jobimg2 {
+  display: block;
+  margin: auto;
+}
+#jobimg img, #jobimg2 img {
+  width: 180px;
+  margin: auto;
+  display: block
+}
+#jobimg2 {transform: scaleX(-1)}
+#rarLvlOrb h4 { display: inline; font-size: 22px }
+#rarAndAttrs {
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  div { display: block; margin:auto 0}
+  h4 {font-size: 22px}
+}

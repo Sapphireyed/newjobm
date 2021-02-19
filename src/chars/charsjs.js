@@ -1,9 +1,9 @@
 import { tbody } from './heroesTable.js'
 import { applyBody } from './enemiesTable.js'
-//import { openNew } from '../basicfn/openNew.js'
+import { openNew } from '../basicfn/openNew.js'
 import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
-        glossAllInfo, appliesAllInfo,charsAllInfo} from '../abilitiesData.js'
+        glossAllInfo, appliesAllInfo,charsAllInfo, charsAllInfoRaw} from '../abilitiesData.js'
         import { matImagesComplete, abilImagesComplete, charsImagesComplete} from '../img/imgsHTML.js'
 //import { openNew } from '../basicfn/openNew.js'
 //import { abilImagesComplete} from '../img/imgsHTML.js'
@@ -14,15 +14,55 @@ import star from '../img/events/StarColor1.png'
 var $ = require("jquery")
 import tablesorter from 'tablesorter';
 
+// change stats
+export function charStats(arr, stat, hero) {
+let bonus = 0
+switch (true) {
+  case (hero.value == 1+99):
+    bonus += 0.025
+  case (hero.value > 1+90):
+    bonus += 0.025
+  case (hero.value > 1+80):
+    bonus += 0.025
+  case (hero.value > 1+70):
+    bonus += 0.025
+  case (hero.value > 1+60):
+    bonus += 0.025
+  case (hero.value > 1+50):
+    bonus += 0.025
+  case (hero.value > 1+45):
+    bonus += 0.025
+  case (hero.value > 1+35):
+    bonus += 0.025
+  case (hero.value > 1+25):
+    bonus += 0.025
+  case (hero.value > 1+15):
+    bonus += 0.025
+  case (hero.value > 1+10):
+    bonus += 0.025
+  case (hero.value > 1+5):
+    bonus += 0.025
+  default:
+}
+  arr.map(cell => {
+    let attr = cell.id
+
+     //calculate extra
+    //lvl/100 * hp + bonus
+  //  let bonus = cell *
+
+    cell.innerHTML = Math.ceil(Math.ceil(cell.id/100*stat.value) + Math.ceil(bonus*cell.id))
+//    console.log(stat.value*cell.id/100*stat.value)
+  })
+}
 // TOOLTIP
 function tooltips() {
 //tableRows = document.querySelectorAll('tr')
-
 var descFinaleSplit = descFinale.map(desc => desc.split(':<br>'))
 var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':<br>'))
 var switchCells =  document.getElementsByClassName('tooltiptext')
 for (var i=0; i < switchCells.length; i++) {
-    var switchName = switchCells[i].parentNode.innerText.trim()
+    var switchName = switchCells[i].parentNode.innerText.replace(/  /g, ' ').trim()
     var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
     var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
     var tooltipsApply = abilTraits.map(trait => trait.split(': ')).filter(desc=> desc[0] == switchName)
@@ -30,6 +70,7 @@ for (var i=0; i < switchCells.length; i++) {
 
     tooltipsAb.map((desc, ind) => {
       if (desc[0] == switchName) {
+      //  deas[1] = deas1.replace('while job on', '')
         switchCells[i].innerHTML = desc[1] + '<br> <span class="tipApply">(' + tooltipsApply[ind][1] + ')</span>'
         switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\(, , , \)|, ,|, , ,|\(, , , \)|\(\)|<br><br>/g, '')
         switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\( \)/g, '')
@@ -45,6 +86,7 @@ for (var i=0; i < switchCells.length; i++) {
     })*/
     tooltipsPass.map((desc, ind) => {
       if (desc[0] == switchName) {
+        desc[1] = desc[1].replace('while job on', '')
         switchCells[i].innerHTML = desc[1] + '<br> <span class="tipApply">(' + passApply[ind][1] + ')</span>'
         switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\(, , , \)|, ,|, , ,|\(, , , \)|\(\)|<br><br>/g, '')
         switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\( \)/g, '')
@@ -53,8 +95,16 @@ for (var i=0; i < switchCells.length; i++) {
     })
   }
 }
+function charLink(item) {
+  let charTable;
+  var i = item.parentNode.firstChild.innerHTML
+  charTable = item.parentNode.parentNode.id  == 'abilsBody' ? 'heroes' : 'enemies'
+  openNew('char',charsAllInfo, i, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits, charTable)
+}
 
 let currentPage0 =[]
+var filters = document.getElementsByClassName('filter')
+
 export function glossFn() {
   var pagesSel = document.getElementById('numOfPages')
   let storeList = charsAllInfo
@@ -75,7 +125,10 @@ export function glossFn() {
         load()
       }
 
-  pagesSel.onchange = pagesNum
+  pagesSel.onchange = function() {
+    filters.map(f => f.value = 'All')
+    pagesNum()
+  }
 function nextPage() {
   currentPage0.pop()
   currentPage += 1;
@@ -107,34 +160,170 @@ function lastPage() {
 function loadList() {
   numberPerPage = parseInt(numberPerPage) || 'all'
     var abilsBody = document.getElementById('abilsBody');
+    filters = Array.from(filters)
+    if (filters.filter(f => f.value == 'All').length == filters.length) {
+      // pagination
+      var begin
+      if (numberPerPage == 10) {
+        $("table").trigger("destroy");
+        begin = ((currentPage - 1) * numberPerPage);
+      } else if ( numberPerPage == 'all') {
+        begin = 0
+        numberPerPage = list.length
+        $("table").trigger("destroy");
 
-    // pagination
-    var begin
-    if (numberPerPage == 10) {
-      $("table").trigger("destroy");
-      begin = ((currentPage - 1) * numberPerPage);
-    } else if ( numberPerPage == 'all') {
-      begin = 0
-      numberPerPage = list.length
-      $("table").trigger("destroy");
-
+      } else {
+        $("table").trigger("destroy");
+         begin = currentPage == 1 ? currentPage - 1 : (currentPage-1)*numberPerPage
+      }
+      var end = begin + numberPerPage;
+      pageList = list.slice(begin, end);
     } else {
-      $("table").trigger("destroy");
-       begin = currentPage == 1 ? currentPage - 1 : (currentPage-1)*numberPerPage
+      if (numberPerPage == list.length) {
+        pageList.length = pageList.length
+      } else if (pageList.length >= numberPerPage) {
+        pageList.length = numberPerPage
+      }
     }
-    var end = begin + numberPerPage;
-    pageList = list.slice(begin, end);
+
     drawList();
     check();
     $('.myTable').tablesorter();
     tooltips()
+    // filters
+    function filter(){
+      charsAllInfoRaw.map(char=> char.push('sep'))
+
+      pageList = charsAllInfoRaw
+      let newList = charsAllInfo
+      filters.map(f => {
+        if (f.value == 'All') {
+          newList.map(ch => ch.push(f.id))
+        } else {
+          const elemRegex = /fire|water|earth|thunder|wind|light|dark|bleed|injury|venom|restrain|insane|Element|Debuff|Null/g;
+          const attrRegex = /MaxHp|Strength|Agility|Intelligence|Protect/gi
+          let chosenAttr = document.getElementById('attrSel').value
+          let typeVal = document.getElementById('type').value
+            newList.map(ch=> {
+              if (f.id == 'rarity') {
+                switch (f.value) {
+                  case '1':
+                    ch = ch[2] == 'Beginner' ? ch.push('rarity') : ch
+                    break;
+                  case '2':
+                    ch = ch[2] == 'Easy' ? ch.push('rarity') : ch
+                    break;
+                  case '3':
+                    ch = ch[2] == 'Medium' ? ch.push('rarity') : ch
+                    break;
+                  case '4':
+                    ch = ch[2] == 'Hard' ? ch.push('rarity') : ch
+                    break;
+                  case '5':
+                    ch = ch[2] == 'Boss' ? ch.push('rarity') : ch
+                    break;
+                  default:
+                }
+              }
+              if (f.id == 'race') {
+                ch = ch[15] == f.value ? ch.push('race') : ch
+              }
+          //    let searchin = document.getElementById('searchin')
+              let passive1 = ch[11]
+              let passive2 = ch[12]
+              let abil1 = ch[13]
+              let abil2 = ch[14]
+              let abilsboth = abilitiesAllInfo.filter(ab => abil1 == ab[2] || abil2 == ab[2])
+              abilsboth.map(a => {
+                let skills = [5, 8, 11, 14]
+                let effects = [6,9,12, 15]
+                if (f.id == 'type') {
+                  switch (f.value) {
+                    case 'Other':
+                    ch = skills.some((unit) => a[unit] == 'Null' && a[unit+1] == 'Null') ? ch.push('type') : a
+                    ch = skills.some((unit) => a[unit] == 'InstantBoost' && a[unit+1] == 'Direct') ? ch.push('type') : a
+                    skills.some((unit) => (a[unit] == undefined ? '' : (a[unit].includes('Protect') && (a[unit+1] == 'Direct' || a[unit+1] == 'Guard' || a[unit+1] == 'Draw')))) ? ch.push('type') : ''
+                    break;
+                  case 'Remove Debuff':
+                    skills.some((unit) => a[unit].includes('Protect') && a[unit+1].match(elemRegex)) ? ch.push('type') : ''
+                    break;
+                  case 'Protect':
+                    skills.some((unit) => a[unit].includes('Protect') && (chosenAttr == 'All' ? a[unit+1].match(attrRegex) : a[unit+1].includes(chosenAttr))) ? ch.push('type') : ''
+                    break;
+                  case 'Negative':
+                    skills.some((unit) => a[unit] == 'Curse' || a[unit] == 'Sacrifice') ? ch.push('type') : ''
+                    break;
+                  default:
+                    skills.some((unit) => a[unit] == f.value && (chosenAttr == 'All' ? true : a[unit+1].includes(chosenAttr))) ? ch.push('type') : ''
+                  }
+                }
+                if (f.id == 'attrSel' && f.value !== 'All') {
+                    if (typeVal == 'All') {
+                      skills.some(s=> {
+                        a[s] == undefined ? '' : a[s].includes(f.value) ? ch.push('attrSel') : ''
+                      })
+                      effects.some(s=> {
+                        a[s] == undefined ? '' : a[s].includes(f.value) ? ch.push('attrSel') : ''
+                      })
+                    } else {
+                      if (typeVal == 'Protect') {
+                        skills.some(s => a[s] == undefined ? '' : a[s].includes('Protect') && a[s+1].includes(f.value)) ? ch.push('attrSel') : ''
+                      } else {
+                          skills.some(s=> {
+                            (a[s] == typeVal && a[s+1].includes(f.value)) ? ch.push('attrSel') : ''
+                            a[s].includes(f.value) ? ch.push('attrSel') : ''
+                          })
+
+                      }
+                      }
+                  }
+                  if (f.id == 'apply') {
+                    if ([a[17], a[18], a[19]].some(el => el = el.includes(f.value))) {
+                      ch.push('apply')
+                    }
+                  }
+                  if (f.id == 'element') {
+                    effects.some(s => a[s] == undefined ? '' : a[s].includes(f.value)) ? ch.push('element') : ''
+                  }
+              })
+
+          })
+        }
+      })
+      pageList = newList.filter(l=> l.includes('element') && l.includes('rarity') && l.includes('attrSel') && l.includes('apply') && l.includes('type') && l.includes('race') && l.includes('whenSel'))
+
+  pageList.map(a => a.length = 17)
+      if (pageList.length == 0 ) {
+        document.getElementById('dialog').style.display = 'block';
+        document.getElementById('closedialog').onclick = function() {
+        document.getElementById('dialog').style.display = 'none';
+        }
+      }
+    //  charsAllInfo.map(a => a.splice(a.indexOf('sep'), 8))
+    }
+    let startF = document.getElementById('start')
+    let clearF = document.getElementById('jobsclear')
+     startF.addEventListener('click', function() {
+         filter()
+         loadList()
+     })
+      clearF.addEventListener('click', function() {
+        filters.map(f => f.value = 'All')
+        filter()
+        loadList()
+      })
+    //links opening new pages
+    let charLinks = Array.from(document.querySelectorAll('#heroesTable tr td:nth-child(3)'));
+    charLinks.map(link => {
+      link.addEventListener('click', function() {
+        charLink(this)
+      })
+    })
     //abilities imgs
     let switchskills = Array.from(document.querySelectorAll('.abil'))
-    console.log(switchskills)
     switchskills.map((abil,i) => {
       let switchskillsimg = document.createElement('div')
-      let src = abilImagesComplete.filter(img => switchskills[i].id == img.id)
-
+      let src = abilImagesComplete.filter(img => switchskills[i].children[0].innerText.trim() == img.id)
       if (src.length > 0) {
         switchskills[i].prepend(switchskillsimg)
         switchskillsimg.innerHTML = src[0].outerHTML
@@ -142,7 +331,7 @@ function loadList() {
     })
     let pics= document.querySelectorAll('tr td:nth-child(2)')
 // Icons on sides of the table
-    let abilrows = Array.from(document.querySelectorAll('tr'))
+    let abilrows = Array.from(document.querySelectorAll('#abilsBody tr'))
     abilrows.shift()
     for (var i = 0; i < abilrows.length; i++) {
       let name = abilrows[i].children[2]
@@ -156,6 +345,37 @@ function loadList() {
       })
 
     }
+
+    //change stats
+    let start= document.querySelectorAll('#lvlbtns button')[0]
+    let resetlvls = document.querySelectorAll('#lvlbtns button')[1]
+    let stat = document.getElementById('chooselvl')
+    let hero = document.getElementById('herolvl')
+    hero.disabled = false
+    stat.value = 10
+    hero.value = 1
+    let hpStat = Array.from(document.querySelectorAll('.jobRow td:nth-child(n+8)'))
+    let str = Array.from(document.querySelectorAll('.jobRow td:nth-child(9)'))
+    let agi = Array.from(document.querySelectorAll('.jobRow td:nth-child(10)'))
+    let int = Array.from(document.querySelectorAll('.jobRow td:nth-child(11'))
+    start.addEventListener('click', function() {
+      console.log('start')
+      charStats(hpStat, stat, hero)
+      //charStats(str)
+      //charStats(agi)
+      //charStats(int)
+    })
+    resetlvls.addEventListener('click', function() {
+      stat.value = 10
+      hero.value = 1
+      charStats(hpStat, stat,hero)
+      //charStats(str)
+      //charStats(agi)
+      //charStats(int)
+    })
+    start.click()
+    //filters
+
   }
 
   function drawList() {
@@ -188,11 +408,11 @@ function loadList() {
         //jobbItem.splice(3,1,)
         jobItem.splice(9, 0, attr[0], attr[1], attr[2], attr[3])
         //passives
-        jobItem[4] = jobItem[4] == '' ? '' : '<span class="tooltipMy pass">' + jobItem[4] + '<span class="tooltipMy tooltiptext"></span></span>'
-                    + (jobItem[5] == '' ? '' : '/<br>' + '<span class="tooltipMy pass">' + jobItem[5] + '<span class="tooltipMy tooltiptext"></span></span>')
+        jobItem[4] = jobItem[4] == '' ? '' : '1. <span class="tooltipMy pass">'+ jobItem[4] + '<span class="tooltipMy tooltiptext"></span></span>'
+                    + (jobItem[5] == '' ? '' : '<br>' + '2. <span class="tooltipMy pass">' + jobItem[5] + '<span class="tooltipMy tooltiptext"></span></span>')
         //abilities
-        jobItem[6] = jobItem[6] == '' ? '' : '<span class="tooltipMy abil">' + jobItem[6] + '<span class="tooltipMy tooltiptext"></span></span>'
-                   + (jobItem[7] == '' ? '' : '/<br>' + '<span class="tooltipMy abil">' + jobItem[7] + '<span class="tooltipMy tooltiptext"></span></span>')
+        jobItem[6] = jobItem[6] == '' ? '' : '<span class="tooltipMy abil"><span class="name">' + jobItem[6] + '</span><span class="tooltipMy tooltiptext"></span></span>'
+                   + (jobItem[7] == '' ? '' : '<br>' + '<span class="tooltipMy abil"><span class="name">' + jobItem[7] + '</span><span class="tooltipMy tooltiptext"></span></span>')
         jobItem.splice(5,1)
         jobItem.splice(6,1)
         //attrs
@@ -226,8 +446,10 @@ function loadList() {
               cell.innerHTML = '<td class="master">master</td>'
               break;
             default: cell.innerHTML = '<td>' + job + '</td>'
+            cell.id = cell.innerText
+            //Array.from(cell.children).map(child => child.id = child.innerText.replace('/', '').trim())
           }
-          Array.from(cell.children).map(child => child.id = child.innerText.replace('/', '').trim())
+        //  Array.from(cell.children).map(child => child.id = child.innerText.replace('/', '').trim())
         /*  var tooltip = document.createElement('span')
           tooltip.classList.add('tooltipMy', 'tooltiptext')
 
@@ -301,7 +523,11 @@ export function applyTableFn() {
         load()
       }
 
-  pagesSel.onchange = pagesNum
+  pagesSel.onchange = function() {
+    filters.map(f => f.value = 'All')
+    pagesNum()
+  }
+
   function nextPage() {
     currentPage0.pop()
     currentPage += 1;
@@ -340,6 +566,8 @@ export function applyTableFn() {
     if (numberPerPage == 10) {
       $("table").trigger("destroy");
       begin = ((currentPage - 1) * numberPerPage);
+      console.log(charsAllInfo[0])
+      console.log(charsAllInfo[9])
     } else if ( numberPerPage == 'all') {
       begin = 0
       numberPerPage = list.length
@@ -351,28 +579,32 @@ export function applyTableFn() {
     }
     var end = begin + numberPerPage;
     pageList = list.slice(begin, end);
+    console.log(end)
+    console.log(begin)
+    console.log(numberPerPage)
     drawList();
     check();
     $('.myTable').tablesorter();
-
+    tooltips()
+    //links opening new pages
+    let charLinks = Array.from(document.querySelectorAll('#enemiesTable tr td:nth-child(3)'));
+    charLinks.map(link => {
+      link.addEventListener('click', function() {
+        charLink(this)
+      })
+    })
     //abilities imgs
     let switchskills = Array.from(document.querySelectorAll('.tooltipMy.enabil:not(.tooltiptext)'))
-
     switchskills.map((abil,i) => {
       let switchskillsimg = document.createElement('div')
-      let src = abilImagesComplete.filter(img => switchskills[i].innerText.trim() == img.id)
-console.log(switchskills[i].innerText.trim())
+      let src = abilImagesComplete.filter(img => switchskills[i].children[0].innerText.trim() == img.id)
       if (src.length > 0) {
         switchskillsimg.innerHTML = src[0].outerHTML
-            console.log(switchskillsimg)
         switchskills[i].prepend(switchskillsimg)
-                  console.log(switchskills[i])
-    //    switchskillsimg.innerHTML = src[0].outerHTML
       }
     })
-    tooltips()
   // Icons on sides of the table
-    let abilrows = Array.from(document.querySelectorAll('tr'))
+    let abilrows = Array.from(document.querySelectorAll('#applyBody tr'))
     abilrows.shift()
     for (var i = 0; i < abilrows.length; i++) {
       let name = abilrows[i].children[2]
@@ -385,13 +617,37 @@ console.log(switchskills[i].innerText.trim())
       })
 
     }
+    // specialcases 'sc'
+    let sc = Array.from(document.querySelectorAll('.spec'))
+    sc.map(s=> {
+      let txt = s.innerText == undefined ? '' : s.innerText.split(':')
+      s.innerHTML = '<span style="font-weight:600">' + txt[0] + ': </span><span>' + (txt[1] == undefined ? '' : txt[1].split('-').join(', ')) + '</span>'
+      s.innerHTML = s.innerText == ': ' || s.innerText == ':' ? '' : s.innerHTML
+    })
+    //change stats
+    let start= document.querySelectorAll('#lvlbtns button')[0]
+    let resetlvls = document.querySelectorAll('#lvlbtns button')[1]
+    let stat = document.getElementById('chooselvl')
+    let hero = document.getElementById('herolvl')
+    stat.value = 100
+    hero.disabled = true
+    let hpStat = Array.from(document.querySelectorAll('#applyBody .jobRow td:nth-child(n+10)'))
+    start.addEventListener('click', function() {
+      hpStat.map(hp => hp.innerHTML = Math.ceil(hp.id/100 * stat.value))
+    })
+    resetlvls.addEventListener('click', function(){
+      stat.value = 100
+      hpStat.map(hp => hp.innerHTML = Math.ceil(hp.id/100 * stat.value))
+    })
+    start.click()
+    console.log('currentpage ' + currentPage)
 }
 
   function drawList() {
     document.getElementById("applyBody").innerHTML = "";
     var applyBody = document.getElementById('applyBody');
 //    let pageList = appliesAllInfo
-    pageList.pop()
+    //pageList.pop()
     for (var i=0; i < pageList.length; i++) {
       var jobItem = Object.values(pageList[i])
       jobItem.pop()
@@ -399,19 +655,46 @@ console.log(switchskills[i].innerText.trim())
       let attrs = jobItem.splice(4,4)
       jobItem.splice(8,4)
       jobItem.push(attrs[0],attrs[1], attrs[2], attrs[3])
+      //enemy passives
       jobItem[4] = jobItem[4].split('-')
-      jobItem[4] = jobItem[4].map(item => item = '<span class="tooltipMy">' + item + '<span class="tooltipMy tooltiptext"></span></span>')
-      jobItem[4] = jobItem[4].join('/<br>')
+      jobItem[4] = jobItem[4].map((item,i) => item = (i+1) + '. ' + '<span class="tooltipMy">' + item + '<span class="tooltipMy tooltiptext"></span></span>')
+      jobItem[4] = jobItem[4].join('<br>')
+      //enemy random abils
+      jobItem[5] = jobItem[5].replace(/\|/g, '-')
       jobItem[5] = jobItem[5].split('-')
-      jobItem[5] = jobItem[5].map(item => item = '<span class="tooltipMy enabil">' + item + '<span class="tooltipMy tooltiptext"></span></span>')
-      jobItem[5] = jobItem[5].join('/<br>')
-      //jobItem.splice(3, 2)
+      function count(arr) {
+        return arr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {})
+      }
+      jobItem[5] = count(jobItem[5])
+      jobItem[5] = Object.entries(jobItem[5]).map((k,v) => '<span class="tooltipMy">' + k + '<span class="tooltipMy tooltiptext">x</span></span>').join('<br>')
+      //jobItem[5] = jobItem[5].map(item => item = '<span class="tooltipMy enabil"><span class="name">' + item + '</span><span class="tooltipMy tooltiptext"></span></span>')
+      //jobItem[5] = jobItem[5].join('<br>')
+      //threshold
+      let thresh = jobItem[6]
+      if (thresh == '') {
+      } else if (thresh.includes('|') == false) {
+          thresh = thresh.split('-').join(', ')
+      } else if (thresh.split('|').length == 3) {
+          thresh.split('|')
+      } else if (thresh.split('|').length == 2) {
+          thresh = thresh.split('|')
+          thresh.push(thresh[1])
+      }
 
+      thresh = thresh.includes('|') ? thresh.split('|') : thresh
+      if (typeof thresh !== 'string') {
+        thresh = thresh == '' ? '' : thresh.map(it => it = it == '' ? 'none' : it)
+        thresh = thresh == '' ? '' : thresh.map((it,i) => it !== '' ? '<span class="thresh' + (i+1) + '">' + it.split('-').join(', ') + '</span>' : '')
+        thresh = thresh == '' ? '' : thresh.join('<br>')
+      }
+      jobItem[6] = thresh
+      // special cases jobitem[7]
+      //in loadList dues to':' used to split messing with imgssrc
+      jobItem[7] = jobItem[7].split('|')
+      jobItem[7] = jobItem[7].map(a => '<span class="spec">' + a + '</span>')
+      jobItem[7] = jobItem[7].join('<br>')
+    //  jobItem[7] = jobItem[7].replace(/[a-z]:/g)
 
-      //  jobItem.pop()
-
-
-    //    jobItem.splice(7, 2, '', '')
       var tableRow = document.createElement('tr')
       tableRow.classList.add('jobRow')
       i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#a6b7be'
@@ -419,8 +702,8 @@ console.log(switchskills[i].innerText.trim())
 
       jobItem.map( (job, ind) => {
         var cell = document.createElement('td')
-        cell.className = job
         cell.innerHTML = job
+        cell.className = cell.innerText
         //  Array.from(cell.children).map(child => child.id = child.innerText.replace('/', '').trim())
         cell.id = cell.innerText
 
@@ -469,7 +752,7 @@ load()
 
   $("#search").on("keyup", function() {
     var input = $(this).val().toLowerCase();
-      $("#abilsBody tr").filter(function(){
+      $("#applyBody tr").filter(function(){
         $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1)
       });
     });

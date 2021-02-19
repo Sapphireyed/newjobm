@@ -31,7 +31,8 @@ export { powlvl, unitDesc,
          passives, passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
          jobsData, jobsStats, jobsDataAll, craft, mats,
          glossAllInfo,appliesAllInfo, glossRaw,applyRaw,
-         characters, charsAllInfo }
+         characters, charsAllInfo,charsAllInfoRaw,
+          chapters, chaptAllInfo}
 
 //skillunits
 let powlvl;     // power level table from sheet 4
@@ -64,6 +65,9 @@ let glossRaw = []
 let applyRaw = [];
 //characters
 let charsAllInfo = [];
+let charsAllInfoRaw = [] //without colors and icons on keywords
+//chapters
+let chaptAllInfo = []
 //glossAllInfo.length = 63
 
 var name, desc, desc1, desc2, desc3, desc4
@@ -90,6 +94,10 @@ function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multip
         desc[0] = desc.map(desc => desc.name)
         desc[0] = 'Become ' + desc
         desc = desc[0]
+    } else if (arrToCompare == passives && row[skill] == 'Protect' && row[effect] == 'Direct') {
+        desc[0] = desc.map(desc => desc.name)
+        desc[0] = 'Gain Invulnerable'
+        desc = 'Gain Invulnerable'
     } else if (arrToCompare == passives && row[skill] == 'Sacrifice' && row[effect] == 'Charge') {
         desc[0] = desc.map(desc => desc.name)
         desc[0] = 'Gain ' + row[multiplier] +  ' ' + desc
@@ -565,7 +573,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
             + (desc1[i].desc || '')
             + '<br>' + (desc2[i].desc || '')
             + '<br>' + (desc3[i].desc || '')
-            + '<br>' + (desc4[i].desc || '') + '<br>')
+            + '<br>' + (desc4[i].desc || ''))
             }
           changeColors(res, 2)  // change colors of keywords in skills/effects/traits
           changeApply(res, 16)
@@ -616,17 +624,32 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
         },
   }
   let characters = {
+    charsRaw:() => {
+      return GetSheetDone
+        .raw(id, 9).then(data => data.data).then(res => {
+          res.shift()
+    //    changeColors(res, 1)
+        res.map(a => charsAllInfoRaw.push(a))
+        })
+    },
     chars:() => {
       return GetSheetDone
         .raw(id, 9).then(data => data.data).then(res => {
           res.shift()
         changeColors(res, 1)
         charsAllInfo = res;
-        console.log(res)
         })
     }
   }
-  //console.log(abilitiesArr)
+  let chapters = {
+    chapt:() => {
+      return GetSheetDone
+        .raw(id, 10).then(data => data.data).then(res => {
+          res.shift()
+        chaptAllInfo = res;
+        })
+    }
+  }
   /*find:() => {
     return GetSheetDone.raw(id,6).then((sheet) => {
       sheet.data.map(data => abilSheet.push(data))

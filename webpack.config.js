@@ -11,6 +11,7 @@ module.exports = {
   passives: path.resolve(__dirname, './src/passives.js'),
   glossary: path.resolve(__dirname, './src/glossary.js'),
   characters: path.resolve(__dirname, './src/characters.js'),
+  char: path.resolve(__dirname, './src/char.js'),
 },
 output: {
   filename: '[name].[contenthash]bundle.js',
@@ -87,6 +88,10 @@ module: {
     new HtmlWebpackPlugin({
       filename: 'characters.html',
       chunks: ['characters'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'char.html',
+      chunks: ['char'],
     }),
     /*new CompressionPlugin({
       test: /\.js(\?.*)?$/i

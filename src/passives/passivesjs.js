@@ -262,27 +262,16 @@ function loadList() {
 
   //const eventChange = new Event('change')
   let start = document.getElementById('start')
-
-    /* start.addEventListener('click', function() {
-      let pagesVal = pagesSel.value
-       pagesSel.value = 'all'
-       let val = filters.map(f => f.value)
-       pagesSel.onchange()
-       filters.map((f, ind) => f.value = val[ind])
-       pagesSel.value = pagesVal
-       numberPerPage = pagesVal
-       document.getElementById("next").disabled = false;
-       document.getElementById("last").disabled = false
-     })*/
+  let clear = document.getElementById('jobsclear')
 
      start.addEventListener('click', function() {
        filter(passivesAllInfo)
        loadList()
-      // let displayed = Array.from(document.querySelectorAll('#jobsBody tr')).filter(tr => tr.classList.contains('d-none') == false)
-      // displayed.map((tr, index) => {
-      //   index >= pagesSel.value ? tr.classList.add('d-none') : ''
-    //   })
-      // cursorDef()
+     })
+     clear.addEventListener('click', function() {
+       filters.map(f => f.value = 'All')
+       filter(passivesAllInfo)
+       loadList()
      })
 
   function drawList() {

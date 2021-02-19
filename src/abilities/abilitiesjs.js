@@ -91,7 +91,7 @@ function loadList() {
     let abilrows = Array.from(document.querySelectorAll('tr'))
     abilrows.shift()
     for (var i = 0; i < abilrows.length; i++) {
-      tooltipsFn(abilrows[i])
+    //  tooltipsFn(abilrows[i])
       let name = abilrows[i].children[2]
 
       abilrows[i].addEventListener('mousemove', function() {
@@ -124,7 +124,7 @@ function loadList() {
   }
 
   //tooltips
-  function tooltipsFn() {
+  /*function tooltipsFn() {
 
     let applyTip = Array.from(document.querySelectorAll('.applyTip:not(.applyText)'))
 
@@ -142,7 +142,7 @@ function loadList() {
         counter +=1
       }
     }
-  }
+  }*/
 
   //filters
   filters = Array.from(filters)
@@ -231,29 +231,16 @@ function loadList() {
 
   //const eventChange = new Event('change')
   let start = document.getElementById('start')
-
-    /* start.addEventListener('click', function() {
-      let pagesVal = pagesSel.value
-       pagesSel.value = 'all'
-       let val = filters.map(f => f.value)
-       pagesSel.onchange()
-       filters.map((f, ind) => f.value = val[ind])
-       pagesSel.value = pagesVal
-       numberPerPage = pagesVal
-       document.getElementById("next").disabled = false;
-       document.getElementById("last").disabled = false
-     })*/
-
-     start.addEventListener('click', function() {
+  let clear = document.getElementById('jobsclear')
+   start.addEventListener('click', function() {
        filter(abilitiesAllInfo)
        loadList()
-      // let displayed = Array.from(document.querySelectorAll('#jobsBody tr')).filter(tr => tr.classList.contains('d-none') == false)
-      // displayed.map((tr, index) => {
-      //   index >= pagesSel.value ? tr.classList.add('d-none') : ''
-    //   })
-      // cursorDef()
-     })
-
+   })
+    clear.addEventListener('click', function() {
+      filters.map(f => f.value = 'All')
+      filter(abilitiesAllInfo)
+      loadList()
+    })
   function drawList() {
     document.getElementById("abilsBody").innerHTML = "";
       for (var i=0; i < pageList.length; i++) {
@@ -294,7 +281,7 @@ function loadList() {
             default: cell.innerHTML = '<td>' + job + '</td>'
             cell.id = cell.innerText
           }
-        
+
           var imgComplete = abilImagesComplete.find(jobimg => jobimg.id == jobItem[2])
 
           if (cell.innerHTML == 'pic') {

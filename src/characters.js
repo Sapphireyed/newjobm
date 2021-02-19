@@ -11,13 +11,18 @@ import { glossFn, applyTableFn } from './chars/charsjs.js'
 import theadimg from './img/materials/Space Stone.png'
 var $ = require("jquery")
 import { toggle} from './basicfn/toggle.js'
+import { sideDiv, toggleSide } from './side/side.js'
 
 //let bgimg = document.createElement('img')
 //bgimg.id = 'bgimg'
 //bgimg.src = bg
 
-document.body.append( nav(), glossarymain)
+document.body.append( nav(), glossarymain, sideDiv)
 cursor()
+let sidenav = document.getElementById('sidenav')
+let section = $('#glossarymain')
+let navmain = document.getElementById('navMain')
+toggleSide(sidenav, section,navmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
 document.body.style.backgroundAttachment = 'fixed'
@@ -31,49 +36,63 @@ window.onscroll = function() {
    abilities.units()
     .then(unit => {
       abilities.passivesFn()
-      abilities.abils()
-       .then(ab => {
-         getAbilImgs()
-         characters.chars()
-           .then(res => {
-             getCharsImages()
-          console.log(charsImagesComplete)
-             glossFn()
-             let heroesTable = document.getElementById('heroesTable')
-             let enemiesTable = document.getElementById('enemiesTable')
-             let button1= document.getElementById('glossButton')
-             let button2= document.getElementById('applyButton')
-             button1.style.backgroundColor = 'rgb(3, 26, 42)'
-             let heroes = true
-             button1.onclick = function(){
-               if (heroes == false) {
+      characters.charsRaw()
+        .then(ch => {
+          abilities.abils()
+           .then(ab => {
+             getAbilImgs()
+
+             characters.chars()
+               .then(res => {
+                 getCharsImages()
                  glossFn()
-                 switchTable(heroesTable, enemiesTable)
-                 this.style.backgroundColor = 'rgb(3, 26, 42)'
-                 button2.style.backgroundColor = 'rgba(3, 26, 42, .5)'
-                 heroes = true
-               }
-             }
-             button2.onclick = function(){
-               if (heroes == true) {
-                 console.log('poo')
-                 this.style.backgroundColor = 'rgb(3, 26, 42)'
-                 button1.style.backgroundColor = 'rgba(3, 26, 42, .5)'
-                 let trs = document.querySelectorAll('#applyTable tr')
-                 if (trs.length < 3) {
-                   applyTableFn()
-                //   document.querySelectorAll('#enemiesTable thead').style.display = 'block'
+                 let heroesTable = document.getElementById('heroesTable')
+                 let enemiesTable = document.getElementById('enemiesTable')
+                 let button1= document.getElementById('glossButton')
+                 let button2= document.getElementById('applyButton')
+                 let level =document.getElementById('chooselvl')
+                 //level.value = 10
+                 let start= document.querySelectorAll('#lvlbtns button')[0]
+                 let resetlvls = document.querySelectorAll('#lvlbtns button')[1]
+                 resetlvls.click()
+                 start.click()
+                 button1.style.backgroundColor = 'rgb(3, 26, 42)'
+                 let heroes = true
+                 button1.onclick = function(){
+                   if (heroes == false) {
+                     glossFn()
+                     switchTable(heroesTable, enemiesTable)
+                     this.style.backgroundColor = 'rgb(3, 26, 42)'
+                     button2.style.backgroundColor = 'rgba(3, 26, 42, .5)'
+                     resetlvls.click()
+                     start.click()
+                     heroes = true
+                   }
                  }
-                 switchTable(enemiesTable, heroesTable)
-                 heroes = false
-               }
-             }
-             function switchTable(table, table2) {
-               table.style.display = 'table';
-               table2.style.display = 'none'
-             }
-           })
-           })
+                 button2.onclick = function(){
+                   if (heroes == true) {
+                     this.style.backgroundColor = 'rgb(3, 26, 42)'
+                     button1.style.backgroundColor = 'rgba(3, 26, 42, .5)'
+                     let trs = document.querySelectorAll('#applyTable tr')
+                     if (trs.length < 3) {
+                       applyTableFn()
+                    //   document.querySelectorAll('#enemiesTable thead').style.display = 'block'
+                     }
+                     switchTable(enemiesTable, heroesTable)
+                     level.value = 100
+                     resetlvls.click()
+                     start.click()
+                     heroes = false
+                   }
+                 }
+                 function switchTable(table, table2) {
+                   table.style.display = 'table';
+                   table2.style.display = 'none'
+                 }
+               })
+               })
+        })
+
        })
     })
 

@@ -1,4 +1,17 @@
 $mainBg: #031a2a;
+::-webkit-scrollbar-thumb { background-color: $mainBg; }
+::-webkit-scrollbar { background-color: rgb(193, 224, 245); }
+#sideDiv {
+  background-color: $mainBg;
+  h4 {
+    background-color: rgb(193, 224, 245);
+    color:  $mainBg;
+    box-shadow: 2px 2px 1px 1px rgb(193, 224, 245);
+  }
+  a {
+    background-color: $mainBg;
+  }
+}
 @mixin title {
     text-align: center;
     color: #fff;
@@ -7,6 +20,7 @@ $mainBg: #031a2a;
 h1 {
     @include title;
 }
+#glossarymain { width: 80vw; margin: 0 5% 0 10%}
 #navFiters button { background-color: $mainBg}
 #pages {
   button {
@@ -18,9 +32,12 @@ h1 {
     float: none;
   }
 }
+#otherfilters { text-align: right}
+#lvlbtns button { background-color: $mainBg}
 #navFiters { border-top: 2px solid $mainBg;}
 #tabs {
   width: 100%;
+  padding-top:5px;
   button {
     width: 50%;
     color: white;
@@ -37,19 +54,22 @@ thead { background-color: $mainBg}
 th { background-color: $mainBg}
 #jobs {background-color: #0c3551}
 #enemiesTable {display: none}
-#enemiesTable tr td:nth-child(6){padding-left: 30px;}
+#enemiesTable tr td:nth-child(6){padding-left: 30px;} // abil imgsHTML
+//treshold colors
+#enemiesTable tr td:nth-child(7) { max-width: 200px;}
+.thresh1 { color: forestgreen; span {color: forestgreen; font-weight: normal;}}
+.thresh2 { color: #FFDE00; span {color: #FFDE00; font-weight: normal;}}
+.thresh3 { color: red; span {color: red; font-weight: normal;}}
+//attributes bg colors
 #enemiesTable tr td:nth-child(10) {
     background-color: rgba(216, 216, 51, .7);
 }
-
 #enemiesTable tr td:nth-child(11) {
     background-color: rgba(183, 38, 25,.7)//rgba(255, 101, 101, 0.7);
 }
-
 #enemiesTable tr td:nth-child(12) {
     background-color: rgba(51, 204, 76, 0.7);
 }
-
 #enemiesTable tr td:nth-child(13) {
     background-color: rgba(51, 82, 171, 0.7);
 }
@@ -97,6 +117,9 @@ table tr td:not(:first-child) {
   img { position: inherit}
 }
 
+.tooltipMy .tooltiptext {
+    background-color: $mainBg; //r
+  }
 .Beginner {color: #6a8d55; font-weight: 600}
 .Easy { color: #4b7396; font-weight: 600}
 .Medium {color: #584b67; font-weight: 600}

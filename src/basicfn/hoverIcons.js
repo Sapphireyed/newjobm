@@ -9,7 +9,7 @@ let targetWidth = 768;
 
 export function showIcon(item, arr) {
   let mouseY = event.clientY; //get mouseposition to decide where to display img
-  let bgimg = arr.filter(img => img.id == item.innerText)
+  let bgimg = arr.filter(img => img.id == item.innerText.trim())
   let theadimg;
   switch (arr) {
     case jobImagesComplete:

@@ -451,7 +451,7 @@ let filtersdiv = document.getElementById('jobs')
 
 function jobLink(item) {
   var i = item.parentNode.firstChild.innerHTML
-  openNew(jobValues, i, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+  openNew('job', jobValues, i, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits, 'heroes')
 }
 
 //clear filters
