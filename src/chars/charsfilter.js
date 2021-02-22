@@ -33,8 +33,13 @@ rarSel.classList.add('filter', 'rounded')
 //rarSel.style.float = 'right'
 //rarSel.style.width = '100px'
 const optionsArr = ['All', 1, 2, 3, 4, 5];
+const optionsArr2 = ['All', 'Beginner', 'Easy', 'Medium', 'Hard', 'Boss'];
 
-const options = optionsArr.map(opt => {
+export const options = optionsArr.map(opt => {
+  const value = opt
+  return `<option value="${value}">${opt}</option>`;
+});
+export const options2 = optionsArr2.map(opt => {
   const value = opt
   return `<option value="${value}">${opt}</option>`;
 });
@@ -201,7 +206,7 @@ const searchinSel = document.createElement('select');
 searchinSel.id = 'searchin'
 searchinSel.name = 'searchin'
 searchinSel.classList.add('rounded')
-searchinSel.innerHTML = '<option value="both">Both</option><option value="passive">Passive</option><option value="ability">Ability</option>'
+searchinSel.innerHTML = '<option value="both">Both</option><option value="passives">Passives</option><option value="abilities">Abilities</option>'
 searchinDiv.append(searchinLabel, searchinSel)
 
 //clear filters button
@@ -216,7 +221,9 @@ clear.innerHTML = 'Reset'
 clear.classList.add('rounded')
 clear.style.color = 'white'
 clear.style.fontSize = '18px'
-cleardiv.appendChild(clear)
+let clear2 = clear.cloneNode(true)
+clear.id = 'clear2'
+cleardiv.append(clear, clear2)
 //clear filters button
 let filterStart = document.createElement('div')
 filterStart.classList.add('col-6', 'sol-sm-3')
@@ -226,7 +233,9 @@ start.innerHTML = 'Search'
 start.classList.add('rounded')
 start.style.color = 'white'
 start.style.fontSize = '18px'
-filterStart.appendChild(start)
+let start2 = start.cloneNode(true)
+start2.id = 'start2'
+filterStart.append(start, start2)
 //filtBtns.append(cleardiv, filterStart)
 /*const filtersLabels = document.createElement('div');
 filtersLabels.classList.add('col-6')

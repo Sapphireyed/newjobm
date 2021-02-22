@@ -2,7 +2,7 @@ import { tbody } from './abilsTable.js'
 import { openNew } from '../basicfn/openNew.js'
 import { abilities, abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
-        jobsDataAll, appliesAllInfo} from '../abilitiesData.js'
+        jobsDataAll, appliesAllInfo, charsAllInfo} from '../abilitiesData.js'
 //import { openNew } from '../basicfn/openNew.js'
 import { abilImagesComplete} from '../img/imgsHTML.js'
 import { abilsfilter } from './abilsfilter'
@@ -115,7 +115,20 @@ function loadList() {
           let job = jobsDataAll.filter(job => job[1] == this.innerText)
           let ind = job[0][0]
           console.log(ind)
-          openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+          openNew('job', jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+        }
+      })
+      // heroes
+      let chars = charsAllInfo.filter(char => char[13] == name.innerText || char[14] == name.innerText)
+      chars = chars == [] ? '' : chars
+      chars = chars.map(j=> '<br><span class="openNewHero">' + j[1] + '</span>')
+      abilrows[i].children[8].innerHTML = chars == '' ? '' : '<div>' + chars + '</div>'
+      let charLinks = Array.from(document.getElementsByClassName('openNewHero'))
+      charLinks.map(link =>{
+        link.onclick = function() {
+          let char = charsAllInfo.filter(job => job[1] == this.innerText)
+          let ind = char[0][0]
+          openNew('char', charsAllInfo, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,'heroes')
         }
       })
 

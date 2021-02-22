@@ -3,7 +3,7 @@ import '../abils.scss';
 import nav from './nav/nav';
 import { sideDiv, toggleSide } from './side/side.js'
 import { abilsmain } from './abilities/abilsmain.js'
-import {abilities, jobsData, abilitiesAllInfo} from './abilitiesData.js'
+import {abilities, characters, jobsData, abilitiesAllInfo} from './abilitiesData.js'
 import { getAbilImgs, abilImagesComplete, getJobImgs } from './img/imgsHTML.js'
 import { abilitiesFn } from './abilities/abilitiesjs.js'
 import theadimg from './img/Traits/Dumb.png'
@@ -40,7 +40,8 @@ abilities.units()
               abilitiesFn()
             })
           })
-
+          
+characters.chars()
 jobsData.jobs()
 jobsData.craft()
     .then(data => {

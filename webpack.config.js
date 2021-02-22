@@ -12,6 +12,7 @@ module.exports = {
   glossary: path.resolve(__dirname, './src/glossary.js'),
   characters: path.resolve(__dirname, './src/characters.js'),
   char: path.resolve(__dirname, './src/char.js'),
+  chapters: path.resolve(__dirname, './src/chapters.js'),
 },
 output: {
   filename: '[name].[contenthash]bundle.js',
@@ -92,6 +93,10 @@ module: {
     new HtmlWebpackPlugin({
       filename: 'char.html',
       chunks: ['char'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'chapters.html',
+      chunks: ['chapters'],
     }),
     /*new CompressionPlugin({
       test: /\.js(\?.*)?$/i

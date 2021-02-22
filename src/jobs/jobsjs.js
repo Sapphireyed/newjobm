@@ -42,6 +42,7 @@ export function jobs() {
     var jobsRows = jobsSheetArrs[2][1];
     jobsRows.shift()
     jobsRows.map(job => {
+      console.log(job)
       for (var i=0; i< job.length; i++) {
         job[i] == undefined ? job.splice(i,1, '') : job[i]
       }
@@ -118,6 +119,7 @@ function loadList() {
 
     drawList();
     check();
+
     jobLinks = document.querySelectorAll('#jobsTable tr td:nth-child(3)');
     for (var i = 0; i < jobLinks.length; i++) {
       jobLinks[i].addEventListener('mousemove', function() {
@@ -187,6 +189,7 @@ function filter() {
       let filter = f.id
       tableRows = Array.from(tableRows)
       for (var ind = 1; ind < tableRows.length; ind++) {
+
         //hide all rows. Particular rowswill be isplayed as per filters
         tableRows[ind].classList.add('d-none', 'boo')
       //  console.log(tableRows[ind].classList)
@@ -243,7 +246,7 @@ function filter() {
 //const eventChange = new Event('change')
 let start = document.getElementById('start')
   start.addEventListener('click',function() {
-    alert('wait')
+
     setTimeout(function() {
 
        let pagesVal = pagesSel.value
@@ -259,13 +262,13 @@ let start = document.getElementById('start')
 
 
         filter()
+
         let displayed = Array.from(document.querySelectorAll('#jobsBody tr')).filter(tr => tr.classList.contains('d-none') == false)
         displayed.map((tr, index) => {
           index >= pagesSel.value ? tr.classList.add('d-none') : ''
         })
        // cursorDef()
-
-    }, 10)
+    }, 0)
   })
 
 //   filters[i].value = 'All'

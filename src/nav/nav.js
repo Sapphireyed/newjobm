@@ -6,6 +6,7 @@ export default () => {
   const img = document.createElement("img"); // logo at the top
   img.src = logo;
   img.alt = 'logo';
+  img.id = 'top'
   img.classList.add('mx-auto', 'd-block');
   const logonav = document.createElement('nav');
   const logodiv = document.createElement('div')

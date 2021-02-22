@@ -166,7 +166,7 @@ function changeColors(arr, nameind) {
         r[i] = r[i].replace(/\bfire\b/gi, '<span class=\'fire\'><img class="icon" src="' + fire + '" alt="fire"/> Fire</span>')
         r[i] = r[i].replace(/\bearth\b/gi, '<span class=\'earth\'><img class="icon" src="' + earth + '" alt="earth"/> Earth</span>')
         r[i] = r[i].replace(/\bwind\b/gi, '<span class=\'wind\'><img class="icon" src="' + wind + '" alt="wind"/> Wind</span>')
-        r[i] = r[i].replace(/\bthunder\b/gi, '<span class=\'thunder\'><img class="icon" src="' + thunder + '" alt="thunder"/> Thunder</span>')
+        r[i] = r[i].replace(/\bthunder\b/gi, '<span class=\'thunder\'><img class="icon" src="' + thunder + '" alt="thunder"/>Thunder</span>')
         r[i] = r[i].replace(/\blight\b/gi, '<span class=\'light\'><img class="icon" src="' + light + '" alt="light"/> Light</span>')
         r[i] = r[i].replace(/\bdark\b/gi, '<span class=\'dark\'><img class="icon" src="' + dark + '" alt="dark"/> Dark</span>')
         // apply debuffs change col
@@ -501,6 +501,7 @@ let abilities = {
             + '<br>' + (desc3[i].desc || '')
             + '<br>' + (desc4[i].desc || ''))
           }
+          descFinale = descFinale.map(desc => desc.replace(/<br><br><br>|<br><br>/, '<br>'))
 
           changeColors(res, 2)  // change colors of keywords in skills/effects/traits
           changeApply(res, 17)
@@ -635,6 +636,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
     chars:() => {
       return GetSheetDone
         .raw(id, 9).then(data => data.data).then(res => {
+          console.log(res)
           res.shift()
         changeColors(res, 1)
         charsAllInfo = res;
@@ -646,6 +648,14 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
       return GetSheetDone
         .raw(id, 10).then(data => data.data).then(res => {
           res.shift()
+          res.map(row => {
+            for(let i=0;i<row.length;i++) {
+              row[i] == undefined ? row.splice(i,1, '') : row[i]
+            }
+            return row
+          })
+        //  res= res.map(row=> row= row.filter((r,i) => r == empty))
+          console.log(res)
         chaptAllInfo = res;
         })
     }

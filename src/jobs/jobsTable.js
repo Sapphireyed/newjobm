@@ -22,7 +22,6 @@ thead.innerHTML = '<tr id="jobsThead">'
     + '<th data-sort="number">INT<i class="fas fa-sort float-right"></i></th>'
     + '</tr>'
   var tbody = document.createElement('tbody')
-
   tbody.id = 'jobsBody'
 //  tbody.style.backgroundImage = 'url("' + sword + '")'
 //  tbody.style.backgroundSize = 'contain'

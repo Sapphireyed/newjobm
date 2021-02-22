@@ -272,11 +272,6 @@ tbody { color: black}
   i {
       margin-top: 5px;
   }
-
-  img {
-    //  width: 40%
-  }
-
 }
 
 .sticky {
@@ -452,6 +447,7 @@ table tr td:nth-child(3) {
   bottom: 20px;
   right: 30px;
   display: none;
+  z-index: 100000;
 }
 #dialog {
   position: absolute;

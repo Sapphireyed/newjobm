@@ -22,6 +22,7 @@ h1 {
 }
 #glossarymain { width: 80vw; margin: 0 5% 0 10%}
 #navFiters button { background-color: $mainBg}
+#clear2, #start2 { display:none}
 #pages {
   button {
     background-color:$mainBg;
@@ -54,7 +55,7 @@ thead { background-color: $mainBg}
 th { background-color: $mainBg}
 #jobs {background-color: #0c3551}
 #enemiesTable {display: none}
-#enemiesTable tr td:nth-child(6){padding-left: 30px;} // abil imgsHTML
+#enemiesTable .enabil{padding-left: 30px;} // abil imgsHTML
 //treshold colors
 #enemiesTable tr td:nth-child(7) { max-width: 200px;}
 .thresh1 { color: forestgreen; span {color: forestgreen; font-weight: normal;}}

@@ -2,7 +2,7 @@ import './style.scss';
 import './passives.scss';
 import nav from './nav/nav';
 import { passivesmain } from './passives/passivesmain.js'
-import {abilities, jobsData,abilitiesAllInfo} from './abilitiesData.js'
+import {abilities, jobsData,abilitiesAllInfo,characters} from './abilitiesData.js'
 import { getAbilImgs, abilImagesComplete, getJobImgs } from './img/imgsHTML.js'
 import { passivesFn } from './passives/passivesjs.js'
 import theadimg from './img/Materials/Guardian Necklace.png'
@@ -34,6 +34,7 @@ jobsData.craft()
 abilities.units()
     .then(data => {
         abilities.abils()
+        characters.chars()
         abilities.glossary()
           .then(p => {
             abilities.passivesFn()

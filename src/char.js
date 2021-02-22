@@ -77,6 +77,9 @@ chapters.chapt()
     whichChar(this, enemybtn, heroAttr, enemyAttr, rarity, rarityEn, div2, div2en, div2bis)
     passiveAndSwitchBis.style.display = 'flex'
     rarityFn(rarity,char[2], 'heroes')
+    document.getElementById('threshdiv').style.display = 'none'
+    document.getElementById('scdiv').style.display = 'none'
+    document.getElementById('dropdiv').style.display = 'none'
     //change stats
     let start= document.querySelectorAll('#lvlbtns button')[0]
     let resetlvls = document.querySelectorAll('#lvlbtns button')[1]
@@ -87,7 +90,6 @@ chapters.chapt()
     hero.value = 1
     let hpStat = Array.from(document.querySelectorAll('.spanattr'))
     start.addEventListener('click', function() {
-      console.log('start')
       charStats(hpStat, stat, hero)
     })
     resetlvls.addEventListener('click', function() {
@@ -96,6 +98,7 @@ chapters.chapt()
       charStats(hpStat)
     })
     start.click()
+    document.getElementById('herolvl').style.display = 'block'
     if (heroclicked == 0 ) {
       // build passive1
       let passivesDiv = document.createElement('div')
@@ -111,7 +114,6 @@ chapters.chapt()
         var descText = splitDesc(passiveFinale, passiveH.innerText.split(':')[1].trim())
         descText = descText.length == 0 ? '' : descText[0][1]
         passiveDesc.innerHTML = descText.replace('while job on', '')
-        console.log(passiveDesc.innerHTML)
         let pTraits = splitApply(passiveTraits, passiveH.innerText.split(':')[1].trim())[0]
         pTraits[1] !== ', , ' ? passiveDesc.innerHTML = passiveDesc.innerHTML  + '<br>(' + pTraits[1] +')' : ''
         passiveDesc.innerHTML = passiveDesc.innerHTML.replace(/, ,|, , ,|\(,|\(\)|<br><br>/g, '')
@@ -129,9 +131,9 @@ chapters.chapt()
       let passiveH2 = document.createElement('h4')
       passiveH2.id = 'passiveH1'
       passiveH2.innerHTML = 'Passive2: ' + char[12] || ''
-      if(char[12] !== ''){
-        passiveH2.innerText = passiveH2.innerText.replace(/  /g, ' ')
-        let passiveDesc2 = document.createElement('h5')
+      passiveH2.innerText = passiveH2.innerText.replace(/  /g, ' ')
+      let passiveDesc2 = document.createElement('h5')
+      if (char[12] !== ''){
         passiveDesc2.id = 'passiveDesc2'
         var descText2 = splitDesc(passiveFinale, passiveH2.innerText.split(':')[1].trim())
         descText2 = descText2.length == 0 ? '' : descText2[0][1]
@@ -140,10 +142,10 @@ chapters.chapt()
         pTraits2[1] !== ', , ' ? passiveDesc2.innerHTML = passiveDesc2.innerHTML  + '<br>(' + pTraits2[1] +')' : ''
         passiveDesc2.innerHTML = passiveDesc2.innerHTML.replace(/, ,|, , ,|\(,|\(\)|<br><br>/g, '')
         passiveDesc2.innerHTML = passiveDesc2.innerHTML.replace(/, \)/g, ')')
-
+      }
         passivesDiv2.append(passiveH2, passiveDesc2)
         div2bis.append(passivesDiv2)
-      }
+
 
       //abilitiy1
       let abilsmainDiv = document.createElement('div')
@@ -207,6 +209,9 @@ chapters.chapt()
     whichChar(this, herobtn, enemyAttr, heroAttr, rarityEn, rarity, div2en, div2, div2bis)
     passiveAndSwitchBis.style.display = 'none'
     rarityFn(rarityEn, char[2], 'enemies')
+    document.getElementById('threshdiv').style.display = 'flex'
+    document.getElementById('scdiv').style.display = 'block'
+    document.getElementById('dropdiv').style.display = 'block'
     // change enemy starts
     let start= document.querySelectorAll('#lvlbtns button')[0]
     let resetlvls = document.querySelectorAll('#lvlbtns button')[1]
@@ -216,7 +221,6 @@ chapters.chapt()
     hero.disabled = true
     let hpStat = Array.from(document.querySelectorAll('.spanattr'))
     start.addEventListener('click', function() {
-      console.log('brr')
       hpStat.map(hp => hp.innerHTML = Math.ceil(hp.id/100 * stat.value))
     })
     resetlvls.addEventListener('click', function(){
@@ -224,6 +228,7 @@ chapters.chapt()
       hpStat.map(hp => hp.innerHTML = Math.ceil(hp.id/100 * stat.value))
     })
     start.click()
+    document.getElementById('herolvl').style.display = 'none'
 
     if (enemyclicked == 0) {
       let passivesDiv = document.createElement('div')
@@ -252,10 +257,13 @@ chapters.chapt()
         var descText = splitDesc(passiveFinale, passiveH.innerText.trim())
         descText = descText.length == 0 ? '' : descText[0][1]
         passiveDesc.innerHTML = descText.replace('while job on', '')
-        let pTraits = splitApply(passiveTraits, passiveH.innerText.trim())[0]
-        pTraits[1] !== ', , ' ? passiveDesc.innerHTML = passiveDesc.innerHTML  + '<br>(' + pTraits[1] +')' : ''
-        passiveDesc.innerHTML = passiveDesc.innerHTML.replace(/, ,|, , ,|\(,|\(\)|<br><br>/g, '')
-        passiveDesc.innerHTML = passiveDesc.innerHTML.replace(/, \)/g, ')')
+        if (passiveH.innerText !== '' ) {
+          let pTraits = splitApply(passiveTraits, passiveH.innerText.trim())[0]
+          pTraits[1] !== ', , ' ? passiveDesc.innerHTML = passiveDesc.innerHTML  + '<br>(' + pTraits[1] +')' : ''
+          passiveDesc.innerHTML = passiveDesc.innerHTML.replace(/, ,|, , ,|\(,|\(\)|<br><br>/g, '')
+          passiveDesc.innerHTML = passiveDesc.innerHTML.replace(/, \)/g, ')')
+        }
+
 
         passiveSkill.append(passiveH, passiveDesc)
         passivesDiv.appendChild(passiveSkill)
@@ -274,41 +282,39 @@ chapters.chapt()
       abilsCollapse.innerHTML = ' - '
       abilsH.appendChild(abilsCollapse)
       abilsmainDiv.appendChild(abilsH)
-      mainabils.map((ab, i) => {
-        let abilname = Array.from(document.querySelectorAll('.skillname'))
-        let samename = abilname.filter(a => ab == a.innerText)
-        if (samename.length > 0 ) {
-          let counter = mainabils.filter(a => a == samename[0].innerText).length
-          samename[0].innerHTML = samename[0].innerHTML + 'x' + counter
-        } else {
-            let switchSkill = document.createElement('div')
-            switchSkill.id = 'switchSkill' + i
-            switchSkill.classList.add('col-12','row')
-            let switchH = document.createElement('h5')
-            switchH.classList.add('col-4', 'skillname')
-            switchH.id = 'switchH' + i
-            switchH.innerHTML = ab.replace(/  /g, ' ')
-            let switchimg = document.createElement('div')
-            switchimg.id = 'switchimg' + i
-            switchimg.className = 'abilimg'
-            switchimg.innerHTML = abilImagesComplete.filter(a=> a.id == switchH.innerText.trim())[0].outerHTML
-            switchH.appendChild(switchimg)
-            let switchDesc = document.createElement('h6')
-            switchDesc.id = 'switchDesc' + i
-            switchDesc.classList.add('col-8')
-            var descText = splitDesc(descFinale, switchH.innerText.trim())
-            descText = descText.length == 0 ? '' : descText[0][1]
-            switchDesc.innerHTML = descText
-            let pTraits = splitApply(abilTraits, switchH.innerText.trim())[0]
-            pTraits[1] !== ', , ' ? switchDesc.innerHTML = switchDesc.innerHTML  + '<br>(' + pTraits[1] +')' : ''
-            switchDesc.innerHTML = switchDesc.innerHTML.replace(/, ,|, , ,|\(,|\(\)|<br><br>/g, '')
-            switchDesc.innerHTML = switchDesc.innerHTML.replace(/, \)/g, ')')
+      function count(arr) {
+        return arr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {})
+      }
+      mainabils = count(mainabils)
+      Object.entries(mainabils).map((ab, i) => {
+        let switchSkill = document.createElement('div')
+        switchSkill.id = 'switchSkill' + ab[1]
+        switchSkill.classList.add('col-12','row')
+        let switchH = document.createElement('h5')
+        switchH.classList.add('col-4', 'skillname')
+        switchH.id = 'switchH' + ab[1]
+        switchH.innerHTML = ab[0]
+        let switchimg = document.createElement('div')
+        switchimg.id = 'switchimg' + ab[1]
+        switchimg.className = 'abilimg'
+        switchimg.innerHTML = abilImagesComplete.filter(a=> a.id == switchH.innerText.trim())[0].outerHTML
 
-            switchSkill.append(switchH, switchDesc)
-            abilsmainDiv.appendChild(switchSkill)
-            div2en.appendChild(abilsmainDiv)
-        }
+        let switchDesc = document.createElement('h6')
+        switchDesc.id = 'switchDesc' + ab[1]
+        switchDesc.classList.add('col-8')
+        var descText = splitDesc(descFinale, switchH.innerText.trim())
+        descText = descText.length == 0 ? '' : descText[0][1]
+        switchDesc.innerHTML = descText
+        let pTraits = splitApply(abilTraits, switchH.innerText.trim())[0]
+        pTraits[1] !== ', , ' ? switchDesc.innerHTML = switchDesc.innerHTML  + '<br>(' + pTraits[1] +')' : ''
+        switchDesc.innerHTML = switchDesc.innerHTML.replace(/, ,|, , ,|\(,|\(\)|<br><br>/g, '')
+        switchDesc.innerHTML = switchDesc.innerHTML.replace(/, \)/g, ')')
+        switchH.innerHTML = ab[1] > 1 ? ab[0] + '(' + ab[1] + ')' : ab[0]
+        switchH.appendChild(switchimg)
 
+        switchSkill.append(switchH, switchDesc)
+        abilsmainDiv.appendChild(switchSkill)
+        div2en.appendChild(abilsmainDiv)
       })
       // collapse passives and abils
       let abilities = document.querySelectorAll('.abilsmainDiv h5')
@@ -356,7 +362,6 @@ chapters.chapt()
         if (typeof thresh !== 'string') {
           thresh = thresh == '' ? '' : thresh.map(it => it = it == '' ? 'none' : it)
         }
-        console.log(thresh)
         let th1 = thresh[0]
         let th2 = thresh[1]
         let th3 = thresh[2]
@@ -373,8 +378,10 @@ chapters.chapt()
         desc1.map((d,i) => {
           let descspan = document.createElement('span')
           descspan.innerHTML = '<br>' + desctxt[i].replace(/<br>/g, '. ') + '<br>'
+          console.log(descspan.innerHTML )
           d.innerHTML = '<br>' + d.innerHTML
-          descspan.innerHTML = descspan.innerHTML.replace(/ . | . ./g, '')
+        //  descspan.innerHTML = descspan.innerHTML.replace(/ . | . ./g, '')
+          console.log(descspan.innerHTML)
           d.append(descspan)
         })
         let desc2 = Array.from(document.querySelectorAll('.th2'))
@@ -399,15 +406,103 @@ chapters.chapt()
       }
 
       //collapse thresh
+  //    char[9] == '' ? document.getElementById('threshH').click() : ''
       let threshH = document.getElementById('threshH')
       let threshCollapse = document.createElement('a')
       threshCollapse.innerHTML = ' - '
       threshH.appendChild(threshCollapse)
       threshH.onclick = function() {
-        console.log('kkk')
         $('#threshdiv div').toggle('slow')
         threshCollapse.innerHTML == ' - ' ? threshCollapse.innerHTML = ' + ' : threshCollapse.innerHTML = ' - '
       }
+      // Drops
+      let dropdesc = descFinale.map(d => d.split(':<br>'))
+      let dropdiv = document.getElementById('dropdiv')
+      let dropsub = document.createElement('div')
+      let drop1 = document.getElementsByClassName('drop')[0]
+      if (char[13] !== '') {
+        drop1.innerHTML = '<h5>' + char[13] + '</h5><div class="dropdesc"></div>'
+        let drop1img = abilImagesComplete.filter(img=> img.id == drop1.innerText)
+        drop1.innerHTML = '<div>' + drop1img[0].outerHTML + ' ' + drop1.innerHTML + '</div><br>'
+      }
+      let drop2 = document.getElementsByClassName('drop')[1]
+      if (char[14] !== '') {
+        drop2.innerHTML = '<h5>' + char[14] + '</h5><div class="dropdesc"></div>'
+        let drop2img = abilImagesComplete.filter(img=> img.id == drop2.innerText)
+        drop2.innerHTML = '<div>' + drop2img[0].outerHTML + ' ' + drop2.innerHTML + '<div><br>'
+      }
+      let tips = Array.from(document.getElementsByClassName('dropdesc'))
+      console.log(tips)
+      dropdesc = tips.map(t=> dropdesc.filter(dsc => dsc[0] == t.previousElementSibling.innerText.trim())[0][1])
+      tips.map((t,index) => t.innerHTML = '<br>' + dropdesc[index])
+      dropsub.append(drop1, drop2)
+      dropdiv.appendChild(dropsub)
+      //special cases
+      let scdiv = document.getElementById('scdiv')
+      let scsub = document.getElementById('scsub')
+      scsub.innerHTML = char[10]
+      let scs = scsub.innerText.split('|')
+      let cond = scs.map(abil => abil.split(':')[0])
+      let name = scs.map(abil => abil.split(':')[1])
+      if (char[10] !== '') {
+        if (char[10].includes('|')) {
+          name = Array.from(name)
+          scsub.innerHTML = ''
+          scs.map((abil, i) => {
+            let newCase = document.createElement('h5')
+            newCase.innerHTML = name
+            if ( Array.from(name).some(el => el.includes('-'))) {
+                name = newCase.innerText.split(',').map(n => n.split('-'))
+                name.map((n,index) => {
+                  let img = n.map(ni=> abilImagesComplete.filter(abimg=> abimg.id == ni.trim())[0])
+                  n = n.map((ni,ind) => '<div class="scall">' + img[ind].outerHTML+'<h5 class="scname">' + ni + '</h5>' + '<div class="scdesc"><br></div></div>')
+                  scsub.innerHTML = scsub.innerHTML.includes(cond[index]) ? scsub.innerHTML : scsub.innerHTML + '<br><h5 class="cond">' + cond[index] + ': </h5><br><br>' + n
+                  scsub.innerHTML = scsub.innerHTML.replace(/,/g, '')
+                })
+
+            } else {
+              name = name.includes('-') ? newCase.innerText.split('-') : newCase.innerText.split(',')
+              let img = name.map(n => abilImagesComplete.filter(a => a.id == n.trim())[0].outerHTML)
+              name = name.map(n => '<h5 class="scname">' + n + '</h5>')
+              i == 0 ? scsub.innerText = '' : ''
+              name.map((n,ind) => scsub.innerHTML = scsub.innerHTML.includes(cond[i]) ? scsub.innerHTML : scsub.innerHTML + '<br><h5 class="cond">' + cond[i] + ': </h5><br><br><div class="scall">' + img[ind] +' ' + n +'<div class="scdesc"></div>')
+
+            //  scsub.append(newCase)
+            }
+
+          })
+        } else {
+          scs.map((abil,i) => {
+            let newCase = document.createElement('h5')
+            newCase.innerHTML = name
+            name = newCase.innerText.split('-')
+            let img = name.map(n => abilImagesComplete.filter(a => a.id == n.trim())[0].outerHTML)
+            name = name.map(n => '<h5 class="scname">' + n + '</h5>')
+            i == 0 ? scsub.innerHTML = '<h5 class="cond">' + cond[i] + ': </h5><br><br>': ''
+            name.map((n,ind) => scsub.innerHTML = scsub.innerHTML + '<div class="scall">' + img[ind] +' ' + n + '<div class="scdesc"></div></div><br>')
+          //  scsub.append(newCase)
+          })
+        }
+
+        scsub.innerHTML = scsub.innerHTML.split('|').join('<br>')
+        let tips = Array.from(document.getElementsByClassName('scdesc'))
+        let desc = descFinale.map(d => d.split(':<br>'))
+        desc = tips.map(t=> desc.filter(dsc => dsc[0] == t.previousElementSibling.innerText.trim())[0][1])
+        tips.map((t,index) => t.innerHTML = desc[index]) + '<br>'
+      }
+      let scnames = Array.from(document.querySelectorAll('.scname'))
+      scnames.map(sc=> {
+        let coll = document.createElement('a')
+        coll.className = 'sccoll'
+        coll.innerHTML = ' + '
+        sc.append(coll)
+        sc.nextElementSibling.style.display = 'none'
+        sc.onclick = function(){
+          let thisdesc = this.nextElementSibling
+          thisdesc.style.display = thisdesc.style.display == 'none' ? 'block' : 'none'
+          coll.innerHTML = coll.innerHTML == ' - ' ? ' + ' : ' - '
+        }
+      })
       // chapters
       let chaptdiv = document.getElementById('chapt')
       var header = document.getElementById('jobheader')
@@ -501,7 +596,6 @@ chapters.chapt()
 
       })*/
       oneH.style.width = one.getBoundingClientRect().height + 'px'
-      console.log(one.getBoundingClientRect().height)
       enemyclicked = 1
 
     }

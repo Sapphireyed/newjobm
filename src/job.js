@@ -145,7 +145,7 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
 
         let ind = jobsDataAll.filter(job => job[1] == name.trim())
         ind = parseInt(ind[0])
-        openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+        openNew('job',jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
       })
     }
     // apply tooltips

@@ -8,7 +8,7 @@ import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
 //import { openNew } from '../basicfn/openNew.js'
 //import { abilImagesComplete} from '../img/imgsHTML.js'
 //import { passivesfilter } from './passivesfilter'
-import {filterPass} from '../basicfn/filters.js'
+import {abfilt, passfilt} from '../basicfn/charfilt.js'
 import { showIcon, hideIcon } from '../basicfn/hoverIcons.js'
 import star from '../img/events/StarColor1.png'
 var $ = require("jquery")
@@ -228,65 +228,29 @@ function loadList() {
               if (f.id == 'race') {
                 ch = ch[15] == f.value ? ch.push('race') : ch
               }
-          //    let searchin = document.getElementById('searchin')
-              let passive1 = ch[11]
-              let passive2 = ch[12]
-              let abil1 = ch[13]
-              let abil2 = ch[14]
-              let abilsboth = abilitiesAllInfo.filter(ab => abil1 == ab[2] || abil2 == ab[2])
-              abilsboth.map(a => {
-                let skills = [5, 8, 11, 14]
-                let effects = [6,9,12, 15]
-                if (f.id == 'type') {
-                  switch (f.value) {
-                    case 'Other':
-                    ch = skills.some((unit) => a[unit] == 'Null' && a[unit+1] == 'Null') ? ch.push('type') : a
-                    ch = skills.some((unit) => a[unit] == 'InstantBoost' && a[unit+1] == 'Direct') ? ch.push('type') : a
-                    skills.some((unit) => (a[unit] == undefined ? '' : (a[unit].includes('Protect') && (a[unit+1] == 'Direct' || a[unit+1] == 'Guard' || a[unit+1] == 'Draw')))) ? ch.push('type') : ''
-                    break;
-                  case 'Remove Debuff':
-                    skills.some((unit) => a[unit].includes('Protect') && a[unit+1].match(elemRegex)) ? ch.push('type') : ''
-                    break;
-                  case 'Protect':
-                    skills.some((unit) => a[unit].includes('Protect') && (chosenAttr == 'All' ? a[unit+1].match(attrRegex) : a[unit+1].includes(chosenAttr))) ? ch.push('type') : ''
-                    break;
-                  case 'Negative':
-                    skills.some((unit) => a[unit] == 'Curse' || a[unit] == 'Sacrifice') ? ch.push('type') : ''
-                    break;
-                  default:
-                    skills.some((unit) => a[unit] == f.value && (chosenAttr == 'All' ? true : a[unit+1].includes(chosenAttr))) ? ch.push('type') : ''
-                  }
-                }
-                if (f.id == 'attrSel' && f.value !== 'All') {
-                    if (typeVal == 'All') {
-                      skills.some(s=> {
-                        a[s] == undefined ? '' : a[s].includes(f.value) ? ch.push('attrSel') : ''
-                      })
-                      effects.some(s=> {
-                        a[s] == undefined ? '' : a[s].includes(f.value) ? ch.push('attrSel') : ''
-                      })
-                    } else {
-                      if (typeVal == 'Protect') {
-                        skills.some(s => a[s] == undefined ? '' : a[s].includes('Protect') && a[s+1].includes(f.value)) ? ch.push('attrSel') : ''
-                      } else {
-                          skills.some(s=> {
-                            (a[s] == typeVal && a[s+1].includes(f.value)) ? ch.push('attrSel') : ''
-                            a[s].includes(f.value) ? ch.push('attrSel') : ''
-                          })
+              let searchin = document.getElementById('searchin')
+              switch (searchin.value) {
+                case 'abilities':
+                  abfilt(ch, abilitiesAllInfo, f, elemRegex, attrRegex, chosenAttr, typeVal)
+                  document.getElementById('whenSel').disabled = true;
+                  document.getElementById('type').disabled = false;
+                  document.getElementById("whenSel").value = 'All'
+                  break;
+                case 'passives':
+                  passfilt(ch, passivesAllInfo, f, elemRegex, attrRegex, chosenAttr, typeVal)
+                  document.getElementById('whenSel').disabled = false;
+                  document.getElementById('type').disabled = true;
+                  document.getElementById("type").value = 'All'
+                  break;
+                case 'both':
+                  passfilt(ch, passivesAllInfo, f, elemRegex, attrRegex, chosenAttr, typeVal)
+                  abfilt(ch, abilitiesAllInfo, f, elemRegex, attrRegex, chosenAttr, typeVal)
+                  document.getElementById("type").disabled = false;
+                  document.getElementById('whenSel').disabled = false;
+                  break;
+                default:
 
-                      }
-                      }
-                  }
-                  if (f.id == 'apply') {
-                    if ([a[17], a[18], a[19]].some(el => el = el.includes(f.value))) {
-                      ch.push('apply')
-                    }
-                  }
-                  if (f.id == 'element') {
-                    effects.some(s => a[s] == undefined ? '' : a[s].includes(f.value)) ? ch.push('element') : ''
-                  }
-              })
-
+              }
           })
         }
       })
@@ -359,7 +323,6 @@ function loadList() {
     let agi = Array.from(document.querySelectorAll('.jobRow td:nth-child(10)'))
     let int = Array.from(document.querySelectorAll('.jobRow td:nth-child(11'))
     start.addEventListener('click', function() {
-      console.log('start')
       charStats(hpStat, stat, hero)
       //charStats(str)
       //charStats(agi)
@@ -562,30 +525,104 @@ export function applyTableFn() {
     var abilsBody = document.getElementById('abilsBody');
 
     // pagination
-    var begin
-    if (numberPerPage == 10) {
-      $("table").trigger("destroy");
-      begin = ((currentPage - 1) * numberPerPage);
-      console.log(charsAllInfo[0])
-      console.log(charsAllInfo[9])
-    } else if ( numberPerPage == 'all') {
-      begin = 0
-      numberPerPage = list.length
-      $("table").trigger("destroy");
+    if (filters.filter(f => f.value == 'All').length == filters.length) {
+      var begin
+      if (numberPerPage == 10) {
+        $("table").trigger("destroy");
+        begin = ((currentPage - 1) * numberPerPage);
+      } else if ( numberPerPage == 'all') {
+        begin = 0
+        numberPerPage = list.length
+        $("table").trigger("destroy");
 
+      } else {
+        $("table").trigger("destroy");
+         begin = currentPage == 1 ? currentPage - 1 : (currentPage-1)*numberPerPage
+      }
+      var end = begin + numberPerPage;
+      pageList = list.slice(begin, end);
     } else {
-      $("table").trigger("destroy");
-       begin = currentPage == 1 ? currentPage - 1 : (currentPage-1)*numberPerPage
+      if (numberPerPage == list.length) {
+        pageList.length = pageList.length
+      } else if (pageList.length >= numberPerPage) {
+        pageList.length = numberPerPage
+      }
     }
-    var end = begin + numberPerPage;
-    pageList = list.slice(begin, end);
-    console.log(end)
-    console.log(begin)
-    console.log(numberPerPage)
+
     drawList();
     check();
     $('.myTable').tablesorter();
     tooltips()
+    // filters
+    function filterEn(){
+      charsAllInfoRaw.map(char=> char.push('sep'))
+
+      pageList = charsAllInfoRaw
+      let newList = charsAllInfo
+      filters.map(f => {
+        if (f.value == 'All') {
+          newList.map(ch => ch.push(f.id))
+        } else {
+          const elemRegex = /fire|water|earth|thunder|wind|light|dark|bleed|injury|venom|restrain|insane|Element|Debuff|Null/g;
+          const attrRegex = /MaxHp|Strength|Agility|Intelligence|Protect/gi
+          let chosenAttr = document.getElementById('attrSel').value
+          let typeVal = document.getElementById('type').value
+            newList.map(ch=> {
+              if (f.id == 'rarity') {
+                ch[2] == f.value ? ch.push('rarity') : ''
+              }
+              if (f.id == 'race') {
+                ch = ch[15] == f.value ? ch.push('race') : ch
+              }
+              let searchin = document.getElementById('searchin')
+              switch (searchin.value) {
+                case 'abilities':
+                  abfilt(ch, abilitiesAllInfo, f, elemRegex, attrRegex, chosenAttr, typeVal)
+                  document.getElementById('whenSel').disabled = true;
+                  document.getElementById('type').disabled = false;
+                  document.getElementById("whenSel").value = 'All'
+                  break;
+                case 'passives':
+                  passfilt(ch, passivesAllInfo, f, elemRegex, attrRegex, chosenAttr, typeVal)
+                  document.getElementById('whenSel').disabled = false;
+                  document.getElementById('type').disabled = true;
+                  document.getElementById("type").value = 'All'
+                  break;
+                case 'both':
+                  passfilt(ch, passivesAllInfo, f, elemRegex, attrRegex, chosenAttr, typeVal)
+                  abfilt(ch, abilitiesAllInfo, f, elemRegex, attrRegex, chosenAttr, typeVal)
+                  document.getElementById("type").disabled = false;
+                  document.getElementById('whenSel').disabled = false;
+                  break;
+                default:
+
+              }
+          })
+        }
+      })
+      pageList = newList.filter(l=> l.includes('element') && l.includes('rarity') && l.includes('attrSel') && l.includes('apply') && l.includes('type') && l.includes('race') && l.includes('whenSel'))
+
+  pageList.map(a => a.length = 17)
+      if (pageList.length == 0 ) {
+        document.getElementById('dialog').style.display = 'block';
+        document.getElementById('closedialog').onclick = function() {
+        document.getElementById('dialog').style.display = 'none';
+        }
+      }
+    //  charsAllInfo.map(a => a.splice(a.indexOf('sep'), 8))
+    }
+    let startF = document.getElementById('start2')
+    let clearF = document.getElementById('clear2')
+    let enemies = true
+     startF.addEventListener('click', function() {
+         filterEn()
+         loadList()
+     })
+      clearF.addEventListener('click', function() {
+        filters.map(f => f.value = 'All')
+        filterEn()
+        loadList()
+      })
     //links opening new pages
     let charLinks = Array.from(document.querySelectorAll('#enemiesTable tr td:nth-child(3)'));
     charLinks.map(link => {
@@ -594,7 +631,8 @@ export function applyTableFn() {
       })
     })
     //abilities imgs
-    let switchskills = Array.from(document.querySelectorAll('.tooltipMy.enabil:not(.tooltiptext)'))
+    let switchskills = Array.from(document.querySelectorAll('.tooltipMy:not(.tooltiptext)'))
+
     switchskills.map((abil,i) => {
       let switchskillsimg = document.createElement('div')
       let src = abilImagesComplete.filter(img => switchskills[i].children[0].innerText.trim() == img.id)
@@ -640,7 +678,6 @@ export function applyTableFn() {
       hpStat.map(hp => hp.innerHTML = Math.ceil(hp.id/100 * stat.value))
     })
     start.click()
-    console.log('currentpage ' + currentPage)
 }
 
   function drawList() {
@@ -666,7 +703,7 @@ export function applyTableFn() {
         return arr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {})
       }
       jobItem[5] = count(jobItem[5])
-      jobItem[5] = Object.entries(jobItem[5]).map((k,v) => '<span class="tooltipMy">' + k + '<span class="tooltipMy tooltiptext">x</span></span>').join('<br>')
+      jobItem[5] = Object.entries(jobItem[5]).map((k,v) => '<span class="tooltipMy"><span class="enabil">' + k[0] + '</span><span class="tooltipMy tooltiptext"></span></span> (x' + k[1] + ')').join('<br>')
       //jobItem[5] = jobItem[5].map(item => item = '<span class="tooltipMy enabil"><span class="name">' + item + '</span><span class="tooltipMy tooltiptext"></span></span>')
       //jobItem[5] = jobItem[5].join('<br>')
       //threshold

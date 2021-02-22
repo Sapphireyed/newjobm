@@ -1,6 +1,6 @@
 
 let jobmain = document.createElement('section')
-jobmain.classList.add('section', 'shadow')
+jobmain.classList.add('section', 'shadow', 'subsection')
 jobmain.id= 'jobmainsect'
 //HEADER
 let maindiv = document.createElement('div');
@@ -159,19 +159,19 @@ div1.append(imgdiv, rarAndAttrs, img2nd)
 
 //JOB PASSIVE & SWITCH
 let div2 = document.createElement('div')
-div2.classList.add('row')
+div2.classList.add('row', 'subsection')
 div2.id = 'passiveAndSwitch'
 let div2bis = document.createElement('div')
-div2bis.classList.add('row')
+div2bis.classList.add('row', 'subsection')
 div2bis.id = 'passiveAndSwitchBis'
 
 let div2en = document.createElement('div')
-div2en.classList.add('row')
+div2en.classList.add('row', 'subsection')
 div2en.id = 'passiveAndSwitchEn'
 //threshold
 let threshdiv = document.createElement('div')
 threshdiv.id = 'threshdiv'
-threshdiv.classList.add('row')
+threshdiv.classList.add('row', 'subsection')
 let threshH = document.createElement('h4')
 threshH.id= 'threshH'
 threshH.innerHTML = 'Threshold Abilities'
@@ -199,16 +199,34 @@ threshdiv.append(threshH, onediv, twodiv, threediv)
 //spcial cases
 let scdiv = document.createElement('div')
 scdiv.id = 'scdiv'
-scdiv.classList.add('row')
+scdiv.classList.add('col-6', 'shadow')
 let scH = document.createElement('h4')
 scH.id= 'scH'
 scH.innerHTML = 'Special Cases'
-scH.classList.add('col-12', 'rounded-lg', 'shadow', )
-scdiv.appendChild(scH)
+scH.classList.add('col-12', 'rounded-lg')
+let scsub = document.createElement('div')
+scsub.id = 'scsub'
+scdiv.append(scH, scsub)
+// drops
+let dropdiv = document.createElement('div')
+dropdiv.classList.add('col-6', 'shadow')
+dropdiv.id = 'dropdiv'
+let dropH = document.createElement('h4')
+dropH.classList.add('col-12', 'rounded')
+dropH.innerHTML = 'Drops '
+let drop1 = document.createElement('div')
+drop1.classList.add('drop')
+let drop2 = document.createElement('div')
+drop2.classList.add('drop')
+dropdiv.append(dropH, drop1, drop2)
+
+let scAndDrop = document.createElement('div')
+scAndDrop.classList.add('row', 'subsection')
+scAndDrop.append(scdiv, dropdiv)
 //chapters
 let chapdiv = document.createElement('div')
 chapdiv.id = 'chapt'
-chapdiv.classList.add('row')
+chapdiv.classList.add('row', 'subsection', 'shadow')
 let chheader = document.createElement('div')
 chheader.classList.add('row', 'col-12', 'rounded-lg','shadow')
 chheader.id = 'chH'
@@ -225,6 +243,6 @@ chheader.append(chimg, chname, type, chimg.cloneNode(true))
 chapdiv.append(chheader)
 
 
-jobmain.append(maindiv, div1, div2, div2bis, div2en, threshdiv, scdiv, chapdiv)
+jobmain.append(maindiv, div1, div2, div2bis, div2en, threshdiv, scAndDrop, chapdiv)
 
 export {jobmain}

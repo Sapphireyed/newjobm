@@ -2,7 +2,7 @@ import { tbody } from './passivesTable.js'
 import { openNew } from '../basicfn/openNew.js'
 import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
-        jobsDataAll, appliesAllInfo} from '../abilitiesData.js'
+        jobsDataAll, appliesAllInfo,charsAllInfo} from '../abilitiesData.js'
 //import { openNew } from '../basicfn/openNew.js'
 //import { abilImagesComplete} from '../img/imgsHTML.js'
 import { passivesfilter } from './passivesfilter'
@@ -89,19 +89,11 @@ function loadList() {
     abilrows.shift()
     for (var i = 0; i < abilrows.length; i++) {
       let name = abilrows[i].children[2]
-
-    /*  abilrows[i].addEventListener('mousemove', function() {
-        showIcon(name, abilImagesComplete)
-      })
-      abilrows[i].addEventListener('mouseleave', function(){
-        hideIcon(abilImagesComplete)
-      })*/
       // Description
       let desc = passiveFinale.map(desc => desc.split(':<br>'))
       desc = desc.filter(d => d[0] == name.innerText)[0]
       abilrows[i].children[4].innerHTML = desc[1].replace(/<br><br>/, '')
       // Jobs
-
       let jobs = jobsDataAll.filter(job => job[7] == name.innerText)
       jobs = jobs == [] ? '' : jobs
       jobs = jobs.map(j=> '<br><span class="openNew">' + j[1] + '</span>')
@@ -109,14 +101,26 @@ function loadList() {
       let jobLinks = Array.from(document.getElementsByClassName('openNew'))
       jobLinks.map(link =>{
         link.onclick = function() {
-          let job = jobsDataAll.filter(job => job[1] == this.innerText)
+          let job = charsAllInfo.filter(job => job[1] == this.innerText)
           let ind = job[0][0]
-          console.log(ind)
-          openNew(jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+          openNew('job', jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
+        }
+      })
+      // heroes
+      let chars = charsAllInfo.filter(char => char[11] == name.innerText || char[12] == name.innerText)
+      chars = chars == [] ? '' : chars
+      chars = chars.map(j=> '<br><span class="openNewHero">' + j[1] + '</span>')
+      abilrows[i].children[7].innerHTML = chars == '' ? '' : '<div>' + chars + '</div>'
+      let charLinks = Array.from(document.getElementsByClassName('openNewHero'))
+      charLinks.map(link =>{
+        link.onclick = function() {
+          let char = charsAllInfo.filter(job => job[1] == this.innerText)
+          let ind = char[0][0]
+          openNew('char', charsAllInfo, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,'heroes')
         }
       })
       //tooltips
-      abilrows[i] = abilrows[i] == undefined ? 'n/A' : abilrows[i]
+    /*  abilrows[i] = abilrows[i] == undefined ? 'n/A' : abilrows[i]
       let apply = abilrows[i].children[5].innerHTML.split('<br>')
       apply = apply.map(a=> a = '<span class="applyTip">' + a + '<span class="applyTip applyText"></span></span>')
       abilrows[i].children[5].innerHTML = (apply[0] || '') + (apply[1] == undefined ? '' : '<br>' + apply[1] || '') + (apply[2] == undefined ? '' : '<br>' + apply[2] || '')
@@ -136,7 +140,7 @@ function loadList() {
           counter +=1
           console.log('here counter' + counter)
         }
-      }
+      }*/
 
     }
   }
@@ -159,7 +163,6 @@ function loadList() {
           let skills = [4, 7, 10, 13]
           let effects = [5,8,13, 14]
             if (f.id == 'rarity' && f.value !== 'All') {
-              console.log(a[3] == f.value)
               a[3] == f.value ? a.push('rarity') : ''
             }
             if (f.id == 'whenSel' && f.value !== 'All') {

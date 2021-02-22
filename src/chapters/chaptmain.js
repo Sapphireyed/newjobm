@@ -1,7 +1,6 @@
-import { jobsfilter } from './jobsfilter.js'
-import { jobsTable } from './jobsTable.js'
+import { jobsfilter } from './chaptersfilter.js'
+import { jobsTable } from './chaptTable.js'
 import theadimg from '../img/other/thead.png'
-var $ = require("jquery")
 
 let jobsmain = document.createElement('section')
 jobsmain.id = 'jobsmain'

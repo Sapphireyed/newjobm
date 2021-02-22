@@ -1,7 +1,14 @@
+.subsection { margin: 20px auto}
 #rarity {
   img { width: 30px}
 }
-#jobmaindiv { margin: 10px}
+#jobmaindiv {
+  margin: 10px;
+  padding-bottom: 6px;
+  position:sticky;
+  top: 0;
+  z-index:10;
+}
 #basicinfo { margin: 20px 5px 20px 5px}
 .navbtns {
   width: 50%;
@@ -14,206 +21,628 @@
   padding: 0;
   button { float: left }
 }
-#traitsdivPassive h5:first-child {
-  //text-align: center;
+#passiveTraitsH, #passiveTraits { display: inline}
+#switchtraitsH, #switchtraits { display: inline}
+#basicinfo div:first-child, #jobimg2 {
+  display: block;
+  margin: auto;
 }
-#passiveDesc { margin: 10px 5px 10px 5px}
-#passiveSkill { text-align: center }
-#switchDesc { margin: 10px 5px 30px 5px}
-#switchSkill { text-align: center}
-#switchimg img { width: 45px; margin-bottom: 7px; padding: 5px }
-#deckdiv {
-  margin: 10px 0;
-  img:not(.icon) {
-    width: 45px;
-    display: block;
-    margin:auto;
-    padding: 5px;
-  }
+#jobimg img, #jobimg2 img {
+  width: 180px;
+  margin: auto;
+  display: block
 }
-
+#jobimg2 {transform: scaleX(-1)}
+#rarLvlOrb h4 { display: inline; font-size: 22px }
+#rarAndAttrs {
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  div { display: block; margin:auto 0}
+  h4 {font-size: 22px}
+}
+.drop {padding: 0 30px}
+.scdesc { display: none}
+.scall { margin-left: 30px}
 //.jobattrs {text-align: left}
 $main1star: #6a8d55;
+$light1star: #f4ffed;
 .job1star::-webkit-scrollbar-thumb { background-color: #6a8d55; }
 .job1star::-webkit-scrollbar { background-color: #f4ffed; }
 .job1star {
-  background-color: $main1star;
-  #sideDiv {
     background-color: $main1star;
-    overflow-y:scroll;
-    #rarAndAttrs h4:not(#rarity) { color: $main1star}
-    h4 {
-      background-color: #f4ffed;
-      color:  $main1star;
-      box-shadow: 2px 2px 1px 1px #6a8d55;
-    }
-    a {
+    #sideDiv {
       background-color: $main1star;
+      h4 {
+        background-color: $light1star;
+        color:  $main1star;
+        box-shadow: 2px 2px 1px 1px rgba(106, 141, 85, .5);
+      }
+      a {
+        background-color: $main1star;
+      }
     }
-  }
-  #sideDiv::-webkit-scrollbar-thumb { background-color: $main1star; }
-  #sideDiv::-webkit-scrollbar { background-color: #f4ffed; }
-  #jobmainsect {background-color: #f4ffed;}
-  button {
-    background-color: $main1star;
-  }
-  #crystDiv { visibility: hidden}
-  h1 {
-      background-color:   $main1star;
-      margin-right: auto;
-      margin-left: auto;
-  }
-  #lvlbtns button { background-color: $main1star; display: none }
-  h4:not(.jobattr){ text-align: center }
-  #passiveAndSwitch h4,#passiveAndSwitchEn h4 {
-    background-color: $main1star;
-    color: white;
-    border-radius: 5px;
-  }
-  #passiveAndSwitch h5 {
-    padding: 5px 10px;
-  }
+    #sideDiv::-webkit-scrollbar-thumb { background-color: $main1star; }
+    #sideDiv::-webkit-scrollbar { background-color: $light1star; }
+    #jobmainsect {background-color: $light1star;}
+    button { background-color: $main1star}
+    h1 {
+        background-color: $main1star;
+        margin-right:auto;
+        margin-left: auto;
+    }
+    #lvlbtns button { background-color: $main1star; }
+    #passiveAndSwitch, #passiveAndSwitchBis {
+      h4 {
+        background-color: $main1star;
+        color: white;
+        border-radius: 5px;
+      }
+        div { margin-bottom: 8px }
+        #passiveSkill1, #passiveSkill2 {border-right: 2px solid $main1star}
+        .abilimg img {
+          display:block;
+          margin:auto;
+          width:40px;
+        }
+      }
+    #passiveDesc1, #passiveDesc2, #switchDesc1, #switchDesc2 { padding: 2px 15px}
+    #passiveAndSwitchEn {
+      h4 {
+        background-color: $main1star;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        position: relative;
+        box-shadow: 2px 1px grey;
+        a {
+          position: absolute;
+          right: 5%;
+          font-weight: bold;
+          box-shadow: 2px 1px grey;
+          width: 23px;
+          border-radius: 50%;
+          color: $main1star;
+          background-color: $light1star;
+        }
+      }
+      h5 {
+        background-color: $main1star;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        .abilimg {
+          margin: 10px 0;
+        }
+        img:not(.icon) { width: 40px;}
+      }
+      h6 { background-color: rgba(106, 141, 85, 0.3); }
+    }
+    h4:not(.jobattr){ text-align: center }
+    h4 {color: $main1star;}
+    #passiveH {
+      background-color: $main1star;
+      color: white
+    }
+    #passiveSkill { border-right: 2px solid $main1star}
+    #switchH {
+      background-color: $main1star;
+      color: white
+    }
+    #threshdiv {
+      padding: 0 10px;
+      text-align: center;
+      h4 {
+        background-color: $main1star;
+        color: white;
+        a {
+          position: absolute;
+          right: 5%;
+          font-weight: bold;
+          box-shadow: 2px 1px grey;
+          width: 23px;
+          border-radius: 50%;
+          color: $main1star;
+          background-color: $light1star;
+        }
+      }
+      h5:first-child {
+        text-decoration: underline;
+        color: white;
+      }
+      h5 span { font-size:14px}
+      div:nth-child(2) {
+        background-color: rgb(159, 250, 157);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(55, 161, 53);
+        }
+      } //lightgreen
+      div:nth-child(3) {
+        background-color: rgb(255, 255, 168);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(255, 255, 66);
+        }
+      } //lightyellow
+      div:nth-child(4) {
+        background-color: rgb(255, 153, 153);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(250, 47, 47);
+        }
+      } //lightred
 
-  #deck { background-color: rgba(106, 141, 85, .5) }
-  .applyTip .applyText {
-    background-color: #6a8d55;
-    font-weight: normal;
-  }
+    }
+    #chapt {
+      padding: 0 10px;
+      text-align: center;
+      h4 {display:none}
+      #chH { background-color: $main1star;color: white; margin-bottom: 10px;}
+      img {width:50px; filter:brightness(0)}
+      #chimg2 img{ transform: none !important}
+    }
+    #dropdiv, #scdiv {
+      h4 { background-color: $main1star; color: white}
+      h5 { display: inline;}
+      .scname { padding-left:20px}
+      img:not(.icon) {width:30px; padding: 4px;}
+      #scsub {margin: auto}
+      .spec { padding: 0 0 0 30px }
+    }
+    #dropdiv {
+      border-left: 2px solid $main1star;
+      div { margin: auto}
+    }
 }
 $main2star: #4b7396;
+$light2star: #eef7ff;
 .job2star::-webkit-scrollbar-thumb { background-color: #4b7396; }
 .job2star::-webkit-scrollbar { background-color: #eef7ff; }
 .job2star {
-    background-color: #4b7396;
+    background-color: $main2star;
     #sideDiv {
       background-color: $main2star;
-      overflow-y:scroll;
       h4 {
-        background-color: #4b7396;
+        background-color: $light2star;
         color:  $main2star;
-        box-shadow: 2px 2px 1px 1px rgba(75, 115, 150, .7);
+        box-shadow: 2px 2px 1px 1px rgba(75, 115, 150, .5);
       }
       a {
         background-color: $main2star;
       }
     }
     #sideDiv::-webkit-scrollbar-thumb { background-color: $main2star; }
-    #sideDiv::-webkit-scrollbar { background-color: #eef7ff; }
-    #jobmainsect {background-color: #eef7ff;}
-    #crystDiv { visibility: hidden}
-    h1
-    {
-        background-color: #4b7396;
+    #sideDiv::-webkit-scrollbar { background-color: $light2star; }
+    #jobmainsect {background-color: $light2star;}
+    button { background-color: $main2star}
+    h1 {
+        background-color: $main2star;
         margin-right:auto;
         margin-left: auto;
     }
+    #lvlbtns button { background-color: $main2star; }
+    #passiveAndSwitch, #passiveAndSwitchBis {
+      h4 {
+        background-color: $main2star;
+        color: white;
+        border-radius: 5px;
+      }
+        div { margin-bottom: 8px }
+        #passiveSkill1, #passiveSkill2 {border-right: 2px solid $main2star}
+        .abilimg img {
+          display:block;
+          margin:auto;
+          width:40px;
+        }
+      }
+    #passiveDesc1, #passiveDesc2, #switchDesc1, #switchDesc2 { padding: 2px 15px}
+    #passiveAndSwitchEn {
+      h4 {
+        background-color: $main2star;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        position: relative;
+        box-shadow: 2px 1px grey;
+        a {
+          position: absolute;
+          right: 5%;
+          font-weight: bold;
+          box-shadow: 2px 1px grey;
+          width: 23px;
+          border-radius: 50%;
+          color: $main2star;
+          background-color: $light2star;
+        }
+      }
+      h5 {
+        background-color: $main2star;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        .abilimg {
+          margin: 10px 0;
+        }
+        img:not(.icon) { width: 40px;}
+      }
+      h6 { background-color: rgba(75, 115, 150, 0.3); }
+    }
     h4:not(.jobattr){ text-align: center }
-    #lvlbtns button { background-color: #4b7396;display: none }
-    h4 {color: #4b7396;}
+    h4 {color: $main2star;}
     #passiveH {
-      background-color: #4b7396;
+      background-color: $main2star;
       color: white
     }
-    #passiveSkill { border-right: 2px solid #4b7396}
+    #passiveSkill { border-right: 2px solid $main2star}
     #switchH {
-      background-color: #4b7396;
+      background-color: $main2star;
       color: white
     }
-    #deck { background-color: rgba(75, 115, 150, .7) }
-    .applyTip .applyText {
-      background-color: #4b7396;
-      color: white;
-      font-weight: normal;
+    #threshdiv {
+      padding: 0 10px;
+      text-align: center;
+      h4 {
+        background-color: $main2star;
+        color: white;
+        a {
+          position: absolute;
+          right: 5%;
+          font-weight: bold;
+          box-shadow: 2px 1px grey;
+          width: 23px;
+          border-radius: 50%;
+          color: $main2star;
+          background-color: $light2star;
+        }
+      }
+      h5:first-child {
+        text-decoration: underline;
+        color: white;
+      }
+      h5 span { font-size:14px}
+      div:nth-child(2) {
+        background-color: rgb(159, 250, 157);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(55, 161, 53);
+        }
+      } //lightgreen
+      div:nth-child(3) {
+        background-color: rgb(255, 255, 168);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(255, 255, 66);
+        }
+      } //lightyellow
+      div:nth-child(4) {
+        background-color: rgb(255, 153, 153);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(250, 47, 47);
+        }
+      } //lightred
+
+    }
+    #chapt {
+      padding: 0 10px;
+      text-align: center;
+      h4 {display:none}
+      #chH { background-color: $main2star;color: white; margin-bottom: 10px;}
+      img {width:50px; filter:brightness(0)}
+      #chimg2 img{ transform: none !important}
+    }
+    #dropdiv, #scdiv {
+      h4 { background-color: $main2star; color: white}
+      h5 { display: inline;}
+      .scname { padding-left:20px}
+      img:not(.icon) {width:30px; padding: 4px;}
+      #scsub {margin: auto}
+      .spec { padding: 0 0 0 30px }
+    }
+    #dropdiv {
+      border-left: 2px solid $main2star;
+      div { margin: auto}
     }
 }
 $main3star: #584b67;
+$light3star: #f5eefd;
 .job3star::-webkit-scrollbar-thumb { background-color: #584b67; }
 .job3star::-webkit-scrollbar { background-color: #f5eefd; }
 .job3star {
-    background-color: #584b67; //#f5eefd;
+    background-color: $main3star;
     #sideDiv {
       background-color: $main3star;
-      overflow-y:scroll;
       h4 {
-        background-color: #f5eefd;
+        background-color: $light3star;
         color:  $main3star;
-        box-shadow: 2px 2px 1px 1px rgba(88, 75, 103, .7);
+        box-shadow: 2px 2px 1px 1px rgba(88, 75, 103, .5);
       }
       a {
         background-color: $main3star;
       }
     }
     #sideDiv::-webkit-scrollbar-thumb { background-color: $main3star; }
-    #sideDiv::-webkit-scrollbar { background-color: #f5eefd; }
-    #jobmainsect {background-color: #f5eefd;}
-    #crystDiv { visibility: hidden}
+    #sideDiv::-webkit-scrollbar { background-color: $light3star; }
+    #jobmainsect {background-color: $light3star;}
+    button { background-color: $main3star}
     h1 {
-        background-color: #584b67;
+        background-color: $main3star;
         margin-right:auto;
         margin-left: auto;
     }
-    #lvlbtns button { background-color: #584b67; display: none}
+    #lvlbtns button { background-color: $main3star; }
+    #passiveAndSwitch, #passiveAndSwitchBis {
+      h4 {
+        background-color: $main3star;
+        color: white;
+        border-radius: 5px;
+      }
+        div { margin-bottom: 8px }
+        #passiveSkill1, #passiveSkill2 {border-right: 2px solid $main3star}
+        .abilimg img {
+          display:block;
+          margin:auto;
+          width:40px;
+        }
+      }
+    #passiveDesc1, #passiveDesc2, #switchDesc1, #switchDesc2 { padding: 2px 15px}
+    #passiveAndSwitchEn {
+      h4 {
+        background-color: $main3star;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        position: relative;
+        box-shadow: 2px 1px grey;
+        a {
+          position: absolute;
+          right: 5%;
+          font-weight: bold;
+          box-shadow: 2px 1px grey;
+          width: 23px;
+          border-radius: 50%;
+          color: $main3star;
+          background-color: $light3star;
+        }
+      }
+      h5 {
+        background-color: $main3star;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        .abilimg {
+          margin: 10px 0;
+        }
+        img:not(.icon) { width: 40px;}
+      }
+      h6 { background-color: rgba(88, 75, 103, 0.3); }
+    }
     h4:not(.jobattr){ text-align: center }
-    h4 {color: #584b67;}
+    h4 {color: $main3star;}
     #passiveH {
-      background-color: #584b67;
+      background-color: $main3star;
       color: white
     }
-    #passiveSkill { border-right: 2px solid #584b67}
+    #passiveSkill { border-right: 2px solid $main3star}
     #switchH {
-      background-color: #584b67;
+      background-color: $main3star;
       color: white
     }
-    #deck { background-color: rgba(88, 75, 103, .7) }
-    .applyTip .applyText {
-      background-color: #584b67;
-      color: white;
-      font-weight: normal;
+    #threshdiv {
+      padding: 0 10px;
+      text-align: center;
+      h4 {
+        background-color: $main3star;
+        color: white;
+        a {
+          position: absolute;
+          right: 5%;
+          font-weight: bold;
+          box-shadow: 2px 1px grey;
+          width: 23px;
+          border-radius: 50%;
+          color: $main3star;
+          background-color: $light3star;
+        }
+      }
+      h5:first-child {
+        text-decoration: underline;
+        color: white;
+      }
+      h5 span { font-size:14px}
+      div:nth-child(2) {
+        background-color: rgb(159, 250, 157);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(55, 161, 53);
+        }
+      } //lightgreen
+      div:nth-child(3) {
+        background-color: rgb(255, 255, 168);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(255, 255, 66);
+        }
+      } //lightyellow
+      div:nth-child(4) {
+        background-color: rgb(255, 153, 153);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(250, 47, 47);
+        }
+      } //lightred
+
+    }
+    #chapt {
+      padding: 0 10px;
+      text-align: center;
+      h4 {display:none}
+      #chH { background-color: $main3star;color: white; margin-bottom: 10px;}
+      img {width:50px; filter:brightness(0)}
+      #chimg2 img{ transform: none !important}
+    }
+    #dropdiv, #scdiv {
+      h4 { background-color: $main3star; color: white}
+      h5 { display: inline;}
+      .scname { padding-left:20px}
+      img:not(.icon) {width:30px; padding: 4px;}
+      #scsub {margin: auto}
+      .spec { padding: 0 0 0 30px }
+    }
+    #dropdiv {
+      border-left: 2px solid $main3star;
+      div { margin: auto}
     }
 }
 $main4star: #954e3a;
+$light4star: #fff0ec;
 .job4star::-webkit-scrollbar-thumb { background-color: #954e3a; }
 .job4star::-webkit-scrollbar { background-color: #fff0ec; }
 .job4star {
-    background-color: #954e3a;
+    background-color: $main4star;
     #sideDiv {
       background-color: $main4star;
-      overflow-y:scroll;
       h4 {
-        background-color: #fff0ec;
+        background-color: $light4star;
         color:  $main4star;
-        box-shadow: 2px 2px 1px 1px rgba(149, 78, 58, .7);
+        box-shadow: 2px 2px 1px 1px rgba(149, 78, 58, .5);
       }
       a {
         background-color: $main4star;
       }
     }
     #sideDiv::-webkit-scrollbar-thumb { background-color: $main4star; }
-    #sideDiv::-webkit-scrollbar { background-color: #fff0ec; }
-    #jobmainsect {background-color: #fff0ec;}
-    #crystDiv { visibility: hidden}
+    #sideDiv::-webkit-scrollbar { background-color: $light4star; }
+    #jobmainsect {background-color: $light4star;}
+    button { background-color: $main4star}
     h1 {
-        background-color: #954e3a;
+        background-color: $main4star;
         margin-right:auto;
         margin-left: auto;
     }
-    #lvlbtns button { background-color: #954e3a; display: none}
+    #lvlbtns button { background-color: $main4star; }
+    #passiveAndSwitch, #passiveAndSwitchBis {
+      h4 {
+        background-color: $main4star;
+        color: white;
+        border-radius: 5px;
+      }
+        div { margin-bottom: 8px }
+        #passiveSkill1, #passiveSkill2 {border-right: 2px solid $main4star}
+        .abilimg img {
+          display:block;
+          margin:auto;
+          width:40px;
+        }
+      }
+    #passiveDesc1, #passiveDesc2, #switchDesc1, #switchDesc2 { padding: 2px 15px}
+    #passiveAndSwitchEn {
+      h4 {
+        background-color: $main4star;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        position: relative;
+        box-shadow: 2px 1px grey;
+        a {
+          position: absolute;
+          right: 5%;
+          font-weight: bold;
+          box-shadow: 2px 1px grey;
+          width: 23px;
+          border-radius: 50%;
+          color: $main4star;
+          background-color: $light4star;
+        }
+      }
+      h5 {
+        background-color: $main4star;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        .abilimg {
+          margin: 10px 0;
+        }
+        img:not(.icon) { width: 40px;}
+      }
+      h6 { background-color: rgba(149, 78, 58, 0.3); }
+    }
     h4:not(.jobattr){ text-align: center }
-    h4 {color: #954e3a;}
+    h4 {color: $main4star;}
     #passiveH {
-      background-color: #954e3a;
+      background-color: $main4star;
       color: white
     }
-    #passiveSkill { border-right: 2px solid #954e3a}
+    #passiveSkill { border-right: 2px solid $main4star}
     #switchH {
-      background-color: #954e3a;
+      background-color: $main4star;
       color: white
     }
-    #deck { background-color: rgba(149, 78, 58, .7) }
-    .applyTip .applyText {
-      background-color: #954e3a;
-      color: white;
-      font-weight: normal;
+    #threshdiv {
+      padding: 0 10px;
+      text-align: center;
+      h4 {
+        background-color: $main4star;
+        color: white;
+        a {
+          position: absolute;
+          right: 5%;
+          font-weight: bold;
+          box-shadow: 2px 1px grey;
+          width: 23px;
+          border-radius: 50%;
+          color: $main4star;
+          background-color: $light4star;
+        }
+      }
+      h5:first-child {
+        text-decoration: underline;
+        color: white;
+      }
+      h5 span { font-size:14px}
+      div:nth-child(2) {
+        background-color: rgb(159, 250, 157);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(55, 161, 53);
+        }
+      } //lightgreen
+      div:nth-child(3) {
+        background-color: rgb(255, 255, 168);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(255, 255, 66);
+        }
+      } //lightyellow
+      div:nth-child(4) {
+        background-color: rgb(255, 153, 153);
+        padding: 0 10px;
+        h5:first-child {
+          background-color: rgb(250, 47, 47);
+        }
+      } //lightred
+
+    }
+    #chapt {
+      padding: 0 10px;
+      text-align: center;
+      h4 {display:none}
+      #chH { background-color: $main4star;color: white; margin-bottom: 10px;}
+      img {width:50px; filter:brightness(0)}
+      #chimg2 img{ transform: none !important}
+    }
+    #dropdiv, #scdiv {
+      h4 { background-color: $main4star; color: white}
+      h5 { display: inline;}
+      .scname { padding-left:20px}
+      img:not(.icon) {width:30px; padding: 4px;}
+      #scsub {margin: auto}
+      .spec { padding: 0 0 0 30px }
+    }
+    #dropdiv {
+      border-left: 2px solid $main4star;
+      div { margin: auto}
     }
 }
 $main5star: #e0c369;
@@ -225,7 +654,7 @@ $light5star: #fffaef;;
     #sideDiv {
       background-color: $main5star;
       h4 {
-        background-color: #fffaef;
+        background-color: $light5star;
         color:  $main5star;
         box-shadow: 2px 2px 1px 1px rgba(224, 195, 105, .5);
       }
@@ -234,15 +663,15 @@ $light5star: #fffaef;;
       }
     }
     #sideDiv::-webkit-scrollbar-thumb { background-color: $main5star; }
-    #sideDiv::-webkit-scrollbar { background-color: #fffaef; }
-    #jobmainsect {background-color: #fffaef;}
+    #sideDiv::-webkit-scrollbar { background-color: $light5star; }
+    #jobmainsect {background-color: $light5star;}
     button { background-color: $main5star}
     h1 {
         background-color: $main5star;
         margin-right:auto;
         margin-left: auto;
     }
-    #lvlbtns button { background-color: #e0c369; }
+    #lvlbtns button { background-color: $main5star; }
     #passiveAndSwitch, #passiveAndSwitchBis {
       h4 {
         background-color: $main5star;
@@ -285,19 +714,19 @@ $light5star: #fffaef;;
         .abilimg {
           margin: 10px 0;
         }
-        img { width: 40px;}
+        img:not(.icon) { width: 40px;}
       }
       h6 { background-color: rgba(224, 195, 105, 0.3); }
     }
     h4:not(.jobattr){ text-align: center }
-    h4 {color: #e0c369;}
+    h4 {color: $main5star;}
     #passiveH {
-      background-color: #e0c369;
+      background-color: $main5star;
       color: white
     }
-    #passiveSkill { border-right: 2px solid #e0c369}
+    #passiveSkill { border-right: 2px solid $main5star}
     #switchH {
-      background-color: #e0c369;
+      background-color: $main5star;
       color: white
     }
     #threshdiv {
@@ -353,26 +782,16 @@ $light5star: #fffaef;;
       img {width:50px; filter:brightness(0)}
       #chimg2 img{ transform: none !important}
     }
-    #deck { background-color: rgba(224, 195, 105, .5) }
-}
-
-#passiveTraitsH, #passiveTraits { display: inline}
-#switchtraitsH, #switchtraits { display: inline}
-#basicinfo div:first-child, #jobimg2 {
-  display: block;
-  margin: auto;
-}
-#jobimg img, #jobimg2 img {
-  width: 180px;
-  margin: auto;
-  display: block
-}
-#jobimg2 {transform: scaleX(-1)}
-#rarLvlOrb h4 { display: inline; font-size: 22px }
-#rarAndAttrs {
-  padding-left: 40px;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  div { display: block; margin:auto 0}
-  h4 {font-size: 22px}
+    #dropdiv, #scdiv {
+      h4 { background-color: $main5star; color: white}
+      h5 { display: inline;}
+      .scname { padding-left:20px}
+      img:not(.icon) {width:30px; padding: 4px;}
+      #scsub {margin: auto}
+      .spec { padding: 0 0 0 30px }
+    }
+    #dropdiv {
+      border-left: 2px solid $main5star;
+      div { margin: auto}
+    }
 }

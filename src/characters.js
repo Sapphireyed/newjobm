@@ -12,6 +12,7 @@ import theadimg from './img/materials/Space Stone.png'
 var $ = require("jquery")
 import { toggle} from './basicfn/toggle.js'
 import { sideDiv, toggleSide } from './side/side.js'
+import {options2, options } from './chars/charsfilter.js'
 
 //let bgimg = document.createElement('img')
 //bgimg.id = 'bgimg'
@@ -41,24 +42,29 @@ window.onscroll = function() {
           abilities.abils()
            .then(ab => {
              getAbilImgs()
-
              characters.chars()
                .then(res => {
                  getCharsImages()
                  glossFn()
                  let heroesTable = document.getElementById('heroesTable')
                  let enemiesTable = document.getElementById('enemiesTable')
+                 let navfilters = document.getElementById('navFiters')
                  let button1= document.getElementById('glossButton')
                  let button2= document.getElementById('applyButton')
                  let level =document.getElementById('chooselvl')
+                 let raroptions = document.getElementById('rarity')
                  //level.value = 10
                  let start= document.querySelectorAll('#lvlbtns button')[0]
                  let resetlvls = document.querySelectorAll('#lvlbtns button')[1]
+                 let startfilters =document.getElementById('start')
+                 let resetfilters =document.getElementById('jobsclear')
+                 let starten =document.getElementById('start2')
+                 let reseten =document.getElementById('clear2')
                  resetlvls.click()
                  start.click()
                  button1.style.backgroundColor = 'rgb(3, 26, 42)'
                  let heroes = true
-                 button1.onclick = function(){
+                 function heroesFn() {
                    if (heroes == false) {
                      glossFn()
                      switchTable(heroesTable, enemiesTable)
@@ -66,9 +72,16 @@ window.onscroll = function() {
                      button2.style.backgroundColor = 'rgba(3, 26, 42, .5)'
                      resetlvls.click()
                      start.click()
+                     resetfilters.click()
+                     raroptions.innerHTML = options
+                     startfilters.style.display = 'block'
+                     resetfilters.style.display = 'block'
+                     starten.style.display = 'none'
+                     reseten.style.display = 'none'
                      heroes = true
                    }
                  }
+                 button1.onclick = heroesFn
                  button2.onclick = function(){
                    if (heroes == true) {
                      this.style.backgroundColor = 'rgb(3, 26, 42)'
@@ -82,6 +95,12 @@ window.onscroll = function() {
                      level.value = 100
                      resetlvls.click()
                      start.click()
+                     reseten.click()
+                     raroptions.innerHTML = options2
+                     startfilters.style.display = 'none'
+                     resetfilters.style.display = 'none'
+                     starten.style.display = 'block'
+                     reseten.style.display = 'block'
                      heroes = false
                    }
                  }

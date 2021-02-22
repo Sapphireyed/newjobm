@@ -70,8 +70,7 @@ jobsData.craft()
       .then(res => {
         //getMatImgs()
         getJobImgs()
-        jobs()
-
+        jobs()        
       })
 
     })
