@@ -5,6 +5,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
+  home: path.resolve(__dirname, './src/home.js'),
   app: path.resolve(__dirname, './src/app.js'),
   job: path.resolve(__dirname, './src/job.js'),
   abilities: path.resolve(__dirname, './src/abilities.js'),
@@ -61,8 +62,13 @@ module: {
 },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Webpack Output",
+      title: "Jobmania",
       filename: 'index.html',
+      chunks: ['home',],
+    }),
+    new HtmlWebpackPlugin({
+      title: "Webpack Output",
+      filename: 'jobs.html',
       chunks: ['app',],
   //    inject: false ,
     //  preconnect: [
@@ -102,4 +108,12 @@ module: {
       test: /\.js(\?.*)?$/i
     })*/
   ],
+/*  resolve: {
+      fallback: {
+        util: require.resolve("util/"),
+        assert: require.resolve("assert/"),
+        https: require.resolve("https-browserify")
+      }
+
+  }*/
 };

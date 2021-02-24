@@ -80,7 +80,7 @@ abilities.glossRaw()
   abilities.apply()
     .then(apply => {
       applyRaw.map(g => {
-        console.log(g)
+
         let li = document.createElement('li')
         li.classList.add('gloss')
         li.innerHTML = g[1] + '<div class="subgloss">'+ g[10] + '</div>'

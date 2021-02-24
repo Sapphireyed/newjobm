@@ -1,13 +1,14 @@
 import jobsBg from '../img/Jobs/BG/inthp.jpg'
 import abilbg from '../img/Traits/Dumb.png'
 import charsbg from '../img/materials/Space Stone.png'
+import chaptbg from '../img/materials/Thunder Spirit.png'
 var $ = require("jquery")
 import {jobImagesComplete, abilImagesComplete, charsImagesComplete } from '../img/imgsHTML.js'
 
 let w = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
 let targetWidth = 768;
 
-export function showIcon(item, arr) {
+export function showIcon(item, arr, notchapt='notchapt') {
   let mouseY = event.clientY; //get mouseposition to decide where to display img
   let bgimg = arr.filter(img => img.id == item.innerText.trim())
   let theadimg;
@@ -18,18 +19,19 @@ export function showIcon(item, arr) {
     case abilImagesComplete:
       theadimg = abilbg
       break;
-    case abilImagesComplete:
-      theadimg = charsbg
+    case charsImagesComplete:
+      theadimg = notchapt == 'notchapt' ? charsbg : chaptbg
       break;
     default:
   }
+console.log(theadimg)
   //on hovering on jobname disply jib icons on bot sides of the table
   if (arr == jobImagesComplete) {
     document.body.style.backgroundImage = 'url("' + bgimg[0].childNodes[0].currentSrc + '"), url("' + theadimg + '")'
   } else if (arr == abilImagesComplete ){
     document.body.style.backgroundImage = 'url("' + bgimg[0].currentSrc + '"), url("' + abilbg + '")'
   } else if (arr == charsImagesComplete ){
-    document.body.style.backgroundImage = 'url("' + bgimg[0].currentSrc + '"), url("' + charsbg + '")'
+    document.body.style.backgroundImage = 'url("' + bgimg[0].currentSrc + '"), url("' + theadimg + '")'
   }
   document.body.style.backgroundSize = '155px, cover'
   document.body.style.backgroundColor = 'rgba(51,66,74,1)'
@@ -82,7 +84,7 @@ export function showIcon(item, arr) {
   }
 }
 
-export function hideIcon(arr) {
+export function hideIcon(arr, notchapt='notchapt') {
   let theadimg;
   switch (arr) {
     case jobImagesComplete:
@@ -92,7 +94,7 @@ export function hideIcon(arr) {
       theadimg = abilbg
       break;
     case charsImagesComplete:
-      theadimg = charsbg
+      theadimg = notchapt == 'chapt' ? chaptbg : charsbg
       break;
     default:
   }

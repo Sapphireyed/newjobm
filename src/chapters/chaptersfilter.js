@@ -6,11 +6,10 @@ import theadimg from '../img/Jobs/BG/inthp.jpg'
 
 
 const jobsfilter = document.createElement('div');
-jobsfilter.style.backgroundColor = '#5b707a'
 //jobsfilter.style.backgroundSize = 'cover'
 //jobsfilter.style.backgroundPosition = 'center center'
 jobsfilter.classList.add('section', 'shadow', 'row', 'filtersmain')
-jobsfilter.id = 'passives'
+jobsfilter.id = 'chapters'
 
 const header = document.createElement('h1')
 header.classList.add('col-12', 'shadow')

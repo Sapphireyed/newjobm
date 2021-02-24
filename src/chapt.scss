@@ -1,8 +1,40 @@
+$mainBg: #dd9a00;
+
+::-webkit-scrollbar-thumb { background-color: $mainBg; }
+::-webkit-scrollbar { background-color: rgb(193, 224, 245); }
+#sideDiv {
+  background-color: $mainBg;
+  h4 {
+    background-color: rgb(193, 224, 245);
+    color:  $mainBg;
+    box-shadow: 2px 2px 1px 1px rgb(193, 224, 245);
+  }
+  a {
+    background-color: $mainBg;
+  }
+}
+@mixin title {
+    text-align: center;
+    color: #fff;
+    background-color: $mainBg;
+}
+h1 {
+    @include title;
+}
+#jobsmain { width: 80vw; margin: 0 5% 0 10%}
+th { background-color: $mainBg}
+#chapters { background-color: #d3a12e !important}
+#pages {
+  button { background-color: $mainBg}
+  select { background-color: #ebc369}
+}
 td:nth-child(2) img {
   width: 75px;
   filter: brightness(0);
 }
-
+td:nth-child(3) {
+  cursor: url('img/other/cursor3.png'), auto !important;
+}
 table tr td:not(:first-child) {
  padding: 0 0 0 0;
 }
@@ -10,6 +42,9 @@ table tr td:not(:nth-child(2)){
   padding: 0 0 0 10px
 }
 
-td:nth-child(n+7) img {
+td:nth-child(n+3) img {
   width: 30px
 }
+
+.cond, .cond1 { font-weight: normal}
+.cond1 { text-decoration: underline;}

@@ -10,7 +10,7 @@ import { stickyNav, cursor } from './basicfn/stickyNav.js'
 import { toggle} from './basicfn/toggle.js'
 import { chaptersFn} from './chapters/chaptjs.js'
 import { sideDiv, toggleSide } from './side/side.js'
-import theadimg from './img/Jobs/BG/inthp.jpg'
+import theadimg from './img/Materials/Thunder Spirit.png'
 var $ = require("jquery")
 
 let preload = document.createElement('div')
@@ -23,7 +23,7 @@ let navmain = document.getElementById('navMain')
 toggleSide(sidenav, section, navmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
-document.body.style.backgroundAttachment = 'fixed'
+//document.body.style.backgroundAttachment = 'fixed'
 var headernav = document.getElementById("navMain");
 window.onscroll = function() {
   stickyNav(headernav)

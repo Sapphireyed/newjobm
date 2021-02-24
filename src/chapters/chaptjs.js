@@ -81,13 +81,17 @@ function loadList() {
     abilrows.shift()
     for (var i = 0; i < abilrows.length; i++) {
     //  tooltipsFn(abilrows[i])
-      let name = abilrows[i].children[2]
-
+      let name = abilrows[i].children[5].innerHTML.split('<br>')[0]
+      let sep = name.indexOf('>')
+      name = name.substring(sep+1)
+      let nameCont = document.createElement('span')
+      nameCont.innerHTML = name
+      console.log(name)
       abilrows[i].addEventListener('mousemove', function() {
-        showIcon(name, abilImagesComplete)
+        showIcon(nameCont, charsImagesComplete, 'chapt')
       })
       abilrows[i].addEventListener('mouseleave', function(){
-        hideIcon(abilImagesComplete)
+        hideIcon(charsImagesComplete,'chapt')
       })
 
       // heroes
@@ -114,30 +118,46 @@ function loadList() {
       for (var i=0; i < pageList.length; i++) {
         var jobItem = Object.values(pageList[i])
         jobItem.splice(1, 0, "pic")
+        jobItem[2] = jobItem[2] == '' ? 'N/A' : jobItem[2]
         if (jobItem[3] !== 'none') {
-          jobItem[2] = jobItem[2] + '(' + jobItem[3] + ')'
+          jobItem[2] = jobItem[2] + '(' + jobItem[3] + ')<br><br><span class = "cond1">Conditions: </span><br><span class="cond">' + jobItem[4].split('-').join(', ') + '<span><br>'
         }
-        jobItem.splice(3, 1)
-        var imgComplete = charsImagesComplete.filter(jobimg => jobimg.id == jobItem[8].split('-')[0])[0]
-        if (jobItem[8].includes('-')) {
-          let boss = jobItem[8].split('-').map(item => charsImagesComplete.filter(img => img.id == item)[0])
-          jobItem[8] = jobItem[8].split('-').map((item,ind) => '<div class="row">' + '<div class="col-3">' + boss[ind].outerHTML + '</div><div class="col-9">' + item + '</div></div>').join(', ')
+        jobItem.splice(3, 2)
+        var imgComplete = charsImagesComplete.filter(jobimg => jobimg.id == jobItem[7].split('-')[0])[0]
+        if (jobItem[7].includes('-')) {
+          let boss = jobItem[7].split('-').map(item => charsImagesComplete.filter(img => img.id == item)[0])
+          jobItem[7] = jobItem[7].split('-').map((item,ind) => boss[ind].outerHTML + item ).join('<br>')
         } else {
-          let boss = charsImagesComplete.filter(img => img.id == jobItem[8])[0]
-          jobItem[8] = '<div class="row"><div class="col-3">' + boss.outerHTML + '</div><div class="col-9">' + jobItem[8] + '</div></div>'
+          let boss = charsImagesComplete.filter(img => img.id == jobItem[7])[0]
+          jobItem[7] = boss.outerHTML + jobItem[7]
         }
-        jobItem[6] = 'enemies: <br>' + jobItem[6] + '<br>mini-boss: ' + jobItem[7] + '<br>Boss: ' + jobItem[8]
-        jobItem.splice(7, 2)
+        if (jobItem[6].includes('-')) {
+          let boss = jobItem[6].split('-').map(item => charsImagesComplete.filter(img => img.id == item)[0])
+          jobItem[6] = jobItem[6].split('-').map((item,ind) => boss[ind].outerHTML + item ).join('<br>')
+        } else {
+          let boss = charsImagesComplete.filter(img => img.id == jobItem[6])[0]
+          jobItem[6] = boss == undefined ? '' : boss.outerHTML + jobItem[6]
+        }
+        if (jobItem[5].includes('-')) {
+          let boss = jobItem[5].split('-').map(item => charsImagesComplete.filter(img => img.id == item)[0])
+          jobItem[5] = jobItem[5].split('-').map((item,ind) => boss[ind].outerHTML + item ).join('<br>')
+        } else {
+          let boss = charsImagesComplete.filter(img => img.id == jobItem[5])[0]
+          jobItem[5] = boss.outerHTML + jobItem[5]
+        }
+        let startFl = parseInt(jobItem[3].replace(/B|F/g, ''))
+        jobItem[3] = jobItem[3]  + " - B" + (startFl + parseInt(jobItem[4])) + "F"
+        jobItem[2] = jobItem[2] + '<br><b>Floors: </b>' + jobItem[3]
+        jobItem.splice(8,1) // to get rid ofpopulatedfloor
+        jobItem.splice(3,2)
+        jobItem.push('') // to display events
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = 'rgba(100, 167, 189, 9)'
-    //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
-        jobItem.splice(9,1)
-        jobItem.push('')
+        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#e8c471'
         jobItem.map( (job) => {
           var cell = document.createElement('td')
           switch (job) {
-            default: cell.innerHTML =  job
+            default: cell.innerHTML = job
             cell.id = cell.innerText
           }
 
