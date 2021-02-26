@@ -126,3 +126,8 @@ table tr td:not(:first-child) {
 .Medium {color: #584b67; font-weight: 600}
 .Hard { color: #954e3a; font-weight: 600}
 .Boss { color: #e0c369; font-weight: 600}
+
+
+#dialog {
+  background-color: $mainBg;
+}

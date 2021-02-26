@@ -24,6 +24,7 @@ h1 {
 #jobsmain { width: 80vw; margin: 0 5% 0 10%}
 th { background-color: $mainBg}
 #chapters { background-color: #d3a12e !important}
+#otherfilters > div:first-child {text-align: left;}
 #pages {
   button { background-color: $mainBg}
   select { background-color: #ebc369}

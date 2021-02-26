@@ -6,10 +6,12 @@ body::after {
   height:0;
   width:0;
 }
+::-webkit-scrollbar-thumb { background-color: #a27347; }
+::-webkit-scrollbar { background-color: rgb(193, 224, 245); }
 h1 {background-color: transparent}
 section {  margin-top: -25px;}
 
-.div:not(#div1) {
+.div {
   position: absolute;
   top: 0;
   left: 20px;
@@ -31,9 +33,9 @@ section {  margin-top: -25px;}
   .col-5 {width: 215px;}
   img {
     display:block;
-    margin: auto;
-    padding:50px;
-    height:350px;
+    margin: 20% auto;
+    height:220px;
+    width: auto;
   }
   .txt:nth-child(3) { color: $maintxt; letter-spacing: 4px}
 }
@@ -50,14 +52,20 @@ section {  margin-top: -25px;}
 }
 
 #gplay {
-  margin-top: -25px;
+  margin-left:30px;
+  text-align: center;
   img {
-    display:block;
+    display:inline;
     margin: auto;
-    width:200px
+  }
+  #playimg { width:200px;   margin-top: -10px;}
+  #media img {
+    margin-top: 10px;
+    width:50px;
   }
 }
-#infoInf {
+#updates { display:none}
+.maininf {
     padding: 30px 90px 30px 40px;
   h3 {
     text-align: center;
@@ -65,6 +73,10 @@ section {  margin-top: -25px;}
     color: #99380b;
     padding-bottom:15px;
     text-shadow: 1px 2px black;
+    a {
+      float: right;
+    //  box-shadow: 1px 1px 1px 1px black
+    }
   }
   ul { list-style-type: none; }
   img {

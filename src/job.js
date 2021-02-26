@@ -18,8 +18,9 @@ import {abilities,
         passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
         appliesAllInfo} from './abilitiesData.js'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
+import {preload } from './preload/preload.js'
 
-document.body.append(nav(), jobmain, sideDiv)
+document.body.append(nav(),preload, jobmain, sideDiv)
 cursor()
 let sidenav = document.getElementById('sidenav')
 let section = $('#jobmainsect')
@@ -186,7 +187,10 @@ let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
 
 
 })
-
+setTimeout(function() {
+  let skip = document.getElementById('skip')
+  skip.style.display = 'block'
+},1500)
 }
 var headernav = document.getElementById("navMain");
 window.onscroll = function() {

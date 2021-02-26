@@ -32,8 +32,11 @@ export { powlvl, unitDesc,
          jobsData, jobsStats, jobsDataAll, craft, mats,
          glossAllInfo,appliesAllInfo, glossRaw,applyRaw,
          characters, charsAllInfo,charsAllInfoRaw,
-          chapters, chaptAllInfo}
+          chapters, chaptAllInfo,
+          verlog, verArr,
+          dungeon, drulesDataAll}
 
+let verArr = []
 //skillunits
 let powlvl;     // power level table from sheet 4
 let unitDesc;  // unit desc table from sheet 4
@@ -69,6 +72,7 @@ let charsAllInfoRaw = [] //without colors and icons on keywords
 //chapters
 let chaptAllInfo = []
 //glossAllInfo.length = 63
+let drulesDataAll = []
 
 var name, desc, desc1, desc2, desc3, desc4
 function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multiplier) {
@@ -593,6 +597,7 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
   let jobsData = {
     jobs:() => {
       return GetSheetDone
+
         .raw(id, 7).then(data => data.data).then(res => {
           res.shift()
           jobsStats = res.map(job => {
@@ -605,7 +610,6 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
             }
           })
           res.map(inf => jobsDataAll.push(inf))
-
 
         })
     },
@@ -636,7 +640,6 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
     chars:() => {
       return GetSheetDone
         .raw(id, 9).then(data => data.data).then(res => {
-          console.log(res)
           res.shift()
         changeColors(res, 1)
         charsAllInfo = res;
@@ -655,61 +658,40 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
             return row
           })
         //  res= res.map(row=> row= row.filter((r,i) => r == empty))
-          console.log(res)
         chaptAllInfo = res;
         })
     }
   }
-  /*find:() => {
-    return GetSheetDone.raw(id,6).then((sheet) => {
-      sheet.data.map(data => abilSheet.push(data))
+  let verlog = {
+    log:() => {
       return GetSheetDone
-        .raw(id, 4)
-        .then((res) => res.data)
-        .then((data) => {
-          var result = data;
-          result.shift();
-          var level = result.slice(0, 8)
-          var power = level.map(pow => {
-          return {
-            lvl: pow[0],
-            strAgiInt: pow[1],
-            maxHP: pow[2] + '/' + pow[3]
-          }
-          })
-          var abils = sheet.data.map((row) => {
-            var desc1 = result.filter(res=> row[5] == res[7] && row[6] == res[8])
-            var desc2 = result.filter(res => row[8] == res[7] && row[9] == res[8])
-            var desc3 = result.filter(res => row[11] == res[7] && row[12] == res[8])
-            var desc4 = result.filter(res => row[14] == res[7] && row[15] == res[8])
-            return desc1.map(desc =>/* row[2] + ':\n' + desc[9] + '(Lvl ' + row[7] + ')' + row[5] + '/' + row[6] + '\n'
-              + desc2.map(desc => desc[9]/*.replace('X', row[10]) + '(Lvl ' + row[10] + ')\n')
-              + desc3.map(desc => desc[9]/*.replace('X', row[13]) + '(Lvl ' + row[13] + ')\n')
-              + desc4.map(desc => desc[9]/*.replace('X', row[16])  + '(Lvl ' + row[16] + ')\n'))
-          });
-            Object.values(abils).map(val => abilSheet.map(row=> row[1] = val))
-            //Object.values(abilAll).map(abil => abil == undefined ? '' : abil.split(':'))
- //abilAll = Object.values(abilAll).map(val => val[0] == undefined ? '' : val[0].split(':'))
-//abilAll.map(val => {
-  /*if (
-    (row[5] == ('Damage' || 'Heal')
-    || (row[5] == "Protect" && (row[6] == ('MaxHP' || 'Strength' || 'Agility' || 'Intelligence'))))
-    && (row[5] == res[7] && row[6] == res[8])
-  ) {
-    var perc = power.map(lvl => {
-      if (lvl.lvl == row[7]) {
-        row[6] == 'MaxHP'
-        ? res[9].replace('X%' , lvl.maxHP)
-        : res[9].replace('X%' , lvl.strAgiInt)
-      }
-      })
-  } else {
-    res[9] = res[9].replace('X', row[7])
+        .raw(id, 2).then(data => data.data).then(res => {
+          res.shift()
+          res.length = 30
+          let lasti = []
+         res.map((row, i) => {
+           i == 0 ? verArr.push(res[0][1]) : ''
+           verArr.push(row[3])
+           if (i > 0 && row[1] !== undefined) {
+             lasti.push(i)
+           }
+
+
+
+         })
+         verArr.length = lasti[0]+1
+        })
+    }
   }
-  return res
-//})
+  let dungeon = { //dungeon rules
+    rules:() => {
+      return GetSheetDone
+        .raw(id, 12).then(data => data.data).then(res => {
+          res.shift()
+          res.map((dr,i)=> dr.splice(0,0,i+1))
+          drulesDataAll = res
     })
-    });
-  },*/
+  }
+}
 
 export {abilities}

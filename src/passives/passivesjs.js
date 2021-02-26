@@ -256,9 +256,9 @@ function loadList() {
     if (pageList.length == 0 ) {
       document.getElementById('dialog').style.display = 'block';
       document.getElementById('closedialog').onclick = function() {
-        document.getElementById('dialog').style.display = 'none';
+      document.getElementById('dialog').style.display = 'none';
       }
-    }
+  }
     passivesAllInfo.map(a => a.splice(a.indexOf('sep'), 5))
   }
 

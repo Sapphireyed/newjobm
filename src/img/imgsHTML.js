@@ -123,6 +123,7 @@ export function getJobImgs() {
       })
   })
   //2nd img for div element - job bg img
+  console.log(jobsStats)
   Object.entries(jobsStats).map(j => {
     sortable.push(Object.entries(j[1]).sort(((a,b) => b[1]-a[1])))
   })

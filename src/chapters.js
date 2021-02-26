@@ -12,10 +12,9 @@ import { chaptersFn} from './chapters/chaptjs.js'
 import { sideDiv, toggleSide } from './side/side.js'
 import theadimg from './img/Materials/Thunder Spirit.png'
 var $ = require("jquery")
+import {preload } from './preload/preload.js'
 
-let preload = document.createElement('div')
-preload.id = 'preload'
-document.body.append(nav(), jobsmain, sideDiv)
+document.body.append(nav(),preload, jobsmain, sideDiv)
 cursor()
 let sidenav = document.getElementById('sidenav')
 let section = $('#jobsmain')
@@ -37,6 +36,8 @@ window.onload = function(){
       chapters.chapt()
         .then(chapt => {
           chaptersFn()
+          let skip = document.getElementById('skip')
+          skip.style.display = 'block'
         })
     })
 

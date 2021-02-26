@@ -42,7 +42,7 @@ export function jobs() {
     var jobsRows = jobsSheetArrs[2][1];
     jobsRows.shift()
     jobsRows.map(job => {
-      console.log(job)
+
       for (var i=0; i< job.length; i++) {
         job[i] == undefined ? job.splice(i,1, '') : job[i]
       }
@@ -277,9 +277,8 @@ let start = document.getElementById('start')
 setTimeout(function() {
   tooltips()
 },200)
-
-
-    $('#preload').animate({width:'0'},400);
+let skip = document.getElementById('skip')
+skip.style.display = 'block'
   //  document.body.style.cursor = 'default'
 }
 // TOOLTIP

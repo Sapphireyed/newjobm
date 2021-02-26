@@ -10,12 +10,13 @@ import theadimg from './img/Traits/Dumb.png'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
 import { toggle} from './basicfn/toggle.js'
 import { jobs } from './abilitiesData.js'
+import {preload } from './preload/preload.js'
 
 //import { jobs} from './jobs/jobsjs.js'
 var $ = require("jquery")
 //import { jobsTable } from './jobs/jobsTable'
 
-document.body.append( nav(), abilsmain, sideDiv)
+document.body.append( nav(),preload, abilsmain, sideDiv)
 
 cursor()
 let sidenav = document.getElementById('sidenav')
@@ -38,9 +39,11 @@ abilities.units()
           .then(res => {
               getAbilImgs()
               abilitiesFn()
+              let skip = document.getElementById('skip')
+              skip.style.display = 'block'
             })
           })
-          
+
 characters.chars()
 jobsData.jobs()
 jobsData.craft()

@@ -6,7 +6,6 @@
 import './style.scss';
 import './jobs.scss';
 //import fontawesome from '@fortawesome/fontawesome-free'
-//var $ = require("jquery")
 import nav from './nav/nav';
 import { jobsmain } from './jobs/jobsmain.js'
 import {abilities, jobsData} from './abilitiesData.js'
@@ -17,14 +16,13 @@ import { toggle} from './basicfn/toggle.js'
 import { jobs} from './jobs/jobsjs.js'
 import { sideDiv, toggleSide } from './side/side.js'
 import theadimg from './img/Jobs/BG/inthp.jpg'
+import {preload} from './preload/preload.js'
 var $ = require("jquery")
 
-//let bgimg = document.createElement('img')
-//bgimg.id = 'bgimg'
-//bgimg.src = bg
-let preload = document.createElement('div')
-preload.id = 'preload'
+
 document.body.append(preload, nav(), jobsmain, sideDiv)
+
+
 cursor()
 let sidenav = document.getElementById('sidenav')
 let section = $('#jobsmain')
@@ -33,9 +31,7 @@ toggleSide(sidenav, section, navmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
 document.body.style.backgroundAttachment = 'fixed'
-//document.body.style.backgroundPosition= 'center center'
-//document.body.style.backgroundPosition = 'center center'
-//add sticky nav
+
 var headernav = document.getElementById("navMain");
 window.onscroll = function() {
   stickyNav(headernav)
@@ -70,7 +66,7 @@ jobsData.craft()
       .then(res => {
         //getMatImgs()
         getJobImgs()
-        jobs()        
+        jobs()
       })
 
     })

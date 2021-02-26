@@ -13,12 +13,13 @@ var $ = require("jquery")
 import { toggle} from './basicfn/toggle.js'
 import { sideDiv, toggleSide } from './side/side.js'
 import {options2, options } from './chars/charsfilter.js'
+import {preload } from './preload/preload.js'
 
 //let bgimg = document.createElement('img')
 //bgimg.id = 'bgimg'
 //bgimg.src = bg
 
-document.body.append( nav(), glossarymain, sideDiv)
+document.body.append( nav(),preload, glossarymain, sideDiv)
 cursor()
 let sidenav = document.getElementById('sidenav')
 let section = $('#glossarymain')
@@ -108,6 +109,8 @@ window.onscroll = function() {
                    table.style.display = 'table';
                    table2.style.display = 'none'
                  }
+                 let skip = document.getElementById('skip')
+                 skip.style.display = 'block'
                })
                })
         })

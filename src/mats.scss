@@ -1,0 +1,56 @@
+$mainBg: #060833;
+
+::-webkit-scrollbar-thumb { background-color: $mainBg; }
+::-webkit-scrollbar { background-color: rgb(193, 224, 245); }
+
+#sideDiv {
+  background-color: $mainBg;
+  h4 {
+    background-color: rgb(193, 224, 245);
+    color:  $mainBg;
+    box-shadow: 2px 2px 1px 1px rgb(193, 224, 245);
+  }
+  a {
+    background-color: $mainBg;
+  }
+}
+@mixin title {
+    text-align: center;
+    color: #fff;
+    background-color: $mainBg;
+}
+h1 {
+    @include title;
+}
+#jobsmain { width: 80vw; margin: 0 5% 0 10%}
+#chapters {background-color: #1f2156 !important}
+#otherfilters > div:first-child {text-align: left;}
+#pages {
+  button { background-color: $mainBg}
+  select, option { background-color: #6669b2}
+}
+th {background-color: $mainBg}
+td:nth-child(2) {
+  width: 40px;
+  padding: 4px;
+}
+td:nth-child(7) { font-style: italic; text-align: center;}
+table tr td:not(:first-child) { padding: 0 0 0 0}
+table tr td:nth-child(3), table tr td:nth-child(5) { padding: 0 0 0 30px}
+table tr td { color: black}
+
+.fromJob,.toJob {font-weight: 600}
+.one { color: #6a8d55;}
+.two { color: #4b7396;}
+.three { color: #584b67;}
+.four { color: #954e3a;}
+.five { color: #e0c369;}
+
+.Common { color: #4f7a35; font-weight: 600 }
+.Rare { color: #427195; font-weight: 600 }
+.Epic { color: #bf6554; font-weight: 600 }
+.Legendary { color: #e0c367; font-weight: 600 }
+
+/*#dialog {
+  background-color: $mainBg;
+}*/

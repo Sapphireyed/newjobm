@@ -13,7 +13,10 @@ const abilsImgs = importAll(require.context('./img/Abilities', false, /\.(png|jp
 const abilsBg = importAll(require.context('./img/Abilities/Bg', false, /\.(png|jpg|JPG|svg)$/));
 const charsImgs = importAll(require.context('./img/Character', false, /\.(png|jpg|JPG|svg)$/));
 const charsBg = importAll(require.context('./img/Character/Frames', false, /\.(png|jpg|JPG|svg)$/));
+const rules = importAll(require.context('./img/Rules', false, /\.(png|jpg|JPG|svg)$/));
 export { jobsImgs, jobsFrames, jobsBg,
          matsImgs,matsFrames,
          abilsImgs, abilsBg,
-         charsImgs,charsBg}
+         charsImgs,charsBg,
+         rules}
+         console.log(rules)

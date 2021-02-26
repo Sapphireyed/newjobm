@@ -12,6 +12,7 @@ import agiimg from '../img/other/agi.png'
 import intimg from '../img/attr/int.png'
 import { splitDesc, splitApply } from './splitFn.js'
 import {rarityFn} from './rarity.js'
+import {preload } from '../preload/preload.js'
 
 export function openNew(page,arr, i, abilArr, abilskills, abileffects, abiltraits, passivesarr, passivedesc, passiveskills,  passiveeffects, passivetraits, table='table') {
 
@@ -20,7 +21,8 @@ export function openNew(page,arr, i, abilArr, abilskills, abileffects, abiltrait
 //    var jobItem = Object.values(arr[i - 1])
     var win = window.open(page +'.html')
     // fires in the new tab
-    var newWin = setInterval(function(){
+    var newWin = setTimeout(function(){
+      win.document.body.appendChild(preload)
       var header = win.document.getElementById('jobheader')
       header.innerHTML = jobItem[1]
 
@@ -282,10 +284,7 @@ let myreg = /([A-Z])\w+/gi
 
     //    console.log(jobcraft)
 
-}, 40)
+}, 1020)
 
-setTimeout(function() {
-  clearInterval(newWin)
-}, 500)
 
 }

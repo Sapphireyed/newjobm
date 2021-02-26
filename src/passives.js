@@ -11,8 +11,9 @@ import { toggle} from './basicfn/toggle.js'
 import { jobs } from './abilitiesData.js'
 import { sideDiv, toggleSide } from './side/side.js'
 var $ = require("jquery")
+import {preload } from './preload/preload.js'
 
-document.body.append( nav(), passivesmain,sideDiv)
+document.body.append( nav(),preload, passivesmain,sideDiv)
 cursor()
 let sidenav = document.getElementById('sidenav')
 let section = $('#jobmainsect')
@@ -41,6 +42,8 @@ abilities.units()
               .then(res => {
                 //  getAbilImgs()
                   passivesFn()
+                  let skip = document.getElementById('skip')
+                  skip.style.display = 'block'
                 })
               })
           })

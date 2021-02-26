@@ -67,3 +67,7 @@ td:nth-child(n+7) div{
   max-height: 100px;
   overflow-y:scroll;
 }
+
+#dialog {
+  background-color: $darkBg;
+}

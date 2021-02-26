@@ -14,11 +14,14 @@ module.exports = {
   characters: path.resolve(__dirname, './src/characters.js'),
   char: path.resolve(__dirname, './src/char.js'),
   chapters: path.resolve(__dirname, './src/chapters.js'),
+  mats: path.resolve(__dirname, './src/mats.js'),
+  gacha: path.resolve(__dirname, './src/gacha.js'),
+  dungeonrules: path.resolve(__dirname, './src/gameMechanics/dungeonrules.js'),
 },
 output: {
   filename: '[name].[contenthash]bundle.js',
-//  path: path.resolve(__dirname, 'deploy'),
-  path: '/newjobm/',
+  path: path.resolve(__dirname, 'deploy'),
+//  path: '/newjobm/',
 },
 //optimization: {
 //  runtimeChunk: 'single',
@@ -104,16 +107,39 @@ module: {
       filename: 'chapters.html',
       chunks: ['chapters'],
     }),
+    new HtmlWebpackPlugin({
+      filename: 'materials.html',
+      chunks: ['mats'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'gacha.html',
+      chunks: ['gacha'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'dungeonrules.html',
+      chunks: ['dungeonrules'],
+    }),
     /*new CompressionPlugin({
       test: /\.js(\?.*)?$/i
     })*/
   ],
-/*  resolve: {
+  resolve: {
       fallback: {
-        util: require.resolve("util/"),
-        assert: require.resolve("assert/"),
-        https: require.resolve("https-browserify")
+        "util": require.resolve("util/"),
+        "assert": require.resolve("assert/"),
+        "https": false,
+        "http": false,
+        "stream": false,
+        "crypto": false,
+        "buffer": false,
+        "zlib": false,
+        "net": false,
+        "tls": false,
+        "fs": false,
+        "path": false,
+        "os": false,
+        "timers": false,
       }
 
-  }*/
+  }
 };

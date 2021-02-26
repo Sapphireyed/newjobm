@@ -296,7 +296,7 @@ function loadList() {
     let pics= document.querySelectorAll('tr td:nth-child(2)')
 // Icons on sides of the table
     let abilrows = Array.from(document.querySelectorAll('#abilsBody tr'))
-    abilrows.shift()
+  //  abilrows.shift()
     for (var i = 0; i < abilrows.length; i++) {
       let name = abilrows[i].children[2]
 
