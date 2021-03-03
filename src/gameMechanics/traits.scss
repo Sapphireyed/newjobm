@@ -1,0 +1,55 @@
+$mainBg: #c09601; //#33424a;
+$mainBgLight: #f5f7f8; //#ebddca;
+
+@mixin title {
+    text-align: center;
+    color: #fff;
+    background-color: $mainBg;
+}
+
+h1 {
+    @include title;
+}
+
+.col-9 { padding: 0}
+
+#tabs {
+  float: right;
+  text-align: right;
+  button {
+    background-color: $mainBg;
+    color:white;
+    float: right;
+    text-align: right;
+    border-radius: 10px
+  }
+}
+th { position: inherit; background-color: $mainBg}
+table tr td:nth-child(2) { width: 35px;}
+table tr:not(:first-child) { height: 50px}
+table tr td:not(:first-child) { padding: 0 0 0 5px; }
+
+#glossarymain {
+  width: 95vw;
+  margin: auto ;
+  #navbtns img { width: 30px; padding: 10px 0 50px 0; float: right}
+  .traitimg {
+    box-shadow: 2px 1px black;
+    width:220px;
+//  display:block;
+//  margin:auto;
+    animation: rotation 5s infinite linear;
+  }
+  #passives {
+    background-color: $mainBg !important;
+    padding: 0.7%;
+  }
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

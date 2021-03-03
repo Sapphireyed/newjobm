@@ -20,7 +20,8 @@ h1 {
     background-color: $mainBg;
   }
 }
-#jobsmain { width: 80vw; margin: 0 5% 0 10%}
+#jobsmain { margin: auto}
+.section { width: 70vw !important}
 #chapters {background-color: #a41919 !important}
 #otherfilters > div:first-child {text-align: left;}
 #pages {
@@ -30,19 +31,24 @@ h1 {
 th {background-color: $mainBg}
 .section {width: 80vw}
 #jobsmain {width: 80vw}
-td:nth-child(2) img, td:nth-child(4) img {
+td:nth-child(2) img, td:nth-child(4) img, td:nth-child(8) img {
   width: 45px;
   padding: 0 0 0 0;
 }
 td:nth-child(3) {text-align: center;}
-td:nth-child(2), td:nth-child(4) {  background-color: $mainBg}
+td:nth-child(2), td:nth-child(4), td:nth-child(8) {  background-color: $mainBg}
 table tr td:not(:first-child) {padding: 0 0 0 0}
 table tr td:nth-child(5),table tr td:nth-child(6) {padding: 0 10px}
-
+.redRule { background-color: red !important; color: white}
 
 .tooltipMy .tooltiptext {
     background-color: $mainBg; //rgb(77, 99, 111);
     left: 25%;
     bottom: 85%;
     box-shadow: 3px 3px #ff7b7b;
+}
+
+@media only screen and (max-width: 760px) {
+  td:nth-child(4) { display: none}
+  .section { width: 90vw}
 }

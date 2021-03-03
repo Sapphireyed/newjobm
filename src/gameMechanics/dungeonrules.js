@@ -12,7 +12,7 @@ import { showIcon, hideIcon } from '../basicfn/hoverIcons.js'
 import { toggle} from '../basicfn/toggle.js'
 import { drules} from './dungrules/drulesjs.js'
 import { sideDiv, toggleSide } from '../side/side.js'
-import theadimg from '../img/traits/badtissue.png'
+import theadimg from '../img/other/badTissueAub.png'
 var $ = require("jquery")
 import tablesorter from 'tablesorter';
 import {preload } from '../preload/preload.js'
@@ -20,13 +20,12 @@ import {preload } from '../preload/preload.js'
 document.body.append(nav(),preload, jobsmain, sideDiv)
 cursor()
 let sidenav = document.getElementById('sidenav')
-let section = $('#jobsmain')
+let section = $('#drulesmain')
 let navmain = document.getElementById('navMain')
 toggleSide(sidenav, section, navmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
 document.body.style.backgroundPosition = 'center center'
-//document.body.style.backgroundAttachment = 'fixed'
 var headernav = document.getElementById("navMain");
 window.onscroll = function() {
   stickyNav(headernav)
@@ -55,8 +54,8 @@ window.onload = function(){
 
                 }
                 // coloring red Rules
-                let redRule = Array.from(document.querySelectorAll('td:nth-child(5)'))
-              //  redRule = redRule.map(rule => rule.innerText == '' ? '' : rule.parentNode.style.backgroundColor = '#8e0000')
+                let redRule = Array.from(document.querySelectorAll('td:nth-child(6)'))
+                redRule = redRule.map(rule => rule.innerText == '' ? '' : rule.parentNode.classList.add('redRule'))
 
                 // Icons on sides of the table
                     let abilrows = Array.from(document.querySelectorAll('tr'))

@@ -4,12 +4,14 @@ import {rules } from '../../importImgs'
 export function drules() {
 
   let pageList = drulesDataAll
+
   document.getElementById("jobsBody").innerHTML = "";
     for (var i=0; i < pageList.length; i++) {
       var jobItem = Object.values(pageList[i])
       jobItem.splice(1,0, 'pic')
       jobItem.push('')
       jobItem.length = 6
+      jobItem[4] == '' ? jobItem.push('', 'pic') : jobItem.push('pic')
       if (jobItem[3].includes('passive')) {
         jobItem[3] = '<span class="tooltipMy">' + jobItem[3] + '<span class="tooltiptext tooltipMy"></span</span>'
       }

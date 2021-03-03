@@ -15,8 +15,10 @@ module.exports = {
   char: path.resolve(__dirname, './src/char.js'),
   chapters: path.resolve(__dirname, './src/chapters.js'),
   mats: path.resolve(__dirname, './src/mats.js'),
+  gachas: path.resolve(__dirname, './src/gachas.js'),
   gacha: path.resolve(__dirname, './src/gacha.js'),
   dungeonrules: path.resolve(__dirname, './src/gameMechanics/dungeonrules.js'),
+  traits: path.resolve(__dirname, './src/gameMechanics/traits.js'),
 },
 output: {
   filename: '[name].[contenthash]bundle.js',
@@ -112,12 +114,20 @@ module: {
       chunks: ['mats'],
     }),
     new HtmlWebpackPlugin({
+      filename: 'gachas.html',
+      chunks: ['gachas'],
+    }),
+    new HtmlWebpackPlugin({
       filename: 'gacha.html',
       chunks: ['gacha'],
     }),
     new HtmlWebpackPlugin({
       filename: 'dungeonrules.html',
       chunks: ['dungeonrules'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'traits.html',
+      chunks: ['traits'],
     }),
     /*new CompressionPlugin({
       test: /\.js(\?.*)?$/i

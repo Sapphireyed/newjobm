@@ -72,7 +72,10 @@ th { background-color: $darkBg}
 table tr td:nth-child(6) {padding: 3px 0 2px 31px}
 td:nth-child(n+8) div{
   max-height: 100px;
-  overflow:scroll;
+  overflow-y:scroll;
+  ::-webkit-scrollbar {
+      width: 8px;
+    }
 }
 .applyTip .applyText {
     background-color: $darkBg; //rgb(77, 99, 111);

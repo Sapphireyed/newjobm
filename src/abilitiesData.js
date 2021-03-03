@@ -34,7 +34,8 @@ export { powlvl, unitDesc,
          characters, charsAllInfo,charsAllInfoRaw,
           chapters, chaptAllInfo,
           verlog, verArr,
-          dungeon, drulesDataAll}
+          dungeon, drulesDataAll,
+          traitsAll, traitsDataAll}
 
 let verArr = []
 //skillunits
@@ -73,6 +74,7 @@ let charsAllInfoRaw = [] //without colors and icons on keywords
 let chaptAllInfo = []
 //glossAllInfo.length = 63
 let drulesDataAll = []
+let traitsDataAll = []
 
 var name, desc, desc1, desc2, desc3, desc4
 function getDesc(arrToGet, arrToMap, arrToCompare, powlvl, skill, effect, multiplier) {
@@ -686,12 +688,22 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
   let dungeon = { //dungeon rules
     rules:() => {
       return GetSheetDone
-        .raw(id, 12).then(data => data.data).then(res => {
+        .raw(id, 13).then(data => data.data).then(res => {
           res.shift()
           res.map((dr,i)=> dr.splice(0,0,i+1))
           drulesDataAll = res
-    })
+      })
+    }
   }
-}
+  let traitsAll = { //dungeon rules
+    traitsFn:() => {
+      return GetSheetDone
+        .raw(id, 12).then(data => data.data).then(res => {
+          res.shift()
+          changeColors(res)
+          traitsDataAll = res
+      })
+    }
+  }
 
 export {abilities}

@@ -1,7 +1,7 @@
 global.fetch = require('node-fetch');
 const GetSheetDone = require('get-sheet-done');
 const id = '1W-ptBX6fjkQcZXrrr4KTZRp2qNcer66Ak4VANW2dM8';
-import {jobsData, jobsDataAll, mats, jobsStats, abilitiesAllInfo, abilSkills, charsAllInfo} from '../abilitiesData.js'
+import {jobsData, jobsDataAll, mats, jobsStats, abilitiesAllInfo, abilSkills,abilEffects, abilTraits, charsAllInfo} from '../abilitiesData.js'
 import {jobsImgs, jobsFrames, jobsBg,
         matsImgs, matsFrames,
         abilsImgs, abilsBg,
@@ -11,7 +11,7 @@ let matImagesComplete = []
 let jobImagesComplete = []
 let abilImagesComplete = []
 let charsImagesComplete = []
-
+console.log(charsImagesComplete)
 export { matImagesComplete, jobImagesComplete, abilImagesComplete, charsImagesComplete } // full DOM element containing job/mat img
 
 //mats frames
@@ -180,12 +180,18 @@ let debuff = Object.entries(abilsBg).filter(frame => frame[0] == 'Debuff.jpg')
 debuff = Object.values(debuff)[0][1]
 let buff = Object.entries(abilsBg).filter(frame => frame[0] == 'Buff.jpg')
 buff = Object.values(buff)[0][1]
+let nothing = Object.entries(abilsBg).filter(frame => frame[0] == 'Nothing.jpg')
+nothing = Object.values(nothing)[0][1]
 
 let abilImgArr =[]
 
 
 export function getAbilImgs() {
   let abilSkillsSplit = Object.values(abilSkills).map(ab => ab == undefined ? '' : ab.split(':'))
+  let abilTraitsSplit = Object.values(abilTraits).map(ab => ab == undefined ? '' : ab.split(':'))
+  let abilEffectsSplit = Object.values(abilEffects).map(ab => ab == undefined ? '' : ab.split(':'))
+  const elemRegex = /fire|water|earth|thunder|wind|light|dark|bleed|injury|venom|restrain|insane|Element|Debuff/gi;
+
   abilitiesAllInfo.map(img => {
     let abilImgHtml = document.createElement('img');  //create abil img empty
     abilImgHtml.classList.add(img[20])
@@ -201,18 +207,29 @@ export function getAbilImgs() {
          img.src = src[1]
       }
       let bgtype = abilSkillsSplit.filter(abil => abil[0] == img.id)
+      let isCurse = abilTraitsSplit.filter(abil => abil[0] == img.id)
+      let effect = abilEffectsSplit.filter(abil => abil[0] == img.id)
 
-      if (bgtype[0][1].includes('Curse')) {
-        img.style.backgroundImage = 'url("' + curse + '")'
-      } else if (bgtype[0][1].includes('Damage') == true) {
-        img.style.backgroundImage = 'url("' + damage + '")'
-      } else if (bgtype[0][1].includes('Heal')) {
-        img.style.backgroundImage = 'url("' + heal + '")'
-      } else if (bgtype[0][1].includes('Debuff')) {
-        img.style.backgroundImage = 'url("' + debuff + '")'
-      } else {
-        img.style.backgroundImage = 'url("' + buff + '")'
-      }
+      switch (true) {
+        case isCurse[0][1].includes('Curse'):
+          img.style.backgroundImage = 'url("' + curse + '")'
+          break;
+        case bgtype[0][1].includes('Damage') == true:
+          img.style.backgroundImage = 'url("' + damage + '")'
+          break
+        case bgtype[0][1].includes('Heal') || (bgtype[0][1].includes('protect') && elemRegex.test(effect[0][1])):
+          img.style.backgroundImage = 'url("' + heal + '")'
+          break;
+        case bgtype[0][1].includes('Debuff') || bgtype[0][1].includes('Vulnerable'):
+          img.style.backgroundImage = 'url("' + debuff + '")'
+          break
+        case bgtype[0][1].includes('Buff') || bgtype[0][1].includes('InstantBoost') || bgtype[0][1].includes('protect') || bgtype[0][1].includes('Sacrifice'):
+          img.style.backgroundImage = 'url("' + buff + '")'
+          break
+        default:
+          img.style.backgroundImage = 'url("' + nothing + '")'
+        }
+
       img.style.backgroundSize = 'cover'
     })
 

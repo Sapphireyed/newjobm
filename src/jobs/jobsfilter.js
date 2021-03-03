@@ -226,7 +226,7 @@ navFiters.append(searchinDiv, cleardiv, filterStart)
 filtersDiv.append(rarFilter, elemFilter, attrFilterDiv, typeFilterDiv, applyFilterDiv, whenFilterDiv, navFiters)
 
 const othersDiv = document.createElement('div');
-othersDiv.classList.add('col-12', 'col-sm-5', 'row');
+othersDiv.classList.add('col-12', 'col-lg-5', 'row');
 othersDiv.id = 'otherfilters'
 
 // choose Lvl

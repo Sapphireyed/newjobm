@@ -63,6 +63,8 @@ th { background-color: $darkBg}
     background-color: $darkBg; //rgb(77, 99, 111);
 }
 
+td:nth-child(2) { display: none}
+td:nth-child(3) { color: $darkBg}
 td:nth-child(n+7) div{
   max-height: 100px;
   overflow-y:scroll;

@@ -23,6 +23,7 @@ thead.innerHTML = '<tr id="jobsThead">'
     + '</tr>'
   var tbody = document.createElement('tbody')
   tbody.id = 'jobsBody'
+
 //  tbody.style.backgroundImage = 'url("' + sword + '")'
 //  tbody.style.backgroundSize = 'contain'
 //  tbody.style.backgroundRepeat = 'no-repeat'

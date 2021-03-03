@@ -67,6 +67,7 @@ jobsData.craft()
         //getMatImgs()
         getJobImgs()
         jobs()
+
       })
 
     })

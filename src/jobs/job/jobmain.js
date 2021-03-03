@@ -1,6 +1,10 @@
 //import { init } from '../jobsjs.js'
 import hpbar from '../../img/other/hpbar.png'
 
+let w = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
+let targetWidth = 768;
+let targetMid = 1000
+
 let jobmain = document.createElement('section')
 jobmain.classList.add('section', 'shadow')
 jobmain.id= 'jobmainsect'
@@ -29,10 +33,10 @@ jobimg.classList.add('d-block', 'mx-auto')
 imgdiv.appendChild(jobimg)
 
 let attrs = document.createElement('div')
-attrs.classList.add('col-10', 'row', 'my-auto')
+attrs.classList.add('col-md-10', 'col-12', 'row', 'my-auto')
 let rarLvlOrb = document.createElement('div')
 rarLvlOrb.id = 'rarLvlOrb'
-rarLvlOrb.classList.add('col-6')
+rarLvlOrb.classList.add('col-md-6','col-12')
 //rarity
 let rarity = document.createElement('div')
 rarity.id = 'rarity'
@@ -96,7 +100,7 @@ rarLvlOrb.append(rarity, level, crystDiv,lvlbtns)
 
 let attrsAttrs = document.createElement('div')
 attrsAttrs.id= 'attrsAttrs'
-attrsAttrs.className = 'col-5'
+attrsAttrs.classList.add('col-md-5', 'col-12')
 let hp = document.createElement('h4')
 hp.id = 'hp'
 //hp.className = 'maxhp'
@@ -116,7 +120,7 @@ attrsArr.map(attr => {
 })
 
 let rarAndAttrs = document.createElement('div')
-rarAndAttrs.classList.add('col-8', 'row')
+rarAndAttrs.classList.add('col-md-8','col-12', 'row')
 rarAndAttrs.id = 'rarAndAttrs'
 
 /*let hpdiv = document.createElement('div')
@@ -136,7 +140,8 @@ rarAndAttrs.append(rarLvlOrb, attrsAttrs)
 let img2nd = imgdiv.cloneNode(true)
 img2nd.id = 'jobimg2'
 //attrs.prepend(rarLvlOrb)
-div1.append(imgdiv, rarAndAttrs, img2nd)
+w > targetWidth ? div1.append(imgdiv, rarAndAttrs, img2nd) : div1.append(imgdiv, rarAndAttrs)
+
 
 //JOB PASSIVE & SWITCH
 let div2 = document.createElement('div')
@@ -247,7 +252,7 @@ deckH.style.margin = '7px 0'
 deckH.innerHTML = 'Deck'
 
 let card1 = document.createElement('div')
-card1.className = 'col'
+card1.className = 'col-md'
 card1.id = 'card1'
 card1.style.margin = '5px'
 let card1H = document.createElement('h5')
@@ -261,7 +266,7 @@ card1desc.id = 'card1desc'
 card1.append(card1H, card1img, card1desc)
 
 let card2 = document.createElement('div')
-card2.className = 'col'
+card2.className = 'col-md'
 card2.id = 'card2'
 card2.style.margin = '5px'
 let card2H = document.createElement('h5')
@@ -274,7 +279,7 @@ card2desc.id = 'card2desc'
 card2.append(card2H, card2img, card2desc)
 
 let card3 = document.createElement('div')
-card3.className = 'col'
+card3.className = 'col-md'
 card3.id = 'card3'
 card3.style.margin = '5px'
 let card3H = document.createElement('h5')
@@ -287,7 +292,7 @@ card3desc.id = 'card3desc'
 card3.append(card3H, card3img, card3desc)
 
 let card4 = document.createElement('div')
-card4.className = 'col'
+card4.className = 'col-md'
 card4.id = 'card4'
 card4.style.margin = '5px'
 let card4H = document.createElement('h5')

@@ -10,7 +10,7 @@ thead.classList.add('thead', 'shadow-lg', 'w-100')
 thead.id = 'thead'
 thead.innerHTML = '<tr id="abilsThead">'
     + '<th data-sort="number">#<i class="fas fa-sort float-right"></i></th>'
-    + '<th>Icon<i class="fas fa-sort float-right"></i></th>'
+  //  + '<th>Icon<i class="fas fa-sort float-right"></i></th>'
     + '<th>Name<i class="fas fa-sort float-right"></i></th>'
     + '<th>Skill Rank<i class="fas fa-sort float-right"></i></th>'
     + '<th>Description<i class="fas fa-sort float-right"></i></th>'

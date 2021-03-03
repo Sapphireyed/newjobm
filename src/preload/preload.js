@@ -18,14 +18,19 @@ import cryst from '../img/materials/jobmania Crystal.png'
 export {preload}
 
 let chars = [pizarro, thanatos, lonely, michael, aphylia]
-
+ document.body.style.overflow = 'hidden'
 let preload = document.createElement('div')
-
+preload.style.width = screen.width + 'px'
+preload.style.height = screen.height + 'px'
 preload.id = 'preload'
 let preloaddiv =document.createElement('div')
+preloaddiv.id = 'preloaddiv'
 let jimg = document.createElement('img')
+jimg.style.backgroundImage = 'url("' + jobmJ + '")'
 jimg.src = jobmJ
 jimg.id = 'jimg'
+let jwidth = jimg.clientWidth
+let jheight = jimg.clientHeight
 let obmaniaimg = document.createElement('img')
 obmaniaimg.src = obmania
 obmaniaimg.id = 'obmania'
@@ -38,6 +43,13 @@ skip.id = 'skip'
 skip.onclick = function(){
   preload.style.transition = '0.8s'
   preload.style.opacity = 0
+  preload.style.zIndex = -100
+  preloaddiv.style.animation = 'none'
+  chardiv.style.animation = 'none'
+  document.body.style.overflow = 'visible'
+  setTimeout(function(){
+    preload.style.display = 'none'
+  },400)
 }
 preloaddiv.append(jimg, obmaniaimg, eternalimg)
 
@@ -51,10 +63,12 @@ chardiv.appendChild(char)
 preload.append(preloaddiv, skip, chardiv)
 let imgs = Array.from(document.querySelectorAll('#preload img:not(#hero)'))
 let ind = Math.floor(Math.random() * chars.length)
+
 switch (ind) {
   case 0:
     preload.style.backgroundImage = 'url(' + dark + ')'
     preload.style.backgroundPosition = 'center center'
+    char.style.width = '200px'
     char.src = lonely
     break;
   case 1:
@@ -87,9 +101,9 @@ switch (ind) {
   case 4:
     preload.style.backgroundImage = 'url(' + badTissue + ')'
     preload.style.backgroundPosition = 'center center'
-    jimg.style.filter = 'brightness(0) invert(1)'
-    obmaniaimg.style.filter = 'brightness(0) invert(1)'
-    eternalimg.style.filter = 'brightness(0) invert(1)'
+  //  jimg.style.filter = 'brightness(0) invert(1)'
+  //  obmaniaimg.style.filter = 'brightness(0) invert(1)'
+  //  eternalimg.style.filter = 'brightness(0) invert(1)'
 
     char.src = pizarro
       break;
@@ -113,10 +127,26 @@ setTimeout(function(){
     eternalimg.style.width = jimg.width * 0.71 + 'px'
   //  obmaniaimg.style.right = '5px'
 
-}, 3000)
+}, 3002)
+setTimeout(function() {
+  preloaddiv.style.animation = 'pulse 1.5s infinite ease-in-out alternate'
+  chardiv.style.animation = 'pulse 1.5s infinite ease-in-out alternate'
 
+},4000)
+
+/*setTimeout(function(){
+  preloaddiv.style.animation = 'none'
+  chardiv.style.animation= 'none'
+},10000)*/
 setTimeout(function(){
-  document.getElementById('preload').style.transition = '0.8s'
+  document.getElementById('preload').style.transition = '1.1s'
   document.getElementById('preload').style.opacity = 0
   document.getElementById('preload').style.zIndex = -100
-}, 7000)
+  preloaddiv.style.animation = 'none'
+  chardiv.style.animation = 'none'
+ document.body.style.overflow = 'visible'
+}, 8000)
+
+setTimeout(function(){
+  preload.style.display = 'none'
+},9000)

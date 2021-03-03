@@ -1,0 +1,16 @@
+h1 {
+  background-color: #717171;
+  box-shadow: 2px 2px black;
+}
+
+#gachalist {
+  ul {list-style-type: none; }
+  li { padding: 4px;}
+  img {
+    width: 85%;
+    display: block;
+    margin: auto;
+    z-index:1
+  }
+  img:hover { transform: scale(1.1); z-index: 10}
+}

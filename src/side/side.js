@@ -1,6 +1,10 @@
 import {abilities, appliesAllInfo, glossRaw, applyRaw} from '../abilitiesData.js'
 var $ = require("jquery")
 
+let w = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
+let targetWidth = 768;
+let targetMid = 1000
+
 export {sideDiv}
 let sideDiv = document.createElement('div')
 sideDiv.id = 'sideDiv'
@@ -30,21 +34,41 @@ sideDiv.appendChild(listDiv)
 export function toggleSide(el, section, nav) {
   let shown = false
   el.addEventListener('click', function() {
-    if(shown == false) {
-      $("#sideDiv").animate({right:'0'},500);
-      $('#sidenav').animate({right:'21.4%'},500)
-      section.animate({margin:'0 5% 0 5%', width: '68vw'},500);
-      shown = true
-      window.addEventListener('scroll', function() {
-        header.style.top = nav.getBoundingClientRect().bottom + 'px'
-        listDiv.style.marginTop = header.getBoundingClientRect().bottom + 'px'
-      })
-    } else {
-      $("#sideDiv").animate({right:'-25%'},500);
-      $('#sidenav').animate({right:'-3.5%'},500)
-      section.animate({marginLeft: '10%', width: '80vw'},500);
-      Array.from($('.subgloss')).map(s=> s.style.display = 'none')
-      shown = false
+    if (w > targetWidth) {
+      if(shown == false) {
+        $("#sideDiv").animate({right:'0'},500);
+        $('#sidenav').animate({right:'21.4%'},500)
+        console.log(section[0])
+        section[0].id == 'drulesmain' ? '' : section.animate({margin:'0 5% 0 5%', width: '68vw'},500);
+        shown = true
+        window.addEventListener('scroll', function() {
+          header.style.top = nav.getBoundingClientRect().bottom + 'px'
+          listDiv.style.marginTop = header.getBoundingClientRect().bottom + 'px'
+        })
+      } else {
+        $("#sideDiv").animate({right:'-25%'},500);
+        $('#sidenav').animate({right:'-3%'},500)
+        section[0].id == 'drulesmain' ? '' : section.animate({marginLeft: '10%', width: '80vw'},500);
+        Array.from($('.subgloss')).map(s=> s.style.display = 'none')
+        shown = false
+      }
+    } else if (w <= targetWidth ) {
+      if(shown == false) {
+        $("#sideDiv").animate({left:'0'},500);
+        $('#sidenav').animate({left:'67%'},500)
+      //  section.animate({margin:'0 5% 0 5%', width: '68vw'},500);
+        shown = true
+        window.addEventListener('scroll', function() {
+          header.style.top = nav.getBoundingClientRect().bottom + 'px'
+          listDiv.style.marginTop = header.getBoundingClientRect().bottom + 'px'
+        })
+      } else {
+        $("#sideDiv").animate({left:'-80%'},500);
+        $('#sidenav').animate({left:'-13%'},500)
+    //    section.animate({marginLeft: '10%', width: '80vw'},500);
+        Array.from($('.subgloss')).map(s=> s.style.display = 'none')
+        shown = false
+      }
     }
 
   })

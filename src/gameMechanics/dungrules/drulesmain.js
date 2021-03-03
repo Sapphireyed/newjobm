@@ -3,7 +3,7 @@ import { drulesTable } from './drulesTable.js'
 import theadimg from '../../img/other/thead.png'
 
 let jobsmain = document.createElement('section')
-jobsmain.id = 'jobsmain'
+jobsmain.id = 'drulesmain'
 jobsfilter.style.backgroundColor = '#4d636f'
 
 jobsfilter.style.color = 'white'

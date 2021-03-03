@@ -3,7 +3,7 @@ import { characters, jobsStats,charsAllInfo, jobsData, verlog, verArr} from '../
 import {jobsImgs} from '../importimgs.js'
 import book from '../img/other/book2.png'
 import dice from '../img/events/HeroEssence.png'
-import sapphire from '../img/events/ghostRed.png'
+import ghost from '../img/events/ghostRed.png'
 import gplay from '../img/google-play-badge.png'
 import discordimg from '../img/discord.png'
 import redditimg from '../img/reddit.png'
@@ -52,7 +52,7 @@ let infoInf = document.createElement('div')
 infoInf.classList.add('col-6', 'maininf')
 infoInf.id = 'infoInf'
 let smallHead = document.createElement('h3')
-smallHead.innerHTML = 'Jobmania - Etarnal Dungeon'
+smallHead.innerHTML = 'Jobmania - Eternal Dungeon'
 let updBtn = document.createElement('a')
 updBtn.innerHTML = ' > '
 updBtn.id = 'updbtn'
@@ -69,7 +69,13 @@ let summary = document.createElement('h5')
 summary.innerHTML = 'Countless combinations ensure great replayability. Try various builds, choose different paths'
 let dicepic = document.createElement('img')
 dicepic.id = 'dice'
-dicepic.src = sapphire
+dicepic.src = ghost
+let dicepic2 = dicepic.cloneNode(true)
+setInterval(function() {
+  dicepic.style.animation = 'hithere 7s ease infinite'
+  dicepic2.style.animation = 'hithere 7s ease infinite'
+//  dicepic.style.animationIterationCount = '1';
+}, 2000)
 infoInf.append(smallHead, desc, features, summary, dicepic)
 
 let updates= document.createElement('div')
@@ -93,7 +99,8 @@ verlog.log()
         news.append(liI)
       }
     })
-    updates.append(updatesH, ver, news, dicepic.cloneNode(true))
+
+    updates.append(updatesH, ver, news, dicepic2)
   })
 
 
@@ -266,21 +273,43 @@ playBtnDiv.id = 'gplay'
 playBtnDiv.classList.add('row')
 let playdiv = document.createElement('div')
 playdiv.classList.add('col-6')
+playdiv.id = 'playdiv'
 let playimg = document.createElement('img')
 playimg.src= gplay
 playimg.id = 'playimg'
-playdiv.append(playimg)
+let gplayLink = document.createElement('a')
+gplayLink.target = '_blank'
+gplayLink.href = 'https://play.google.com/store/apps/details?id=com.aubjective.jobmania'
+let gplayshine = document.createElement('div')
+gplayshine.className='gshine'
+gplayLink.append(playimg, gplayshine)
+playdiv.append(gplayLink)
 let media = document.createElement('div')
 media.classList.add('col-6')
 media.id = 'media'
+let shinemedia = document.createElement('div')
+shinemedia.className='shine'
 let discord = document.createElement('img')
 discord.src= discordimg
 discord.id = 'discord'
+let discordLink = document.createElement('a')
+discordLink.target = '_blank'
+discordLink.href = 'https://discord.com/invite/B6aYFffm6j'
+discordLink.append(discord, shinemedia)
 let reddit = document.createElement('img')
 reddit.src= redditimg
+let redditLink = document.createElement('a')
+redditLink.target = '_blank'
+redditLink.href = 'https://www.reddit.com/r/jobmania/'
+redditLink.append(reddit, shinemedia.cloneNode(true))
 let fb = document.createElement('img')
 fb.src= fbimg
-media.append(discord, reddit, fb)
+let fbLink = document.createElement('a')
+fbLink.target = '_blank'
+fbLink.href = 'https://www.facebook.com/JobmaniaOfficialPage'
+fbLink.append(fb, shinemedia.cloneNode(true))
+
+media.append(discordLink, redditLink, fbLink)
 playBtnDiv.append(media,playdiv)
 change.append(div1, div2, div3, div4, div5, div6, div7, playBtnDiv)
 

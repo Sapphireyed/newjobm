@@ -36,79 +36,85 @@ window.onload = function() {
 jobsData.craft()
 jobsData.jobs().then(j => {
   getJobImgs()
-  // jobicon
-  let jobmain = document.getElementById('jobimg')
-  let jobmain2 = document.getElementById('jobimg2')
-  var header = document.getElementById('jobheader')
-  let currentjobImg = jobImagesComplete.filter(img => img.id == jobheader.innerHTML)
+  setTimeout(function() {
+    // jobicon
+    let jobmain = document.getElementById('jobimg')
+    let jobmain2 = document.getElementById('jobimg2')
+    var header = document.getElementById('jobheader')
+    console.log(header)
+    console.log(jobheader.innerHTML)
+    let currentjobImg = jobImagesComplete.filter(img => img.id == jobheader.innerHTML)
 
-  jobmain.innerHTML = currentjobImg[0].outerHTML
-  jobmain2.innerHTML = currentjobImg[0].outerHTML
-  //bg imgs
-  let jobsrc = Object.entries(jobsImgs).filter(img => img[0] == jobheader.innerHTML + '.png')
-  document.body.style.backgroundImage = 'url("' + jobsrc[0][1] + '")'
-  document.body.style.backgroundSize = '190px'
-  //document.body.style.backgroundSize = 'contain'
-
+    jobmain.innerHTML = currentjobImg[0].outerHTML
+    jobmain2.innerHTML = currentjobImg[0].outerHTML
+    //bg imgs
+    let jobsrc = Object.entries(jobsImgs).filter(img => img[0] == jobheader.innerHTML + '.png')
+    document.body.style.backgroundImage = 'url("' + jobsrc[0][1] + '")'
+    document.body.style.backgroundSize = '190px'
+    //document.body.style.backgroundSize = 'contain'
+  }, 1500)
 }).then(d => {
   abilities.abils().then(f=> {
     abilities.passivesFn()
 
     getAbilImgs()
 }).then(d => {
-  // abilities icons
-  let switchimg = document.getElementById('switchimg')
-  var switchH = document.getElementById('switchH')
-  switchH = switchH.innerHTML.split(':')[1].trim()
+  setTimeout(function(){
+    // abilities icons
+    let switchimg = document.getElementById('switchimg')
+    var switchH = document.getElementById('switchH')
+    switchH = switchH.innerHTML.split(':')[1].trim()
 
-  let currentSwitchImg = abilImagesComplete.filter(img => img.id == switchH)
-  switchimg.innerHTML = currentSwitchImg[0].outerHTML
+    let currentSwitchImg = abilImagesComplete.filter(img => img.id == switchH)
+    switchimg.innerHTML = currentSwitchImg[0].outerHTML
 
-let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
-  let ext = h.innerHTML.indexOf('(')
-  let name = h.innerHTML.substring(0, ext-1)
-  return name
-})
-
-  let card1img = document.getElementById('card1img')
-  let currentCard1Img = abilImagesComplete.filter(img => img.id == cardHname[0])
-
-  card1img == null ? '' : card1img.innerHTML = currentCard1Img[0].outerHTML
-
-  let card2img = document.getElementById('card2img')
-  let currentCard2Img = abilImagesComplete.filter(img => img.id == cardHname[1])
-  card2img == null ? '' : card2img.innerHTML = currentCard2Img[0].outerHTML
-
-  let card3img = document.getElementById('card3img')
-  let currentCard3Img = abilImagesComplete.filter(img => img.id == cardHname[2] || img.id == cardHname[1])
-  card3img == null ? '' : card3img.innerHTML = currentCard3Img[0].outerHTML
-
-  let card4img = document.getElementById('card4img')
-  let currentCard4Img = abilImagesComplete.filter(img => img.id == cardHname[3] || img.id == cardHname[2] || img.id == cardHname[1])
-  card4img == null ? '' : card4img.innerHTML = currentCard4Img[0].outerHTML
+  let cardHname = Array.from(document.querySelectorAll('#deck h5')).map(h => {
+    let ext = h.innerHTML.indexOf('(')
+    let name = h.innerHTML.substring(0, ext-1)
+    return name
   })
 
-  // change jobsStats
-  let changelvl = document.getElementById('levelSel')
-  let stats = Array.from(document.getElementsByClassName('spanattr'))
-  let jobmCryst = document.getElementById('jobmCrystal')
-  if (document.getElementById('rarity').children.length == 6) {
-    document.querySelectorAll('#lvlbtns button')[0].onclick = function() {
-      stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
+    let card1img = document.getElementById('card1img')
+    let currentCard1Img = abilImagesComplete.filter(img => img.id == cardHname[0])
+
+    card1img == null ? '' : card1img.innerHTML = currentCard1Img[0].outerHTML
+
+    let card2img = document.getElementById('card2img')
+    let currentCard2Img = abilImagesComplete.filter(img => img.id == cardHname[1])
+    card2img == null ? '' : card2img.innerHTML = currentCard2Img[0].outerHTML
+
+    let card3img = document.getElementById('card3img')
+    let currentCard3Img = abilImagesComplete.filter(img => img.id == cardHname[2] || img.id == cardHname[1])
+    card3img == null ? '' : card3img.innerHTML = currentCard3Img[0].outerHTML
+
+    let card4img = document.getElementById('card4img')
+    let currentCard4Img = abilImagesComplete.filter(img => img.id == cardHname[3] || img.id == cardHname[2] || img.id == cardHname[1])
+    card4img == null ? '' : card4img.innerHTML = currentCard4Img[0].outerHTML
+    })
+
+    // change jobsStats
+    let changelvl = document.getElementById('levelSel')
+    let stats = Array.from(document.getElementsByClassName('spanattr'))
+    let jobmCryst = document.getElementById('jobmCrystal')
+    if (document.getElementById('rarity').children.length == 6) {
+      document.querySelectorAll('#lvlbtns button')[0].onclick = function() {
+        stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
+      }
+      document.querySelectorAll('#lvlbtns button')[1].onclick = function() {
+        changelvl.value = 10
+        document.getElementById('jobmCrystal').value = 0
+        stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
+      }
+    } else {
+      changelvl.onchange = function() {
+        stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * this.value))
+      }
+      jobmCryst.onchange = function() {
+        stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
+      }
     }
-    document.querySelectorAll('#lvlbtns button')[1].onclick = function() {
-      changelvl.value = 10
-      document.getElementById('jobmCrystal').value = 0
-      stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
-    }
-  } else {
-    changelvl.onchange = function() {
-      stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * this.value))
-    }
-    jobmCryst.onchange = function() {
-      stats.map(stat => stat.innerHTML = Math.ceil(stat.id/10 * changelvl.value) + Math.ceil((stat.id/10 * changelvl.value) * jobmCryst.value/10))
-    }
-  }
+  }, 1500)
+
 
   jobsData.materials().then(d => {
     getMatImgs()

@@ -33,4 +33,11 @@ export function stickyNav(nav) {
     nav.classList.remove("sticky");
     uplink.style.display = 'none'
   }
+  let showOverflow = nav.offsetTop + 200
+  console.log(showOverflow)
+  if (window.pageYOffset > sticky) {
+    document.body.style.overflowX = 'visible'
+  } else {
+    document.body.style.overflowX = 'hidden'
+  }
 }

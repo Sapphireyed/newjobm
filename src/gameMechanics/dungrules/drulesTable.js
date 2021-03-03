@@ -18,6 +18,7 @@ thead.innerHTML = '<tr id="jobsThead">'
     + '<th id="thHp" style="width:42.4px"></th>'
     + '<th data-sort="number">Description</th>'
     + '<th data-sort="number">Special</th>'
+    + '<th></th>' + '<th></th>' 
     + '</tr>'
   var tbody = document.createElement('tbody')
   tbody.id = 'jobsBody'

@@ -236,44 +236,44 @@ let myreg = /([A-Z])\w+/gi
 
             switch (jobItem[1]) {
               case job[9]:
-                craftdiv.innerHTML = '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[4] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[5] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[6] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[7] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[8] + '</span></div></div>'
+                craftdiv.innerHTML = '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[4] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[5] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[6] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[7] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[8] + '</span></div></div>'
                 break;
               case job[7]:
-                craftdiv.innerHTML = '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[4] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[5] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[6] + '</span></div></div>'
+                craftdiv.innerHTML = '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[4] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[5] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[6] + '</span></div></div>'
                 break;
               case job[5]:
-                craftdiv.innerHTML = '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[4] + '</span></div></div>'
+                craftdiv.innerHTML = '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[4] + '</span></div></div>'
                 break;
               case job[3]:
-                craftdiv.innerHTML = '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div></div>'
+                craftdiv.innerHTML = '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div></div>'
                 break;
               case job[1]:
-                craftdiv.innerHTML = '<div class="col col-sm craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col col-sm craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div>'
+                craftdiv.innerHTML = '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div>'
                 break;
               default:
 

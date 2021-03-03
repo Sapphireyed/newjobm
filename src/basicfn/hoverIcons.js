@@ -3,6 +3,7 @@ import abilbg from '../img/Traits/Dumb.png'
 import charsbg from '../img/materials/Space Stone.png'
 import chaptbg from '../img/materials/Thunder Spirit.png'
 import rulesbg from '../img/traits/badTissue.png'
+import rulesbg2 from '../img/other/badTissueAub.png'
 var $ = require("jquery")
 import {jobImagesComplete, abilImagesComplete, charsImagesComplete } from '../img/imgsHTML.js'
 import { rules } from '../importImgs'
@@ -122,7 +123,12 @@ export function hideIcon(arr, notchapt='notchapt') {
     default: theadimg = jobsBg
   }
   if ( w > targetWidth) {
-    $('head').append('<style>body::after{background-image: url("' + theadimg + '"); background-repeat: no-repeat; background-size: cover; background-position: center center ; height: 100%; width:100%; display: block; transform: none; top: 0; left: 0;z-index: -20}</style>')
+    if (arr == rules) {
+      $('head').append('<style>body::after{background-image: url("' + rulesbg2 + '"); background-attachment: local; background-repeat: no-repeat; background-size: cover; background-position: center center; transform: none;z-index: -20}</style>')
+    } else {
+      $('head').append('<style>body::after{background-image: url("' + theadimg + '"); background-repeat: no-repeat; background-size: cover; background-position: center center ; height: 100%; width:100%; display: block; transform: none; top: 0; left: 0;z-index: -20}</style>')
+
+    }
   }
   document.body.style.backgroundColor = 'rgb(245,247,248)';
   document.body.style.backgroundSize = 'cover'

@@ -6,6 +6,7 @@ body::after {
   height:0;
   width:0;
 }
+
 ::-webkit-scrollbar-thumb { background-color: #a27347; }
 ::-webkit-scrollbar { background-color: rgb(193, 224, 245); }
 h1 {background-color: transparent}
@@ -47,7 +48,7 @@ section {  margin-top: -25px;}
 #info {
   width:96vw;
   height: 31vw;
-  margin: auto;
+  margin: -30px auto -25px auto;
   color: white;
 }
 
@@ -62,7 +63,117 @@ section {  margin-top: -25px;}
   #media img {
     margin-top: 10px;
     width:50px;
+
   }
+}
+@keyframes TransitioningBackground {
+  0% {
+    background-position: 1% 0%;
+  }
+  50% {
+    background-position: 99% 100%;
+  }
+  100% {
+    background-position: 1% 0%;
+  }
+}
+
+#playdiv a {
+  // for shine & gradient effects to work
+  position: relative;
+  overflow: hidden;
+
+  // psuedo-element shine animation left side
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    width: 50px;
+    height: 50%;
+    top: 0;
+    left:23%;
+    filter: blur(30px);
+    transform: translateX(-100px) skewX(-15deg);
+  }
+
+  // psuedo-element shine animation right side
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+    width: 30px;
+    height: 50%;
+    top: 0;
+    left:23%;
+    opacity:0;
+    filter: blur(5px);
+    overflow:hidden;
+    transform: translateX(-7px) skewX(-15deg);
+  }
+
+  // grow button and change background gradient on hover
+  &:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+
+    // psuedo-elements for right- and left-side shine animations
+    &::before,
+    &::after {
+      10% {
+        opacity:1;
+      }
+      99% {
+        opacity: 1
+      }
+      100% {opacity: 0}
+      transform: translateX(135px) skewX(-15deg);
+      transition: 0.5s;
+    }
+  }
+}
+.shine {
+  width:10px;
+  height:45px;
+  position:absolute;
+  top:-5px;
+  left: 0;
+  overflow:hidden;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all .1s ease;
+  transform: skewX(10deg) translateX(0);
+  opacity: 0;
+}
+#media a {
+  width:40px;
+  height:40px;
+  overflow:hidden;
+  position:relative;
+}
+#media a:hover .shine {
+  transform: skewX(10deg) translateX(40px);
+  animation: shine 0.5s ease;
+}
+@keyframes shine {
+  1% { opacity:1}
+  80% { opacity: 0}
+}
+.gshine {
+  width:10px;
+  height:45px;
+  position:absolute;
+  top:-15px;
+  left: 0;
+  overflow:hidden;
+  background: rgba(255, 255, 255, 0.4);
+  transition: all .2s linear;
+  transform: skewX(10deg) translateX(0);
+  opacity: 0;
+}
+#playdiv a:hover .gshine {
+  transform: skewX(10deg) translateX(170px);
+  animation: shine 0.5s ease;
 }
 #updates { display:none}
 .maininf {
@@ -96,13 +207,21 @@ section {  margin-top: -25px;}
   position: absolute;
   bottom: 0;
   width:100%;
-  height:150px;
+  height:130px;
   border-top: 14px solid $mainBg ;
 //  border-bottom: 14px solid $mainBg ;
   background-color: white;
   padding-top:10px;
 }
 
+@keyframes hithere {
+  1% { transform: scale(1.2); }
+  4%, 8% { transform: rotate(-20deg) scale(1.2); }
+  6% { transform: rotate(20deg) scale(1.2); }
+  11% { transform: rotate(0deg) scale(1.2); }
+  16% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
 
 /*#subwrapper {
   background-image: url('');
