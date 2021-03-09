@@ -267,6 +267,13 @@ let start = document.getElementById('start')
         displayed.map((tr, index) => {
           index >= pagesSel.value ? tr.classList.add('d-none') : ''
         })
+        console.log(displayed)
+        if (displayed.length == 0) {
+          document.getElementById('dialog').style.display = 'block';
+          document.getElementById('closedialog').onclick = function() {
+          document.getElementById('dialog').style.display = 'none';
+          }
+        }
        // cursorDef()
     }, 0)
   })
@@ -461,6 +468,7 @@ let clear = document.getElementById('jobsclear')
 clear.onclick = function() {
   Array.from(filters).map(filter => filter.value = 'All')
   load()
+  document.getElementById('dialog').style.display = 'none'
 }
 
 //let str = document.querySelectorAll()

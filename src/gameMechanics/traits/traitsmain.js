@@ -11,13 +11,13 @@ glossarymain.id = 'glossarymain'
 glossarymain.classList.add('row')
 
 glossfilter.style.color = 'white'
-glossfilter.classList.add('col-9')
+glossfilter.classList.add('col-sm-9', 'col-12')
 glossfilter.append(glossTable, applyTable)
 glossarymain.classList.add('section')
 glossTable.classList.add('w-100')
 
 let randomImg = document.createElement('div')
-randomImg.classList.add('col-2')
+randomImg.classList.add('col-md-2','col-12')
 randomImg.id = 'randimg'
 let img = document.createElement('img')
 img.classList.add('traitimg')
@@ -42,9 +42,11 @@ stop.src = pause
 replay.src = replaysrc
 navbtns.append(replay, stop, play)
 randomImg.append(navbtns, img,img2,img3)
+let randImg2 = randomImg.cloneNode(true)
+randImg2.classList.add('d-md-none')
 
 let empty = document.createElement('div')
-empty.classList.add('col-1')
-glossarymain.append(glossfilter,empty, randomImg)
+empty.classList.add('col-1', 'd-none', 'd-md-block')
+glossarymain.append(randImg2, glossfilter,empty, randomImg)
 
 export {glossarymain}

@@ -23,21 +23,14 @@ export function cursor() {
 export function stickyNav(nav) {
   var sticky = nav.offsetTop + 60;
   if (window.pageYOffset > sticky) {
-  //  console.log(sticky)
     nav.classList.add("sticky")
     uplink.style.display = 'block'
-//    bgimg.style.top = '-10px'
-//          let width = document.getElementById('jobsBody').offsetWidth
-//          header.style.width = width + 'px'
+    document.body.style.overflowX = 'visible'
   } else {
     nav.classList.remove("sticky");
     uplink.style.display = 'none'
-  }
-  let showOverflow = nav.offsetTop + 200
-  console.log(showOverflow)
-  if (window.pageYOffset > sticky) {
-    document.body.style.overflowX = 'visible'
-  } else {
     document.body.style.overflowX = 'hidden'
   }
+  let showOverflow = nav.offsetTop + 200
+
 }

@@ -6,7 +6,7 @@ import theadimg from '../img/Jobs/BG/inthp.jpg'
 
 
 const glossfilter = document.createElement('div');
-glossfilter.style.backgroundColor = '#5b707a'
+glossfilter.style.backgroundColor = '#aa6c4e'
 //glossfilter.style.backgroundSize = 'cover'
 //glossfilter.style.backgroundPosition = 'center center'
 glossfilter.classList.add('section', 'shadow', 'row', 'filtersmain')
@@ -29,7 +29,7 @@ othersDiv.id = 'otherfilters'
 
 // SEARCH
 const searchDiv = document.createElement('div')
-searchDiv.classList.add('col-6')
+searchDiv.classList.add('col-md-6', 'col-12')
 const searchLabel = document.createElement('label')
 searchLabel.for = 'search'
 searchLabel.innerHTML = 'Search: '
@@ -45,7 +45,7 @@ searchDiv.append(searchLabel, search)
 // DISPLAY PAGE / PAGER
 var pages = document.createElement('div')
 pages.id = 'pagesdiv'
-pages.classList.add('col-6')
+pages.classList.add('col-md-6', 'col-12')
 //pager.classList.add()
 pages.innerHTML = '<!-- pager -->' +
     '<div></div>' +
@@ -69,7 +69,7 @@ let tabs = document.createElement('div')
 tabs.id = 'tabs'
 let buffs = document.createElement('button')
 //buffs.classList.add('rounded')
-buffs.innerHTML = 'Buff/Debbuf Keywords'
+buffs.innerHTML = 'Buffs/Debbufs'
 buffs.id = 'glossButton'
 let applies = document.createElement('button')
 //applies.classList.add('rounded')

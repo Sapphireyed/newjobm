@@ -104,9 +104,9 @@ function loadList() {
         jobItem.pop()
         let desc = jobItem.pop()
       //  jobItem[i] = jobItem[i] == undefined ? '' : jobItem[i]
-        jobItem.splice(1, 0, "pic")
-        jobItem.splice(3, 2)
-        jobItem.splice(3, 0, desc)
+      //  jobItem.splice(1, 0, "pic")
+        jobItem.splice(2, 2)
+        jobItem.splice(2, 0, desc)
         jobItem.splice(6,1)
       //  jobItem.pop()
 
@@ -114,7 +114,7 @@ function loadList() {
     //    jobItem.splice(7, 2, '', '')
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#a6b7be'
+        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#eaa987'
     //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
 
 
@@ -181,7 +181,7 @@ function load() {
     loadList();
 }
 load()
-
+document.getElementById('skip').style.display = 'block'
 $("#search").on("keyup", function() {
   var input = $(this).val().toLowerCase();
     $("#abilsBody tr").filter(function(){
@@ -285,9 +285,9 @@ export function applyTableFn() {
         var jobItem = Object.values(pageList[i])
         jobItem.pop()
         let desc = jobItem.pop()
-        jobItem.splice(1, 0, "pic")
-        jobItem.splice(3, 2)
-        jobItem.splice(3, 0, desc)
+    //    jobItem.splice(1, 0, "pic")
+        jobItem.splice(2, 2)
+        jobItem.splice(2, 0, desc)
         jobItem.splice(6,1)
 
       //  jobItem.pop()
@@ -296,7 +296,7 @@ export function applyTableFn() {
     //    jobItem.splice(7, 2, '', '')
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#a6b7be'
+        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#eaa987'
     //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
 
 
@@ -316,7 +316,7 @@ export function applyTableFn() {
             case 'Master':
               cell.innerHTML = '<td class="master">master</td>'
               break;
-            default: cell.innerHTML = '<td>' + job + '</td>'
+            default: cell.innerHTML = '<td>' + job.replace('N/A', '') + '</td>'
           }
 
         /*  var tooltip = document.createElement('span')

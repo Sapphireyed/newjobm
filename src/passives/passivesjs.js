@@ -275,6 +275,7 @@ function loadList() {
        filters.map(f => f.value = 'All')
        filter(passivesAllInfo)
        loadList()
+       document.getElementById('dialog').style.display = 'none'
      })
 
   function drawList() {

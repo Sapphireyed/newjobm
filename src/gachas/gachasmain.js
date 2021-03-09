@@ -21,7 +21,8 @@ gachaList.classList.add('row')
 banners.map(banner => {
   let gacha= document.createElement('li')
   gacha.innerHTML = '<img src="' + banner[1]+ '">'
-  gacha.classList.add('col-6')
+  gacha.classList.add('col-md-6', 'col-12')
+  console.log(banner.lastModified)
   if (banner[0] == 'Space Gacha.png' || banner[0] == 'Xmas Gacha.png') {
     gacha.style.filter = 'grayscale(95%)'
   }

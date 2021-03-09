@@ -253,6 +253,7 @@ function loadList() {
       filters.map(f => f.value = 'All')
       filter(abilitiesAllInfo)
       loadList()
+      document.getElementById('dialog').style.display = 'none'
     })
   function drawList() {
     document.getElementById("abilsBody").innerHTML = "";
@@ -263,9 +264,9 @@ function loadList() {
         jobItem.splice(5, 12, 'n/a')
         jobItem.pop()
             //    jobItem[3] = '<span class="' + jobItem[3] + '">' + jobItem[3] + '</span>'
-        jobItem[6] = jobItem[6] == '' ? '' : '<span class="applyTip">' + jobItem[6] + '<span class="applyTip applyText"></span></span>'
-                    + (jobItem[7] == '' ? '' : '<br>' + '<span class="applyTip">' + jobItem[7] + '<span class="applyTip applyText"></span></span>')
-                    + (jobItem[8] == '' ? '' : '<br>' + '<span class="applyTip">' + jobItem[8] + '<span class="applyTip applyText"></span></span>')
+        jobItem[6] = jobItem[6] == '' ? '' : jobItem[6] // tooltip classadd here if needed
+                    + (jobItem[7] == '' ? '' : '<br>' + jobItem[7])
+                    + (jobItem[8] == '' ? '' : '<br>' + jobItem[8])
 
         jobItem.splice(7, 2, '', '')
         var tableRow = document.createElement('tr')

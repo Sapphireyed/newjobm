@@ -10,7 +10,7 @@ import { stickyNav, cursor } from './basicfn/stickyNav.js'
 import { toggle} from './basicfn/toggle.js'
 //import { jobs} from './jobs/jobsjs.js'
 //
-import theadimg from './img/traits/BrokenDefend.png'
+import theadimg from './img/traits/BrokenDefend.PNG'
 import {preload } from './preload/preload.js'
 var $ = require("jquery")
 

@@ -32,7 +32,6 @@ export function chaptersFn() {
       }
 
   pagesSel.onchange = function(){
-    filters.map(f => f.value = 'All')
     pagesNum()
   }
 function nextPage() {
@@ -95,18 +94,18 @@ function loadList() {
       })
 
       // heroes
-    /*  let chars = charsAllInfo.filter(char => char[13] == name.innerText || char[14] == name.innerText)
+      let chars = charsAllInfo.filter(char => char[2] == name.innerText)
       chars = chars == [] ? '' : chars
       chars = chars.map(j=> '<br><span class="openNewHero">' + j[1] + '</span>')
-      abilrows[i].children[8].innerHTML = chars == '' ? '' : '<div>' + chars + '</div>'
       let charLinks = Array.from(document.getElementsByClassName('openNewHero'))
+      console.log(charLinks)
       charLinks.map(link =>{
         link.onclick = function() {
           let char = charsAllInfo.filter(job => job[1] == this.innerText)
           let ind = char[0][0]
           openNew('char', charsAllInfo, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,'heroes')
         }
-      })*/
+      })
 
     }
 
@@ -126,24 +125,24 @@ function loadList() {
         var imgComplete = charsImagesComplete.filter(jobimg => jobimg.id == jobItem[7].split('-')[0])[0]
         if (jobItem[7].includes('-')) {
           let boss = jobItem[7].split('-').map(item => charsImagesComplete.filter(img => img.id == item)[0])
-          jobItem[7] = jobItem[7].split('-').map((item,ind) => boss[ind].outerHTML + item ).join('<br>')
+          jobItem[7] = jobItem[7].split('-').map((item,ind) => boss[ind].outerHTML + '<span class="openNewHero">' + item + '</span>').join('<br>')
         } else {
           let boss = charsImagesComplete.filter(img => img.id == jobItem[7])[0]
-          jobItem[7] = boss.outerHTML + jobItem[7]
+          jobItem[7] = boss.outerHTML + '<span class="openNewHero">'+ jobItem[7] + '</span'
         }
         if (jobItem[6].includes('-')) {
           let boss = jobItem[6].split('-').map(item => charsImagesComplete.filter(img => img.id == item)[0])
-          jobItem[6] = jobItem[6].split('-').map((item,ind) => boss[ind].outerHTML + item ).join('<br>')
+          jobItem[6] = jobItem[6].split('-').map((item,ind) => boss[ind].outerHTML + '<span class="openNewHero">' + item + '</span>').join('<br>')
         } else {
           let boss = charsImagesComplete.filter(img => img.id == jobItem[6])[0]
-          jobItem[6] = boss == undefined ? '' : boss.outerHTML + jobItem[6]
+          jobItem[6] = boss == undefined ? '' : boss.outerHTML + '<span class="openNewHero">' + jobItem[6] + '</span>'
         }
         if (jobItem[5].includes('-')) {
           let boss = jobItem[5].split('-').map(item => charsImagesComplete.filter(img => img.id == item)[0])
-          jobItem[5] = jobItem[5].split('-').map((item,ind) => boss[ind].outerHTML + item ).join('<br>')
+          jobItem[5] = jobItem[5].split('-').map((item,ind) => boss[ind].outerHTML + '<span class="openNewHero">' + item + '</span>').join('<br>')
         } else {
           let boss = charsImagesComplete.filter(img => img.id == jobItem[5])[0]
-          jobItem[5] = boss.outerHTML + jobItem[5]
+          jobItem[5] = boss.outerHTML + '<span class="openNewHero">' + jobItem[5] + '</span>'
         }
         let startFl = parseInt(jobItem[3].replace(/B|F/g, ''))
         jobItem[3] = jobItem[3]  + " - B" + (startFl + parseInt(jobItem[4])) + "F"

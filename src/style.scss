@@ -7,7 +7,7 @@
 @import '@fortawesome/fontawesome-free/scss/v4-shims';*/
 
 html{
-//    overflow-y: overlay;
+  //  overflow-y: overlay;
 }
 /*black in main nav bar, light to all*/
 $mainBg: #2a434a; //#33424a;
@@ -290,18 +290,18 @@ opacity: 0;
 #last img { transform: rotate(-4deg)}
 
 //jobstable
-table { overflow-x: scroll}
+//table { overflow-x: scroll}
 thead {position: relative}
 th {
   position: sticky;
   top: 46px;
+  text-align: center;;
   background-color: $mainBg;
   z-index: 9000;
 }
 tbody { color: black}
 #jobtable {
     width: 100%;
-
     tr: nth-child(even) {
       background-color: #9eb1bb;
     }
@@ -419,6 +419,7 @@ table tr td:nth-child(3) {
         bottom: 85%;
         opacity: 0;
         transition: opacity 0.3s;
+        padding: 5px;
         box-shadow: 3px 3px #435761;
     }
 
@@ -496,7 +497,7 @@ table tr td:nth-child(3) {
   background-color: $mainBg;
   box-shadow: 2px 2px grey;
   color: white;
-  top: 40%;
+  top: 55%;
   left: 45%;
   padding: 30px;
   display: none;
@@ -748,7 +749,9 @@ table tr td:nth-child(3) {
 }
 
 @media only screen and (max-width: 760px) {
-  .section { margin: auto 0 auto 20px;width: 100vw;}
+  body { overflow-x: hidden;}
+  #jobsmain { margin: auto; width: 90vw;}
+
   body::after {width: 100%}
   .dropdown {
     position: relative;
@@ -774,7 +777,7 @@ table tr td:nth-child(3) {
   }
 
   .tooltipMy .tooltiptext {
-      left: -65%;
+      left: -85%;
   }
 
   .jobBg {
@@ -789,9 +792,21 @@ table tr td:nth-child(3) {
   }
   #jobsclear {float: left}
   #otherfilters { margin: 20px 0 0 0 }
-  #otherfilters div:first-child {text-align: left}
+  #otherfilters div:first-child {text-align: left; margin-bottom: 7px}
+  #pages { margin-left: -10px}
 
   #emptydiv {display: none}
+  #preload {
+    div:not(#chardiv){
+      left:0;
+      top:18%;
+      img:not(#hero) { transform: scale(1)}
+    }
+    #chardiv {
+      top:41%;
+      right:30%
+    }
+  }
   //.filtersSub div:nth-child(even) {text-align: right}
 //  .filtersSub div:first-child { display: inline}
 //  .filtersSub div:first-child label {width: 50%; text-align: left}

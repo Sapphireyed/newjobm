@@ -33,17 +33,20 @@ jobimg.classList.add('d-block', 'mx-auto')
 imgdiv.appendChild(jobimg)
 
 let attrs = document.createElement('div')
-attrs.classList.add('col-10', 'row', 'my-auto')
+attrs.classList.add('col-md-10', 'col-12', 'row', 'my-auto')
 let rarLvlOrb = document.createElement('div')
 rarLvlOrb.id = 'rarLvlOrb'
-rarLvlOrb.classList.add('col-6')
+rarLvlOrb.classList.add('col-md-6', 'col-12')
 let race = document.createElement('div')
+race.id = 'racediv'
+race.style.margin = '6px 0'
 let raceH = document.createElement('h4')
 raceH.id = 'race'
 race.appendChild(raceH)
 //rarity
 let rarity = document.createElement('div')
 rarity.id = 'rarity'
+rarity.style.margin = '6px 0'
 rarity.classList.add('jobattr')
 let rarityEn = document.createElement('div')
 rarityEn.id = 'rarityEn'
@@ -51,6 +54,7 @@ rarityEn.classList.add('jobattr')
 //acquire
 let acqdiv = document.createElement('div')
 acqdiv.classList.add('col-12')
+acqdiv.style.margin = 'auto auto 6px auto'
 let acq = document.createElement('h4')
 acq.id = 'acq'
 acqdiv.appendChild(acq)
@@ -70,7 +74,7 @@ levelSel.type = 'number'
 levelSel.min = 1
 levelSel.step = 10
 levelSel.value = 10
-levelSel.style.width = '50px'
+levelSel.style.width = '60px'
 levelSel.classList.add('rounded')
 labelh4.append(levelLabel)
 level.append(labelh4, levelSel)
@@ -107,7 +111,7 @@ rarLvlOrb.append(acqdiv, rarityEn, rarity, race, herolvl, level,lvlbtns, br)
 
 let attrsAttrs = document.createElement('div')
 attrsAttrs.id= 'attrsAttrs'
-attrsAttrs.className = 'col-5'
+attrsAttrs.classList.add('col-md-5', 'col-12')
 let hp = document.createElement('h4')
 hp.id = 'hp'
 //hp.className = 'maxhp'
@@ -127,7 +131,7 @@ attrsArr.map(attr => {
 })
 let attrsAttrsEn = document.createElement('div')
 attrsAttrsEn.id= 'attrsAttrsEn'
-attrsAttrsEn.className = 'col-5'
+attrsAttrsEn.classList.add('col-md-5', 'col-12')
 let hpEn = document.createElement('h4')
 hpEn.id = 'hpEn'
 //hp.className = 'maxhp'
@@ -147,7 +151,7 @@ attrsArrEn.map(attr => {
 })
 
 let rarAndAttrs = document.createElement('div')
-rarAndAttrs.classList.add('col-8', 'row')
+rarAndAttrs.classList.add('col-md-8', 'col-12', 'row')
 rarAndAttrs.id = 'rarAndAttrs'
 
 rarAndAttrs.append(rarLvlOrb, attrsAttrs, attrsAttrsEn)
@@ -180,7 +184,7 @@ let onediv = document.createElement('div')
 onediv.classList.add('col-12', 'col-sm-4')
 onediv.id = 'thresh1'
 let oneH = document.createElement('h5')
-oneH.innerHTML = '100%'
+oneH.innerHTML = 'Act first'
 oneH.id = 'oneH'
 onediv.append(oneH)
 let twodiv = document.createElement('div')
@@ -199,7 +203,7 @@ threshdiv.append(threshH, onediv, twodiv, threediv)
 //spcial cases
 let scdiv = document.createElement('div')
 scdiv.id = 'scdiv'
-scdiv.classList.add('col-6', 'shadow')
+scdiv.classList.add('col-md-6', 'col-12', 'shadow')
 let scH = document.createElement('h4')
 scH.id= 'scH'
 scH.innerHTML = 'Special Cases'
@@ -209,7 +213,7 @@ scsub.id = 'scsub'
 scdiv.append(scH, scsub)
 // drops
 let dropdiv = document.createElement('div')
-dropdiv.classList.add('col-6', 'shadow')
+dropdiv.classList.add('col-md-6','col-12', 'shadow')
 dropdiv.id = 'dropdiv'
 let dropH = document.createElement('h4')
 dropH.classList.add('col-12', 'rounded')

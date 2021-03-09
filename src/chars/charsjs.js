@@ -161,6 +161,7 @@ function loadList() {
   numberPerPage = parseInt(numberPerPage) || 'all'
     var abilsBody = document.getElementById('abilsBody');
     filters = Array.from(filters)
+      filter()
     if (filters.filter(f => f.value == 'All').length == filters.length) {
       // pagination
       var begin
@@ -275,6 +276,7 @@ function loadList() {
         filters.map(f => f.value = 'All')
         filter()
         loadList()
+        document.getElementById('dialog').style.display = 'none'
       })
     //links opening new pages
     let charLinks = Array.from(document.querySelectorAll('#heroesTable tr td:nth-child(3)'));
@@ -523,7 +525,7 @@ export function applyTableFn() {
 
   numberPerPage = parseInt(numberPerPage) || 'all'
     var abilsBody = document.getElementById('abilsBody');
-
+    filterEn()
     // pagination
     if (filters.filter(f => f.value == 'All').length == filters.length) {
       var begin

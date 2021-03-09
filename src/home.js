@@ -2,7 +2,7 @@ import './style.scss';
 import './home.scss';
 //import fontawesome from '@fortawesome/fontawesome-free'
 import nav from './nav/nav';
-import { herodiv ,mainsec} from './home/homemain.js'
+import { herodiv ,mainsec, herodiv2} from './home/homemain.js'
 import {abilities, jobsData, verlog} from './abilitiesData.js'
 import {getMatImgs, getAbilImgs, getJobImgs, abilImagesComplete, jobImagesComplete, charsImagesComplete} from './img/imgsHTML.js'
 import { jobsTable } from './jobs/jobsTable.js'
@@ -10,48 +10,65 @@ import { stickyNav, cursor } from './basicfn/stickyNav.js'
 import { toggle} from './basicfn/toggle.js'
 import { jobs} from './jobs/jobsjs.js'
 //
-import theadimg from './img/traits/joker.png'
+import theadimg from './img/other/spacestoneBg.png'
+import stonesrc from './img/other/spaseStoneSol.png'
 import {preload } from './preload/preload.js'
 var $ = require("jquery")
 
-//let bgimg = document.createElement('img')
-//bgimg.id = 'bgimg'
-//bgimg.src = bg
-//let preload = document.createElement('div')
-//preload.id = 'preload'
 
-
-document.body.append(nav(), preload, mainsec, herodiv)
+document.body.append(nav(), preload, mainsec, herodiv, herodiv2)
 cursor()
+//let playBtnDiv = document.getElementById('gplay')
+
+let w = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
+let targetWidth = 768;
+let targetMid = 1000
 
 let section = $('#jobsmain')
 let navmain = document.getElementById('navMain')
 //toggleSide(sidenav, section, navmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
+document.body.style.backgroundColor = 'dimgrey'
 document.body.style.backgroundSize = 'cover'
 document.body.style.backgroundAttachment = 'fixed'
-document.body.style.backgroundPosition= 'center center'
+document.body.style.backgroundPosition= 'left top'
 //add sticky nav
 var headernav = document.getElementById("navMain");
-window.onscroll = function() {
+window.addEventListener('scroll', function() {
   stickyNav(headernav)
-}
-
-window.onload = function(){
-  console.log(charsImagesComplete)
-  let updates = document.getElementById('updates')
-  let infoInf = document.getElementById('infoInf')
-  let upd = document.querySelectorAll('h3 a')[0]
-  upd.onclick = function(){
-    infoInf.style.display = 'none'
-    updates.style.display = 'block'
-    let about = document.querySelectorAll('h3 a')[1]
-    about.onclick = function(){
-      infoInf.style.display = 'block'
-      updates.style.display = 'none'
-    }
+  if (w > targetMid) {
+    document.getElementById('herodiv').style.top = headernav.getBoundingClientRect().bottom + 'px'
+    document.getElementById('herodiv2').style.top = headernav.getBoundingClientRect().bottom + 'px'
   }
 
+})
+
+window.onload = function(){
+  let stones = document.createElement('div')
+  stones.id= 'stones'
+let stone = document.createElement('img')
+stone.src = stonesrc
+stone.className = 'stone'
+let stonei = 0
+while (stonei<= 9) {
+  stones.appendChild(stone.cloneNode(true))
+  stonei++
+}
+document.body.appendChild(stones)
+/*  let stones = Array.from(document.getElementsByClassName('stone'))
+  let index = 0
+  let randTop = [5, 75, 45, 25, 35, 15]
+  stones.map(st => {
+    setInterval(function(){
+      let rand = Math.floor(Math.random() * randTop.length)
+      st.style.transform = 'rotate(' + randTop[rand] + 'deg)'
+      st.style.top = randTop[rand] + '%'
+      st.style.left = randTop[rand] + '%'
+      st.style.width = randTop[rand]/4 + '%'
+      console.log(randTop[rand])
+    }, 25000)
+
+})*/
 function el1(el1, fontsize){
   let s = 0;
   el1.style.fontSize = 0
@@ -77,7 +94,8 @@ function picInside(el,arr) {
 }
 
   let divs = Array.from(document.getElementsByClassName('div'))
-    let i = divs.length-1
+  console.log(divs)
+  let i = divs.length-1
   divs[i].style.opacity = 1
   divs[i].style.position = 'inherit'
   setTimeout(function(){
@@ -92,6 +110,7 @@ function picInside(el,arr) {
     Array.from(divs[i].children[0].children).map(txt => {
       txt.style.fontSize = 0
     })
+    divs[i].children[2].style.fontSize = 0
     let next = i == divs.length-1 ? 0 : i+1
     divs[i].style.transition = '1s'
     divs[i].style.opacity = 0
@@ -110,7 +129,7 @@ function picInside(el,arr) {
       //  picInside(divs[next].children[1].children[0], unknown)
         break;
       case 3:
-            console.log(divs[i])
+
       //  picInside(divs[next].children[1].children[0], charsImagesComplete)
         break;
       case 4:
@@ -122,13 +141,13 @@ function picInside(el,arr) {
       default:
 
     }
-
+console.log(divs[next].children[0])
     el1(divs[next].children[0].children[0], 48)
     setTimeout(function(){
       el1(divs[next].children[0].children[1], 40)
     },600)
     setTimeout(function(){
-      el1(divs[next].children[0].children[2], 54)
+      el1(divs[next].children[2], 54)
     },1200)
     i++
   }

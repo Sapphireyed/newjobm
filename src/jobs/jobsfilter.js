@@ -206,7 +206,7 @@ let filterStart = document.createElement('div')
 filterStart.classList.add('col-6', 'sol-sm-3')
 let start = document.createElement('button')
 start.id = 'start'
-start.innerHTML = 'Start'
+start.innerHTML = 'Search'
 start.classList.add('rounded')
 start.style.color = 'white'
 start.style.fontSize = '18px'

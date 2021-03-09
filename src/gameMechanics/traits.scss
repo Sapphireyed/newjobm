@@ -53,3 +53,14 @@ table tr td:not(:first-child) { padding: 0 0 0 5px; }
     transform: rotate(359deg);
   }
 }
+
+@media only screen and (max-width: 760px) {
+  #randimg {
+    text-align: center;
+     img:nth-child(n+2) {width: 100px}
+   }
+  #glossarymain #navbtns {
+    text-align: center;
+    img { float:none}
+  }
+}

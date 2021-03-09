@@ -2,7 +2,7 @@ import jobsBg from '../img/Jobs/BG/inthp.jpg'
 import abilbg from '../img/Traits/Dumb.png'
 import charsbg from '../img/materials/Space Stone.png'
 import chaptbg from '../img/materials/Thunder Spirit.png'
-import rulesbg from '../img/traits/badTissue.png'
+import rulesbg from '../img/traits/badTissue.PNG'
 import rulesbg2 from '../img/other/badTissueAub.png'
 var $ = require("jquery")
 import {jobImagesComplete, abilImagesComplete, charsImagesComplete } from '../img/imgsHTML.js'

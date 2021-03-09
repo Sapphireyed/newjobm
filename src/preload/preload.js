@@ -3,24 +3,30 @@ import thanatos from '../img/character/Death Thanatos.png'
 import lonely from '../img/character/The Lonely Queen.png'
 import pizarro from '../img/character/Legendary Knight Pizarro.png'
 import aphylia from '../img/character/Life Titan Aphylia.png'
-
+import nis from '../img/character/Sin Hunter Nis.png'
 
 import jobmJ from '../img/other/jobmJ.png'
 import obmania from '../img/other/obmania.png'
 import eternal from '../img/other/eternal.png'
 import dark from '../img/materials/dark spirit.png'
 import light from '../img/materials/light spirit.png'
-import power from '../img/traits/costlyPower.png'
+import wind from '../img/other/blessedBg.png'
+import power from '../img/traits/costlyPower.PNG'
 import bless from '../img/traits/Blessed.png'
 import badTissue from '../img/materials/earth Spirit.png'
 import cryst from '../img/materials/jobmania Crystal.png'
 
 export {preload}
 
-let chars = [pizarro, thanatos, lonely, michael, aphylia]
+let w = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
+let targetWidth = 768;
+let targetMid = 1000
+
+let chars = [pizarro, thanatos, lonely, michael, aphylia, nis]
  document.body.style.overflow = 'hidden'
 let preload = document.createElement('div')
 preload.style.width = screen.width + 'px'
+//preload.style.width = '460px'
 preload.style.height = screen.height + 'px'
 preload.id = 'preload'
 let preloaddiv =document.createElement('div')
@@ -29,12 +35,12 @@ let jimg = document.createElement('img')
 jimg.style.backgroundImage = 'url("' + jobmJ + '")'
 jimg.src = jobmJ
 jimg.id = 'jimg'
+jimg.maxWidth = preload.width
 let jwidth = jimg.clientWidth
 let jheight = jimg.clientHeight
 let obmaniaimg = document.createElement('img')
 obmaniaimg.src = obmania
 obmaniaimg.id = 'obmania'
-let obmheight = obmaniaimg.height
 let eternalimg = document.createElement('img')
 eternalimg.src = eternal
 let skip = document.createElement('a')
@@ -46,7 +52,7 @@ skip.onclick = function(){
   preload.style.zIndex = -100
   preloaddiv.style.animation = 'none'
   chardiv.style.animation = 'none'
-  document.body.style.overflow = 'visible'
+  document.body.style.overflowY = 'visible'
   setTimeout(function(){
     preload.style.display = 'none'
   },400)
@@ -86,6 +92,7 @@ switch (ind) {
     jimg.style.filter = 'brightness(0) invert(1)'
     obmaniaimg.style.filter = 'brightness(0) invert(1)'
     eternalimg.style.filter = 'brightness(0) invert(1)'
+    console.log(power)
 
     char.src = thanatos
     break;
@@ -107,27 +114,42 @@ switch (ind) {
 
     char.src = pizarro
       break;
+    case 5:
+      preload.style.backgroundImage = 'url(' + wind + ')'
+      preload.style.backgroundPosition = 'center top'
+      preload.style.backgroundAttachment = 'fixed'
+    //  jimg.style.filter = 'brightness(0) invert(1)'
+    //  obmaniaimg.style.filter = 'brightness(0) invert(1)'
+    //  eternalimg.style.filter = 'brightness(0) invert(1)'
+
+      char.src = nis
+      break;
   default:
 
 }
 preload.style.backgroundSize = 'cover'
 
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
+
 setTimeout(function(){
-    jimg.style.transform = 'scale(1.5)'
-    char.style.transform = 'scale(2)'
+    jimg.style.transform = w < targetWidth ? 'scale(1)' : 'scale(1.5)'
+    char.style.transform = w < targetWidth ? 'scale(1.5)' : 'scale(2)'
 }, 1)
+let obmheight
 setTimeout(function(){
       obmaniaimg.style.height = jimg.height * 0.55 * 1.5 + 'px'
-      eternalimg.style.top = obmheight + 'px'
       obmaniaimg.style.width = jimg.width * 0.95 + 'px'
-
+      obmheight = obmaniaimg.height
 }, 1501)
 setTimeout(function(){
+    eternalimg.style.top = obmheight + 'px'
     eternalimg.style.height = jimg.width * 0.15 + 'px'
     eternalimg.style.width = jimg.width * 0.71 + 'px'
   //  obmaniaimg.style.right = '5px'
 
-}, 3002)
+}, 3010)
 setTimeout(function() {
   preloaddiv.style.animation = 'pulse 1.5s infinite ease-in-out alternate'
   chardiv.style.animation = 'pulse 1.5s infinite ease-in-out alternate'
@@ -144,9 +166,10 @@ setTimeout(function(){
   document.getElementById('preload').style.zIndex = -100
   preloaddiv.style.animation = 'none'
   chardiv.style.animation = 'none'
- document.body.style.overflow = 'visible'
+ document.body.style.overflowY = 'visible'
 }, 8000)
 
 setTimeout(function(){
+  console.log(preload)
   preload.style.display = 'none'
 },9000)

@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
+var ImageminPlugin = require('imagemin-webpack-plugin').default
 //const CompressionPlugin = require("compression-webpack-plugin");
 //var HtmlWebpackPreconnectPlugin = require('html-webpack-preconnect-plugin')
 
@@ -132,6 +133,12 @@ module: {
     /*new CompressionPlugin({
       test: /\.js(\?.*)?$/i
     })*/
+    new ImageminPlugin({
+      disable: true, // Disable during development
+      pngquant: {
+        quality: '95-100'
+      }
+    })
   ],
   resolve: {
       fallback: {

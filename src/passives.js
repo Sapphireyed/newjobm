@@ -16,11 +16,12 @@ import {preload } from './preload/preload.js'
 document.body.append( nav(),preload, passivesmain,sideDiv)
 cursor()
 let sidenav = document.getElementById('sidenav')
-let section = $('#jobmainsect')
+let section = $('#passives')
 let navmain = document.getElementById('abilsmain')
 toggleSide(sidenav, section,navmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
+document.body.style.backgroundPosition = 'center center'
 document.body.style.backgroundAttachment = 'fixed'
 
 var headernav = document.getElementById("navMain");

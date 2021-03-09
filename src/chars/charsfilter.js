@@ -221,6 +221,7 @@ clear.innerHTML = 'Reset'
 clear.classList.add('rounded')
 clear.style.color = 'white'
 clear.style.fontSize = '18px'
+clear.style.width = '80%'
 let clear2 = clear.cloneNode(true)
 clear.id = 'clear2'
 cleardiv.append(clear, clear2)
@@ -233,6 +234,7 @@ start.innerHTML = 'Search'
 start.classList.add('rounded')
 start.style.color = 'white'
 start.style.fontSize = '18px'
+start.style.width = '80%'
 let start2 = start.cloneNode(true)
 start2.id = 'start2'
 filterStart.append(start, start2)

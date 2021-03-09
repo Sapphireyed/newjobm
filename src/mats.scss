@@ -29,7 +29,7 @@ h1 {
   button { background-color: $mainBg}
   select, option { background-color: #6669b2}
 }
-th {background-color: $mainBg}
+th {background-color: $mainBg;color: white}
 td:nth-child(2) {
   width: 40px;
   padding: 4px;
@@ -39,7 +39,7 @@ table tr td:not(:first-child) { padding: 0 0 0 0}
 table tr td:nth-child(3), table tr td:nth-child(5) { padding: 0 0 0 30px}
 table tr td { color: black}
 
-.fromJob,.toJob {font-weight: 600}
+.fromJob,.toJob {font-weight: 600;cursor: pointer;}
 .one { color: #6a8d55;}
 .two { color: #4b7396;}
 .three { color: #584b67;}
@@ -54,3 +54,8 @@ table tr td { color: black}
 /*#dialog {
   background-color: $mainBg;
 }*/
+
+@media only screen and (max-width: 760px) {
+  #otherfilters div:first-child {text-align:center;margin-bottom:7px}
+  #pages {margin-left: -10px}
+}

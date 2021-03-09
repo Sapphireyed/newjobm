@@ -1,4 +1,18 @@
-$mainBg: #264553;
+$mainBg: #725142;
+
+body::after { height: 0}
+@keyframes spinBg {
+	from{transform:scale(1)}
+	to{transform:scale(1.2)}
+}
+@keyframes spinContent {
+	from{transform:scale(1)}
+	to{transform:scale(0.83)}
+}
+#wrapper {
+//  animation: spinBg 7s infinite ease-in-out alternate;
+}
+//#subwrapper { animation: spinContent 7s infinite ease-in-out alternate}
 @mixin title {
     text-align: center;
     color: #fff;
@@ -21,10 +35,14 @@ h1 {
 .filtersmain select option {
    background-color: rgba(42, 67, 74, .5);
 }
-
+table { border-color: transparent}
 #applyTable { display: none}
 thead {background-color: $mainBg}
-th {text-align:center; background-color: $mainBg}
+th {position: relative;
+  top:0;
+  text-align:center;
+  background-color: $mainBg;
+}
 #tabs {
   width: 100%;
   button {
@@ -33,14 +51,24 @@ th {text-align:center; background-color: $mainBg}
     font-weight: bold;
     border-style: none;
     padding: 7px 0;
-    background-color: rgba(38, 69, 83, .4)
+    background-color: rgba(170, 108, 78, .4)
   }
 //  border-bottom: 3px solid #2a434a // $mainBg
 }
 
-
+.sticky { position: inherit !important}
 #otherfilters {
   padding: 10px 0;
   div:first-child {text-align: left}
 }
 #pages button {background-color: $mainBg}
+
+table tr td:nth-child(3) { font-weight: normal}
+table tr td:nth-child(2) { font-weight: bold; text-align: center;}
+table tr td:not(:first-child) { padding: 3px 9px}
+table tr td:nth-child(n+4) {text-align: center;}
+
+@media only screen and (max-width: 760px) {
+  #otherfilters div:first-child {text-align:center;margin-bottom:7px}
+  #pages {margin-left: -10px}
+}

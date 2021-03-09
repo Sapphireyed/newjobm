@@ -105,7 +105,7 @@ characters.chars().then(j => {
       if (heroclicked == 0 ) {
         // build passive1
         let passivesDiv = document.createElement('div')
-        passivesDiv.classList.add('col-6')
+        passivesDiv.classList.add('col-12', 'col-md-6')
         passivesDiv.id = 'passiveSkill1'
         let passiveH = document.createElement('h4')
         passiveH.id = 'passiveH1'
@@ -132,7 +132,7 @@ characters.chars().then(j => {
 
         // passive2
         let passivesDiv2 = document.createElement('div')
-        passivesDiv2.classList.add('col-6')
+        passivesDiv2.classList.add('col-12', 'col-md-6')
         passivesDiv2.id = 'passiveSkill2'
         let passiveH2 = document.createElement('h4')
         passiveH2.id = 'passiveH1'
@@ -158,7 +158,7 @@ characters.chars().then(j => {
 
         //abilitiy1
         let abilsmainDiv = document.createElement('div')
-        abilsmainDiv.classList.add('col-6')
+        abilsmainDiv.classList.add('col-12', 'col-md-6')
         abilsmainDiv.id = 'switchSkill1'
         let switchH = document.createElement('h4')
         switchH.id = 'switchH11'
@@ -185,7 +185,7 @@ characters.chars().then(j => {
 
         //abilitiy2
         let abilsmainDiv2 = document.createElement('div')
-        abilsmainDiv2.classList.add('col-6')
+        abilsmainDiv2.classList.add('col-12', 'col-md-6')
         abilsmainDiv2.id = 'switchSkill2'
         let switchH2 = document.createElement('h4')
         switchH2.id = 'switchH2'
@@ -242,7 +242,7 @@ characters.chars().then(j => {
 
       if (enemyclicked == 0) {
         let passivesDiv = document.createElement('div')
-        passivesDiv.classList.add('col-6')
+        passivesDiv.classList.add('col-md-6', 'col-12')
         passivesDiv.id = 'passivesmainDiv'
         let passivesH = document.createElement('h4')
         passivesH.innerHTML = 'Passives'
@@ -285,7 +285,7 @@ characters.chars().then(j => {
         // build abilities
         let mainabils = char.[8].replace(/\|/g, '-').split('-')
         let abilsmainDiv = document.createElement('div')
-        abilsmainDiv.classList.add('col-6')
+        abilsmainDiv.classList.add('col-md-6', 'col-12')
         abilsmainDiv.id = 'abilsmainDiv'
         let abilsH = document.createElement('h4')
         abilsH.innerHTML = 'Random Abilities'
@@ -517,6 +517,13 @@ characters.chars().then(j => {
             coll.innerHTML = coll.innerHTML == ' - ' ? ' + ' : ' - '
           }
         })
+        if (scsub.innerText == '') {
+            scdiv.style.display = 'none'
+            dropdiv.classList.remove('col-md-6')
+            dropdiv.children[1].classList.add('row')
+            document.querySelectorAll('.drop')[0].classList.add('col-12', 'col-md-6')
+            document.querySelectorAll('.drop')[1].classList.add('col-12', 'col-md-6')
+        }
         // chapters
         let chaptdiv = document.getElementById('chapt')
         var header = document.getElementById('jobheader')

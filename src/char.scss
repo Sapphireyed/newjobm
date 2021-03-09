@@ -1,6 +1,6 @@
 .subsection { margin: 20px auto}
 #rarity {
-  img { width: 30px}
+  img { width: 30px; margin: 7px 0; margin-top: -2px}
 }
 #jobmaindiv {
   margin: 10px;
@@ -25,7 +25,7 @@
 #switchtraitsH, #switchtraits { display: inline}
 #basicinfo div:first-child, #jobimg2 {
   display: block;
-  margin: auto;
+  margin: auto 0 10px 0;
 }
 #jobimg img, #jobimg2 img {
   width: 180px;
@@ -33,13 +33,18 @@
   display: block
 }
 #jobimg2 {transform: scaleX(-1)}
-#rarLvlOrb h4 { display: inline; font-size: 22px }
+#rarLvlOrb h4 {
+  display: inline;
+  font-size: 22px;
+}
+
+input { margin-left: 9px}
 #rarAndAttrs {
   padding-left: 40px;
   padding-top: 20px;
   padding-bottom: 10px;
   div { display: block; margin:auto 0}
-  h4 {font-size: 22px}
+  h4:not(:first-child) {font-size: 22px; margin: 12px 0}
 }
 .drop {padding: 0 30px}
 .scdesc { display: none}
@@ -66,13 +71,16 @@ $light1star: #f4ffed;
     #sideDiv::-webkit-scrollbar-thumb { background-color: $main1star; }
     #sideDiv::-webkit-scrollbar { background-color: $light1star; }
     #jobmainsect {background-color: $light1star;}
-    button { background-color: $main1star}
+    button:not(#navbtn) { background-color: $main1star}
     h1 {
         background-color: $main1star;
         margin-right:auto;
         margin-left: auto;
     }
-    #lvlbtns button { background-color: $main1star; }
+    #lvlbtns {
+      margin: 6px 0 0 0;
+       button { background-color: $main1star;}
+    }
     #passiveAndSwitch, #passiveAndSwitchBis {
       h4 {
         background-color: $main1star;
@@ -149,7 +157,6 @@ $light1star: #f4ffed;
       }
       h5:first-child {
         text-decoration: underline;
-        color: white;
       }
       h5 span { font-size:14px}
       div:nth-child(2) {
@@ -216,13 +223,16 @@ $light2star: #eef7ff;
     #sideDiv::-webkit-scrollbar-thumb { background-color: $main2star; }
     #sideDiv::-webkit-scrollbar { background-color: $light2star; }
     #jobmainsect {background-color: $light2star;}
-    button { background-color: $main2star}
+    button:not(#navbtn) { background-color: $main2star}
     h1 {
         background-color: $main2star;
         margin-right:auto;
         margin-left: auto;
     }
-    #lvlbtns button { background-color: $main2star; }
+    #lvlbtns {
+      margin: 6px 0 0 0;
+       button { background-color: $main2star;}
+    }
     #passiveAndSwitch, #passiveAndSwitchBis {
       h4 {
         background-color: $main2star;
@@ -299,7 +309,6 @@ $light2star: #eef7ff;
       }
       h5:first-child {
         text-decoration: underline;
-        color: white;
       }
       h5 span { font-size:14px}
       div:nth-child(2) {
@@ -366,13 +375,16 @@ $light3star: #f5eefd;
     #sideDiv::-webkit-scrollbar-thumb { background-color: $main3star; }
     #sideDiv::-webkit-scrollbar { background-color: $light3star; }
     #jobmainsect {background-color: $light3star;}
-    button { background-color: $main3star}
+    button:not(#navbtn) { background-color: $main3star}
     h1 {
         background-color: $main3star;
         margin-right:auto;
         margin-left: auto;
     }
-    #lvlbtns button { background-color: $main3star; }
+    #lvlbtns {
+      margin: 6px 0 0 0;
+       button { background-color: $main3star;}
+    }
     #passiveAndSwitch, #passiveAndSwitchBis {
       h4 {
         background-color: $main3star;
@@ -449,7 +461,6 @@ $light3star: #f5eefd;
       }
       h5:first-child {
         text-decoration: underline;
-        color: white;
       }
       h5 span { font-size:14px}
       div:nth-child(2) {
@@ -516,13 +527,16 @@ $light4star: #fff0ec;
     #sideDiv::-webkit-scrollbar-thumb { background-color: $main4star; }
     #sideDiv::-webkit-scrollbar { background-color: $light4star; }
     #jobmainsect {background-color: $light4star;}
-    button { background-color: $main4star}
+    button:not(#navbtn) { background-color: $main4star}
     h1 {
         background-color: $main4star;
         margin-right:auto;
         margin-left: auto;
     }
-    #lvlbtns button { background-color: $main4star; }
+    #lvlbtns {
+      margin: 6px 0 0 0;
+       button { background-color: $main4star;}
+    }
     #passiveAndSwitch, #passiveAndSwitchBis {
       h4 {
         background-color: $main4star;
@@ -599,7 +613,6 @@ $light4star: #fff0ec;
       }
       h5:first-child {
         text-decoration: underline;
-        color: white;
       }
       h5 span { font-size:14px}
       div:nth-child(2) {
@@ -666,13 +679,16 @@ $light5star: #fffaef;;
     #sideDiv::-webkit-scrollbar-thumb { background-color: $main5star; }
     #sideDiv::-webkit-scrollbar { background-color: $light5star; }
     #jobmainsect {background-color: $light5star;}
-    button { background-color: $main5star}
+    button:not(#navbtn) { background-color: $main5star}
     h1 {
         background-color: $main5star;
         margin-right:auto;
         margin-left: auto;
     }
-    #lvlbtns button { background-color: $main5star; }
+    #lvlbtns {
+      margin: 6px 0 0 0;
+       button { background-color: $main5star;}
+    }
     #passiveAndSwitch, #passiveAndSwitchBis {
       h4 {
         background-color: $main5star;
@@ -749,7 +765,6 @@ $light5star: #fffaef;;
       }
       h5:first-child {
         text-decoration: underline;
-        color: white;
       }
       h5 span { font-size:14px}
       div:nth-child(2) {
@@ -795,4 +810,9 @@ $light5star: #fffaef;;
       border-left: 2px solid $main5star;
       div { margin: auto}
     }
+}
+#racediv {margin: 5px 0;}
+
+@media only screen and (max-width: 760px) {
+  #jobimg2 { display: none}
 }

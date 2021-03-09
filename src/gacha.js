@@ -30,6 +30,11 @@ window.onscroll = function() {
 }
 
 window.onload = function(){
+  setTimeout(function() {
+    let rewards = Array.from(document.querySelectorAll('#rewards .reward'))
+    rewards.map(rew => rew.children[1].innerText == '' ? rew.style.diplay = 'none' : rew)
+    console.log(rewards)
+  }, 4500)
 
 }
 

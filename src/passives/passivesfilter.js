@@ -152,7 +152,7 @@ let filterStart = document.createElement('div')
 filterStart.classList.add('col-6')
 let start = document.createElement('button')
 start.id = 'start'
-start.innerHTML = 'Start'
+start.innerHTML = 'Search'
 start.classList.add('rounded')
 start.style.color = 'white'
 start.style.fontSize = '18px'
@@ -207,6 +207,7 @@ pages.innerHTML = '<!-- pager -->' +
 let emptyDiv = document.createElement('div')
 emptyDiv.innerHTML = '...'
 emptyDiv.id = 'emptydiv'
+emptyDiv.style.color = 'transparent'
 
 othersDiv.append(emptyDiv, searchDiv, pages)
 //add it all to the section

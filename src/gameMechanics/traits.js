@@ -9,6 +9,7 @@ import { traits } from '../importImgs.js'
 import { stickyNav, cursor } from '../basicfn/stickyNav.js'
 import { glossFn, applyTableFn } from './traits/traitsjs.js'
 import theadimg from '../img/traits/joker.png'
+import {preload } from '../preload/preload.js'
 var $ = require("jquery")
 import { toggle} from '../basicfn/toggle.js'
 
@@ -16,7 +17,7 @@ import { toggle} from '../basicfn/toggle.js'
 //bgimg.id = 'bgimg'
 //bgimg.src = bg
 
-document.body.append( nav(), glossarymain)
+document.body.append( preload, nav(), glossarymain)
 cursor()
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'

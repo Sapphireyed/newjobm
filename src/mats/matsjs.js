@@ -35,7 +35,6 @@ export function matsFn() {
       }
 
   pagesSel.onchange = function(){
-    filters.map(f => f.value = 'All')
     pagesNum()
   }
 function nextPage() {
@@ -114,19 +113,15 @@ function loadList() {
     //  tooltipsFn(abilrows[i])
       let name = abilrows[i].children[2].innerText + '.png'
 
-      // heroes
-    /*  let chars = charsAllInfo.filter(char => char[13] == name.innerText || char[14] == name.innerText)
-      chars = chars == [] ? '' : chars
-      chars = chars.map(j=> '<br><span class="openNewHero">' + j[1] + '</span>')
-      abilrows[i].children[8].innerHTML = chars == '' ? '' : '<div>' + chars + '</div>'
-      let charLinks = Array.from(document.getElementsByClassName('openNewHero'))
-      charLinks.map(link =>{
+      // Jobs
+      let jobLinks = Array.from(document.getElementsByClassName('openNew'))
+      jobLinks.map(link =>{
         link.onclick = function() {
-          let char = charsAllInfo.filter(job => job[1] == this.innerText)
-          let ind = char[0][0]
-          openNew('char', charsAllInfo, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,'heroes')
+          let job = jobsDataAll.filter(job => job[1] == this.innerText)
+          let ind = job[0][0]
+          openNew('job', jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
         }
-      })*/
+      })
 
     }
 
@@ -142,7 +137,7 @@ function loadList() {
         jobItem.splice(1, 0, "pic")
         let craft = jobItem[4]
         craft = craft.split('|')
-        craft = craft.map(cr => '<span class="fromJob">' + cr.split('-')[0] + '</span>' + ' -> ' + '<span class="toJob">' +cr.split('-')[1] + '</span><br>')
+        craft = craft.map(cr => '<span class="fromJob openNew">' + cr.split('-')[0] + '</span>' + ' -> ' + '<span class="toJob openNew">' +cr.split('-')[1] + '</span><br>')
         jobItem[4] = craft.join('')
         //jobmania crystal special case
         jobItem[1] == 'Jobmania Crystal' ? jobItem[5] = '' : ''

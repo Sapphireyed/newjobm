@@ -1,5 +1,5 @@
 import './style.scss';
-import './jobs.scss';
+//import './jobs.scss';
 import './mats.scss'
 import nav from './nav/nav';
 import { jobsmain } from './mats/matsmain.js'
@@ -34,7 +34,13 @@ window.onload = function(){
     .then(job => {
       jobsData.materials()
         .then(mat => {
+          jobsData.craft()
           getMatImgs()
+          abilities.units()
+            .then(unit => {
+              abilities.abils()
+              abilities.passivesFn()
+            })
         }).then(m => {
           matsFn()
           let skip = document.getElementById('skip')

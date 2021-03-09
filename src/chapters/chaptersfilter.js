@@ -28,7 +28,7 @@ othersDiv.id = 'otherfilters'
 
 // SEARCH
 const searchDiv = document.createElement('div')
-searchDiv.classList.add('col-6')
+searchDiv.classList.add('col-md-6','col-12')
 const searchLabel = document.createElement('label')
 searchLabel.for = 'search'
 searchLabel.innerHTML = 'Search: '
@@ -44,7 +44,7 @@ searchDiv.append(searchLabel, search)
 // DISPLAY PAGE / PAGER
 var pages = document.createElement('div')
 pages.id = 'pagesdiv'
-pages.classList.add('col-6')
+pages.classList.add('col-6', 'col-12')
 //pager.classList.add()
 pages.innerHTML = '<!-- pager -->' +
     '<div></div>' +

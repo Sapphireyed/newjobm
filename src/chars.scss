@@ -52,7 +52,7 @@ h1 {
 
 #tabs button { background-color: rgba(3, 26, 42,.5)}
 thead { background-color: $mainBg}
-th { background-color: $mainBg}
+th { background-color: $mainBg; text-align: center}
 #jobs {background-color: #0c3551}
 #enemiesTable {display: none}
 #enemiesTable .enabil{padding-left: 30px;} // abil imgsHTML

@@ -22,7 +22,7 @@ let navmain = document.getElementById('navMain')
 toggleSide(sidenav, section, navmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
-//document.body.style.backgroundAttachment = 'fixed'
+document.body.style.backgroundAttachment = 'fixed'
 var headernav = document.getElementById("navMain");
 window.onscroll = function() {
   stickyNav(headernav)
