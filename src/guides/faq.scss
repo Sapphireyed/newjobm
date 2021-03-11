@@ -1,0 +1,110 @@
+#elements {
+  height: 300px;
+  .elCont {
+    height: 130px;
+    position: relative;
+  }
+  img {
+    width: 60px;
+    margin: auto;
+    display: block;
+  }
+  .sword {
+    width:30px;
+    position: absolute;
+  }
+  #sword1 {
+    bottom: 5%;
+    left: 25%;
+    transform: rotate(185deg)
+  }
+  #sword2 {
+    bottom: 5%;
+    left: 15%;
+    transform: rotate(105deg)
+  }
+  #sword3 {
+    bottom: 5%;
+    right: 22%;
+    transform: rotate(265deg)
+  }
+  #sword4 {
+    top: -35%;
+    right: 15%;
+    //transform: rotate(95deg)
+  }
+  #sword5 {
+    top:10%;
+    right: 45%;
+    transform: rotate(45deg)
+  }
+  #sword6 {
+    top:5%;
+    left: 45%;
+    transform: rotate(45deg)
+  }
+  #sword7 {
+    top:25%;
+    left: 45%;
+    transform: rotate(225deg)
+  }
+}
+
+table {
+  text-align:center;
+  margin: auto;
+  tr {
+    height: 90px;
+  }
+  img {
+    width: 50px;
+    margin: auto;
+    display: block;
+  }
+  tr td { padding: 0 30px 0 30px; position: relative}
+  tr td:not(:first-child) { padding: 0 30px 0 30px}
+  img.sword {
+    width: 30px;
+    position: absolute;
+    top:40%;
+    left: -15%;
+    transform: rotate(45deg)
+  }
+}
+
+#mainfaq {
+  background-color: rgba(179, 153, 124,.7);
+//  color:white;
+  h4:not(#note) {
+    text-align: center;
+    background-color: #2f4600;
+    color: white;
+    border-radius: 3%;
+    box-shadow: 1px 2px black;
+    a {
+      color: #2f4600;
+      font-weight: bold;
+      width:23px;
+      background-color: white;
+      border-radius:50%;
+      float:right;
+      margin-right:1%;
+      box-shadow: 1px 2px black;
+    }
+  }
+  p { display: none; padding: 0 10px}
+  #note {
+    text-align: center;
+    padding: 10px 30px;
+    font-weight: normal;
+  }
+  span {
+    margin-left:10px;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+//  table {transform: rotate(90deg);}
+//  table img:not(.sword) { transform: rotate(270deg)}
+  #elements {height:500px}
+}

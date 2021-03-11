@@ -33,12 +33,13 @@ import crystal from '../img/events/crystal.png'
 
 //howfar
 import thana666 from '../img/dungeon/thana666.png'
+import thanafight from '../img/dungeon/thanafight.png'
 import newrules from '../img/dungeon/newrules.png'
 
 let unknown = [tana, tanatxt, pwhite, unknownRed]
 let descend = [descend1, descend2, descend3, descend4]
 let treasures = [gold,job,midas, crystal]
-let howfar = [thana666, newrules]
+let howfar = [thana666, newrules, thanafight]
 
 let w = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
 let targetWidth = 768;

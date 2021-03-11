@@ -40,7 +40,6 @@ window.addEventListener('scroll', function() {
     document.getElementById('herodiv').style.top = headernav.getBoundingClientRect().bottom + 'px'
     document.getElementById('herodiv2').style.top = headernav.getBoundingClientRect().bottom + 'px'
   }
-
 })
 
 window.onload = function(){
@@ -94,7 +93,6 @@ function picInside(el,arr) {
 }
 
   let divs = Array.from(document.getElementsByClassName('div'))
-  console.log(divs)
   let i = divs.length-1
   divs[i].style.opacity = 1
   divs[i].style.position = 'inherit'

@@ -1,0 +1,41 @@
+#mainsect {
+  width: 85vw;
+  margin:auto
+}
+#mainguide {
+  background-color: rgba(179, 153, 124, 0.7);
+  h2 {
+    text-align: center;
+    background-color: #2f4600;
+    color: white;
+    border-radius: 3%;
+    box-shadow: 1px 2px black;
+    a{
+      color: #2f4600;
+      font-weight: bold;
+      width:28px;
+      background-color: white;
+      border-radius:50%;
+      float:right;
+      margin-right:1%;
+      box-shadow: 1px 2px black;
+    }
+  }
+  h5 {text-align: center;}
+}
+#intro {
+  text-align: center;
+}
+
+#newbie {
+  img {
+    width:350px;
+    display:block;
+    margin:auto;
+  }
+}
+#contentDiv {
+  position: fixed;
+  top: 220px;
+  right:20px;
+}

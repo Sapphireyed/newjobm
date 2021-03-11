@@ -98,7 +98,7 @@ window.addEventListener('load', function(){
                 chanceAbil = ''
                 bestMat = 'Legendary'
                 chanceMat = '75'
-                req = '<em>Defeat 5 unique enemies during a run<br>As best rewards contains the enemies defeated of highest rarity<em>'
+                req = '<em>Defeat 5 unique enemies during a run<br>As best rewards contains the enemies defeated of highest rarity<br>Every 100 floors will increase the drop chance of the highest-rarity heroes<em>'
                 classname = name.replace(/ /g, '').toLowerCase()
                 document.body.style.backgroundImage = 'url("' + defaultBg + '")'
                 break;
@@ -406,9 +406,63 @@ window.addEventListener('load', function(){
 
             })
             rewardsDiv.append(heroes, abils, matsEl)
-            maindiv.append(costdiv, reqdiv, rewardsDiv)
-            gachamain.append(maindiv)
+            let rates = document.createElement('table')
+            if (name == 'Special Gacha') {
 
+              let thead = document.createElement('thead')
+              thead.innerHTML = '<th>Floor</th>'
+                            //  + '<th>Highest Rarity<th>'
+                              + '<th style="line-height:0.8">Character Chance<br></th>'
+                              + '<th style="line-height:0.8">Highest Rarity Standard Chance</th>'
+                              + '<th style="line-height:0.8">Highest Rarity Chance with Boost</th>'
+                              + '<th>Cost (x10)</th>'
+              rates.append(thead)
+              rates.innerHTML = rates.innerHTML + '<tr>'
+                      + '<td>< B100F</td><td>25%</td><td>1.25%</td><td>3.75% </td><td>50000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B200F</td><td>35%</td><td>1.75%</td><td>5.25% </td><td>75000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B300F</td><td>45%</td><td>2.25%</td><td>6.75% </td><td>100000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B400F</td><td>55%</td><td>2.75%</td><td>8.25% </td><td>125000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B500F</td><td>65%</td><td>3.25%</td><td>9.75% </td><td>150000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B600F / <span class="pro">Pro </span> < B100F</td><td>75%</td><td>3.75%</td><td>11.25% </td><td>175000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B700F / <span class="pro">Pro </span> < B200F</td><td>85%</td><td>4.25%</td><td>12.75% </td><td>200000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B800F / <span class="pro">Pro </span> < B300F</td><td>95%</td><td>4.75%</td><td>14.25% </td><td>225000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B900F / <span class="pro">Pro </span> < B400F</td><td>100%</td><td>5%</td><td>15% </td><td>250000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B1000F / <span class="pro">Pro </span> < B500F</td><td>100%</td><td>10%</td><td>20% </td><td>275000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B1100F / <span class="pro">Pro </span> < B600F</td><td>100%</td><td>15%</td><td>25% </td><td>300000</td>'
+                    + '</tr>'
+                    + '<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>'
+                    + '<tr>'
+                      + '<td>< B2600F / <span class="pro">Pro </span> < B2100F</td><td>100%</td><td>90%</td><td>100% </td><td>500000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B2700F / <span class="pro">Pro </span> < B2200F</td><td>100%</td><td>95%</td><td>100% </td><td>500000</td>'
+                    + '</tr>'
+                    + '<tr>'
+                      + '<td>< B2800F / <span class="pro">Pro </span> < B2300F</td><td>100%</td><td>100%</td><td>100% </td><td>500000</td>'
+                    + '</tr>'
+            }
+            maindiv.append(costdiv, reqdiv, rewardsDiv, rates)
+            gachamain.append(maindiv)
             let rewards = Array.from(document.querySelectorAll('#rewards .reward'))
             rewards.map(rew => {
               rew.children[1].innerText == '' ? rew.style.display = 'none' : rew

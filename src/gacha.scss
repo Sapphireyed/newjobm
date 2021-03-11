@@ -147,3 +147,14 @@ $mainBg: #444444;
     h4 { padding: 15px 15px}
   }
 }
+table {
+  width: 100%;
+  background-color: #9a9a9a;
+  thead {width: 100%; }
+  th { background-color:$mainBg; color: white; padding: 5px}
+  td {
+    text-align: center;
+  }
+  tr td:nth-child(3) {font-weight: normal}
+}
+.pro { color: yellow}

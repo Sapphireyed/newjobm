@@ -1,0 +1,51 @@
+.mainsect {
+  //margin-top: 2%;
+  padding-bottom: 60px;
+  .img {
+    padding: 15px
+  }
+  img {
+    display: block;
+    margin:auto;
+    width:70px;
+  }
+//  overflow-y: scroll
+}
+h1{
+  margin-bottom: 30px;
+  background-color: transparent;
+  text-decoration:  underline;
+}
+
+h4 {
+  padding: 6px;
+  font-weight:normal;
+  color: rgb(177, 177, 177)
+}
+
+a {display: block}
+.role {
+  font-style: italic;
+  text-align: right;
+}
+.name {
+  text-align: center;
+  a {
+    font-size:16px;
+    display: none;
+    width: 100%;
+  }
+}
+
+
+
+.designed {
+  width:100%;
+  //position: fixed;
+  bottom:0;
+  text-align: center;
+  color: rgba(163, 163, 163, .8);
+  //background-color: #042235;
+}
+
+//#herodiv, #herodiv2 { z-index:100}

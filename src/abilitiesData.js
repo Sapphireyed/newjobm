@@ -35,9 +35,11 @@ export { powlvl, unitDesc,
           chapters, chaptAllInfo,
           verlog, verArr,
           dungeon, drulesDataAll,
-          traitsAll, traitsDataAll, gachas, gachasDataAll}
+          traitsAll, traitsDataAll, gachas, gachasDataAll,
+          faq, faqDataAll}
 
 let verArr = []
+let faqDataAll = []
 //skillunits
 let powlvl;     // power level table from sheet 4
 let unitDesc;  // unit desc table from sheet 4
@@ -712,6 +714,16 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
         .raw(id, 11).then(data => data.data).then(res => {
           res.shift()
           gachasDataAll = res
+      })
+    }
+  }
+  let faq = { //dungeon rules
+    faq:() => {
+      return GetSheetDone
+        .raw(id, 14).then(data => data.data).then(res => {
+          res.shift()
+          changeColors(res)
+          faqDataAll = res
       })
     }
   }
