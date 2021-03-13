@@ -285,7 +285,8 @@ window.addEventListener('load', function(){
             let heroChance = '<span>' + chanceHero + '%</span>'
             heroesH.innerHTML = heroesH.innerHTML + heroChance
             let hlist = document.createElement('ul')
-            if (bestHero.length > 4) {
+            if (chanceHero.length > 4) {
+              console.log(bestHero)
               bestHero = bestHero.split('-')
               bestHero.map(best => {
                 let li = document.createElement('li')

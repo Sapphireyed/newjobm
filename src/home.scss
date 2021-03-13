@@ -358,6 +358,7 @@ opacity: 0;
     img {
       margin-top: 0;
     }
+    #playdiv {padding-bottom:50px}
   }
   .div  .txtdiv { width: 300px}
   #herodiv {
@@ -367,4 +368,5 @@ opacity: 0;
     border-top: 14px solid $mainBg;
   }
   #herodiv2 {display: none}
+  #up {bottom: 60px}
 }

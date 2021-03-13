@@ -41,11 +41,10 @@ a {display: block}
 
 .designed {
   width:100%;
-  //position: fixed;
-  bottom:0;
+  padding-bottom: 110px;
   text-align: center;
   color: rgba(163, 163, 163, .8);
   //background-color: #042235;
 }
 
-//#herodiv, #herodiv2 { z-index:100}
+#herodiv, #herodiv2 { z-index:100}

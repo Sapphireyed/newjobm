@@ -32,7 +32,7 @@ preload.id = 'preload'
 let preloaddiv =document.createElement('div')
 preloaddiv.id = 'preloaddiv'
 let jimg = document.createElement('img')
-jimg.style.backgroundImage = 'url("' + jobmJ + '")'
+//jimg.style.backgroundImage = 'url("' + jobmJ + '")'
 jimg.src = jobmJ
 jimg.id = 'jimg'
 jimg.maxWidth = preload.width
@@ -135,7 +135,7 @@ window.onbeforeunload = function () {
 
 setTimeout(function(){
     jimg.style.transform = w < targetWidth ? 'scale(1)' : 'scale(1.5)'
-    char.style.transform = w < targetWidth ? 'scale(1.5)' : 'scale(2)'
+    char.style.transform = w < targetWidth ? 'scale(1.3)' : 'scale(2)'
 }, 1)
 let obmheight
 setTimeout(function(){

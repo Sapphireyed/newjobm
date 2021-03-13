@@ -283,7 +283,7 @@ let start = document.getElementById('start')
 
 setTimeout(function() {
   tooltips()
-},200)
+},1500)
 let skip = document.getElementById('skip')
 skip.style.display = 'block'
   //  document.body.style.cursor = 'default'

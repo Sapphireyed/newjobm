@@ -119,7 +119,7 @@ img1.src = aub
 img1div.append(img1)
 name1div.classList.add('row', 'col-4')
 name1.classList.add('col-6')
-img1div.classList.add('col-6', 'img')
+img1div.classList.add('col-lg-6', 'col-12', 'img')
 name1.append(img1div)
 name1div.append(name1, img1div)
 
@@ -130,7 +130,7 @@ img2.style.width = '120px'
 img2div.append(img2)
 name2div.classList.add('row', 'col-4')
 name2.classList.add('col-6')
-img2div.classList.add('col-6', 'img')
+img2div.classList.add('col-lg-6', 'col-12', 'img')
 name2.append(img2div)
 name2div.append(name2, img2div)
 
@@ -140,7 +140,7 @@ img3.src = dream
 img3div.append(img3)
 name3div.classList.add('row', 'col-4')
 name3.classList.add('col-6')
-img3div.classList.add('col-6', 'img')
+img3div.classList.add('col-lg-6', 'col-12', 'img')
 name3.append(img3div)
 name3div.append(name3, img3div)
 
@@ -151,7 +151,7 @@ img4.style.width = '100px'
 img4div.append(img4)
 name4div.classList.add('row', 'col-4')
 name4.classList.add('col-6')
-img4div.classList.add('col-6', 'img')
+img4div.classList.add('col-lg-6', 'col-12', 'img')
 name4.append(img4div)
 name4div.append(name4,img4div)
 
@@ -161,7 +161,7 @@ img5.src = icons
 img5div.append(img5)
 name5div.classList.add('row', 'col-4')
 name5.classList.add('col-6')
-img5div.classList.add('col-6', 'img')
+img5div.classList.add('col-lg-6', 'col-12', 'img')
 name5.append(img5div)
 name5div.append(name5, img5div)
 

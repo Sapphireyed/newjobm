@@ -7,7 +7,6 @@ uplink.href = '#top'
 uplink.id = 'up'
 let upimg = document.createElement('img')
 upimg.src = up
-//upimg.id = 'up'
 uplink.appendChild(upimg)
 document.body.appendChild(uplink)
 
@@ -21,8 +20,10 @@ export function cursor() {
   links.map(link => link.style.cursor = 'url("' + custCursor + '"), auto')
 }
 export function stickyNav(nav) {
-  var sticky = nav.offsetTop + 60;
+  var sticky = nav.offsetTop + 30;
   if (window.pageYOffset > sticky) {
+    console.log(window.pageYOffset)
+  //  console.log()
     nav.classList.add("sticky")
     uplink.style.display = 'block'
     document.body.style.overflowX = 'visible'

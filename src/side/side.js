@@ -53,9 +53,12 @@ export function toggleSide(el, section, nav) {
         shown = false
       }
     } else if (w <= targetWidth ) {
+      let margLeft = w * 0.56 + 'px'
+      document.getElementById('sideDiv').style.width = w * 0.7 + 'px'
+      document.getElementById('h2gloss').style.width = w * 0.7 + 'px'
       if(shown == false) {
         $("#sideDiv").animate({left:'0'},500);
-        $('#sidenav').animate({left:'67%'},500)
+        $('#sidenav').animate({left:margLeft},500)
       //  section.animate({margin:'0 5% 0 5%', width: '68vw'},500);
         shown = true
         window.addEventListener('scroll', function() {
@@ -63,8 +66,8 @@ export function toggleSide(el, section, nav) {
           listDiv.style.marginTop = header.getBoundingClientRect().bottom + 'px'
         })
       } else {
-        $("#sideDiv").animate({left:'-80%'},500);
-        $('#sidenav').animate({left:'-13%'},500)
+        $("#sideDiv").animate({left:'-70%'},500);
+        $('#sidenav').animate({left:'-10%'},500)
     //    section.animate({marginLeft: '10%', width: '80vw'},500);
         Array.from($('.subgloss')).map(s=> s.style.display = 'none')
         shown = false

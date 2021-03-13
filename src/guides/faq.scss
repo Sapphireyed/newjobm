@@ -106,5 +106,9 @@ table {
 @media only screen and (max-width: 760px) {
 //  table {transform: rotate(90deg);}
 //  table img:not(.sword) { transform: rotate(270deg)}
-  #elements {height:500px}
+  #elements {
+    height:400px;
+    margin:-40px auto 0 auto;
+    .elCont {height: 100px}
+  }
 }

@@ -1,5 +1,5 @@
 $mainBg: #444444;
-.section { width:85vw}
+.section { width:95vw}
 ::-webkit-scrollbar {
     background-color: #9eb1bb;
 }
@@ -59,7 +59,7 @@ $mainBg: #444444;
   margin-top: 10px;
   h4 {
     text-align: center;
-    padding:60px 15px;
+    padding:60px 25px;
     border-radius: 8%;
   }
   img {
@@ -140,11 +140,12 @@ $mainBg: #444444;
     span {
       box-shadow: 0 0 black;
       padding:0;
+      margin: 0
     }
   }
   .reqimg { width: 100px}
   #req {
-    h4 { padding: 15px 15px}
+    h4 { padding: 15px 15px; font-size:18px}
   }
 }
 table {
