@@ -58,7 +58,7 @@ export function toggleSide(el, section, nav) {
       document.getElementById('h2gloss').style.width = w * 0.7 + 'px'
       if(shown == false) {
         $("#sideDiv").animate({left:'0'},500);
-        $('#sidenav').animate({left:margLeft},500)
+        $('#sideDiv h4').animate({left:'0'},500)
       //  section.animate({margin:'0 5% 0 5%', width: '68vw'},500);
         shown = true
         window.addEventListener('scroll', function() {
@@ -66,8 +66,8 @@ export function toggleSide(el, section, nav) {
           listDiv.style.marginTop = header.getBoundingClientRect().bottom + 'px'
         })
       } else {
-        $("#sideDiv").animate({left:'-70%'},500);
-        $('#sidenav').animate({left:'-10%'},500)
+        $("#sideDiv").animate({left:'-90%'},500);
+        $('#sideDiv h4').animate({left:'-110%'},500)
     //    section.animate({marginLeft: '10%', width: '80vw'},500);
         Array.from($('.subgloss')).map(s=> s.style.display = 'none')
         shown = false

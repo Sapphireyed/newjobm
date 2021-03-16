@@ -1,5 +1,5 @@
 import '../style.scss';
-import '../jobs.scss';
+//import '../jobs.scss';
 import './dungeonrules.scss'
 import nav from '../nav/nav';
 import { jobsmain } from './dungrules/drulesmain.js'

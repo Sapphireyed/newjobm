@@ -85,7 +85,15 @@ th { background-color: $darkBg}
 }
 
 td:nth-child(2) { display: none}
-td:nth-child(3) { color: $darkBg}
+td:nth-child(3) {
+  color: $darkBg;
+}
+tr:nth-child(odd) td:nth-child(3) {
+  background-color: #b7b7c4;
+}
+tr:nth-child(even) td:nth-child(3) {
+  background-color: rgb(114, 139, 188);
+}
 td:nth-child(n+7) div{
   max-height: 100px;
   overflow-y:scroll;
@@ -93,4 +101,13 @@ td:nth-child(n+7) div{
 
 #dialog {
   background-color: $darkBg;
+}
+
+@media only screen and (max-width: 760px) {
+  #passivesmain { width: 96vw; margin:0; overflow-x: scroll}
+  #otherfilters {
+    label { display: none}
+    input { display: block; margin: auto;}
+
+  }
 }

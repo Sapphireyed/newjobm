@@ -22,11 +22,10 @@ export function cursor() {
 export function stickyNav(nav) {
   var sticky = nav.offsetTop + 30;
   if (window.pageYOffset > sticky) {
-    console.log(window.pageYOffset)
   //  console.log()
     nav.classList.add("sticky")
     uplink.style.display = 'block'
-    document.body.style.overflowX = 'visible'
+  //  document.body.style.overflowX = 'visible'
   } else {
     nav.classList.remove("sticky");
     uplink.style.display = 'none'

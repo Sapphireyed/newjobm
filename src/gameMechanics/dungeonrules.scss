@@ -28,7 +28,7 @@ h1 {
   button { background-color: $mainBg}
   select, option { background-color: #ff7b7b}
 }
-th {background-color: $mainBg}
+th {background-color: $mainBg; color:white}
 .section {width: 80vw}
 #jobsmain {width: 80vw}
 td:nth-child(2) img, td:nth-child(4) img, td:nth-child(8) img {
@@ -52,4 +52,6 @@ table tr td:nth-child(5),table tr td:nth-child(6) {padding: 0 10px}
   td:nth-child(4) { display: none}
   .section { width: 90vw}
   .pic2 {display: none}
+  .section{max-width:100vw; width:100vw !important}
+  #drulesmain { width:100vw;margin: 0; overflow-x: scroll;}
 }

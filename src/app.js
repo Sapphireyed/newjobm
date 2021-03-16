@@ -8,7 +8,7 @@ import './jobs.scss';
 //import fontawesome from '@fortawesome/fontawesome-free'
 import nav from './nav/nav';
 import { jobsmain } from './jobs/jobsmain.js'
-import {abilities, jobsData} from './abilitiesData.js'
+import {abilities, jobsData, descFinale, passiveFinale, abilTraits, passiveTraits} from './abilitiesData.js'
 import {getMatImgs, getAbilImgs, getJobImgs, abilImagesComplete, jobImagesComplete} from './img/imgsHTML.js'
 import { jobsTable } from './jobs/jobsTable.js'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
@@ -101,6 +101,7 @@ jobsData.craft()
               })
             }
           },2000)
+
       })
 
     })

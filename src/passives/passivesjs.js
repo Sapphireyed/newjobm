@@ -89,6 +89,7 @@ function loadList() {
     abilrows.shift()
     for (var i = 0; i < abilrows.length; i++) {
       let name = abilrows[i].children[2]
+      
       // Description
       let desc = passiveFinale.map(desc => desc.split(':<br>'))
       desc = desc.filter(d => d[0] == name.innerText)[0]

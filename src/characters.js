@@ -109,6 +109,7 @@ window.onscroll = function() {
                    table.style.display = 'table';
                    table2.style.display = 'none'
                  }
+
                  let skip = document.getElementById('skip')
                  skip.style.display = 'block'
                })

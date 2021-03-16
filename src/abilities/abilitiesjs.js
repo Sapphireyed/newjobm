@@ -90,10 +90,13 @@ function loadList() {
 // Icons on sides of the table
     let abilrows = Array.from(document.querySelectorAll('tr'))
     abilrows.shift()
+
     for (var i = 0; i < abilrows.length; i++) {
     //  tooltipsFn(abilrows[i])
       let name = abilrows[i].children[2]
-
+      if (name.offsetLeft == 107){
+        i % 2 == 0 ? name.style.backgroundColor = '#f5f7f8' : name.style.backgroundColor = 'rgb(100, 167, 189)'
+      }
       abilrows[i].addEventListener('mousemove', function() {
         showIcon(name, abilImagesComplete)
       })

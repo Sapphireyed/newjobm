@@ -84,3 +84,17 @@ td:nth-child(n+8) div{
 #dialog {
   background-color: $darkBg;
 }
+
+@media only screen and (max-width: 760px) {
+  #abilsmain { width: 100vw; margin:0; overflow-x: scroll}
+  #otherfilters {
+    label { display: none}
+    input { display: block; margin: auto;}
+  }
+  tr:nth-child(odd) td:nth-child(3) {
+    background-color: #f5f7f8;
+  }
+  tr:nth-child(even) td:nth-child(3) {
+    background-color: rgb(100, 167, 189);
+  }
+}

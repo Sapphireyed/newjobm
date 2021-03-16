@@ -237,6 +237,7 @@ opacity: 0;
 //main jobstable section narrower than other sections
 #jobsmain {
   width: 80vw;
+  h1 { padding:5px 0}
 //  overflow-x: scroll;
 }
 
@@ -326,8 +327,13 @@ tbody { color: black}
 
 table tr td:not(:first-child) { padding: 0 0 0 31px; }
 table tr td:nth-child(3) {
+  text-align: center;
     font-weight: bold;
+    position: sticky;
+    left:0;
+    z-index: 100;
 }
+
 #jobsTable tr td:nth-child(8) {
     background-color: rgba(216, 216, 51, .7);
 }
@@ -740,17 +746,34 @@ table tr td:nth-child(3) {
   .jobBg {
     width: 35px;
   }
-  .filtersmain label { width: 100%}
-  .filtersmain select { float: none; margin-right: 4px}
+  #mainimg {
+    position: absolute;
+    top:0;
+    opacity: 0.1;
+  }
+  .filtersmain label { width: 100%; margin-top: 0.5rem}
+  .filtersmain select:not(.pages) { float: none; margin-right: 4px; width:120px}
+
   #otherfilters { margin: 20px 0 0 0 }
   #otherfilters div:first-child {text-align: left}
-  .filtersSub div:nth-child(even) {text-align: right}
+  .filtersSub div:nth-child(even):not(.col-12) {text-align: right}
+  #navfilters {
+    div { text-align: left;}
+    label { width:50%;float:none; }
+    select { float: right; margin-top:10px}
+  }
 //  .filtersSub div:first-child label {width: 50%; text-align: left; float: left}
 }
 
 @media only screen and (max-width: 760px) {
-  body { overflow-x: hidden;}
-  #jobsmain { margin: auto; width: 90vw;}
+  html, body {
+  overflow-x: hidden;
+}
+body {
+  position: relative
+}
+  .section { max-width: 100vw }
+  #jobsmain, #abilsmain { margin:0; width: 100vw;overflow-x:scroll;}
 
   body::after {width: 100%}
   .dropdown {
@@ -765,14 +788,17 @@ table tr td:nth-child(3) {
     min-width: 140px;
 
   }
-
+  #up {bottom:0; right:0}
   #sideDiv {
-    left: -80%;
-//    width: 80%;
-//    h4 {width:76%}
+    left: -90%;
+    width:90%;
+    h4 {left: -110%;}
     a {
-    left: -10%;
-    width:140px
+    width:140px;
+    transform: none;
+    left:0;
+    top:95%;
+    bottom:0;
     }
   }
 
@@ -784,16 +810,35 @@ table tr td:nth-child(3) {
     width: 35px;
   }
 
-  .filtersmain label { width: 100%}
+  .filtersmain label{ width: 100%}
   #navFiters {
     margin-top: 5px;
     border-top: 2px solid $mainBg;
-    button { margin-top: 0}
+    div:not(:first-child) {padding: 0;}
+    button { margin-top: 10px; width:100% !important}
+    select { float:right;}
+    div:first-child {
+      label { width:50%;}
+      select { margin-top:10px}
+    }
   }
   #jobsclear {float: left}
-  #otherfilters { margin: 20px 0 0 0 }
-  #otherfilters div:first-child {text-align: left; margin-bottom: 7px}
-  #pages { margin-left: -10px}
+  #otherfilters {
+    margin: 20px 0 0 0;
+    div:first-child {text-align: left; margin-bottom: 7px}
+    div:nth-child(4) {
+      padding:0;
+      label { opacity: 0}
+      input { display:block; margin:auto}
+    }
+    #chooselvl, #herolvl, #jobmCrystal { width: 120px !important}
+  }
+  #lvlbtns {
+    padding:0;
+    button { width:50%}
+  }
+  #pagesdiv { padding:0}
+  #pages { margin-left: -10px; padding:0}
 
   #emptydiv {display: none}
   #preload {

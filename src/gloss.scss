@@ -71,4 +71,6 @@ table tr td:nth-child(n+4) {text-align: center;}
 @media only screen and (max-width: 760px) {
   #otherfilters div:first-child {text-align:center;margin-bottom:7px}
   #pages {margin-left: -10px}
+	#glossarymain { width: 100vw; margin:0; overflow-x: scroll}
+	table tr td:nth-child(3) { position: relative}
 }

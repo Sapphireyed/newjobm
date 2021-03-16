@@ -2,21 +2,30 @@
 import next from '../img/other/swordnext3.png'
 import last from '../img/other/swordlast3.png'
 import bgh1 from '../img/other/bgh1.png'
-import theadimg from '../img/Jobs/BG/inthp.jpg'
+import theadimg from '../img/other/bgh1.png'
 
 const br = document.createElement('br')
 const jobsfilter = document.createElement('div');
-//jobsfilter.style.backgroundImage = 'url("' + theadimg + '")'
-//jobsfilter.style.backgroundSize = 'cover'
-//jobsfilter.style.backgroundPosition = 'center center'
+let img = document.createElement('img')
+img.src= theadimg
+img.id = 'mainimg'
+
+
 jobsfilter.classList.add('section', 'shadow', 'row', 'filtersmain')
 jobsfilter.id = 'jobs'
+//jobsfilter.style.backgroundImage = 'url("' + theadimg + '")'
+jobsfilter.style.backgroundSize = 'cover'
+jobsfilter.style.backgroundPosition = 'center 20%'
+
 
 const header = document.createElement('h1')
 header.classList.add('col-12')
 header.innerHTML = 'JOBS'
 header.style.textShadow = '2px 2px grey'
 header.id = 'top'
+//header.style.backgroundImage = 'url("' + theadimg + '")'
+header.style.backgroundSize = 'cover'
+header.style.backgroundPosition = 'center 20%'
 //header.style.backgroundImage = 'url("' + bgh1 +'")'
 //header.style.backgroundSize = 'cover'
 

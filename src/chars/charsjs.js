@@ -301,7 +301,9 @@ function loadList() {
   //  abilrows.shift()
     for (var i = 0; i < abilrows.length; i++) {
       let name = abilrows[i].children[2]
-
+      if (name.offsetLeft == 107){
+        i % 2 == 0 ? name.style.backgroundColor = '#f5f7f8' : name.style.backgroundColor = 'rgb(100, 167, 189)'
+      }
 
       abilrows[i].addEventListener('mousemove', function() {
         showIcon(name, charsImagesComplete)
@@ -648,7 +650,9 @@ export function applyTableFn() {
     abilrows.shift()
     for (var i = 0; i < abilrows.length; i++) {
       let name = abilrows[i].children[2]
-
+      if (name.offsetLeft == 107){
+        i % 2 == 0 ? name.style.backgroundColor = '#f5f7f8' : name.style.backgroundColor = 'rgb(100, 167, 189)'
+      }
       abilrows[i].addEventListener('mousemove', function() {
         showIcon(name, charsImagesComplete)
       })
@@ -724,6 +728,7 @@ export function applyTableFn() {
       if (typeof thresh !== 'string') {
         thresh = thresh == '' ? '' : thresh.map(it => it = it == '' ? 'none' : it)
         thresh = thresh == '' ? '' : thresh.map((it,i) => it !== '' ? '<span class="thresh' + (i+1) + '">' + it.split('-').join(', ') + '</span>' : '')
+        thresh = thresh == '' ? '' : thresh.map(t => t == '' ? '' : t.replace('none', ''))
         thresh = thresh == '' ? '' : thresh.join('<br>')
       }
       jobItem[6] = thresh
