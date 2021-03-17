@@ -233,7 +233,71 @@ opacity: 0;
 .info {
     margin-bottom: 10px
 }
-
+#jobs{position:relative; overflow:hidden}
+#mainimg {
+  position: absolute;
+  top:0;
+  opacity: 1;
+  background-color: $mainBg;
+  img {
+    width:105%;
+  }
+}
+#upAndDown {
+  height:35px;
+  position:absolute;
+  top: 1%;
+}
+#up1, #up2 {
+  font-size: 28px;
+  font-weight:bold;
+  transform: scale(1, 0.7) scaleY(-1);
+  line-height: 0.5;
+  animation: upDown 8s linear infinite;
+  margin-top: -40px;
+}
+#up2 { text-align: right;}
+#upAndDown2 {
+  position: absolute;
+  top:1%;
+  z-index: 1;
+  div {
+    font-size: 28px;
+    font-weight:bold;
+    transform: scale(1, 0.7);
+    line-height: 0.5;
+    animation: upDown 8s linear infinite reverse;
+    margin-top: -40px;
+  }
+  div:nth-child(2) { text-align: right;}
+}
+@keyframes upDown {
+  0%{
+    margin-top: -160px;
+    opacity:0
+  //  transform: scale(1, 0.7) scaleY(-1);
+    }
+  5% {
+      margin-top: 0;
+      opacity:1
+    }
+  90% { color: white}
+  93% {
+    color: grey
+  }
+  96% {
+    color:white;
+    margin-top: 0;
+  } 95% {
+    opacity: 1;
+    margin-top: 0;
+  }
+  100% {
+    margin-top: 40px;
+    opacity: 0
+  //  transform: scale(1, 0.7) scaleY(-1);
+  }
+}
 //main jobstable section narrower than other sections
 #jobsmain {
   width: 80vw;
@@ -325,7 +389,7 @@ tbody { color: black}
 //  z-index: 10000;
 }
 
-table tr td:not(:first-child) { padding: 0 0 0 31px; }
+table tr td:not(:first-child) { padding: 0 5px; }
 table tr td:nth-child(3) {
   text-align: center;
     font-weight: bold;
@@ -737,6 +801,9 @@ table tr td:nth-child(3) {
       width:140px;
     }
   } */
+  #mainimg {
+    top:0
+  }
   .tooltipMy img { position:inherit;}
   .tooltipMy .tooltiptext {
       left: -55%;
@@ -746,11 +813,7 @@ table tr td:nth-child(3) {
   .jobBg {
     width: 35px;
   }
-  #mainimg {
-    position: absolute;
-    top:0;
-    opacity: 0.1;
-  }
+
   .filtersmain label { width: 100%; margin-top: 0.5rem}
   .filtersmain select:not(.pages) { float: none; margin-right: 4px; width:120px}
 
@@ -837,8 +900,8 @@ body {
     padding:0;
     button { width:50%}
   }
-  #pagesdiv { padding:0}
-  #pages { margin-left: -10px; padding:0}
+  #pagesdiv { padding:0; text-align: center; margin-bottom:6px}
+  #pages { float:none !important; padding:0}
 
   #emptydiv {display: none}
   #preload {
@@ -848,7 +911,7 @@ body {
       img:not(#hero) { transform: scale(1)}
     }
     #chardiv {
-      top:41%;
+      top:44%;
       right:20%
     }
   }

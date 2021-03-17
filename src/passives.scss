@@ -88,6 +88,13 @@ td:nth-child(2) { display: none}
 td:nth-child(3) {
   color: $darkBg;
 }
+tr:nth-child(odd) {
+  background-color: #b7b7c4;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(114, 139, 188);
+}
 tr:nth-child(odd) td:nth-child(3) {
   background-color: #b7b7c4;
 }

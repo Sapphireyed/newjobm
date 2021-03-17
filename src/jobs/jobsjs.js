@@ -354,7 +354,7 @@ function drawList() {
 
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#9eb1bb'
+      //  i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#9eb1bb'
 
 
         jobItem.map( job => {
@@ -382,9 +382,11 @@ function drawList() {
           var tooltip = document.createElement('span')
           tooltip.classList.add('tooltipMy', 'tooltiptext')
 
-
+          if (cell.innerHTML !== '') {
             cell.innerHTML == jobItem[5] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
             cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
+          }
+
 
           //add images to pic cell
           var imgComplete = jobImagesComplete.find(jobimg => jobimg.id == jobItem[2])

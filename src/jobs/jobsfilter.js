@@ -2,13 +2,15 @@
 import next from '../img/other/swordnext3.png'
 import last from '../img/other/swordlast3.png'
 import bgh1 from '../img/other/bgh1.png'
-import theadimg from '../img/other/bgh1.png'
+import thanafight from '../img/dungeon/thanafight.png'
+import theadimg from '../img/other/bgh2.png'
+
+let w = document.documentElement.clientWidth || document.body.clientWidth || window.innerWidth;
+let targetWidth = 768;
+let targetMid = 1000
 
 const br = document.createElement('br')
 const jobsfilter = document.createElement('div');
-let img = document.createElement('img')
-img.src= theadimg
-img.id = 'mainimg'
 
 
 jobsfilter.classList.add('section', 'shadow', 'row', 'filtersmain')
@@ -17,15 +19,14 @@ jobsfilter.id = 'jobs'
 jobsfilter.style.backgroundSize = 'cover'
 jobsfilter.style.backgroundPosition = 'center 20%'
 
-
 const header = document.createElement('h1')
 header.classList.add('col-12')
 header.innerHTML = 'JOBS'
 header.style.textShadow = '2px 2px grey'
 header.id = 'top'
-//header.style.backgroundImage = 'url("' + theadimg + '")'
-header.style.backgroundSize = 'cover'
-header.style.backgroundPosition = 'center 20%'
+//jobsfilter.style.backgroundImage = 'url("' + theadimg + '")'
+//jobsfilter.style.backgroundSize = 'cover'
+//jobsfilter.style.backgroundPosition = 'center 20%'
 //header.style.backgroundImage = 'url("' + bgh1 +'")'
 //header.style.backgroundSize = 'cover'
 
@@ -244,7 +245,7 @@ chooseLvlDiv.classList.add('col-6', 'col-lg-12')
 //chooseLvlDiv.style.textAlign = 'right'
 const chooseLabel = document.createElement('label');
 chooseLabel.for = 'chooselvl'
-chooseLabel.innerHTML = 'Change lvl: '
+chooseLabel.innerHTML = 'Change lvl'
 chooseLabel.style.marginRight = '4px'
 const chooseInput = document.createElement('input');
 chooseInput.id = 'chooselvl'
@@ -265,7 +266,7 @@ crystDiv.classList.add('col-6','col-lg-12')
 crystDiv.style.textAlign = 'right'
 const jobmCrystal = document.createElement('label');
 jobmCrystal.for = 'jobmCrystal'
-jobmCrystal.innerHTML = 'Jobmania Crystal: '
+jobmCrystal.innerHTML = 'Jobmania Crystal'
 jobmCrystal.style.textAlign = 'right'
 jobmCrystal.style.marginRight = '4px'
 const numOfCryst = document.createElement('select');
@@ -334,4 +335,45 @@ pages.innerHTML = '<!-- pager -->' +
 othersDiv.append(chooseLvlDiv, crystDiv, lvlbtns, searchDiv, pages)
 //add it all to the section
 jobsfilter.append(header, filtersDiv, othersDiv)
+let img = document.createElement('div')
+let imgImg = document.createElement('img')
+let upAndDown = document.createElement('div')
+upAndDown.classList.add('row','col-12')
+let up1 = document.createElement('div')
+up1.innerHTML = ' ^ <br> ^ '
+up1.classList.add('col')
+let up2 = up1.cloneNode(true)
+upAndDown.append(up1, up2)
+let upAndDown2 = upAndDown.cloneNode(true)
+upAndDown.id = 'upAndDown'
+upAndDown2.id = 'upAndDown2'
+up2.id = 'up2'
+up1.id = 'up1'
+let empty = document.createElement('div')
+empty.style.width = '80%'
+
+img.append(imgImg)
+jobsfilter.append(upAndDown, upAndDown2)
+setTimeout(function(){
+  w > 1000 ? imgImg.src= theadimg : imgImg.src = thanafight
+  img.id = 'mainimg'
+  img.style.width = jobsfilter.clientWidth + 'px'
+  img.style.height = jobsfilter.clienHeight + 'px'
+  jobsfilter.append(img)
+},2000)
+function imgfade() {
+  img.style.transition = '9s ease'
+  img.style.top = '-165%'
+  upAndDown2.style.zIndex = -1
+  upAndDown.style.zIndex = 1
+}
+function imgFadeIn() {
+  img.style.transition = '9s ease'
+  img.style.top = 0
+  upAndDown2.style.zIndex = 1
+  upAndDown.style.zIndex = -1
+}
+upAndDown.onclick = imgFadeIn
+//setTimeout(imgfade,10000)
+upAndDown2.onclick = imgfade
 export { jobsfilter}

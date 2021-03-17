@@ -1,4 +1,4 @@
-import sword from '../img/other/blades.png'
+import bgh1 from '../img/other/bgh1.png'
 
 var jobsTable = document.createElement('table');
 jobsTable.id = 'jobsTable';
@@ -8,6 +8,9 @@ var thead = document.createElement('thead')
 //thead.style.backgroundSize = 'cover'
 thead.classList.add('thead', 'shadow-lg', 'w-100')
 thead.id = 'thead'
+//thead.style.backgroundImage = 'url("' + bgh1 + '")'
+//thead.style.backgroundPosition = 'center bottom'
+//thead.style.backgroundSize = 'cover'
 thead.innerHTML = '<tr id="jobsThead">'
     + '<th data-sort="number">#<i class="fas fa-sort float-right"></i></th>'
     + '<th>Icon<i class="fas fa-sort float-right"></i></th>'

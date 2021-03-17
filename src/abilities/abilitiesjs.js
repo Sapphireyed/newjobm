@@ -94,9 +94,6 @@ function loadList() {
     for (var i = 0; i < abilrows.length; i++) {
     //  tooltipsFn(abilrows[i])
       let name = abilrows[i].children[2]
-      if (name.offsetLeft == 107){
-        i % 2 == 0 ? name.style.backgroundColor = '#f5f7f8' : name.style.backgroundColor = 'rgb(100, 167, 189)'
-      }
       abilrows[i].addEventListener('mousemove', function() {
         showIcon(name, abilImagesComplete)
       })
@@ -274,7 +271,7 @@ function loadList() {
         jobItem.splice(7, 2, '', '')
         var tableRow = document.createElement('tr')
         tableRow.classList.add('jobRow')
-        i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = 'rgba(100, 167, 189, 9)'
+    //    i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = 'rgba(100, 167, 189, 9)'
     //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
 
 
