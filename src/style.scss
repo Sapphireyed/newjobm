@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
 /*$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/solid';
@@ -35,8 +36,9 @@ $secondBgLight: #c4c2bf;
 h1 {
     @include title;
 }
-
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
 body {
+    font: 1.5em 'Montserrat';
   background-color: rgb(245,247,248);
   overflow-x: hidden;
 //  background-image: radial-gradient(circle, #a5c6d6 0, rgba(21,27,31,1) 60%, rgba(51,66,74,1) 100%);
@@ -109,7 +111,10 @@ img { max-width: 100%}
 nav {
   position: relative;
   z-index: 10001;
+  font: 1em/1 Open Sans, Impact;
+  text-transform: uppercase;
   img { padding: 20px 0 10px 0}
+
 }
 nav:nth-child(2) {
    background-color: $secondBg;
@@ -247,13 +252,14 @@ opacity: 0;
   height:35px;
   position:absolute;
   top: 1%;
+  z-index: -1
 }
 #up1, #up2 {
   font-size: 28px;
   font-weight:bold;
   transform: scale(1, 0.7) scaleY(-1);
   line-height: 0.5;
-  animation: upDown 8s linear infinite;
+  animation: upDown 3s linear infinite;
   margin-top: -40px;
 }
 #up2 { text-align: right;}
@@ -626,6 +632,7 @@ table tr td:nth-child(3) {
     }
   }
   #skip {
+    font: 1.5em/1 Open Sans, Impact;
     position: absolute;
     right:10%;
     top: 10%;
@@ -802,7 +809,7 @@ table tr td:nth-child(3) {
     }
   } */
   #mainimg {
-    top:0
+    top:7%
   }
   .tooltipMy img { position:inherit;}
   .tooltipMy .tooltiptext {
@@ -831,6 +838,7 @@ table tr td:nth-child(3) {
 @media only screen and (max-width: 760px) {
   html, body {
   overflow-x: hidden;
+
 }
 body {
   position: relative

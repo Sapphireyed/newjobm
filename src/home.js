@@ -68,6 +68,32 @@ document.body.appendChild(stones)
     }, 25000)
 
 })*/
+
+//h1 effects
+/*let header = document.querySelectorAll('.maininf h1')[0]
+header.innerHTML = header.innerHTML.split('').map(h => '<h1 class="head">' + h + '</h1>').join('')
+let heads = Array.from(document.querySelectorAll('.head'))
+console.log(heads)
+setTimeout(function(){
+  heads.map((h, ind) => {
+    h.style.animation = 'hithere 1s linear infinite'
+  //  h.style.animationDelay = ind + 's'
+    ind += 1.5
+  })
+},6000)*/
+//split header into span elements each containng one letter
+let header = document.querySelectorAll('.maininf h1')[0]
+let headersplit = header.innerHTML.split('<br>')
+headersplit[0] = headersplit[0].split('').map(h => h = '<span class="head">' + h + '</span>').join('')
+headersplit[2] = headersplit[2].split('').map(h => h = '<span class="head">' + h + '</span>').join('')
+header.innerHTML = headersplit[0] + '<br><span class="eternal">' + headersplit[1] + '</span><br>' + headersplit[2]
+
+//add hithere animaton to the otherghost
+let ghost = document.getElementsByClassName('ghostdiv')[0].children[0]
+setInterval(function() {
+  ghost.style.animation = 'hithere 7s ease infinite'
+},8000)
+
 function el1(el1, fontsize){
   let s = 0;
   el1.style.fontSize = 0
@@ -139,7 +165,7 @@ function picInside(el,arr) {
       default:
 
     }
-console.log(divs[next].children[0])
+
     el1(divs[next].children[0].children[0], 48)
     setTimeout(function(){
       el1(divs[next].children[0].children[1], 40)

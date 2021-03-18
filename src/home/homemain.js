@@ -60,17 +60,18 @@ infoInf.id = 'infoInf'
 //infoInf.style.backgroundImage = 'url("' + book + '")'
 //infoInf.style.backgroundSize = 'contain'
 let smallHead = document.createElement('h1')
-smallHead.classList.add('col-12')
-smallHead.innerHTML = 'Jobmania - Eternal Dungeon'
+smallHead.classList.add('col-lg-8','col-12')
+smallHead.innerHTML = 'Jobmania<br>Eternal<br>Dungeon'
 
 let features = document.createElement('ul')
-features.classList.add('col-lg-10','co-12')
+features.classList.add('col-12')
 features.innerHTML = '<li><img src="' + dice + '"> Roguelite dungeon crawler with a strategic deck-building and turn-based combat</li>'
                    + '<li><img src="' + dice + '"> A great variety of heroes, jobs and abilities ensures limitless replayability and unique experience on every run</li>'
                    + '<li><img src="' + dice + '"> Generous gacha system allows to obtain powerful charcters or crafting materials and make a quick progress in the game</li>'
                    + '<li><img src="' + dice + '"> Frequant updates with new content make the game feel fresh even to veterans</li>'
                    + '<li><img src="' + dice + '"> Portrait screen makes it easy to play everywhere and at any time!</li>'
-                   + '<li><img src="' + dice + '"> A friendly and active community on discord and reddit including constant support from game\'s marvelous creator, Aubrey Puan!</li></br>'
+                   + '<li class="licontainer"><div class="cover"></div><div><img src="' + dice + '"> '
+                        + 'A friendly and active community on discord and reddit including constant support from game\'s marvelous creator, Aubrey Puan!</div></li>'
 let summary = document.createElement('h5')
 summary.innerHTML = 'Countless combinations ensure great replayability. Try various builds, choose different paths'
 let dicepic = document.createElement('img')
@@ -79,11 +80,10 @@ dicepic.src = ghost
 let ghostdiv = document.createElement('div')
 ghostdiv.classList.add('col-lg-2', 'col-12')
 ghostdiv.id = 'ghostdiv'
+ghostdiv.classList.add('ghostdiv')
 ghostdiv.appendChild(dicepic)
-let dicepic2 = dicepic.cloneNode(true)
 setInterval(function() {
   dicepic.style.animation = 'hithere 7s ease infinite'
-  dicepic2.style.animation = 'hithere 7s ease infinite'
 //  dicepic.style.animationIterationCount = '1';
 }, 2000)
 let playBtnDiv = document.createElement('div')
@@ -130,16 +130,23 @@ fbLink.append(fb, shinemedia.cloneNode(true))
 media.append(discordLink, redditLink, fbLink)
 playBtnDiv.append(media,playdiv)
 
-infoInf.append(smallHead, features, ghostdiv, playBtnDiv)
+infoInf.append(ghostdiv.cloneNode(true), smallHead, ghostdiv, features, playBtnDiv)
 
 let updates= document.createElement('div')
 updates.id = 'updates'
+updates.className = 'view'
 updates.classList.add('maininf', 'row')
+let mask =document.createElement('div')
+mask.classList.add('mask')
 let updatesH = document.createElement('h3')
 updatesH.innerHTML = 'What\'s new'
 let banner = document.createElement('img')
 banner.src = bannerimg
 banner.id = 'banner'
+
+let listtitle = document.createElement('h2')
+listtitle.id = 'title'
+listtitle.innerHTML = 'Latest Updates'
 verlog.log()
   .then(v => {
     let ver = document.createElement('h5')
@@ -153,9 +160,21 @@ verlog.log()
       }
     })
 
-    updates.append( banner, news)
+    updates.append(banner, mask, listtitle, news)
   })
-
+/*setTimeout(function(){
+  banner.style.width = banner.parentNode.parentNode.offsetWidth + 'px'
+},3500)
+setTimeout(function(){
+  updates.style.width = banner.width
+  banner.style.height = banner.width * 0.39 + 'px'
+  updates.style.height = banner.width * 0.39 + 'px'
+},4000)
+setTimeout(function(){
+  mask.style.width = banner.width
+  mask.style.height = banner.width * 0.39 + 'px'
+//  updates.style.height = banner.width * 0.39 + 'px'
+},4100)*/
 let change = document.createElement('div')
 change.className = 'change'
 let change1 = change.cloneNode(true)
@@ -168,7 +187,12 @@ change.id = 'change'
 
 let animationHeader = document.createElement('h1')
 animationHeader.id = 'animationHeader'
-animationHeader.innerHTML = 'Descend <br>into the <span style="color: #36c1f9">Dungeon</span>'
+animationHeader.innerHTML = 'Descend <br>into the <span style="color: #36c1f9">Dungeon</span><br'
+let terrorp = document.createElement('p')
+terrorp.className = 'terror'
+terrorp.innerHTML = 'of Terror'
+animationHeader.append(terrorp)
+
 let div1 = document.createElement('div')
 div1.classList.add('row', 'col-6')
 div1.id = 'div1'
@@ -349,6 +373,12 @@ change3.append(div7)
 
 change.append(animationHeader, change1, change2, change3)
 
+animationHeader.addEventListener('mouseenter', function() {
+  terrorp.classList.add('animateTerror')
+})
+animationHeader.addEventListener('mouseleave', function() {
+  terrorp.classList.remove('animateTerror')
+})
 /*let changeWrapper = document.createElement('div')
 changeWrapper.classList.add('col-6')
 changeWrapper.style.backgroundImage = 'url("' + book + '")'
