@@ -65,13 +65,39 @@ smallHead.innerHTML = 'Jobmania<br>Eternal<br>Dungeon'
 
 let features = document.createElement('ul')
 features.classList.add('col-12')
-features.innerHTML = '<li><img src="' + dice + '"> Roguelite dungeon crawler with a strategic deck-building and turn-based combat</li>'
-                   + '<li><img src="' + dice + '"> A great variety of heroes, jobs and abilities ensures limitless replayability and unique experience on every run</li>'
-                   + '<li><img src="' + dice + '"> Generous gacha system allows to obtain powerful charcters or crafting materials and make a quick progress in the game</li>'
-                   + '<li><img src="' + dice + '"> Frequant updates with new content make the game feel fresh even to veterans</li>'
-                   + '<li><img src="' + dice + '"> Portrait screen makes it easy to play everywhere and at any time!</li>'
-                   + '<li class="licontainer"><div class="cover"></div><div><img src="' + dice + '"> '
-                        + 'A friendly and active community on discord and reddit including constant support from game\'s marvelous creator, Aubrey Puan!</div></li>'
+features.id = 'features'
+features.innerHTML = '<li>'
+                        + '<p>&nbsp;</p>'
+                        + '<p><img src="' + dice + '"> Roguelite dungeon crawler with a strategic deck-building and turn-based combat</p>'
+                   + '</li>'
+                   + '<li>'
+                         + '<p><img src="' + dice + '"> Roguelite dungeon crawler with a strategic deck-building and turn-based combat</p>'
+                         + '<p><img src="' + dice + '"> Variety of heroes, jobs and abilities ensures limitless replayability and unique experience on every run</p>'
+                  + '</li>'
+                   + '<li>'
+                        + '<p><img src="' + dice + '"> A great variety of heroes, jobs and abilities ensures limitless replayability and unique experience on every run</p>'
+                        + '<p><img src="' + dice + '"> Generous gacha system allows to obtain powerful charcters or crafting materials and make a quick progress in the game</p>'
+                   + '</li>'
+                   + '<li>'
+                        + '<p><img src="' + dice + '"> Generous gacha system allows to obtain powerful charcters or crafting materials and make a quick progress in the game</p>'
+                        + '<p><img src="' + dice + '"> Frequant updates with new content make the game feel fresh even to veterans</p>'
+                   + '</li>'
+                   + '<li>'
+                        + '<p><img src="' + dice + '"> Frequant updates with new content make the game feel fresh even to veterans</p>'
+                        + '<p><img src="' + dice + '"> Portrait screen makes it easy to play everywhere and at any time!</p>'
+                   + '</li>'
+                   + '<li>'
+                        + '<p><img src="' + dice + '"> Portrait screen makes it easy to play everywhere and at any time!</p>'
+                        + '<p><img src="' + dice + '">A friendly and active community on discord and reddit including constant support from game\'s marvelous creator, Aubjective Aub!</p>'
+                   + '</li>'
+                   + '<li>'
+                        + '<p><img src="' + dice + '">A friendly and active community on discord and reddit including constant support from game\'s marvelous creator, Aubjective Aub!</p>'
+                        + '<p class="gplay"></p>'
+                   + '</li>'
+                   + '<li>'
+                        + '<p class="gplay"></p>'
+                        + '<p">&nbsp;</p>'
+                   + '</li>'
 let summary = document.createElement('h5')
 summary.innerHTML = 'Countless combinations ensure great replayability. Try various builds, choose different paths'
 let dicepic = document.createElement('img')
@@ -130,7 +156,14 @@ fbLink.append(fb, shinemedia.cloneNode(true))
 media.append(discordLink, redditLink, fbLink)
 playBtnDiv.append(media,playdiv)
 
-infoInf.append(ghostdiv.cloneNode(true), smallHead, ghostdiv, features, playBtnDiv)
+setTimeout(function() {
+  document.getElementsByClassName('gplay')[0].append(playBtnDiv)
+  document.getElementsByClassName('gplay')[1].append(playBtnDiv.cloneNode(true))
+}, 4000)
+let headerAll = document.createElement('div')
+headerAll.classList.add('col-12', 'row', 'header')
+headerAll.append(ghostdiv.cloneNode(true), smallHead, ghostdiv)
+infoInf.append(headerAll, features, playBtnDiv)
 
 let updates= document.createElement('div')
 updates.id = 'updates'
@@ -161,20 +194,25 @@ verlog.log()
     })
 
     updates.append(banner, mask, listtitle, news)
+    updates.addEventListener('mouseenter',function(){
+      mask.style.transitionDelay = '0s'
+      mask.style.transform = 'scale(1)'
+      listtitle.style.transitionDelay = '0.3s'
+      listtitle.style.transform = 'scale(1)'
+      news.style.transitionDelay = '0.8s'
+      news.style.transform = 'scale(1)'
+    })
+    updates.addEventListener('mouseleave', function(){
+      mask.style.transitionDelay = '0.4s'
+      mask.style.transform = 'scale(0)'
+      listtitle.style.transitionDelay = '0s'
+      listtitle.style.transform = 'scale(0)'
+      news.style.transitionDelay = '0s'
+      news.style.transform = 'scale(0)'
+    })
   })
-/*setTimeout(function(){
-  banner.style.width = banner.parentNode.parentNode.offsetWidth + 'px'
-},3500)
-setTimeout(function(){
-  updates.style.width = banner.width
-  banner.style.height = banner.width * 0.39 + 'px'
-  updates.style.height = banner.width * 0.39 + 'px'
-},4000)
-setTimeout(function(){
-  mask.style.width = banner.width
-  mask.style.height = banner.width * 0.39 + 'px'
-//  updates.style.height = banner.width * 0.39 + 'px'
-},4100)*/
+
+
 let change = document.createElement('div')
 change.className = 'change'
 let change1 = change.cloneNode(true)
@@ -194,15 +232,15 @@ terrorp.innerHTML = 'of Terror'
 animationHeader.append(terrorp)
 
 let div1 = document.createElement('div')
-div1.classList.add('row', 'col-6')
+div1.classList.add('row', 'col-md-6', 'col-12')
 div1.id = 'div1'
 let img1 = document.createElement('img')
 let img1div = document.createElement('div')
-img1div.classList.add('col-md-6', 'col-12')
+img1div.classList.add('col-6')
 img1div.appendChild(img1)
 img1.src = chosseHero
 let txt = document.createElement('div')
-txt.classList.add('col-md-6', 'col-12','txtdiv')
+txt.classList.add('col-6','txtdiv')
 txt.id = 'txtdiv'
 let txtp1 = document.createElement('h2')
 txtp1.classList.add('txt')
@@ -217,15 +255,15 @@ txt.append(txtp1, txtp2, txtp3)
 div1.append(txt, img1div)
 
 let div2 = document.createElement('div')
-div2.classList.add('row','col-6')
+div2.classList.add('row','col-md-6', 'col-12')
 div2.id = 'div2'
 let img2 = document.createElement('img')
 let img2div = document.createElement('div')
-img2div.classList.add('col-md-6', 'col-12')
+img2div.classList.add('col-6')
 img2div.appendChild(img2)
 //img2.src = chosseHero
 let txt2 = document.createElement('div')
-txt2.classList.add('col-md-6', 'col-12', 'txtdiv')
+txt2.classList.add('col-6', 'txtdiv')
 txt2.id = 'txtdiv'
 let txt2p1 = document.createElement('h2')
 txt2p1.classList.add('txt')
@@ -348,8 +386,9 @@ div7.id = 'div7'
 
 let img7div = document.createElement('div')
 let img7 = document.createElement('img')
-img7div.classList.add('col-md-3', 'col-12')
+img7div.classList.add('col-md-3', 'col-12', 'delve')
 let img7div2 = img7div.cloneNode(true)
+img7div2.id = 'delve2'
 img7div.append(img7)
 let img7next = document.createElement('img')
 img7div2.append(img7next)
@@ -379,6 +418,85 @@ animationHeader.addEventListener('mouseenter', function() {
 animationHeader.addEventListener('mouseleave', function() {
   terrorp.classList.remove('animateTerror')
 })
+
+setTimeout(function() {
+  var img = $('#div1 img');
+  var img2toRot = $('#div2 img')
+
+var offset = img.offset();
+var mouseDown = false;
+function mouse(evt) {
+    if(mouseDown ==true){
+      var center_x = (offset.left) + (img.width() / 2);
+      var center_y = (offset.top) + (img.height() / 2);
+      var mouse_x = evt.pageX;
+      var mouse_y = evt.pageY;
+      var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
+      var degree = (radians * (180 / Math.PI) * -1);
+      img.css('-moz-transform', 'rotate(' + degree + 'deg)');
+      img.css('-webkit-transform', 'rotate(' + degree + 'deg)');
+      img.css('-o-transform', 'rotate(' + degree + 'deg)');
+      img.css('-ms-transform', 'rotate(' + degree + 'deg)');
+    }
+}
+function mouse1(evt) {
+    if(mouseDown ==true){
+      var center_x = (offset.left) + (img2toRot.width() / 2);
+      var center_y = (offset.top) + (img2toRot.height() / 2);
+      var mouse_x = evt.pageX;
+      var mouse_y = evt.pageY;
+      var radians = Math.atan2(mouse_x - center_x, mouse_y - center_y);
+      var degree = (radians * (180 / Math.PI) * -1);
+      img2toRot.css('-moz-transform', 'rotate(' + degree + 'deg)');
+      img2toRot.css('-webkit-transform', 'rotate(' + degree + 'deg)');
+      img2toRot.css('-o-transform', 'rotate(' + degree + 'deg)');
+      img2toRot.css('-ms-transform', 'rotate(' + degree + 'deg)');
+    }
+}
+
+$('.change').mousemove(function (e) {
+    mouseDown=true;
+    $(document).mousemove(mouse);
+    $(document).mousemove(mouse1);
+});
+$(document).mouseup(function (e) {
+    mouseDown = false;
+})
+  //div1.addEventListener('mousemove', flipImg)
+  //div1.addEventListener('mouseleave', flipBack)
+  /*function getCenter(element) {
+      const {left, top, width, height} = element.getBoundingClientRect();
+      return {x: left + width / 2, y: top + height / 2}
+  }
+
+  //const arrow = document.querySelector("#arrow");
+  const arrowCenter = getCenter(img1);
+  document.body.addEventListener("mousemove", ({clientX, clientY}) => {
+    let bounds = img1.getBoundingClientRect();
+    let x = clientX - bounds.left;
+    let y = clientY - bounds.top;
+    const angle = Math.atan2(arrowCenter.x - x,arrowCenter.y);
+
+    img1.style.transform = `rotate(${angle}rad)`;
+  });*/
+  /*function flipImg() {
+    let mouseY = event.clientY
+    let mouseX = event.clientX
+    console.log(mouseX)
+    console.log(div1.clientWidth)
+    if (mouseX > div1.clientWidth/2) {
+      img1.style.transition = '0.3s'
+      img1.style.transform = 'scaleX(-1)'
+    } else {
+      img1.style.transition = '0.3s'
+      img1.style.transform = 'scaleX(1)'
+    }
+  }
+  function flipBack() {
+    img1.style.transform = 'scale(1)'
+  }*/
+}, 3000)
+
 /*let changeWrapper = document.createElement('div')
 changeWrapper.classList.add('col-6')
 changeWrapper.style.backgroundImage = 'url("' + book + '")'

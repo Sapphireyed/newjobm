@@ -631,17 +631,38 @@ table tr td:nth-child(3) {
       transition:1.5s
     }
   }
-  #skip {
-    font: 1.5em/1 Open Sans, Impact;
+  .skip {
+    //font: 1.5em/1 Open Sans, Impact;
     position: absolute;
-    right:10%;
-    top: 10%;
-    box-shadow: 1px 2px dimgrey;
-    padding: 3px 6px;
-    display:none;
+    box-shadow: 0 0 18px white;
+    padding: 4px 8px;
+    font-weight:bold;
+    border-radius: 15%;
+    color:white;
+  //  display:none;
   }
+  #skipTop {right: -10%; top:10%}
+  #skipBottom {left:-10%; bottom:10%}
+//  #skipLeft {left:6%; top:0}
+//  #skipRight {right: 6%; bottom:0}
 }
 #preloaddiv { display: block;margin: auto;}
+@keyframes skipTop {
+  0 { right: 0}
+  100% { right: 100%}
+}
+@keyframes skipBottom {
+  0 { left: 0}
+  100% { left: 100%}
+}
+/*@keyframes skipRight {
+  0 { bottom: 0}
+  100% { bottom: 100%}
+}
+@keyframes skipLeft {
+  0 { top: 0}
+  100% { top: 100%}
+}*/
 @keyframes pulse {
   from { transform: scale(1); }
   to { transform: scale(0.9); }

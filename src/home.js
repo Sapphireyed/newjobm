@@ -100,8 +100,10 @@ function el1(el1, fontsize){
   let start = setInterval(function(){
     el1.style.fontSize = s >= fontsize ? fontsize+'px' : s+1 + 'px'
     s++
+
   },4)
   setTimeout(function() {
+    el1.style.fontSize = fontsize + 'px'
     clearInterval(start)
   }, 1000)
 }
@@ -123,8 +125,11 @@ function picInside(el,arr) {
   divs[i].style.opacity = 1
   divs[i].style.position = 'inherit'
   setTimeout(function(){
-    let skip = document.getElementById('skip')
-    skip.style.display = 'block'
+    let skip = Array.from(document.getElementsByClassName('skip'))
+    skip[0].style.animation = 'skipTop 20s linear infinite alternate'
+    skip[1].style.animation = 'skipBottom 20s linear infinite alternate'
+    skip[2].style.animation = 'skipLeft 20s linear infinite alternate'
+    skip[3].style.animation = 'skipRight 20s linear infinite alternate'
     div1Fn()
   }, 2000)
   function div1Fn() {
@@ -142,29 +147,7 @@ function picInside(el,arr) {
     divs[next].style.transition = '1.3s'
     divs[next].style.opacity = 1
     divs[next].style.position = 'inherit'
-    switch (i) {
-      case 1:
-    //    picInside(divs[next].children[1].children[0], descend)
-        break;
-      case 0:
-    //    picInside(divs[next].children[1].children[0], jobImagesComplete)
-        break;
-      case 2:
-      //  picInside(divs[next].children[1].children[0], unknown)
-        break;
-      case 3:
 
-      //  picInside(divs[next].children[1].children[0], charsImagesComplete)
-        break;
-      case 4:
-    //    picInside(divs[next].children[1].children[0], treasures)
-        break;
-      case 5:
-      //  picInside(divs[next].children[1].children[0], charsImagesComplete)
-        break;
-      default:
-
-    }
 
     el1(divs[next].children[0].children[0], 48)
     setTimeout(function(){

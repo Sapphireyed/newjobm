@@ -45,18 +45,39 @@ let eternalimg = document.createElement('img')
 eternalimg.src = eternal
 let skip = document.createElement('a')
 skip.innerHTML = 'Skip'
-skip.id = 'skip'
-skip.onclick = function(){
-  preload.style.transition = '0.8s'
-  preload.style.opacity = 0
-  preload.style.zIndex = -100
+skip.className = 'skip'
+let skip2= skip.cloneNode(true)
+let skip3= skip.cloneNode(true)
+let skip4= skip.cloneNode(true)
+skip.id = 'skipTop'
+skip2.id = 'skipBottom'
+skip3.id = 'skipLeft'
+skip4.id = 'skipRight'
+
+let fade1 = {transition:'0.9s', transform: 'rotate(1080deg) scale(0)'}
+let fade2 = {transition:'0.9s', transform: 'scale(8)'}
+let fade3 = {transition:'0.4s', transform: 'skew(90deg, 0deg) scaley(1)'}
+let fades= [fade1, fade2, fade3]
+function hidePreload() {
+  let rand = Math.floor(Math.random() * fades.length)
+  console.log(rand)
+  console.log(fades[rand].transform)
+  preload.style.transition = fades[rand].transition
+//  preload.style.transform= 'rotate(1080deg) scale(0)'
+//  preload.style.transform= 'scale(8)'
+  preload.style.transform = fades[rand].transform
+  preload.style.opacity= 0.5
   preloaddiv.style.animation = 'none'
   chardiv.style.animation = 'none'
   document.body.style.overflowY = 'visible'
   setTimeout(function(){
     preload.style.display = 'none'
-  },400)
+  },900)
 }
+skip.onclick = hidePreload
+skip2.onclick = hidePreload
+skip3.onclick = hidePreload
+skip4.onclick = hidePreload
 preloaddiv.append(jimg, obmaniaimg, eternalimg)
 
 let chardiv = document.createElement('div')
@@ -66,7 +87,7 @@ let rand = Math.floor(Math.random() * chars.length)
 //char.src = lonely//chars[rand]
 char.id = 'hero'
 chardiv.appendChild(char)
-preload.append(preloaddiv, skip, chardiv)
+preload.append(preloaddiv, skip, skip2, chardiv)
 let imgs = Array.from(document.querySelectorAll('#preload img:not(#hero)'))
 let ind = Math.floor(Math.random() * chars.length)
 
@@ -161,8 +182,7 @@ setTimeout(function() {
   chardiv.style.animation= 'none'
 },10000)*/
 setTimeout(function(){
-  document.getElementById('preload').style.transition = '1.1s'
-  document.getElementById('preload').style.opacity = 0
+  hidePreload()
   document.getElementById('preload').style.zIndex = -100
   preloaddiv.style.animation = 'none'
   chardiv.style.animation = 'none'
@@ -170,6 +190,5 @@ setTimeout(function(){
 }, 8000)
 
 setTimeout(function(){
-  console.log(preload)
   preload.style.display = 'none'
 },9000)

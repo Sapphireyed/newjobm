@@ -13,6 +13,59 @@ body::after {
 h1 {background-color: transparent}
 section {  margin-top: -25px;}
 #mainsec {width: 70vw; margin: auto}
+@media only screen and (min-width: 1000px) {
+  $total-lines: 9;
+  $left-offset: 29px;
+  $clip-height: 80px;
+  $line-height: $clip-height -5px;
+  #features {
+    font-size:28px;
+    margin-left:-90px;
+    padding: 80px 0;
+    margin-bottom:80px;
+  //  letter-spacing: -2px;
+    // Sort out nasty text fuzz
+    transform: translate3d(0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-kerning: normal;
+    -webkit-text-size-adjust: 100%;
+    li {
+      height: $clip-height;
+      overflow: hidden;
+      position: relative;
+    //  border-bottom: 2px solid $maintxt;
+    // Change the perspective of each alternating line
+    &:nth-child(odd) {
+      transform: skew(60deg, -20deg) scaleY(.66667);
+    }
+    &:nth-child(even) {
+      transform: skew(0deg, -20deg) scaleY(1.33333);
+    }
+
+    // Loop over the total lines and apply a left offset
+    @for $i from 1 through $total-lines+1 {
+      &:nth-child(#{$i}) {
+        left: $left-offset * $i;
+      }
+    }
+    }
+    p {
+      height: $clip-height;
+    //  line-height: $line-height;
+      padding: 0 10px;
+      transition: all .4s ease-in-out;
+      transform: translate3d(0, 0, 0);
+      vertical-align: top;
+    //  white-space: nowrap;
+    }
+
+  }
+  #features:hover {
+    p {
+      transform: translate3d(0, -($clip-height), 0);
+    }
+  }
+}
 
 #change {
   margin-top: 25px;
@@ -20,12 +73,10 @@ section {  margin-top: -25px;}
   h2 { text-align: center}
   #change1 img{ height: 170px}
   #change2 {
-    margin: 20px auto;
-    height: 360px;
-    border-top:8px solid $maintxt;
-    border-bottom:8px solid $maintxt;
+    padding-top:7px;
+    height: 260px;
     .txtdiv {  height: 57.5px; }
-    img { height: 210px}
+    img { height: 160px}
   }
 }
 .change {
@@ -76,12 +127,44 @@ opacity: 0;
   }
   #playimg { width:200px;  }
   #media img {
-  //  margin-top: 10px;
+    background-color: white;
+    border-radius: 12%;
     width:50px;
   //  float: left
   }
 }
 #gplay2 { margin: 50px 50px 0 50px }
+#div1, #div2 {
+    border-bottom: 8px solid $maintxt;
+    padding-bottom:30px;
+}
+#div1 {
+  transform: skew(10deg, 10deg);
+}
+#div2 {
+  transform: skew(10deg, -10deg);
+}
+#div7 div {
+  padding-top:60px;
+}
+.delve:first-child img {transform: skew(10deg, 10deg);}
+#delve2 img { transform: skew(-10deg, -10deg) scaleX(-1);
+}
+#div7::before {
+    content: "";
+    width: 50%;
+    left: 50%;
+    position: absolute;
+    border-top: 8px solid #36c1f9;
+    transform: skew(10deg, -10deg);
+}
+#div7::after {
+    content: "";
+    width: 50%;
+    position: absolute;
+    border-top: 8px solid #36c1f9;
+    transform: skew(10deg, 10deg);
+}
 @keyframes TransitioningBackground {
   0% {
     background-position: 1% 0%;
@@ -194,6 +277,9 @@ opacity: 0;
 }
 
 .maininf {
+  .header {
+    transform: skew(0deg, -20deg) scaleY(1.33333)
+  }
 //  padding: 20px;
   margin: auto;
   h1 {
@@ -206,7 +292,7 @@ opacity: 0;
     text-shadow: 1px 2px black;
     border-radius: 5%;
     animation-delay: 0.8s;
-    margin: 0 0 60px 0;
+    margin: 40px 0 0 -100px;
     line-height:0.6;
   //  height:63px !important
   }
@@ -228,7 +314,7 @@ opacity: 0;
     display: inline-block;
     -webkit-animation: bounce 3.4s ease infinite alternate;
   }
-  ul { list-style-type: none;
+  /*ul { list-style-type: none;
     font-size: 20px;
     line-height:1.7;
     text-align: justify;
@@ -270,15 +356,15 @@ opacity: 0;
     transform:scale(0);
     animation: scale 1s linear 1 forwards;
     animation-delay: 16s
-  }
+  }*/
   .licontainer {
     position:relative;
     opacity:1;
     background-color: transparent;
     div:nth-child(2) {
-      opacity:0;
+  //    opacity:0;
       position: relative;
-      animation: fadein 2s ease-out forwards;
+    //  animation: fadein 2s ease-out forwards;
       animation-delay: 18s;
       z-index:-1;
   }
@@ -287,9 +373,9 @@ opacity: 0;
       top: 0;
       left:0;
       width: 0;
-      animation: translate 2s ease-out forwards;
+  //    animation: translate 2s ease-out forwards;
       animation-delay: 18s;
-      height: 114px;
+      height: 80px;
       background-color: #052a42;
       z-index:1
     }
@@ -300,12 +386,18 @@ opacity: 0;
   }
 
   .ghostdiv { position: relative;}
-  .ghostdiv:first-child {transform: scaleX(-1)}
+  .ghostdiv {
+    img {
+      top:30px;
+      left:-40px
+    }
+  }
+  .ghostdiv:first-child {
+    transform: scaleX(-1);
+    img {left:80px}
+  }
   #ghost {
     position: absolute;
-    left: 2%;
-    top:-20px;
-    left:30px;
     width:130px;
     filter: drop-shadow(2px 4px 6px #36c1f9);
   //  transform: rotate(40deg);
@@ -545,6 +637,7 @@ opacity: 0;
 #updates {
   position: relative;
   overflow: hidden;
+  margin-bottom: 50px;
   #banner {
     width: 100%;
     display: block;
@@ -559,8 +652,9 @@ opacity: 0;
   .mask {
     width:100%;
     height:100%;
-    background: rgba(8, 54, 84,.9);
+    background: rgba(4, 31, 48,.9);
     border-radius:10%;
+    transition: 0.7s;
     transform: scale(0)
   }
   h2 {
@@ -569,35 +663,27 @@ opacity: 0;
     width: 100%;
     color: white;
     font-weight: 600;
-    padding-left: 25%;
+    padding-left: 20%;
     transform: scale(0);
     box-shadow: 2px 1px black;
     text-shadow: 2px 1px #052a42;
+    transition: 0.7s;
   }
   ul {
     width:100%;
     top:28%;
-  //  padding-top:28%;
+    padding:0;
     left:0;
-    padding-left:11%;
     transform: scale(0);
-    background: rgba(8, 54, 84,.9)
+    background: rgba(8, 54, 84,.9);
+    transition: 0.7s;
+    li {
+      padding: 6px 6px 6px 10%;
+    }
   }
 }
-#updates:hover .mask {
-  transition: 0.7s;
-  transform: scale(1);
-}
-#updates:hover h2 {
-  transition: 0.7s;
-  transition-delay:0.3s;
-  transform: scale(1);
-}
-#updates:hover ul {
-  transition: 0.7s;
-  transition-delay:1.6s;
-  transform: scale(1);
-}
+
+
 
 
 
@@ -776,11 +862,18 @@ opacity: 0;
     transform: scale(1)
   }
 }
+@media only screen and (max-width: 1000px) {
+  .licontainer .cover { height: 114px }
+}
 @media only screen and (max-width: 760px) {
 
   #mainsec { width: 100vw}
   #infoInf { padding: 0}
   .maininf  {
+    .header {
+      transform: skew(0deg, -21deg) scaleY(1.33333);
+      margin-left: 100px;
+    }
     h1 {
       font: 1.7em/1 Open Sans, Impact;
     }
@@ -792,10 +885,49 @@ opacity: 0;
       position: relative;
       display: block;
       margin: auto;
+      width:90px;
     }
     .ghostdiv:first-child { display: none}
+    ul {
+      margin:80px auto 15px auto;
+      list-style-type: none;
+    }
+    li {
+      font-size:20px;
+      padding:7px 4px;
+      p:nth-child(odd) {
+        display:none
+      }
+    }
+    ul:hover li {
+      animation: flattenOut 1s linear 1 forwards;
+    }
+    li:nth-child(odd) {
+      transform: scaleY(1.1) skew(20deg, 0)
+    }
+    li:nth-child(even) {
+      transform: scaleY(1.1) skew(-20deg, 0deg)
+    }
+    li:nth-child(8) {display:none}
   }
-  .change { margin: 10px}
+
+
+  .maininf li:nth-child(4) {
+    height:107px;
+  }
+
+  #change1 div:nth-child(2) {
+    margin-top:30px
+  }
+  #div7 .delve:first-child {
+    margin-top:30px;
+    padding-left:50px;
+    border-top: 8px solid $maintxt;
+    transform: skew(10deg, 10deg);
+    img {transform: skew(0,0)}
+  }
+  #div7 div { padding-top:20px;}
+  #div7::after, #div7::before {width:0}
   #gplay {
     margin-bottom: 25px;
     padding-bottom: 0;
@@ -814,9 +946,12 @@ opacity: 0;
   #herodiv2 {display: none}
   #up {bottom: 60px}
 
-  .maininf li:nth-child(4) {
-    height:107px;
+  @keyframes flattenOut {
+    100% {
+      transform: skew(0,0) scaleY(1)
+    }
   }
+
   @keyframes slideBottom {
     0%{
       height: 0;
@@ -837,9 +972,19 @@ opacity: 0;
       opacity:1
     }
   }
-  .view {
-    background-size:contain;
-    border: none;
-    margin:0 auto
+  #updates {
+    overflow:visible;
+    margin-bottom:10px;
+    h2 {
+      top:5%;
+      font-size:1em;
+    }
+    ul {
+      top: 23%;
+      li {
+        font-size:14px;
+        padding:0;
+      }
+    }
   }
 }
