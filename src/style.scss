@@ -241,7 +241,7 @@ opacity: 0;
 #jobs{position:relative; overflow:hidden}
 #mainimg {
   position: absolute;
-  top:0;
+  top:-20%;
   opacity: 1;
   background-color: $mainBg;
   img {
@@ -884,7 +884,7 @@ body {
   #sideDiv {
     left: -90%;
     width:90%;
-    h4 {left: -110%;}
+    h4 {left: -120%;}
     a {
     width:140px;
     transform: none;
@@ -943,6 +943,8 @@ body {
       top:44%;
       right:20%
     }
+    #skipTop {right:-15%}
+    #skipBottom {left:-18%}
   }
   //.filtersSub div:nth-child(even) {text-align: right}
 //  .filtersSub div:first-child { display: inline}

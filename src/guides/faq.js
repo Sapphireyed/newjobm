@@ -62,9 +62,7 @@ faqDataAll.map(f => {
   quest1q.innerHTML = f[0]
   quest1q.append(collapse.cloneNode(true))
   quest1a.innerHTML = f[1].replace(/\|/g, '<br>')
-  console.log(f[1].replace(/\\n/g, '<br>'))
   quest1.append(quest1q, quest1a)
-  console.log(quest1)
   maindiv.append(quest1)
 })
 

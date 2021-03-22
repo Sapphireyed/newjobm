@@ -20,9 +20,9 @@ section {  margin-top: -25px;}
   $line-height: $clip-height -5px;
   #features {
     font-size:28px;
-    margin-left:-90px;
-    padding: 80px 0;
+    padding: 10px 0;
     margin-bottom:80px;
+    margin-top:50px;
   //  letter-spacing: -2px;
     // Sort out nasty text fuzz
     transform: translate3d(0, 0, 0);
@@ -36,16 +36,16 @@ section {  margin-top: -25px;}
     //  border-bottom: 2px solid $maintxt;
     // Change the perspective of each alternating line
     &:nth-child(odd) {
-      transform: skew(60deg, -20deg) scaleY(.66667);
+  //    transform: skew(60deg, -20deg) scaleY(.66667);
     }
     &:nth-child(even) {
-      transform: skew(0deg, -20deg) scaleY(1.33333);
+  //    transform: skew(0deg, -20deg) scaleY(1.33333);
     }
 
     // Loop over the total lines and apply a left offset
     @for $i from 1 through $total-lines+1 {
       &:nth-child(#{$i}) {
-        left: $left-offset * $i;
+    //    left: $left-offset * $i;
       }
     }
     }
@@ -62,7 +62,7 @@ section {  margin-top: -25px;}
   }
   #features:hover {
     p {
-      transform: translate3d(0, -($clip-height), 0);
+    //  transform: translate3d(0, -($clip-height), 0);
     }
   }
 }
@@ -278,7 +278,7 @@ opacity: 0;
 
 .maininf {
   .header {
-    transform: skew(0deg, -20deg) scaleY(1.33333)
+//    transform: skew(0deg, -20deg) scaleY(1.33333)
   }
 //  padding: 20px;
   margin: auto;
@@ -292,7 +292,7 @@ opacity: 0;
     text-shadow: 1px 2px black;
     border-radius: 5%;
     animation-delay: 0.8s;
-    margin: 40px 0 0 -100px;
+  //  margin: 40px 0 0 -100px;
     line-height:0.6;
   //  height:63px !important
   }
@@ -314,18 +314,10 @@ opacity: 0;
     display: inline-block;
     -webkit-animation: bounce 3.4s ease infinite alternate;
   }
-  /*ul { list-style-type: none;
-    font-size: 20px;
-    line-height:1.7;
-    text-align: justify;
-  }
+  ul { text-align: justify; }
   li {
-    line-height:1.7;
-    padding:6px;
-    font-size: 20px;
-    opacity: 0;
-    font-weight: bold;
-    text-shadow: 4px 4px 4px black;
+  //  font-weight: bold;
+//    text-shadow: 4px 4px 4px black;
     background: transparent;
         transition: .5s ease-out;
     background: linear-gradient(to left, transparent 50%, #052a42 50%) right;
@@ -333,53 +325,57 @@ opacity: 0;
     background-color: transparent;
   }
   li:hover {background-position: left}
-  li:nth-child(1) {
-    animation: fromLeft 0.3s linear 1 forwards;
-    animation-delay: 8s;
-  }
-  li:nth-child(2) {
-    animation: fromRight 0.4s linear 1 forwards;
-    animation-delay: 10s;
-  }
-  li:nth-child(3) {
-    overflow: hidden;
-    animation: slideBottom 1s linear 1 forwards;
-    animation-delay: 12s
-  }
-  li:nth-child(4) {
-  //  height: 80px;
-    overflow: hidden;
-    animation: slideLeft 1s linear 1 forwards;
-    animation-delay: 14s
-  }
-  li:nth-child(5) {
-    transform:scale(0);
-    animation: scale 1s linear 1 forwards;
-    animation-delay: 16s
-  }*/
-  .licontainer {
-    position:relative;
-    opacity:1;
-    background-color: transparent;
-    div:nth-child(2) {
-  //    opacity:0;
-      position: relative;
-    //  animation: fadein 2s ease-out forwards;
-      animation-delay: 18s;
-      z-index:-1;
-  }
-    .cover {
-      position:absolute;
-      top: 0;
-      left:0;
-      width: 0;
-  //    animation: translate 2s ease-out forwards;
-      animation-delay: 18s;
+  #features {
+    li{    opacity: 0;}
+    li:nth-child(1) {
+      animation: fromLeft 0.3s linear 1 forwards;
+      animation-delay: 8s;
+    }
+    li:nth-child(2) {
+      animation: fromRight 0.4s linear 1 forwards;
+      animation-delay: 10s;
+    }
+    li:nth-child(3) {
+      overflow: hidden;
+      animation: slideBottom 1s linear 1 forwards;
+      animation-delay: 12s
+    }
+    li:nth-child(4) {
       height: 80px;
-      background-color: #052a42;
-      z-index:1
+      overflow: hidden;
+      animation: slideLeft 1s linear 1 forwards;
+      animation-delay: 14s
+    }
+    li:nth-child(5) {
+      transform:scale(0);
+      animation: scale 1s linear 1 forwards;
+      animation-delay: 16s
+    }
+    .licontainer {
+      position:relative;
+      opacity:1;
+      background-color: transparent;
+      div:nth-child(2) {
+        opacity:0;
+        position: relative;
+        animation: fadein 2s ease-out forwards;
+        animation-delay: 18s;
+        z-index:-1;
+    }
+      .cover {
+        position:absolute;
+        top: 0;
+        left:0;
+        width: 0;
+        animation: translate 2s ease-out forwards;
+        animation-delay: 18s;
+        height: 80px;
+        background-color: #052a42;
+        z-index:1
+      }
     }
   }
+
 
   img {
     width:20px;
@@ -388,13 +384,13 @@ opacity: 0;
   .ghostdiv { position: relative;}
   .ghostdiv {
     img {
-      top:30px;
-      left:-40px
+    //  top:30px;
+  //    left:-40px
     }
   }
   .ghostdiv:first-child {
     transform: scaleX(-1);
-    img {left:80px}
+  //  img {left:80px}
   }
   #ghost {
     position: absolute;
@@ -872,7 +868,8 @@ opacity: 0;
   .maininf  {
     .header {
       transform: skew(0deg, -21deg) scaleY(1.33333);
-      margin-left: 100px;
+      margin-left: 0;
+      margin-top: 80px;
     }
     h1 {
       font: 1.7em/1 Open Sans, Impact;
@@ -880,16 +877,17 @@ opacity: 0;
     .head:nth-child(1), .head:nth-child(8), .head:nth-child(12), .head:nth-child(18) {
       font-size:47px
     }
-    #ghostdiv {margin:-30px auto auto auto;}
+    #ghostdiv {margin: auto; }
     #ghost {
       position: relative;
       display: block;
       margin: auto;
       width:90px;
+      float:right;
     }
     .ghostdiv:first-child { display: none}
     ul {
-      margin:80px auto 15px auto;
+      margin: 10px auto 15px auto;
       list-style-type: none;
     }
     li {
@@ -903,10 +901,10 @@ opacity: 0;
       animation: flattenOut 1s linear 1 forwards;
     }
     li:nth-child(odd) {
-      transform: scaleY(1.1) skew(20deg, 0)
+  //    transform: scaleY(1.1) skew(20deg, 0)
     }
     li:nth-child(even) {
-      transform: scaleY(1.1) skew(-20deg, 0deg)
+  //    transform: scaleY(1.1) skew(-20deg, 0deg)
     }
     li:nth-child(8) {display:none}
   }
@@ -958,7 +956,7 @@ opacity: 0;
       opacity:0;
     }
     100% {
-      height: 190px;
+      height: 150px;
       opacity:1
     }
   }

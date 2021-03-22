@@ -362,14 +362,14 @@ setTimeout(function(){
   jobsfilter.append(img)
 },2000)
 function imgfade() {
-  img.style.transition = '9s ease'
-  img.style.top = '-165%'
+  img.style.transition = '2s ease'
+  img.style.top = '-185%'
   upAndDown2.style.zIndex = -1
   upAndDown.style.zIndex = 1
 }
 function imgFadeIn() {
-  img.style.transition = '9s ease'
-  img.style.top = 0
+  img.style.transition = '2s ease'
+  img.style.top = '-20%'
   upAndDown2.style.zIndex = 1
   upAndDown.style.zIndex = -1
 }
