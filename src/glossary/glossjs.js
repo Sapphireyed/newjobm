@@ -181,7 +181,9 @@ function load() {
     loadList();
 }
 load()
-document.getElementById('skip').style.display = 'block'
+let skip = Array.from(document.getElementsByClassName('skip'))
+skip[0].style.animation = 'skipTop 20s linear infinite alternate'
+skip[1].style.animation = 'skipBottom 20s linear infinite alternate'
 $("#search").on("keyup", function() {
   var input = $(this).val().toLowerCase();
     $("#abilsBody tr").filter(function(){

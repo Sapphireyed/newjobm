@@ -481,8 +481,9 @@ window.addEventListener('load', function(){
               }
             })
 
-            let skip = document.getElementById('skip')
-            skip.style.display = 'block'
+            let skip = Array.from(document.getElementsByClassName('skip'))
+            skip[0].style.animation = 'skipTop 20s linear infinite alternate'
+            skip[1].style.animation = 'skipBottom 20s linear infinite alternate'
           },4500)
         })
 })

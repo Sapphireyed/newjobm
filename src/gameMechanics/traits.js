@@ -70,17 +70,30 @@ traitsAll.traitsFn()
       table.style.display = 'table-row-group';
       table2.style.display = 'none'
     }
-    let replay = document.querySelectorAll('#navbtns img')[0]
-    let stop = document.querySelectorAll('#navbtns img')[1]
-    let play  = document.querySelectorAll('#navbtns img')[2]
+    let replay = document.querySelectorAll('.navbtns img:nth-child(1)')
+    let stop = document.querySelectorAll('.navbtns img:nth-child(2)')
+    let play  = document.querySelectorAll('.navbtns img:nth-child(3)')
     let traitimg = Array.from(document.querySelectorAll('.traitimg'))
-    play.onclick = function(){
+    console.log(play)
+    play[0].onclick = function(){
       traitimg.map(img => img.style.animation = 'rotation 5s infinite linear')
     }
-    stop.onclick = function(){
+    play[1].onclick = function(){
+      traitimg.map(img => img.style.animation = 'rotation 5s infinite linear')
+    }
+    stop[0].onclick = function(){
       traitimg.map(img => img.style.animation = 'rotation 0')
     }
-    replay.onclick = function(){
+    stop[1].onclick = function(){
+      traitimg.map(img => img.style.animation = 'rotation 0')
+    }
+    replay[0].onclick = function(){
+      traitimg.map(img => {
+        let rand = Math.floor(Math.random() * Object.entries(traits).length)
+        img.src = Object.entries(traits)[rand][1]
+      })
+    }
+    replay[1].onclick = function(){
       traitimg.map(img => {
         let rand = Math.floor(Math.random() * Object.entries(traits).length)
         img.src = Object.entries(traits)[rand][1]
@@ -105,7 +118,9 @@ traitsAll.traitsFn()
         })
       }
     }
-
+    let skip = Array.from(document.getElementsByClassName('skip'))
+    skip[0].style.animation = 'skipTop 20s linear infinite alternate'
+    skip[1].style.animation = 'skipBottom 20s linear infinite alternate'
   })
 
 

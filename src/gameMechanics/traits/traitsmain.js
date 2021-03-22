@@ -32,7 +32,7 @@ img.src = Object.entries(traits)[rand][1]
 img2.src = Object.entries(traits)[rand2][1]
 img3.src = Object.entries(traits)[rand3][1]
 let navbtns = document.createElement('div')
-navbtns.className = 'col-12'
+navbtns.classList.add('col-12','navbtns')
 navbtns.id = 'navbtns'
 let play = document.createElement('img')
 let stop = document.createElement('img')
