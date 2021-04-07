@@ -81,6 +81,7 @@ img { max-width: 100%}
     background-color: $mainBg;
 }
 
+
 //navigation bar
 .dropdown {
   position: relative;
@@ -224,6 +225,85 @@ opacity: 0;
 }
 
 .hidden {display: block}
+
+//coming soon
+$color: #00517d;
+$color2: #23739e;
+$color3: #3f8fba;
+$color4: #6db2d6;
+$color5: #cae1ed;
+@function makelongshadow($color, $color2, $color3, $color4, $color5) {
+    $val: 0px 0px $color;
+
+    @for $i from 1 through 5 {
+        $val: #{$val}, -#{$i}px #{$i}px #{$color};
+    }
+
+    @for $i from 6 through 10 {
+        $val: #{$val}, -#{$i}px #{$i}px #{$color2};
+    }
+
+    @for $i from 11 through 15 {
+        $val: #{$val}, -#{$i}px #{$i}px #{$color3};
+    }
+
+    @for $i from 16 through 20 {
+        $val: #{$val}, -#{$i}px #{$i}px #{$color4};
+    }
+
+    @for $i from 21 through 25 {
+        $val: #{$val}, -#{$i}px #{$i}px #{$color5};
+    }
+
+    @return $val;
+}
+#soonSect {
+    width: 100%;
+    height: 100vh;
+
+    #comingsoon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: rgb(81,177,242);
+        font: 5em/1 Open Sans, Impact;
+        letter-spacing: 5px;
+        //font-weight: 900;
+        //font-size: 100px;
+        text-shadow: makelongshadow($color, $color2, $color3, $color4, $color5);
+        animation-name: animateShadow;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate
+    }
+}
+@keyframes animateShadow {
+    0% {
+        text-shadow: makelongshadow($color, $color2, $color3, $color4, $color5);
+    }
+
+    20% {
+        text-shadow: makelongshadow($color2, $color3, $color4, $color5, $color);
+    }
+
+    40% {
+        text-shadow: makelongshadow($color3, $color4, $color5, $color, $color2);
+    }
+
+    60% {
+        text-shadow: makelongshadow($color4, $color5, $color, $color2, $color3);
+    }
+
+    80% {
+        text-shadow: makelongshadow($color5, $color, $color2, $color3, $color4);
+    }
+
+    100% {
+        text-shadow: makelongshadow($color, $color2, $color3, $color4, $color5);
+    }
+}
+
 //main sections
 .section {
   //  padding: 10px 0;
@@ -946,6 +1026,10 @@ body {
     #skipTop {right:-15%}
     #skipBottom {left:-18%}
   }
+  #soonSect #comingsoon {
+      top:40%;
+        font: 4em/1 Open Sans, Impact;
+    }
   //.filtersSub div:nth-child(even) {text-align: right}
 //  .filtersSub div:first-child { display: inline}
 //  .filtersSub div:first-child label {width: 50%; text-align: left}

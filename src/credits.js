@@ -16,7 +16,7 @@ import stonesrc from './img/other/spaseStoneSol.png'
 import {preload } from './preload/preload.js'
 var $ = require("jquery")
 
-import aub from './img/character/aub.png'
+import aub from './img/other/Aubwhite.png'
 import dream from './img/character/Dream Slime Ækashics.png'
 import dfs from './img/credit/DFS.png'
 import icons from './img/credit/gameIcons.png'
@@ -116,6 +116,7 @@ let img5div = img1div.cloneNode(true)
 let name1div = document.createElement('div')
 let img1 = document.createElement('img')
 img1.src = aub
+  //  img1.style.filter= 'brightness(1000000%)'
 img1div.append(img1)
 name1div.classList.add('row', 'col-md-4', 'col-12')
 name1.classList.add('col-md-6', 'col-12')
@@ -186,7 +187,7 @@ mainsect.append(header, credit1, credit2, credit3, credit4, credit5)
 let designed = document.createElement('div')
 designed.classList.add('designed')
 let designedTxt = document.createElement('h6')
-designedTxt.innerHTML = '<em>Web designed by ........</em>'
+designedTxt.innerHTML = '<em>Web designed by <b>Małgorzata Szulc</b> (Sapphire)<br><a href="mailto: malgorzata.k.szulc@.gmail.com">Contact </a></em>'
 designed.append(designedTxt)
 
 document.body.append(mainsect, designed)

@@ -353,8 +353,8 @@ let empty = document.createElement('div')
 empty.style.width = '80%'
 
 img.append(imgImg)
-jobsfilter.append(upAndDown, upAndDown2)
-setTimeout(function(){
+//jobsfilter.append(upAndDown, upAndDown2)
+/*setTimeout(function(){
   w > 1000 ? imgImg.src= theadimg : imgImg.src = thanafight
   img.id = 'mainimg'
   img.style.width = jobsfilter.clientWidth + 'px'
@@ -375,5 +375,5 @@ function imgFadeIn() {
 }
 upAndDown.onclick = imgFadeIn
 //setTimeout(imgfade,10000)
-upAndDown2.onclick = imgfade
+upAndDown2.onclick = imgfade*/
 export { jobsfilter}

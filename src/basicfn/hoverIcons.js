@@ -3,7 +3,7 @@ import abilbg from '../img/Traits/Dumb.png'
 import charsbg from '../img/materials/Space Stone.png'
 import chaptbg from '../img/materials/Thunder Spirit.png'
 import rulesbg from '../img/traits/badTissue.PNG'
-import rulesbg2 from '../img/other/badTissueAub.png'
+import rulesbg2 from '../img/other/badTissueAub.PNG'
 var $ = require("jquery")
 import {jobImagesComplete, abilImagesComplete, charsImagesComplete } from '../img/imgsHTML.js'
 import { rules } from '../importImgs'
@@ -14,7 +14,7 @@ let targetWidth = 768;
 export function showIcon(item, arr, notchapt='notchapt') {
   let mouseY = event.clientY; //get mouseposition to decide where to display img
   let bgimg = arr == rules ? Object.entries(arr).filter(img => img[0] == item + '.png')[0][1] : arr.filter(img => img.id == item.innerText.trim())
-console.log(item.innerText.trim())
+//console.log(item.innerText.trim())
 console.log(arr)
   let theadimg;
   switch (arr) {
@@ -120,13 +120,14 @@ export function hideIcon(arr, notchapt='notchapt') {
       theadimg = notchapt == 'chapt' ? chaptbg : charsbg
       break;
     case rules:
-      theadimg = rulesbg
+      theadimg = rulesbg2
       break;
     default: theadimg = jobsBg
   }
-  if ( w > targetWidth) {
+    if (w > targetWidth) {
+      console.log(arr == rules)
     if (arr == rules) {
-      $('head').append('<style>body::after{background-image: url("' + rulesbg2 + '"); background-attachment: local; background-repeat: no-repeat; background-size: cover; background-position: center center; transform: none;z-index: -20}</style>')
+        $('head').append('<style>body::after{background-image: url("' + rulesbg2 + '"); background-attachment: fixed; background-repeat: no-repeat; background-size: cover; background-position: center top; height: 100%; width:100%;transform: none;z-index: -20}</style>')
     } else {
       $('head').append('<style>body::after{background-image: url("' + theadimg + '"); background-repeat: no-repeat; background-size: cover; background-position: center center ; height: 100%; width:100%; display: block; transform: none; top: 0; left: 0;z-index: -20}</style>')
 

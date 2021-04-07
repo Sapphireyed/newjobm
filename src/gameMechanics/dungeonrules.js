@@ -12,7 +12,7 @@ import { showIcon, hideIcon } from '../basicfn/hoverIcons.js'
 import { toggle} from '../basicfn/toggle.js'
 import { drules} from './dungrules/drulesjs.js'
 import { sideDiv, toggleSide } from '../side/side.js'
-import theadimg from '../img/other/infectedBg.png'
+import theadimg from '../img/other/BadTissueAub.PNG'
 var $ = require("jquery")
 import tablesorter from 'tablesorter';
 import {preload } from '../preload/preload.js'
@@ -26,7 +26,7 @@ toggleSide(sidenav, section, navmain)
 document.body.style.backgroundImage = 'url("' + theadimg + '")'
 document.body.style.backgroundSize = 'cover'
 document.body.style.backgroundAttachment = 'fixed'
-document.body.style.backgroundPosition = 'center center'
+document.body.style.backgroundPosition = 'top center'
 var headernav = document.getElementById("navMain");
 window.onscroll = function() {
   stickyNav(headernav)

@@ -20,6 +20,8 @@ module.exports = {
   gacha: path.resolve(__dirname, './src/gacha.js'),
   dungeonrules: path.resolve(__dirname, './src/gameMechanics/dungeonrules.js'),
   traits: path.resolve(__dirname, './src/gameMechanics/traits.js'),
+  unknowns: path.resolve(__dirname, './src/gameMechanics/unknowns.js'),
+  combos: path.resolve(__dirname, './src/gameMechanics/combos.js'),
   faq: path.resolve(__dirname, './src/guides/faq.js'),
   guide: path.resolve(__dirname, './src/guides/guide.js'),
   credits: path.resolve(__dirname, './src//credits.js'),
@@ -76,7 +78,7 @@ module: {
       chunks: ['home',],
     }),
     new HtmlWebpackPlugin({
-      title: "Webpack Output",
+      title: "jobs",
       filename: 'jobs.html',
       chunks: ['app',],
   //    inject: false ,
@@ -85,65 +87,90 @@ module: {
     //  ]
     }),
     new HtmlWebpackPlugin({
+      title: "job",
       filename: 'job.html',
       chunks: ['job'],
     //  inject: false ,
     }),
     new HtmlWebpackPlugin({
+      title: "abilities",
       filename: 'abilities.html',
       chunks: ['abilities'],
     }),
     new HtmlWebpackPlugin({
+      title: "passives",
       filename: 'passives.html',
       chunks: ['passives'],
     }),
     new HtmlWebpackPlugin({
+      title: "glossary",
       filename: 'glossary.html',
       chunks: ['glossary'],
     }),
     new HtmlWebpackPlugin({
+      title: "characters",
       filename: 'characters.html',
       chunks: ['characters'],
     }),
     new HtmlWebpackPlugin({
+      title: "character",
       filename: 'char.html',
       chunks: ['char'],
     }),
     new HtmlWebpackPlugin({
+      title: "chapters",
       filename: 'chapters.html',
       chunks: ['chapters'],
     }),
     new HtmlWebpackPlugin({
+      title: "materials",
       filename: 'materials.html',
       chunks: ['mats'],
     }),
     new HtmlWebpackPlugin({
+      title: "gachas",
       filename: 'gachas.html',
       chunks: ['gachas'],
     }),
     new HtmlWebpackPlugin({
+      title: "gacha",
       filename: 'gacha.html',
       chunks: ['gacha'],
     }),
     new HtmlWebpackPlugin({
+      title: "dungeon-rules",
       filename: 'dungeonrules.html',
       chunks: ['dungeonrules'],
     }),
     new HtmlWebpackPlugin({
+      title: "traits",
       filename: 'traits.html',
       chunks: ['traits'],
     }),
     new HtmlWebpackPlugin({
+        title: "faq",
       filename: 'faq.html',
       chunks: ['faq'],
     }),
     new HtmlWebpackPlugin({
+      title: "guide",
       filename: 'guide.html',
       chunks: ['guide'],
     }),
     new HtmlWebpackPlugin({
+      title: "credits",
       filename: 'credits.html',
       chunks: ['credits'],
+    }),
+    new HtmlWebpackPlugin({
+      title: "unknowns",
+      filename: 'unknowns.html',
+      chunks: ['unknowns'],
+    }),
+    new HtmlWebpackPlugin({
+      title: "combos",
+      filename: 'combos.html',
+      chunks: ['combos'],
     }),
     /*new CompressionPlugin({
       test: /\.js(\?.*)?$/i

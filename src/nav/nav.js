@@ -42,7 +42,7 @@ export default () => {
       +  '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="#">Game mechanics</a></li>'
       +  '<div class="dropdown-content">'
         +  '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./combos.html">Combos</a></li>'
-        +  '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./unknowns">Unknowns</a></li>'
+        +  '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./unknowns.html">Unknowns</a></li>'
         +  '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./traits.html">Traits</a></li>'
         //+ '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./abilitiessTraits.html">Abilities Traits</a></li>'
         + '<li class="nav-item nav-justified ml-3"><a class="nav-link" href="./dungeonrules.html">Dungeon Rules</a></li>'
