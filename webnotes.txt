@@ -1,3 +1,0 @@
-lightning detective switch tooltip doesnt work
-upgrade passives dont work
-job name == passive/switch name?  tooltip works. it shouldnt.
