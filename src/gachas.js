@@ -3,23 +3,14 @@ import './gachas.scss';
 //import fontawesome from '@fortawesome/fontawesome-free'
 import nav from './nav/nav';
 import { gachasmain} from './gachas/gachasmain.js'
-import {abilities, jobsData, verlog} from './abilitiesData.js'
-import {getMatImgs, getAbilImgs, getJobImgs, abilImagesComplete, jobImagesComplete, charsImagesComplete} from './img/imgsHTML.js'
-//import { jobsTable } from './jobs/jobsTable.js'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
-import { toggle} from './basicfn/toggle.js'
-//import { jobs} from './jobs/jobsjs.js'
-//
+import { toggle } from './basicfn/toggle.js'
+import { language } from './basicfn/language.js'
+import { localization } from './local/local.js'
+import { changeMenu } from './basicfn/changeMenu.js'
 import theadimg from './img/traits/BrokenDefend.PNG'
 import {preload } from './preload/preload.js'
 var $ = require("jquery")
-
-//let bgimg = document.createElement('img')
-//bgimg.id = 'bgimg'
-//bgimg.src = bg
-//let preload = document.createElement('div')
-//preload.id = 'preload'
-
 
 document.body.append(nav(), preload, gachasmain)
 cursor()
@@ -37,17 +28,29 @@ window.onscroll = function() {
   stickyNav(headernav)
 }
 
-window.onload = function(){
+document.getElementById('langSel').addEventListener('change', function () {
+    language()
+    loadAll()
+})
+
+function loadAll() {
+    localization.wiki()
+        .then(loc => {
+            localization.words()
+                .then(word => {
+                    changeMenu()
+                })
+        })
+    if (localStorage.getItem('language')) {
+        document.getElementById('langSel').value = localStorage.getItem('language')
+    }
 
   let skip = Array.from(document.getElementsByClassName('skip'))
   skip[0].style.animation = 'skipTop 20s linear infinite alternate'
   skip[1].style.animation = 'skipBottom 20s linear infinite alternate'
 }
+loadAll()
 
-//console.log(abilities.find)
-
-
-//console.log(gsheet)
 let button = document.getElementById('navbtn')
 let menu = document.getElementById('collapsemenu')
 toggle(menu, button)

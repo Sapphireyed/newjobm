@@ -3,39 +3,69 @@
   margin:auto
 }
 #mainguide {
-  background-color: rgba(179, 153, 124, 0.7);
-  h2 {
-    text-align: center;
-    background-color: #2f4600;
-    color: white;
-    border-radius: 3%;
-    box-shadow: 1px 2px black;
-    a{
-      color: #2f4600;
-      font-weight: bold;
-      width:28px;
-      background-color: white;
-      border-radius:50%;
-      float:right;
-      margin-right:1%;
-      box-shadow: 1px 2px black;
+    background: rgb(179, 153, 124);
+    h2 {
+        text-align: center;
+        background-color: #2f4600;
+        color: white;
+        border-radius: 3%;
+        box-shadow: 1px 2px black;
+
+        a {
+            color: #2f4600;
+            font-weight: bold;
+            width: 28px;
+            background-color: white;
+            border-radius: 50%;
+            float: right;
+            margin-right: 1%;
+            box-shadow: 1px 2px black;
+        }
     }
-  }
-  h5 {text-align: center;}
+
+    h5 {
+        text-align: center;
+    }
 }
 #intro {
   text-align: center;
 }
 
 #newbie {
-  img {
+  img:not(.icon) {
     width:350px;
     display:block;
     margin:auto;
   }
 }
 #contentDiv {
-  position: fixed;
-  top: 220px;
-  right:20px;
+    color: white;
+    background: #2f4600;
+    position: fixed;
+    top: 220px;
+    right: 20px;
+    //height:200px;
+    h3 {
+        padding-top:5px;
+        text-align: center;
+        color: white;
+    }
+}
+
+#subheroGuide {
+    img:not(.icon) {
+        display: inline-block;
+        margin:auto
+    }
+}
+@media only screen and (max-width: 760px) {
+    #mainsect {
+        width: 90vw;
+        padding: 0 3px;
+        margin: auto;
+    }
+
+    #contentDiv {
+        position: inherit;
+    }
 }

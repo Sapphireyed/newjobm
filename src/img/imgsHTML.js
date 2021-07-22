@@ -6,12 +6,13 @@ import {jobsImgs, jobsFrames, jobsBg,
         matsImgs, matsFrames,
         abilsImgs, abilsBg,
         charsImgs, charsBg} from '../importImgs.js'
+import { materialsLoc, charsLoc, wordsLoc, jobsNamesLoc} from '../local/local.js'
 
 let matImagesComplete = []
 let jobImagesComplete = []
 let abilImagesComplete = []
 let charsImagesComplete = []
-console.log(charsImagesComplete)
+
 export { matImagesComplete, jobImagesComplete, abilImagesComplete, charsImagesComplete } // full DOM element containing job/mat img
 
 //mats frames
@@ -25,32 +26,68 @@ let legendary = Object.entries(matsFrames).filter(frame => frame[0] == 'Legendar
 legendary = Object.values(legendary)[0][1]
 // mats img complete
 export function getMatImgs() {
-  Object.entries(matsImgs).map(mat => {
+    matImagesComplete = []
+    let lang = document.getElementById('langSel').value
+    Object.entries(matsImgs).map(mat => {
+        
     let ext = mat[0].indexOf('.')
-    let name = mat[0].substring(0, ext)
+        let name = mat[0].substring(0, ext)
+
+        switch (lang) {
+            case 'English':
+                name = materialsLoc.filter(m => name != undefined && name == m[0])[0]
+                name = name == undefined ? 'n/a' : name[1]
+                break
+            case 'Chinese':
+                name = materialsLoc.filter(m => name != undefined && name == m[0])[0]
+                name = name == undefined ? 'n/a' : name[2]
+                break
+            case 'Chinese(Trad)':
+                name = materialsLoc.filter(m => name != undefined && name == m[0])[0]
+                name = name == undefined ? 'n/a' : name[3]
+                break
+        }
+
     let matImgHtml = document.createElement('img');  //create mat img empty
     matImgHtml.style.backgroundImage = "url('" + mat[1] + "')";  // set shape as backgrond
     matImgHtml.id = name;
     matImgHtml.className = 'material'
     matImgHtml.style.backgroundSize = 'cover'
-    mats.map(material => {
+        mats.map(material => {
+            
       if (material[1] == matImgHtml.id) { // set frame as img src dep on rarity
-        let rarity = material[2]
-        switch (rarity) {
-          case 'Common':
-            matImgHtml.src = common
-            break;
-          case 'Rare':
-            matImgHtml.src = rare
-            break;
-          case 'Epic':
-            matImgHtml.src = epic
-            break;
-          case 'Legendary':
-            matImgHtml.src = legendary
-            break;
-        default:
-        }
+          let rarity = material[2]
+          
+          switch (lang) {
+              case 'English':
+                  rarity = wordsLoc.filter(loc => loc[1] == rarity)[0][1];
+                  break;
+              case 'Chinese':
+                  console.log(rarity)
+                  rarity = wordsLoc.filter(loc => loc[2] == rarity)[0][1];
+                  break;
+              case 'Chinese(Trad)':
+                  rarity = wordsLoc.filter(loc => loc[3] == rarity)[0][1];
+                  break;
+          }
+          let translateRar = wordsLoc.filter(loc => loc[1] == rarity)
+          //translateRar[0] = translateRar[0] == undefined ? 'n/a' : translateRar[0]
+
+          switch (rarity) {
+              case 'Common':
+                matImgHtml.src = common
+                break;
+              case 'Rare':
+                matImgHtml.src = rare
+                break;
+              case 'Epic':
+                matImgHtml.src = epic
+                break;
+              case 'Legendary':
+                matImgHtml.src = legendary
+                break;
+            default:
+          }
         matImagesComplete.push(matImgHtml)
       }
 
@@ -83,7 +120,20 @@ export function getJobImgs() {
 
   Object.entries(jobsImgs).map(job => {
     let ext = job[0].indexOf('.')
-    let name = job[0].substring(0, ext)
+      let name = job[0].substring(0, ext)
+      let lang = document.getElementById('langSel').value
+      switch (lang) {
+          case 'English':
+              name = jobsNamesLoc.filter(j => j[0] == name)[0] == undefined ? name : jobsNamesLoc.filter(j => j[0] == name)[0][1]
+              break
+          case 'Chinese':
+              name = jobsNamesLoc.filter(j => j[0] == name)[0] == undefined ? name : jobsNamesLoc.filter(j => j[0] == name)[0][2]
+              break
+          case 'Chinese(Trad)':
+              name = jobsNamesLoc.filter(j => j[0] == name)[0] == undefined ? name : jobsNamesLoc.filter(j => j[0] == name)[0][3]
+              console.log(name)
+              break
+      }
     jobImgDiv = document.createElement('div');  // create empty div to hold 2 imgs
     jobImgDiv.id = name;
     jobImgDiv.style.position = 'relative'
@@ -123,7 +173,7 @@ export function getJobImgs() {
       })
   })
   //2nd img for div element - job bg img
-  console.log(jobsStats)
+
   Object.entries(jobsStats).map(j => {
     sortable.push(Object.entries(j[1]).sort(((a,b) => b[1]-a[1])))
   })
@@ -158,13 +208,16 @@ export function getJobImgs() {
 
   })
 
-  jobImagesComplete.map(imgdiv => {
+    jobImagesComplete.map(imgdiv => {
+
     let jobImgBg = document.createElement('img');
     jobImgBg.style.position = 'absolute'
     jobImgBg.style.zIndex = '1'
     let x = jobbg.find(bg => bg[0] == imgdiv.id)
-    jobImgBg.src = x[2]
-    imgdiv.append(jobImgBg)
+        jobImgBg.src = x[2]
+        if (!imgdiv.innerHTML.includes(jobImgBg.src)) {
+            imgdiv.append(jobImgBg)
+        }
 
   })
 }
@@ -187,9 +240,9 @@ let abilImgArr =[]
 
 
 export function getAbilImgs() {
-  let abilSkillsSplit = Object.values(abilSkills).map(ab => ab == undefined ? '' : ab.split(':'))
-  let abilTraitsSplit = Object.values(abilTraits).map(ab => ab == undefined ? '' : ab.split(':'))
-  let abilEffectsSplit = Object.values(abilEffects).map(ab => ab == undefined ? '' : ab.split(':'))
+  let abilSkillsSplit = Object.values(abilSkills).map(ab => ab == undefined ? '' : ab.split(':<br>'))
+  let abilTraitsSplit = Object.values(abilTraits).map(ab => ab == undefined ? '' : ab.split(':<br>'))
+  let abilEffectsSplit = Object.values(abilEffects).map(ab => ab == undefined ? '' : ab.split(':<br>'))
   const elemRegex = /fire|water|earth|thunder|wind|light|dark|bleed|injury|venom|restrain|insane|Element|Debuff/gi;
 
   abilitiesAllInfo.map(img => {
@@ -198,6 +251,7 @@ export function getAbilImgs() {
     abilImgHtml.id = img[2].trim()
     abilImgArr.push(abilImgHtml)
   })
+
   Array.from(abilImgArr).map(img => {
     let imgsrc = Object.entries(abilsImgs).filter(abil => abil[0] == img.classList[0] + '.png')
     imgsrc.map(src => {
@@ -206,9 +260,14 @@ export function getAbilImgs() {
       if (name == img.classList[0]) {
          img.src = src[1]
       }
-      let bgtype = abilSkillsSplit.filter(abil => abil[0] == img.id)
-      let isCurse = abilTraitsSplit.filter(abil => abil[0] == img.id)
+        let bgtype = abilSkillsSplit.filter(abil => abil[0] == img.id)
+
+        let isCurse = abilTraitsSplit.filter(abil => abil[0] == img.id)
+      //  isCurse = isCurse.map(c =>console.log(c[1]))
+      //  console.log(isCurse[0][1])
       let effect = abilEffectsSplit.filter(abil => abil[0] == img.id)
+        isCurse[0] = isCurse[0] == undefined ? ['N/A', 'N/A'] : isCurse[0]
+        bgtype[0] = bgtype[0] == undefined ? ['N/A', 'N/A'] : bgtype[0]
 
       switch (true) {
         case isCurse[0][1].includes('Curse'):
@@ -254,9 +313,24 @@ let cfive = Object.entries(charsBg).filter(frame => frame[0] == '5.png')
 cfive = Object.values(cfive)[0][1]
 // mats img complete
 export function getCharsImages() {
+    let lang = document.getElementById('langSel').value
   Object.entries(charsImgs).map(mat => {
     let ext = mat[0].indexOf('.')
-    let name = mat[0].substring(0, ext)
+      let name = mat[0].substring(0, ext)
+      switch (lang) {
+          case 'English':
+              name = charsLoc.filter(m => name != undefined && name == m[0])[0]
+              name = name == undefined ? 'n/a' : name[1]
+              break
+          case 'Chinese':
+              name = charsLoc.filter(m => name != undefined && name == m[0])[0]
+              name = name == undefined ? 'n/a' : name[2]
+              break
+          case 'Chinese(Trad)':
+              name = charsLoc.filter(m => name != undefined && name == m[0])[0]
+              name = name == undefined ? 'n/a' : name[3]
+              break
+      }
     let matImgHtml = document.createElement('img');  //create mat img empty
     matImgHtml.src=  mat[1]  // set shape as backgrond
     matImgHtml.id = name;
@@ -284,7 +358,8 @@ export function getCharsImages() {
             break;
         default:
       }*/
-        charsImagesComplete.push(matImgHtml)
+          charsImagesComplete.push(matImgHtml)
+
       }
 
     })

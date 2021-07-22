@@ -1,14 +1,13 @@
 import { tbody } from './jobstraitsTable.js'
 import { applyBody } from './abilstraitsTable.js'
 //import { openNew } from '../basicfn/openNew.js'
-import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
-        passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
-        jobsDataAll, glossAllInfo, appliesAllInfo,traitsDataAll} from '../../abilitiesData.js'
+import { traitsDataAll, traitsImgs} from '../../abilitiesData.js'
 import {filterPass} from '../../basicfn/filters.js'
 import { traits } from '../../importImgs.js'
 import { showIcon, hideIcon } from '../../basicfn/hoverIcons.js'
 var $ = require("jquery")
 import tablesorter from 'tablesorter';
+
 
 console.log(traits)
 export function glossFn() {
@@ -43,8 +42,7 @@ export function glossFn() {
 
           //add images to pic cell
           let traitsimgs = Object.entries(traits)
-          var imgComplete = traitsimgs.find(jobimg => jobimg[0].toLowerCase() == jobItem[2].toLowerCase() + '.png')
-          console.log(traitsimgs.map(jobimg => jobimg[0].toLowerCase()))
+            var imgComplete = traitsImgs.find(jobimg => jobimg[0].toLowerCase() == jobItem[2].toLowerCase() + '.png')
           if (cell.innerHTML == 'pic') {
             let pic = document.createElement('img')
             imgComplete == undefined ? '' : pic.src = imgComplete[1]
@@ -83,8 +81,6 @@ export function applyTableFn() {
         jobItem.splice(0,0, i+1)
         jobItem.splice(1, 0, "pic")
         if (jobItem[2] !== undefined) {
-          console.log(jobItem)
-          console.log(jobItem[3])
           var tableRow = document.createElement('tr')
           tableRow.classList.add('jobRow')
           i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#d6d1bf'
@@ -97,10 +93,10 @@ export function applyTableFn() {
             //add images to pic cell
             let traitsimgs = Object.entries(traits)
 
-            var imgComplete = traitsimgs.find(jobimg => jobItem[2] == undefined ? '' : jobimg[0].toLowerCase() == jobItem[3].toLowerCase() + '.png')
+            var imgComplete = traitsImgs.find(jobimg => jobItem[2] == undefined ? '' : jobimg[0].toLowerCase() == jobItem[3].toLowerCase() + '.png')
             if (cell.innerHTML == 'pic') {
               let pic = document.createElement('img')
-              pic.src = imgComplete[1]
+              pic.src = imgComplete == undefined ? 'n/a' : imgComplete[1] 
               console.log(traits)
               cell.id = 'pic'
               cell.innerHTML = ''

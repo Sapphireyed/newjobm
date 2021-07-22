@@ -7,6 +7,12 @@ $mainBg: #444444;
 ::-webkit-scrollbar-thumb {
     background-color: $mainBg;
 }
+
+#chooselang {
+    visibility: hidden;
+    z-index: -1
+}
+
 #header {
   img {
     width:55%;

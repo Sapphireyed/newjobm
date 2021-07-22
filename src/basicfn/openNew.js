@@ -1,5 +1,6 @@
 import {jobmain} from '../jobs/job/jobmain.js'
-import {charmain } from '../chars/char/charmain.js'
+import { charmain } from '../chars/char/charmain.js'
+import { materialsLocal, matsLoc, wordsLoc } from '../local/local.js';
 import {abilities, descFinale, abilSkills, abilEffects, abilTraits,
         passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
         craft, jobsStats } from '../abilitiesData.js'
@@ -12,16 +13,18 @@ import agiimg from '../img/other/agi.png'
 import intimg from '../img/attr/int.png'
 import { splitDesc, splitApply } from './splitFn.js'
 import {rarityFn} from './rarity.js'
-import {preload } from '../preload/preload.js'
+import { preload } from '../preload/preload.js'
 
-export function openNew(page,arr, i, abilArr, abilskills, abileffects, abiltraits, passivesarr, passivedesc, passiveskills,  passiveeffects, passivetraits, table='table') {
-
+export function openNew(page, arr, i, abilArr, abilskills, abileffects, abiltraits, passivesarr, passivedesc, passiveskills, passiveeffects, passivetraits, table = 'table') {
+    let lang = document.getElementById('langSel')
     var abil = abilArr
     var jobItem = arr[i-1]
 //    var jobItem = Object.values(arr[i - 1])
     var win = window.open(page +'.html')
     // fires in the new tab
-    var newWin = setTimeout(function(){
+    var newWin = setTimeout(function () {
+        win.document.getElementById('langSel').value = lang.value
+        console.log(win.document.getElementById('langSel').value)
       win.document.body.appendChild(preload)
       var header = win.document.getElementById('jobheader')
       header.innerHTML = jobItem[1]
@@ -57,26 +60,41 @@ export function openNew(page,arr, i, abilArr, abilskills, abileffects, abiltrait
 
       }
 
-
+        let beginner, easy, medium, hard, boss
+        beginner = wordsLoc.filter(loc => loc[0] == 'EnemyBeginner')
+        easy = wordsLoc.filter(loc => loc[0] == 'EnemyEasy')
+        medium = wordsLoc.filter(loc => loc[0] == 'EnemyMedium')
+        hard = wordsLoc.filter(loc => loc[0] == 'EnemyHard')
+        boss = wordsLoc.filter(loc => loc[0] == 'EnemyBoss')
         //change the new tab look based on job/char rarity
         switch (jobItem[2]) {
-            case 'Beginner':
+            case beginner[0][1]:
+            case beginner[0][2]:
+            case beginner[0][3]:
             case '1':
                 win.document.body.classList.add('job1star')
                 break;
-            case 'Easy':
+            case easy[0][1]:
+            case easy[0][2]:
+            case easy[0][3]:
             case '2':
                 win.document.body.classList.add('job2star')
                 break;
-            case 'Medium':
+            case medium[0][1]:
+            case medium[0][2]:
+            case medium[0][3]:
             case '3':
                 win.document.body.classList.add('job3star')
                 break;
-            case 'Hard':
+            case hard[0][1]:
+            case hard[0][2]:
+            case hard[0][3]:
             case '4':
                 win.document.body.classList.add('job4star')
                 break;
-            case 'Boss':
+            case boss[0][1]:
+            case boss[0][2]:
+            case boss[0][3]:
             case '5':
                 win.document.body.classList.add('job5star')
                 break;
@@ -224,23 +242,24 @@ let myreg = /([A-Z])\w+/gi
               cards[i].parentNode.remove()
             }
           }
-
           // Craft
           let craftdiv = win.document.getElementById('craftCraft')
           let craftjob = Object.entries(craft).map(job => {
             job.shift()
-            job = job[0]
-            job[9] = job[9] == undefined ? 'n/a' : job[9]
+              job = job[0]
+
+              job[9] = job[9] == undefined ? 'n/a' : job[9]
+
             let material = job[0]
             let matImg = matImagesComplete.filter(m => m.id == material)
-
+              console.log(job)
             switch (jobItem[1]) {
               case job[9]:
-                craftdiv.innerHTML = '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
-                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
-                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
+                craftdiv.innerHTML = '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">Jobless</span></div></div><span></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[0] + '</span></div></div><span></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[1] + '</span></div></div><span></span>'
+                                      + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[2] + '</span></div></div><span></span>'
+                                      + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[3] + '</span></div></div><span></span>'
                                       + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[4] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
                                       + '<div class="col-md col-6 craft craftjob"><div><span id="craftjob"></span><span class="craft">' + job[5] + '</span></div></div><span><i class="fas fa-plus"></i></span>'
                                       + '<div class="col-md col-6 craft craftmat"><div><span id="craftmat"></span><span class="craft">' + job[6] + '</span></div></div><span><i class="fas fa-arrow-right"></i></span>'
@@ -284,7 +303,7 @@ let myreg = /([A-Z])\w+/gi
 
     //    console.log(jobcraft)
 
-}, 1020)
+}, 1120)
 
 
 }

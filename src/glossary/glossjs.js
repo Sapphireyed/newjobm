@@ -108,7 +108,9 @@ function loadList() {
         jobItem.splice(2, 2)
         jobItem.splice(2, 0, desc)
         jobItem.splice(6,1)
-      //  jobItem.pop()
+          jobItem.pop()
+          jobItem.pop()
+          jobItem.pop()
 
 
     //    jobItem.splice(7, 2, '', '')
@@ -195,7 +197,8 @@ $("#search").on("keyup", function() {
 export function applyTableFn() {
 
   var pagesSel = document.getElementById('numOfPages')
-  var list = appliesAllInfo
+    var list = appliesAllInfo
+    console.log(appliesAllInfo)
   var pageList = [];
   var currentPage = 1;
   var numberPerPage = pagesSel.value;
@@ -241,8 +244,8 @@ export function applyTableFn() {
     // pagination
     var begin
     if (numberPerPage == 10) {
-      $("table").trigger("destroy");
-      begin = ((currentPage - 1) * numberPerPage);
+        $("table").trigger("destroy");
+        begin = ((currentPage - 1) * numberPerPage);
     } else if ( numberPerPage == 'all') {
       begin = 0
       numberPerPage = list.length
@@ -257,23 +260,6 @@ export function applyTableFn() {
     drawList();
     check();
     $('.myTable').tablesorter();
-
-  // Icons on sides of the table
-    let abilrows = Array.from(document.querySelectorAll('tr'))
-    abilrows.shift()
-    for (var i = 0; i < abilrows.length; i++) {
-      let name = abilrows[i].children[2]
-
-    /*  abilrows[i].addEventListener('mousemove', function() {
-        showIcon(name, abilImagesComplete)
-      })
-      abilrows[i].addEventListener('mouseleave', function(){
-        hideIcon(abilImagesComplete)
-      })*/
-
-    }
-
-
 
   }
 
@@ -291,8 +277,9 @@ export function applyTableFn() {
         jobItem.splice(2, 2)
         jobItem.splice(2, 0, desc)
         jobItem.splice(6,1)
-
-      //  jobItem.pop()
+          jobItem.pop()
+          jobItem.pop()
+        jobItem.pop()
 
 
     //    jobItem.splice(7, 2, '', '')
@@ -320,22 +307,6 @@ export function applyTableFn() {
               break;
             default: cell.innerHTML = '<td>' + job.replace('N/A', '') + '</td>'
           }
-
-        /*  var tooltip = document.createElement('span')
-          tooltip.classList.add('tooltipMy', 'tooltiptext')
-
-
-            cell.innerHTML == jobItem[5] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
-            cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''*/
-
-          //add images to pic cell
-        /*  var imgComplete = abilImagesComplete.find(jobimg => jobimg.id == jobItem[2])
-
-          if (cell.innerHTML == 'pic') {
-            cell.id = 'pic'
-            cell.innerHTML = ''
-            cell.append(imgComplete)
-          }*/
 
           tableRow.appendChild(cell)
           applyBody.append(tableRow)

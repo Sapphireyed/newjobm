@@ -1,0 +1,52 @@
+﻿$mainBg: #222738;
+@mixin title {
+    text-align: center;
+    color: #fff;
+    background-color: $mainBg;
+}
+h1 {
+    @include title;
+}
+
+#mainsect {
+    width: 90vw;
+    margin: auto;
+    background-color: #6b7fb0;
+    text-align: justify;
+    padding: 5px 20px;
+
+    #disclaimer {
+        text-align: center
+    }
+
+    #div1 div:nth-child(2) {
+        display: block;
+        margin: auto
+    }
+
+    #div2 {
+        h4 {
+            text-align: center;
+            margin-top: 10px;
+        }
+    }
+
+    div3 {
+        h4 {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .elementCycle {
+            display: block;
+            margin: 10px auto;
+        }
+    }
+}
+
+#div1 img:not(.breakimg):hover {
+    transform: scale(1.5)
+}
+.breakimg {
+    display:block;
+    margin:auto;
+}

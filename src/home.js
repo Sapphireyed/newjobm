@@ -8,11 +8,14 @@ import {getMatImgs, getAbilImgs, getJobImgs, abilImagesComplete, jobImagesComple
 import { jobsTable } from './jobs/jobsTable.js'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
 import { toggle} from './basicfn/toggle.js'
-import { jobs} from './jobs/jobsjs.js'
+import { jobs } from './jobs/jobsjs.js'
+import { materialsLocal, matsLoc } from './local/local.js';
 //
 import theadimg from './img/other/spacestoneBg.png'
 import stonesrc from './img/other/spaseStoneSol.png'
-import {preload } from './preload/preload.js'
+import { preload } from './preload/preload.js'
+import { localization } from './local/local.js'
+import { changeMenu } from './basicfn/changeMenu.js'
 var $ = require("jquery")
 
 
@@ -42,7 +45,8 @@ window.addEventListener('scroll', function() {
   }
 })
 
-window.onload = function(){
+window.onload = function () {
+    
   let stones = document.createElement('div')
   stones.id= 'stones'
 let stone = document.createElement('img')
@@ -54,34 +58,7 @@ while (stonei<= 9) {
   stonei++
 }
 document.body.appendChild(stones)
-/*  let stones = Array.from(document.getElementsByClassName('stone'))
-  let index = 0
-  let randTop = [5, 75, 45, 25, 35, 15]
-  stones.map(st => {
-    setInterval(function(){
-      let rand = Math.floor(Math.random() * randTop.length)
-      st.style.transform = 'rotate(' + randTop[rand] + 'deg)'
-      st.style.top = randTop[rand] + '%'
-      st.style.left = randTop[rand] + '%'
-      st.style.width = randTop[rand]/4 + '%'
-      console.log(randTop[rand])
-    }, 25000)
 
-})*/
-
-//h1 effects
-/*let header = document.querySelectorAll('.maininf h1')[0]
-header.innerHTML = header.innerHTML.split('').map(h => '<h1 class="head">' + h + '</h1>').join('')
-let heads = Array.from(document.querySelectorAll('.head'))
-console.log(heads)
-setTimeout(function(){
-  heads.map((h, ind) => {
-    h.style.animation = 'hithere 1s linear infinite'
-  //  h.style.animationDelay = ind + 's'
-    ind += 1.5
-  })
-},6000)*/
-//split header into span elements each containng one letter
 let header = document.querySelectorAll('.maininf h1')[0]
 let headersplit = header.innerHTML.split('<br>')
 headersplit[0] = headersplit[0].split('').map(h => h = '<span class="head">' + h + '</span>').join('')
@@ -94,89 +71,103 @@ setInterval(function() {
   ghost.style.animation = 'hithere 7s ease infinite'
 },8000)
 
-function el1(el1, fontsize){
-  let s = 0;
-  el1.style.fontSize = 0
-  let start = setInterval(function(){
-    el1.style.fontSize = s >= fontsize ? fontsize+'px' : s+1 + 'px'
-    s++
+    if (localStorage.getItem('language')) {
+        document.getElementById('langSel').value = localStorage.getItem('language')
+    }
 
-  },4)
-  setTimeout(function() {
-    el1.style.fontSize = fontsize + 'px'
-    clearInterval(start)
-  }, 1000)
-}
-function picInside(el,arr) {
-  let start = setInterval(function(){
-    let rand = Math.floor(Math.random() * arr.length)
-    el.src = arr == jobImagesComplete ? arr.[rand].children[0].src : arr[rand].src || arr[rand]
-    el.style.opacity = 0
-    el.style.transition = '1s'
-    el.style.opacity = 1
-  }, 2000)
-  setTimeout(function(){
-    clearInterval(start)
-  }, 7999)
-}
+    localization.words()
+    localization.wiki()
+    localization.abils()
+    localization.passives()
+    localization.characters()
+    localization.jobs()
+        .then(loc => {
+            changeMenu()
+            function el1(el1, fontsize) {
+                let s = 0;
+                el1.style.fontSize = 0
+                let start = setInterval(function () {
+                    el1.style.fontSize = s >= fontsize ? fontsize + 'px' : s + 1 + 'px'
+                    s++
 
-  let divs = Array.from(document.getElementsByClassName('div'))
-  let i = divs.length-1
-  divs[i].style.opacity = 1
-  divs[i].style.position = 'inherit'
-  setTimeout(function(){
-    let skip = Array.from(document.getElementsByClassName('skip'))
-    skip[0].style.animation = 'skipTop 20s linear infinite alternate'
-    skip[1].style.animation = 'skipBottom 20s linear infinite alternate'
-    skip[2].style.animation = 'skipLeft 20s linear infinite alternate'
-    skip[3].style.animation = 'skipRight 20s linear infinite alternate'
-    div1Fn()
-  }, 2000)
-  function div1Fn() {
-  //  let divs = Array.from(document.getElementsByClassName('div'))
+                }, 4)
+                setTimeout(function () {
+                    el1.style.fontSize = fontsize + 'px'
+                    clearInterval(start)
+                }, 1000)
+            }
+            function picInside(el, arr) {
+                let start = setInterval(function () {
+                    let rand = Math.floor(Math.random() * arr.length)
+                    el.src = arr == jobImagesComplete ? arr.[rand].children[0].src : arr[rand].src || arr[rand]
+                    el.style.opacity = 0
+                    el.style.transition = '1s'
+                    el.style.opacity = 1
+                }, 2000)
+                setTimeout(function () {
+                    clearInterval(start)
+                }, 7999)
+            }
 
-    i = i > divs.length-1 ? 0 : i
-    Array.from(divs[i].children[0].children).map(txt => {
-      txt.style.fontSize = 0
-    })
-    divs[i].children[2].style.fontSize = 0
-    let next = i == divs.length-1 ? 0 : i+1
-    divs[i].style.transition = '1s'
-    divs[i].style.opacity = 0
-    divs[i].style.position = 'absolute'
-    divs[next].style.transition = '1.3s'
-    divs[next].style.opacity = 1
-    divs[next].style.position = 'inherit'
+            let divs = Array.from(document.getElementsByClassName('div'))
+            let i = divs.length - 1
+            divs[i].style.opacity = 1
+            divs[i].style.position = 'inherit'
+            setTimeout(function () {
+                let skip = Array.from(document.getElementsByClassName('skip'))
+                skip[0].style.animation = 'skipTop 20s linear infinite alternate'
+                skip[1].style.animation = 'skipBottom 20s linear infinite alternate'
+                skip[2].style.animation = 'skipLeft 20s linear infinite alternate'
+                skip[3].style.animation = 'skipRight 20s linear infinite alternate'
+                div1Fn()
+            }, 2000)
+            function div1Fn() {
+                //  let divs = Array.from(document.getElementsByClassName('div'))
+
+                i = i > divs.length - 1 ? 0 : i
+                Array.from(divs[i].children[0].children).map(txt => {
+                    txt.style.fontSize = 0
+                })
+                divs[i].children[2].style.fontSize = 0
+                let next = i == divs.length - 1 ? 0 : i + 1
+                divs[i].style.transition = '1s'
+                divs[i].style.opacity = 0
+                divs[i].style.position = 'absolute'
+                divs[next].style.transition = '1.3s'
+                divs[next].style.opacity = 1
+                divs[next].style.position = 'inherit'
 
 
-    el1(divs[next].children[0].children[0], 48)
-    setTimeout(function(){
-      el1(divs[next].children[0].children[1], 40)
-    },600)
-    setTimeout(function(){
-      el1(divs[next].children[2], 54)
-    },1200)
-    i++
-  }
-/*  setTimeout(function(){
-    divs[0].style.transition = '1.3s'
-    divs[0].style.opacity = 1
-    divs[0].style.position = 'inherit'
-    el1(divs[0].children[0].children[0], 48)
-    setTimeout(function(){
-      el1(divs[0].children[0].children[1], 40)
-    },600)
-    setTimeout(function(){
-      el1(divs[0].children[0].children[2], 54)
-    },1200)
-    picInside(divs[0].children[1].children[0], charsImagesComplete)
-  },2000)
-  setTimeout(function(){
-    divs[0].style.transition = '1.3s'
-    divs[0].style.opacity = 0
-    divs[0].style.position = 'absolute'
-  }, 8000)*/
-  setInterval(div1Fn, 8000)
+                el1(divs[next].children[0].children[0], 48)
+                setTimeout(function () {
+                    el1(divs[next].children[0].children[1], 40)
+                }, 600)
+                setTimeout(function () {
+                    el1(divs[next].children[2], 54)
+                }, 1200)
+                i++
+            }
+            /*  setTimeout(function(){
+                divs[0].style.transition = '1.3s'
+                divs[0].style.opacity = 1
+                divs[0].style.position = 'inherit'
+                el1(divs[0].children[0].children[0], 48)
+                setTimeout(function(){
+                  el1(divs[0].children[0].children[1], 40)
+                },600)
+                setTimeout(function(){
+                  el1(divs[0].children[0].children[2], 54)
+                },1200)
+                picInside(divs[0].children[1].children[0], charsImagesComplete)
+              },2000)
+              setTimeout(function(){
+                divs[0].style.transition = '1.3s'
+                divs[0].style.opacity = 0
+                divs[0].style.position = 'absolute'
+              }, 8000)*/
+            setInterval(div1Fn, 8000)
+        })
+
 
 }
 

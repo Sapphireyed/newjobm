@@ -2,12 +2,13 @@ import './style.scss';
 import './gacha.scss';
 //import fontawesome from '@fortawesome/fontawesome-free'
 import nav from './nav/nav';
-import { gachamain} from './gachas/gacha/gachamain.js'
+import { gachamain, gachaFn} from './gachas/gacha/gachamain.js'
 import {abilities, jobsData, verlog} from './abilitiesData.js'
 import {getMatImgs, getAbilImgs, getJobImgs, abilImagesComplete, jobImagesComplete, charsImagesComplete} from './img/imgsHTML.js'
 //import { jobsTable } from './jobs/jobsTable.js'
 import { stickyNav, cursor } from './basicfn/stickyNav.js'
-import { toggle} from './basicfn/toggle.js'
+import { toggle } from './basicfn/toggle.js'
+
 //import { jobs} from './jobs/jobsjs.js'
 //
 import {preload } from './preload/preload.js'
@@ -29,11 +30,18 @@ window.onscroll = function() {
   stickyNav(headernav)
 }
 
-window.onload = function(){
+document.getElementById('langSel').addEventListener('change', function () {
+    document.querySelector('#maindiv').innerHTML = '';
+    gachaFn()
+})
+window.onload = function () {
+    if (localStorage.getItem('language')) {
+        document.getElementById('langSel').value = localStorage.getItem('language')
+    }
+    gachaFn()
   setTimeout(function() {
     let rewards = Array.from(document.querySelectorAll('#rewards .reward'))
     rewards.map(rew => rew.children[1].innerText == '' ? rew.style.diplay = 'none' : rew)
-    console.log(rewards)
   }, 4500)
 
 }

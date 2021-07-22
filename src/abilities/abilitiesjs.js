@@ -12,6 +12,7 @@ var $ = require("jquery")
 import tablesorter from 'tablesorter';
 
 export function abilitiesFn() {
+
   var filters = document.getElementsByClassName('filter')
 
   var pagesSel = document.getElementById('numOfPages')
@@ -101,11 +102,14 @@ function loadList() {
         hideIcon(abilImagesComplete)
       })
       // Description
-      let desc = descFinale.map(desc => desc.split(':<br>'))
-      desc = desc.filter(d => d[0] == name.innerText)[0]
+        let desc = descFinale.map(desc => desc.split(':<br>'))
+        
+        desc = desc.filter(d => d[0] == name.innerText)[0]
+
       abilrows[i].children[5].innerHTML = desc[1].replace(/<br><br>/, '')
       // Jobs
-      let jobs = jobsDataAll.filter(job => job[8] == name.innerText)
+        let jobs = jobsDataAll.filter(job => job[8] == name.innerText)
+       // console.log(jobsDataAll)
       jobs = jobs == [] ? '' : jobs
       jobs = jobs.map(j=> '<br><span class="openNew">' + j[1] + '</span>')
       abilrows[i].children[7].innerHTML = jobs == '' ? '' : jobs
@@ -114,12 +118,12 @@ function loadList() {
         link.onclick = function() {
           let job = jobsDataAll.filter(job => job[1] == this.innerText)
           let ind = job[0][0]
-          console.log(ind)
           openNew('job', jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
         }
       })
       // heroes
-      let chars = charsAllInfo.filter(char => char[13] == name.innerText || char[14] == name.innerText)
+        let chars = charsAllInfo.filter(char => char[13] == name.innerText || char[14] == name.innerText)
+     
       chars = chars == [] ? '' : chars
       chars = chars.map(j=> '<br><span class="openNewHero">' + j[1] + '</span>')
       abilrows[i].children[8].innerHTML = chars == '' ? '' : '<div>' + chars + '</div>'
@@ -230,8 +234,8 @@ function loadList() {
       }
 
     })
-    pageList = newList.filter(l=> l.includes('element') && l.includes('rarity') && l.includes('attrSel') && l.includes('apply') && l.includes('type'))
-    pageList.map(a => a.splice(a.length-5,5))
+      pageList = newList.filter(l => l.includes('element') && l.includes('rarity') && l.includes('attrSel') && l.includes('apply') && l.includes('type'))
+    pageList.map(a => a.length = 22)
     if (pageList.length == 0 ) {
       document.getElementById('dialog').style.display = 'block';
       document.getElementById('closedialog').onclick = function() {
@@ -255,10 +259,12 @@ function loadList() {
       loadList()
       document.getElementById('dialog').style.display = 'none'
     })
+
   function drawList() {
     document.getElementById("abilsBody").innerHTML = "";
       for (var i=0; i < pageList.length; i++) {
-        var jobItem = Object.values(pageList[i])
+          var jobItem = Object.values(pageList[i])
+
       //  jobItem[i] = jobItem[i] == undefined ? '' : jobItem[i]
         jobItem.splice(1, 1, "pic")
         jobItem.splice(5, 12, 'n/a')
@@ -277,24 +283,10 @@ function loadList() {
 
         jobItem.map( (job) => {
           var cell = document.createElement('td')
-          switch (job) {
-            case 'Low':
-              cell.innerHTML = 'Low'
-              cell.className = 'Low'
-              break;
-            case 'Medium':
-            cell.innerHTML = 'Medium'
-            cell.className = 'Medium'
-              break;
-            case 'High':
-              cell.innerHTML = '<td class="high">High</td>'
-              break;
-            case 'Master':
-              cell.innerHTML = '<td class="master">master</td>'
-              break;
-            default: cell.innerHTML = '<td>' + job + '</td>'
+          cell.innerHTML = '<td>' + job + '</td>'
             cell.id = cell.innerText
-          }
+            cell.classList = cell.innerHTML
+
 
           var imgComplete = abilImagesComplete.find(jobimg => jobimg.id == jobItem[2])
 

@@ -1,8 +1,10 @@
 import { charsImagesComplete, getCharsImages, getJobImgs, jobImagesComplete} from '../img/imgsHTML'
 import { characters, jobsStats,charsAllInfo, jobsData, verlog, verArr} from '../abilitiesData'
-import {jobsImgs} from '../importimgs.js'
+import { jobsImgs } from '../importimgs.js'
+import { localization } from '../local/local.js'
+
 import book from '../img/other/pergBg.png'
-import bannerimg from '../img/post/sins Event.png'
+import bannerimg from '../img/post/event.png'
 import dice from '../img/other/spaseStoneSol.png'
 import ghost from '../img/events/ghostBlue.png'
 import gplay from '../img/google-play-badge.png'
@@ -35,6 +37,13 @@ import crystal from '../img/events/crystal.png'
 import thana666 from '../img/dungeon/thana666.png'
 import thanafight from '../img/dungeon/thanafight.png'
 import newrules from '../img/dungeon/newrules.png'
+
+
+localization.words()
+localization.abils()
+localization.passives()
+localization.characters()
+localization.jobs()
 
 let unknown = [tana, tanatxt, pwhite, unknownRed]
 let descend = [descend1, descend2, descend3, descend4]
@@ -506,7 +515,8 @@ characters.chars()
           w > targetMid ? imgi.style.height = '100px' : imgi.style.height = 'auto'
           imgi.style.position = 'relative'
           imgi.classList.add('charimg', 'img'+i, 'col-2', 'col-md-12')
-          imgi.id = 'img'+i
+            imgi.id = 'img' + i
+            console.log()
           imgi.innerHTML = charsImagesComplete[rand].outerHTML
           console.log(charsImagesComplete[rand])
           herodiv.append(imgi)

@@ -23,7 +23,7 @@ banners.map(banner => {
   gacha.innerHTML = '<img src="' + banner[1]+ '">'
   gacha.classList.add('col-md-6', 'col-12')
   console.log(banner.lastModified)
-  if (banner[0] == 'Space Gacha.png' || banner[0] == 'Xmas Gacha.png') {
+  if (banner[0] == 'Space Gacha.png' || banner[0] == 'Xmas Gacha.png' || banner[0] == 'Sins Gacha.png') {
     gacha.style.filter = 'grayscale(95%)'
   }
   gacha.onclick = function(){
@@ -31,7 +31,7 @@ banners.map(banner => {
     setTimeout(function() {
       let header = win.document.getElementById('header')
       header.innerHTML ='<img src="' + banner[1]+ '" id="' + banner[0] + '">'
-    },2000)
+    },2500)
 
   }
   gachaList.appendChild(gacha)

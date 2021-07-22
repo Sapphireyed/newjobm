@@ -70,7 +70,7 @@ const optionsArrElem = ['All', 'Fire', 'Water', 'Earth', 'Wind', 'Thunder', 'Lig
 
 const optionsElem = optionsArrElem.map(opt => {
   const value = opt
-  return `<option value="${value}">${opt}</option>`;
+    return `<option id="${value}" value="${value}">${opt}</option>`;
 });
 
 elemSel.innerHTML = optionsElem;
@@ -110,19 +110,19 @@ typeSel.id = 'type'
 typeSel.name = 'type'
 typeSel.value = 'All'
 typeSel.classList.add('filter', 'rounded')
-typeSel.innerHTML = '<option value="All">All</option>'
-                + '<option value="Damage">Damage</option>'
-                + '<option value="Heal">Heal</option>'
-                + '<option value="Buff">Buff</option>'
-                + '<option value="InstantBoost">Action Buff</option>'
-                + '<option value="Debuff">Debuff</option>'
-                + '<option value="Vulnerable">Vulnerable</option>'
+typeSel.innerHTML = '<option id="All" value="All">All</option>'
+                + '<option id="Damage" value="Damage">Damage</option>'
+                + '<option id="Heal" value="Heal">Heal</option>'
+                + '<option id="Buff" value="Buff">Buff</option>'
+                + '<option id="InstantBoost" value="InstantBoost">Action Buff</option>'
+                + '<option id="Debuff" value="Debuff">Debuff</option>'
+                + '<option id="Vulnerable" value="Vulnerable">Vulnerable</option>'
               //    + '<optgroup label="Protect">'
-                + '<option value="Protect">Protect</option>'
-                + '<option value="Remove Debuff">Remove Debuff</option>'
+                + '<option id="Protect" value="Protect">Protect</option>'
+                + '<option id="RemoveDebiff" value="Remove Debuff">Remove Debuff</option>'
                 //  + '</optgroup>'
-                + '<option value="Negative">Negative</option>'
-                + '<option value="Other">Other</option>'
+                + '<option id="Negative" value="Negative">Negative</option>'
+                + '<option id="Other" value="Other">Other</option>'
 //const typeOptionsArr = ['All', 'Buff', 'Curse', 'Damage', 'Debuff', 'Heal', 'InstantBoost', 'Protect', 'Sacrifice', 'Vulnerable'];
 
 //const optionsType = typeOptionsArr.map(opt => {
@@ -146,16 +146,16 @@ applySel.name = 'apply'
 applySel.value = 'All'
 applySel.classList.add('filter', 'rounded')
 const applyOptionsArr = [
-        'Practice Perfect','Exhaust',  'LifeSteal','Last Resort','Turn Charge', 'Combo Blend', 'Overloaded',
-        'Focus Energy', 'Negative Power', 'Curse', 'Scheduled', 'Auto Fire',
-        'CreatureExpert',  'HumanoidExpert',  'MatterExpert',  'SpiritExpert',
-        'Strength Synergy', 'Agility Synergy', 'MaxHP Synergy', 'Intelligence Synergy',
-        'Fire', 'Water', 'Earth', 'Wind', 'Thunder', 'Dark', 'Light'
-        ].sort();
+    'PracticePerfect', 'Exhaust', 'LifeSteal', 'LastResort', 'TurnCharge', 'Combo Blend', 'Overloaded',
+    'FocusEnergy', 'NegativePower', 'Curse', 'Scheduled', 'AutoFire', 'Gamble',
+    'Creature', 'Humanoid', 'Matter', 'Spirit',
+    'Strength Synergy', 'Agility Synergy', 'MaxHP Synergy', 'Intelligence Synergy',
+    'Fire', 'Water', 'Earth', 'Wind', 'Thunder', 'Dark', 'Light'
+].sort();
 
 const optionsApply = applyOptionsArr.map(opt => {
   const value = opt
-  return `<option value="${value}">${opt}</option>`;
+    return `<option id="${value}" value="${value}">${opt}</option>`;
 });
 optionsApply.unshift('<option value="All">All</option>')
 applySel.innerHTML = optionsApply;
@@ -173,11 +173,11 @@ const whenSel = document.createElement('select');
 whenSel.id = 'whenSel'
 whenSel.name = 'whenSel'
 whenSel.classList.add('filter', 'rounded')
-const optionsArrWhen = ['Turn End', 'After Action', 'Combat Start', 'Master', 'Stat Boost', 'Reflect', 'Immune', 'HP Threshold', 'Heal', 'Dmg mitigate'].sort();
+const optionsArrWhen = ['Turn End', 'After Action', 'Combat Start', 'Master', 'Stat Boost', 'Reflect', 'Immune', 'Hp Threshold', 'Heal', 'Dmg Mitigate'].sort();
 
 const optionsWhen = optionsArrWhen.map(opt => {
   const value = opt
-  return `<option value="${value}">${opt}</option>`;
+    return `<option id="${value.replace(' ', '')}" value="${value}">${opt}</option>`;
 });
 optionsWhen.unshift('<option value="All">All</option>')
 whenSel.innerHTML = optionsWhen;

@@ -1,10 +1,11 @@
 import { tbody } from './heroesTable.js'
 import { applyBody } from './enemiesTable.js'
 import { openNew } from '../basicfn/openNew.js'
+import { materialsLoc,materialsLocal } from '../local/local.js'
 import { abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
         glossAllInfo, appliesAllInfo,charsAllInfo, charsAllInfoRaw} from '../abilitiesData.js'
-        import { matImagesComplete, abilImagesComplete, charsImagesComplete} from '../img/imgsHTML.js'
+        import { abilImagesComplete, charsImagesComplete} from '../img/imgsHTML.js'
 //import { openNew } from '../basicfn/openNew.js'
 //import { abilImagesComplete} from '../img/imgsHTML.js'
 //import { passivesfilter } from './passivesfilter'
@@ -55,17 +56,19 @@ switch (true) {
 //    console.log(stat.value*cell.id/100*stat.value)
   })
 }
+
 // TOOLTIP
 function tooltips() {
 //tableRows = document.querySelectorAll('tr')
-var descFinaleSplit = descFinale.map(desc => desc.split(':<br>'))
+    var descFinaleSplit = descFinale.map(desc => desc.split(':<br>'))
 var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':<br>'))
-var switchCells =  document.getElementsByClassName('tooltiptext')
-for (var i=0; i < switchCells.length; i++) {
+    var switchCells = document.getElementsByClassName('tooltiptext')
+    for (var i = 0; i < switchCells.length; i++) {
+
     var switchName = switchCells[i].parentNode.innerText.replace(/  /g, ' ').trim()
     var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
-    var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
-    var tooltipsApply = abilTraits.map(trait => trait.split(': ')).filter(desc=> desc[0] == switchName)
+        var tooltipsPass = passiveFinaleSplit.filter(desc => desc[0] == switchName)
+    var tooltipsApply = abilTraits.map(trait => trait.split(':<br>')).filter(desc=> desc[0] == switchName)
     var passApply = passiveTraits.map(trait => trait.split(': ')).filter(desc=> desc[0] == switchName)
 
     tooltipsAb.map((desc, ind) => {
@@ -84,13 +87,16 @@ for (var i=0; i < switchCells.length; i++) {
       switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
     }
     })*/
-    tooltipsPass.map((desc, ind) => {
-      if (desc[0] == switchName) {
+
+        tooltipsPass.map((desc, ind) => {
+
+            if (desc[0] == switchName) {
         desc[1] = desc[1].replace('while job on', '')
-        switchCells[i].innerHTML = desc[1] + '<br> <span class="tipApply">(' + passApply[ind][1] + ')</span>'
+                switchCells[i].innerHTML = desc[1] + '<br> <span class="tipApply">(' + passApply[ind][1] + ')</span>'
+
         switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\(, , , \)|, ,|, , ,|\(, , , \)|\(\)|<br><br>/g, '')
         switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/\( \)/g, '')
-        switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
+                switchCells[i].innerHTML = switchCells[i].innerHTML.replace(/, \)/g, ')')
       }
     })
   }
@@ -191,6 +197,7 @@ function loadList() {
     check();
     $('.myTable').tablesorter();
     tooltips()
+
     // filters
     function filter(){
       charsAllInfoRaw.map(char=> char.push('sep'))
@@ -287,9 +294,10 @@ function loadList() {
     })
     //abilities imgs
     let switchskills = Array.from(document.querySelectorAll('.abil'))
+    console.log(Array.from(document.querySelectorAll('.abil')))
     switchskills.map((abil,i) => {
       let switchskillsimg = document.createElement('div')
-      let src = abilImagesComplete.filter(img => switchskills[i].children[0].innerText.trim() == img.id)
+      let src = abilImagesComplete.filter(img => switchskills[i].children[0].innerText.trim().replace('  ', ' ') == img.id)
       if (src.length > 0) {
         switchskills[i].prepend(switchskillsimg)
         switchskillsimg.innerHTML = src[0].outerHTML
@@ -370,20 +378,23 @@ function loadList() {
 
         }
         jobItem.splice(1, 0, "pic")
-        let race = jobItem[15]
+          let race = jobItem[15]
         let attr = jobItem.splice(4, 8)
         //jobbItem.splice(3,1,)
+
         jobItem.splice(9, 0, attr[0], attr[1], attr[2], attr[3])
         //passives
-        jobItem[4] = jobItem[4] == '' ? '' : '1. <span class="tooltipMy pass">'+ jobItem[4] + '<span class="tooltipMy tooltiptext"></span></span>'
-                    + (jobItem[5] == '' ? '' : '<br>' + '2. <span class="tooltipMy pass">' + jobItem[5] + '<span class="tooltipMy tooltiptext"></span></span>')
+
+        jobItem[4] = (jobItem[4] == '' ? '1. none' : '1. <span class="tooltipMy pass">'+ jobItem[4] + '<span class="tooltipMy tooltiptext"></span></span>')
+                    + (jobItem[5] == '' ? '<br>2. none' : '<br>' + '2. <span class="tooltipMy pass">' + jobItem[5] + '<span class="tooltipMy tooltiptext"></span></span>')
         //abilities
-        jobItem[6] = jobItem[6] == '' ? '' : '<span class="tooltipMy abil"><span class="name">' + jobItem[6] + '</span><span class="tooltipMy tooltiptext"></span></span>'
-                   + (jobItem[7] == '' ? '' : '<br>' + '<span class="tooltipMy abil"><span class="name">' + jobItem[7] + '</span><span class="tooltipMy tooltiptext"></span></span>')
-        jobItem.splice(5,1)
-        jobItem.splice(6,1)
+
+        jobItem[5] = (jobItem[6] == '' ? '1. none' : '<span class="tooltipMy abil"><span class="name">' + jobItem[6] + '</span><span class="tooltipMy tooltiptext"></span></span>')
+                   + (jobItem[7] == '' ? '<br>2. none' : '<br>' + '<span class="tooltipMy abil"><span class="name">' + jobItem[7] + '</span><span class="tooltipMy tooltiptext"></span></span>')
+          jobItem.splice(6, 2)
+      //  jobItem.splice(7,1)
         //attrs
-        jobItem[7] = jobItem[7] * 0.75
+        jobItem[7] = jobItem[7] * 0.70
         jobItem[8] = jobItem[8] * 1.5
         jobItem[9] = jobItem[9] * 1.5
         jobItem[10] = jobItem[10] * 1.5
@@ -425,8 +436,9 @@ function loadList() {
             cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''*/
 
           //add images to pic cell
-          var imgComplete = charsImagesComplete.find(jobimg => jobimg.id == jobItem[2])
+            var imgComplete = charsImagesComplete.find(jobimg => jobimg.id == jobItem[2])
 
+          if (imgComplete == undefined) imgComplete = ''
           if (cell.innerHTML == 'pic') {
             cell.id = 'pic'
             cell.innerHTML = ''
@@ -638,7 +650,8 @@ export function applyTableFn() {
     let switchskills = Array.from(document.querySelectorAll('.tooltipMy:not(.tooltiptext)'))
 
     switchskills.map((abil,i) => {
-      let switchskillsimg = document.createElement('div')
+        let switchskillsimg = document.createElement('div')
+        switchskills[i].children[0].innerText = switchskills[i].children[0].innerText.replace(/  /g, ' ')
       let src = abilImagesComplete.filter(img => switchskills[i].children[0].innerText.trim() == img.id)
       if (src.length > 0) {
         switchskillsimg.innerHTML = src[0].outerHTML
@@ -699,16 +712,18 @@ export function applyTableFn() {
       jobItem.splice(8,4)
       jobItem.push(attrs[0],attrs[1], attrs[2], attrs[3])
       //enemy passives
-      jobItem[4] = jobItem[4].split('-')
-      jobItem[4] = jobItem[4].map((item,i) => item = (i+1) + '. ' + '<span class="tooltipMy">' + item + '<span class="tooltipMy tooltiptext"></span></span>')
-      jobItem[4] = jobItem[4].join('<br>')
+        jobItem[4] = jobItem[4].split('-')
+
+      jobItem[4] = jobItem[4].map((item,i) => item = (i+1) + '. ' + '<span class="tooltipMy passEn">' + item + '<span class="tooltipMy tooltiptext"></span></span>')
+        jobItem[4] = jobItem[4].join('<br>')
       //enemy random abils
       jobItem[5] = jobItem[5].replace(/\|/g, '-')
-      jobItem[5] = jobItem[5].split('-')
+        jobItem[5] = jobItem[5].split('-')
       function count(arr) {
         return arr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {})
       }
-      jobItem[5] = count(jobItem[5])
+        jobItem[5] = count(jobItem[5])
+        
       jobItem[5] = Object.entries(jobItem[5]).map((k,v) => '<span class="tooltipMy"><span class="enabil">' + k[0] + '</span><span class="tooltipMy tooltiptext"></span></span> (x' + k[1] + ')').join('<br>')
       //jobItem[5] = jobItem[5].map(item => item = '<span class="tooltipMy enabil"><span class="name">' + item + '</span><span class="tooltipMy tooltiptext"></span></span>')
       //jobItem[5] = jobItem[5].join('<br>')
@@ -767,7 +782,6 @@ export function applyTableFn() {
               cell.innerHTML = ''
               cell.append(imgComplete)
             }
-
         tableRow.appendChild(cell)
         applyBody.append(tableRow)
       })

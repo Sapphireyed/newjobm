@@ -58,3 +58,6 @@ td:nth-child(n+3) img {
   #jobsmain { width: 100vw; margin:0; overflow-x: scroll}
   table tr td:nth-child(3) { position: relative}
 }
+tr:nth-child(even) td:nth-child(3) {
+    background-color: #e8c471
+}

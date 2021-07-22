@@ -3,7 +3,8 @@ import { openNew } from '../basicfn/openNew.js'
 import { abilities, abilitiesAllInfo, descFinale, abilSkills, abilEffects, abilTraits,
         passivesAllInfo, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
         jobsDataAll, appliesAllInfo, charsAllInfo, mats} from '../abilitiesData.js'
-import { matsImgs} from '../importimgs.js'
+import { matsImgs } from '../importimgs.js'
+import { materialsLoc } from '../local/local.js'
 //import { openNew } from '../basicfn/openNew.js'
 import { matImagesComplete } from '../img/imgsHTML.js'
 import { abilsfilter } from './matsfilter.js'
@@ -11,10 +12,14 @@ import {filterAb} from '../basicfn/filters.js'
 import { showIcon, hideIcon } from '../basicfn/hoverIcons.js'
 var $ = require("jquery")
 import tablesorter from 'tablesorter';
+import i18next from 'i18next';
 
 export {matspics}
 let matspics = Object.entries(matsImgs)
+
+
 export function matsFn() {
+    
 //  var filters = document.getElementsByClassName('filter')
   var pagesSel = document.getElementById('numOfPages')
   var list = mats
@@ -57,13 +62,16 @@ function lastPage() {
   loadList();
 }
 
-function loadList() {
-  numberPerPage = parseInt(numberPerPage) || 'all'
+    function loadList() {
+
+    numberPerPage = parseInt(numberPerPage) || 'all'
+   
     var jobsBody = document.getElementById('jobsBody');
     var begin
     if (numberPerPage == 10) {
       $("table").trigger("destroy");
-      begin = ((currentPage - 1) * numberPerPage);
+        begin = ((currentPage - 1) * numberPerPage);
+
     } else if ( numberPerPage == 'all') {
       begin = 0
       numberPerPage = list.length
@@ -80,7 +88,7 @@ function loadList() {
     $('.myTable').tablesorter();
     // chnge color of job based on its rarity
     let jobs = Array.from(document.querySelectorAll('.fromJob, .toJob'))
-    jobs.map(j => {
+    /*jobs.map(j => {
       let classname = jobsDataAll.filter(data=> data[1] == j.innerText.trim())[0][2]
       switch (classname) {
         case '1':
@@ -102,7 +110,7 @@ function loadList() {
 
       }
       j.classList.add(classname)
-    })
+    })*/
 
 // Icons on sides of the table
     let abilrows = Array.from(document.querySelectorAll('tr'))
@@ -128,21 +136,27 @@ function loadList() {
   }
 
   function drawList() {
-
     document.getElementById("jobsBody").innerHTML = "";
       for (var i=0; i < pageList.length; i++) {
         var jobItem = Object.values(pageList[i])
         //jobmania crystal special case
-        jobItem[1] == 'Jobmania Crystal' ? jobItem.splice(jobItem.length-2, 0, '') : ''
+          let jobName = jobItem[1]
+            /*  switch (lang) {
+                  case 'Chinese':
+                      jobItem[1] = Object.values(matsLoc).filter(mat => mat.key == jobItem[1])[0].chinese
+              }*/
+
+
+          jobItem[1] == 'Jobmania Crystal' ? jobItem.splice(jobItem.length - 2, 0, '') : ''
         jobItem.splice(1, 0, "pic")
-        let craft = jobItem[4]
+          let craft = jobItem[4]
         craft = craft.split('|')
         craft = craft.map(cr => '<span class="fromJob openNew">' + cr.split('-')[0] + '</span>' + ' -> ' + '<span class="toJob openNew">' +cr.split('-')[1] + '</span><br>')
         jobItem[4] = craft.join('')
         //jobmania crystal special case
         jobItem[1] == 'Jobmania Crystal' ? jobItem[5] = '' : ''
         var tableRow = document.createElement('tr')
-        tableRow.classList.add('jobRow')
+          tableRow.classList.add('jobRow')
         i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#c4c6f4'
         jobItem.map( (job) => {
           var cell = document.createElement('td')
@@ -153,7 +167,7 @@ function loadList() {
             cell.id = cell.innerText
           }
 
-        var imgComplete = matImagesComplete.filter(jobimg => jobimg.id == jobItem[2])[0]
+        var imgComplete = matImagesComplete.filter(jobimg => jobimg.id == jobName)[0]
 
         if (cell.innerHTML == 'pic') {
           cell.id = 'pic'

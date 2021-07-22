@@ -60,7 +60,8 @@ export function filterAb(arr, elem, filter, tableRows,pageList,filters, ind, i,s
 
         }
         }
-    } else if (filter == 'apply') {
+  } else if (filter == 'apply') {
+
       if ([a[17], a[18], a[19]].some(el => el = el.includes(elem))) {
         tableRows[ind].classList.add(filter)
       }

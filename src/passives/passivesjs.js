@@ -92,17 +92,20 @@ function loadList() {
       
       // Description
       let desc = passiveFinale.map(desc => desc.split(':<br>'))
-      desc = desc.filter(d => d[0] == name.innerText)[0]
+        desc = desc.filter(d => d[0] == name.innerText)[0]
+
       abilrows[i].children[4].innerHTML = desc[1].replace(/<br><br>/, '')
       // Jobs
-      let jobs = jobsDataAll.filter(job => job[7] == name.innerText)
+        let jobs = jobsDataAll.filter(job => job[7] == name.innerText)
+        console.log(jobsDataAll)
       jobs = jobs == [] ? '' : jobs
       jobs = jobs.map(j=> '<br><span class="openNew">' + j[1] + '</span>')
       abilrows[i].children[6].innerHTML = jobs == '' ? '' : jobs
-      let jobLinks = Array.from(document.getElementsByClassName('openNew'))
+        let jobLinks = Array.from(document.getElementsByClassName('openNew'))
       jobLinks.map(link =>{
-        link.onclick = function() {
-          let job = charsAllInfo.filter(job => job[1] == this.innerText)
+          link.onclick = function () {
+
+              let job = jobsDataAll.filter(job => job[1] == this.innerText)
           let ind = job[0][0]
           openNew('job', jobsDataAll, ind, descFinale, abilSkills, abilEffects, abilTraits, passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits)
         }
@@ -299,7 +302,6 @@ function loadList() {
         tableRow.classList.add('jobRow')
         i % 2 == 0 ? tableRow.style.backgroundColor = '#b7b7c4' : tableRow.style.backgroundColor = 'rgb(114 139 188)'
     //    i % 2 == 0 ? tableRow.style.color = 'bloack' : tableRow.style.color = 'white'
-console.log(jobItem)
 
         jobItem.map( (job, ind) => {
 

@@ -37,10 +37,8 @@ export function jobs() {
     let crystal = document.getElementById('jobmCrystal')
     let chooselvl = document.getElementById('chooselvl')
     //       J O B S
-    var jobsSheet = data
-    var jobsSheetArrs = Object.entries(jobsSheet);
-    var jobsRows = jobsSheetArrs[2][1];
-    jobsRows.shift()
+
+      var jobsRows = jobsDataAll;
     jobsRows.map(job => {
 
       for (var i=0; i< job.length; i++) {
@@ -49,13 +47,11 @@ export function jobs() {
       return job
     })
     var job = Object.entries(jobsRows);
-
     job.map(job => jobValues.push(job[1]))
-
 
     // PAGINATIOM
     var pagesSel = document.getElementById('numOfPages')
-    var list = jobValues
+    var list = jobsDataAll
     var pageList = [];
     var currentPage = 1;
     var numberPerPage = pagesSel.value;
@@ -163,7 +159,7 @@ function loadList() {
 
     for (var i=0; i< switchskills.length; i++) {
       let switchskillsimg = document.createElement('div')
-      let src = abilImagesComplete.filter(img => switchskills[i].parentNode.id == img.id)
+      let src = abilImagesComplete.filter(img => switchskills[i].parentNode.id.replace('&amp;', '&') == img.id)
       if (src.length > 0) {
         switchskills[i].parentNode.prepend(switchskillsimg)
         switchskillsimg.innerHTML = src[0].outerHTML
@@ -180,12 +176,18 @@ filters = Array.from(filters)
 tableRows = document.querySelectorAll('tr')
 
 // FILTERS
-function filter() {
+    function filter() {
+        localStorage.clear();
   filters.map(f => {
     if (f.value == 'All') {
 
     } else {
-      var elem = f.value
+        var elem = f.value
+        //switch (f.id) {
+        //    case 'AutoFire':
+        //        elem = 'Auto Fire';
+        //        break
+        //}
       let filter = f.id
       tableRows = Array.from(tableRows)
       for (var ind = 1; ind < tableRows.length; ind++) {
@@ -193,7 +195,7 @@ function filter() {
         //hide all rows. Particular rowswill be isplayed as per filters
         tableRows[ind].classList.add('d-none', 'boo')
       //  console.log(tableRows[ind].classList)
-        //remove all classes added during preious filter run.
+        //remove all classes added during previous filter run.
         tableRows[ind].classList.remove('7', '6', '5', '4', '3', '2', '1', filter)
 
         if (elem == pageList[ind-1][2]) {  // rarity
@@ -267,7 +269,6 @@ let start = document.getElementById('start')
         displayed.map((tr, index) => {
           index >= pagesSel.value ? tr.classList.add('d-none') : ''
         })
-        console.log(displayed)
         if (displayed.length == 0) {
           document.getElementById('dialog').style.display = 'block';
           document.getElementById('closedialog').onclick = function() {
@@ -292,7 +293,6 @@ skip[1].style.animation = 'skipBottom 20s linear infinite alternate'
 // TOOLTIP
 function tooltips() {
 tableRows = document.querySelectorAll('tr')
-
 var descFinaleSplit = descFinale.map(desc => desc.split(':<br>'))
 var passiveFinaleSplit = passiveFinale.map(desc => desc.split(':<br>'))
 var switchCells =  document.getElementsByClassName('tooltiptext')
@@ -301,7 +301,7 @@ for (var i=0; i < switchCells.length; i++) {
     var switchName = switchCells[i].parentNode.innerText
     var tooltipsAb = descFinaleSplit.filter(desc=> desc[0] == switchName)
     var tooltipsPass = passiveFinaleSplit.filter(desc=> desc[0] == switchName)
-    var tooltipsApply = abilTraits.map(trait => trait.split(': ')).filter(desc=> desc[0] == switchName)
+    var tooltipsApply = abilTraits.map(trait => trait.split(':<br>')).filter(desc=> desc[0] == switchName)
     var passApply = passiveTraits.map(trait => trait.split(': ')).filter(desc=> desc[0] == switchName)
 
     tooltipsAb.map((desc, ind) => {
@@ -379,18 +379,19 @@ function drawList() {
               default:
                   cell.innerHTML = '<td>' + job + '</td>'
           }
-          cell.id = cell.innerHTML
+            cell.id = cell.innerHTML
           var tooltip = document.createElement('span')
           tooltip.classList.add('tooltipMy', 'tooltiptext')
 
-          if (cell.innerHTML !== '') {
-            cell.innerHTML == jobItem[5] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
+            if (cell.innerHTML !== '') {
+    
+                cell.innerHTML.replace('&amp;', '&') == jobItem[5] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
             cell.innerHTML == jobItem[4] ? cell.appendChild(tooltip) && cell.classList.add('tooltipMy') : ''
           }
 
 
           //add images to pic cell
-          var imgComplete = jobImagesComplete.find(jobimg => jobimg.id == jobItem[2])
+            var imgComplete = jobImagesComplete.find(jobimg => jobimg.id == jobItem[2])
 
           if (cell.innerHTML == 'pic') {
             cell.id = 'pic'

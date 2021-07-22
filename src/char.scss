@@ -50,6 +50,10 @@ input { margin-left: 9px}
 .scdesc { display: none}
 .scall { margin-left: 30px}
 #threshall { text-align: center;}
+#chooselang {
+    visibility: hidden;
+    z-index: -1
+}
 //.jobattrs {text-align: left}
 $main1star: #6a8d55;
 $light1star: #f4ffed;
@@ -128,7 +132,7 @@ $light1star: #f4ffed;
       h6 { background-color: rgba(106, 141, 85, 0.3); }
     }
     h4:not(.jobattr){ text-align: center }
-    h4 {color: $main1star;}
+    h4:not(.loading) {color: $main1star;}
     #passiveH {
       background-color: $main1star;
       color: white
@@ -280,7 +284,7 @@ $light2star: #eef7ff;
       h6 { background-color: rgba(75, 115, 150, 0.3); }
     }
     h4:not(.jobattr){ text-align: center }
-    h4 {color: $main2star;}
+    h4:not(.loading) {color: $main2star;}
     #passiveH {
       background-color: $main2star;
       color: white
@@ -432,7 +436,7 @@ $light3star: #f5eefd;
       h6 { background-color: rgba(88, 75, 103, 0.3); }
     }
     h4:not(.jobattr){ text-align: center }
-    h4 {color: $main3star;}
+    h4:not(.loading) {color: $main3star;}
     #passiveH {
       background-color: $main3star;
       color: white
@@ -584,7 +588,7 @@ $light4star: #fff0ec;
       h6 { background-color: rgba(149, 78, 58, 0.3); }
     }
     h4:not(.jobattr){ text-align: center }
-    h4 {color: $main4star;}
+    h4:not(.loading) {color: $main4star;}
     #passiveH {
       background-color: $main4star;
       color: white
@@ -736,7 +740,7 @@ $light5star: #fffaef;;
       h6 { background-color: rgba(224, 195, 105, 0.3); }
     }
     h4:not(.jobattr){ text-align: center }
-    h4 {color: $main5star;}
+    h4:not(.loading) {color: $main5star;}
     #passiveH {
       background-color: $main5star;
       color: white

@@ -39,7 +39,7 @@ const optionsArr = ['All','Low', 'Medium', 'High', 'Master'];
 
 const options = optionsArr.map(opt => {
   const value = opt
-  return `<option value="${value}">${opt}</option>`;
+    return `<option id="${value}" value="${value}">${opt}</option>`;
 });
 
 rarSel.innerHTML = options;
@@ -60,7 +60,7 @@ const optionsArrElem = ['All', 'Fire', 'Water', 'Earth', 'Wind', 'Thunder', 'Lig
 
 const optionsElem = optionsArrElem.map(opt => {
   const value = opt
-  return `<option value="${value}">${opt}</option>`;
+    return `<option id="${value}" value="${value}">${opt}</option>`;
 });
 
 elemSel.innerHTML = optionsElem;
@@ -81,7 +81,7 @@ const optionsArrAttr = ['All', 'MaxHP', 'Strength', 'Agility', 'Intelligence'];
 
 const optionsAttr = optionsArrAttr.map(opt => {
   const value = opt
-  return `<option value="${value}">${opt}</option>`;
+    return `<option id="${value}" value="${value}">${opt}</option>`;
 });
 
 attrSel.innerHTML = optionsAttr;
@@ -99,11 +99,11 @@ const whenSel = document.createElement('select');
 whenSel.id = 'whenSel'
 whenSel.name = 'whenSel'
 whenSel.classList.add('filter', 'rounded')
-const optionsArrWhen = ['Turn End', 'After Action', 'Combat Start', 'Master', 'Stat Boost', 'Reflect', 'Immune', 'HP Threshold', 'Heal', 'Dmg mitigate'].sort();
+const optionsArrWhen = ['Turn End', 'After Action', 'Combat Start', 'Master', 'Stat Boost', 'Reflect', 'Immune', 'Hp Threshold', 'Heal', 'Dmg Mitigate'].sort();
 
 const optionsWhen = optionsArrWhen.map(opt => {
-  const value = opt
-  return `<option value="${value}">${opt}</option>`;
+    const value = opt
+    return `<option id="${value.replace(' ', '')}" value="${value}">${opt}</option>`;
 });
 optionsWhen.unshift('<option value="All">All</option>')
 whenSel.innerHTML = optionsWhen;
@@ -122,16 +122,16 @@ applySel.name = 'apply'
 applySel.value = 'All'
 applySel.classList.add('filter', 'rounded')
 const applyOptionsArr = [
-        'Practice Perfect','Exhaust',  'LifeSteal','Last Resort','Turn Charge', 'Combo Blend', 'Overloaded',
-        'Focus Energy', 'Negative Power', 'Curse', 'Scheduled', 'Auto Fire',
-        'CreatureExpert',  'HumanoidExpert',  'MatterExpert',  'SpiritExpert',
-        'Strength Synergy', 'Agility Synergy', 'MaxHP Synergy', 'Intelligence Synergy',
-        'Fire', 'Water', 'Earth', 'Wind', 'Thunder', 'Dark', 'Light'
-        ].sort();
+    'PracticePerfect', 'Exhaust', 'LifeSteal', 'LastResort', 'TurnCharge', 'Combo Blend', 'Overloaded',
+    'FocusEnergy', 'NegativePower', 'Curse', 'Scheduled', 'AutoFire', 'Gamble',
+    'Creature', 'Humanoid', 'Matter', 'Spirit',
+    'Strength Synergy', 'Agility Synergy', 'MaxHP Synergy', 'Intelligence Synergy',
+    'Fire', 'Water', 'Earth', 'Wind', 'Thunder', 'Dark', 'Light'
+].sort();
 
 const optionsApply = applyOptionsArr.map(opt => {
-  const value = opt
-  return `<option value="${value}">${opt}</option>`;
+    const value = opt
+    return `<option id="${value}" value="${value}">${opt}</option>`;
 });
 optionsApply.unshift('<option value="All">All</option>')
 applySel.innerHTML = optionsApply;

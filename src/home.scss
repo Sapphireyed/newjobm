@@ -16,9 +16,10 @@ section {  margin-top: -25px;}
 @media only screen and (min-width: 1000px) {
   $total-lines: 9;
   $left-offset: 29px;
-  $clip-height: 80px;
-  $line-height: $clip-height -5px;
+  $clip-marginB: 15px;
+  //$line-height: $clip-height -5px;
   #features {
+    list-style-type: none;
     font-size:28px;
     padding: 10px 0;
     margin-bottom:80px;
@@ -29,8 +30,8 @@ section {  margin-top: -25px;}
     -webkit-font-smoothing: antialiased;
     -webkit-font-kerning: normal;
     -webkit-text-size-adjust: 100%;
-    li {
-      height: $clip-height;
+    li:not(.licontainer) {
+      margin-bottom: $clip-marginB;
       overflow: hidden;
       position: relative;
     //  border-bottom: 2px solid $maintxt;
@@ -50,7 +51,7 @@ section {  margin-top: -25px;}
     }
     }
     p {
-      height: $clip-height;
+      height: 80px;
     //  line-height: $line-height;
       padding: 0 10px;
       transition: all .4s ease-in-out;
@@ -633,7 +634,6 @@ opacity: 0;
 
 #updates {
   position: relative;
-  overflow: hidden;
   margin-bottom: 50px;
   #banner {
     width: 100%;
@@ -668,12 +668,14 @@ opacity: 0;
   }
   ul {
     width:100%;
+    max-height:280px;
     top:28%;
     padding:0;
     left:0;
     transform: scale(0);
     background: rgba(8, 54, 84,.9);
     transition: 0.7s;
+    overflow-y: scroll;
     li {
       padding: 6px 6px 6px 10%;
     }
@@ -922,13 +924,18 @@ opacity: 0;
     margin-top:30px;
     padding-left:50px;
     border-top: 8px solid $maintxt;
-    transform: skew(10deg, 10deg);
+    transform: skew(0);
     img {transform: skew(0,0)}
   }
-  #div7 div { padding-top:20px;}
+    #delve2 img {
+        transform: skew(0) scaleX(1);
+    }
+    #div7 div {
+        padding-top: 20px;
+    }
   #div7::after, #div7::before {width:0}
   #gplay {
-    margin-bottom: 25px;
+    margin-bottom: 55px;
     padding-bottom: 0;
     img {
       margin-top: 0;
@@ -986,4 +993,5 @@ opacity: 0;
       }
     }
   }
+
 }

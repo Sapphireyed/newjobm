@@ -122,6 +122,15 @@ nav:nth-child(2) {
    margin-bottom: 40px;
    border-bottom: 4px solid #f5f7f8;
 }
+#ver {
+    font-size: 14px;
+    color: #151b1f;
+    float: left;
+}
+#ver:hover {
+    color:rgba(255,255,255,.5)
+}
+#chooselang { visibility: visible; z-index: 1 }
 #logo {overflow: hidden}
 #logo:after {
   content: "";
@@ -669,71 +678,111 @@ table tr td:nth-child(3) {
   font-size: 12px;
 }
 #preload {
-  position: absolute;
-  overflow:hidden;
-  color: white;
-  top: 0;
-  left: 0;
-  width: 100%;
-//  height: 100%;
-  background-color: lightgrey;
-  //opacity: 1;
-  z-index: 11111;
-  div:not(#chardiv){
-    position: relative;
-    top:35%;
-    left:20%;
-    img:not(#hero) {
-      //filter: brightness(0) invert(1);
-      -moz-transform: scale(1.5);
-      -ms-transform: scale(1.5);
-      -o-transform: scale(1.5);
-      -webkit-transform: scale(1.5);
-      transform: scale(1.5);
-      position: absolute;
+    position: absolute;
+    overflow: hidden;
+    color: white;
+    top: 0;
+    left: 0;
+    width: 100%;
+    //  height: 100%;
+    background-color: lightgrey;
+    //opacity: 1;
+    z-index: 11111;
+
+    div:not(#chardiv) {
+        position: relative;
+        top: 35%;
+        left: 20%;
+
+        img:not(#hero) {
+            //filter: brightness(0) invert(1);
+            -moz-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+            position: absolute;
+        }
+
+        img:first-child:not(#hero) {
+            transform: scale(0);
+            transition: 1.5s;
+        }
+
+        #obmania {
+            left: 48px;
+            top: 0;
+            width: 0;
+            transition: 1.5s;
+        }
+
+        img:nth-child(3) {
+            left: 30px;
+            width: 0;
+            transition: 1.5s
+        }
     }
-    img:first-child:not(#hero) { transform: scale(0); transition: 1.5s;}
-    #obmania { left: 48px;top: 0; width: 0; transition:1.5s;}
-    img:nth-child(3) { left:30px; width: 0; transition:1.5s}
-  }
 
 
-  #chardiv {
-    position: absolute;
-    top:30%;
-    right: 20%;
-    img {
-      backface-visibility: visible !important;
-	    animation: flip 5s ease infinite;
-      animation-delay: 6s;
-      width:250px;
-      transform: scale(0);
-      transition:1.5s
+    #chardiv {
+        position: absolute;
+        top: 30%;
+        right: 20%;
+
+        img {
+            backface-visibility: visible !important;
+            animation: flip 5s ease infinite;
+            animation-delay: 6s;
+            width: 250px;
+            transform: scale(0);
+            transition: 1.5s
+        }
     }
-  }
-  .skip {
-    //font: 1.5em/1 Open Sans, Impact;
-    position: absolute;
-    box-shadow: 0 0 18px white;
-    padding: 4px 8px;
-    font-weight:bold;
-    border-radius: 15%;
-    color:white;
-  //  display:none;
-  }
-  #skipTop {right: -10%; top:10%}
-  #skipBottom {left:-10%; bottom:10%}
-//  #skipLeft {left:6%; top:0}
-//  #skipRight {right: 6%; bottom:0}
+
+    .skip {
+        //font: 1.5em/1 Open Sans, Impact;
+        position: absolute;
+        box-shadow: 0 0 18px white;
+        padding: 4px 8px;
+        font-weight: bold;
+        border-radius: 15%;
+        color: white;
+        opacity: 0
+        //  display:none;
+    }
+
+    #skipTop {
+        right: 10%;
+        top: 10%
+    }
+
+    #skipBottom {
+        left: 10%;
+        bottom: 10%
+    }
+
+    h4 {
+        position: absolute;
+        top: 57%;
+        left:28%;
+        font-weight:bold;
+    }
+    //  #skipLeft {left:6%; top:0}
+    //  #skipRight {right: 6%; bottom:0}
 }
-#preloaddiv { display: block;margin: auto;}
+#preloaddiv {
+    display: block;
+    margin: auto 0;
+    width:85vw
+
+}
 @keyframes skipTop {
-  0 { right: 0}
-  100% { right: 100%}
+  0 { opacity: 0}
+  20% { opacity: 1}
 }
 @keyframes skipBottom {
-  0 { left: 0}
-  100% { left: 100%}
+  0 { opacity: 0}
+  20% { opacity: 1}
 }
 /*@keyframes skipRight {
   0 { bottom: 0}
@@ -1023,8 +1072,11 @@ body {
       top:44%;
       right:20%
     }
-    #skipTop {right:-15%}
-    #skipBottom {left:-18%}
+    #skipTop {right:15%}
+    #skipBottom {left:18%}
+  }
+  #preload h4{
+      top:5%;
   }
   #soonSect #comingsoon {
       top:40%;

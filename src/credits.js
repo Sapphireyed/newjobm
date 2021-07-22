@@ -17,7 +17,7 @@ import {preload } from './preload/preload.js'
 var $ = require("jquery")
 
 import aub from './img/other/Aubwhite.png'
-import dream from './img/character/Dream Slime Ækashics.png'
+import dream from './img/character/Dream Slime AEkashics.png'
 import dfs from './img/credit/DFS.png'
 import icons from './img/credit/gameIcons.png'
 import rangers from './img/credit/rangers.png'

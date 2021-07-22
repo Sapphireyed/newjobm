@@ -1,9 +1,5 @@
-import {jobmain} from './charmain.js'
 import { splitDesc, splitApply } from '../../basicfn/splitFn.js'
-import {jobsData, jobsDataAll, jobsStats, craft, mats,
-        descFinale, abilSkills, abilEffects, abilTraits,
-        passivesArr, passiveFinale, passiveSkills,  passiveEffects, passiveTraits,
-        appliesAllInfo, characters, charsAllInfo} from '../../abilitiesData.js'
+import {descFinale, passiveFinale, charsAllInfo} from '../../abilitiesData.js'
 
         let herobtn = document.getElementsByClassName('navbtns')[0]
         let enemybtn = document.getElementsByClassName('navbtns')[1]
