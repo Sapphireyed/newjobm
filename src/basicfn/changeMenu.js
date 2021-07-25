@@ -15,7 +15,7 @@ export function changeMenu() {
     let abilsEl = document.getElementById('abilsnav')
     let abilskey = wordsLoc.filter(loc => loc[0] == 'Abilities')
     let passEl = document.getElementById('passivesnav')
-    let passkey = wordsLoc.filter(loc => loc[0] == 'HeroesPassives')
+    let passkey = wordsLoc.filter(loc => loc[0] == 'PassiveSkills')
     let matsEl = document.getElementById('matsnav')
     let matskey = wordsLoc.filter(loc => loc[0] == 'Materials')
     let chaptsEl = document.getElementById('chaptersnav')

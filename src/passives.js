@@ -70,7 +70,7 @@ async function loadAll() {
                                     //localization
                                     let keysVals = getAllKeys()
                                     let jobsHeaderEl = document.querySelector('#passives h1')
-                                    jobsHeaderEl.innerHTML = keysVals.find(word => word.key == 'Abilities').value
+                                    jobsHeaderEl.innerHTML = keysVals.find(word => word.key == 'PassiveSkills').value
 
                                     // attributes filter
                                     document.getElementById('attrSel').parentNode.querySelector('label').innerText = keysVals.find(word => word.key == 'Attribute').value
