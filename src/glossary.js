@@ -77,6 +77,11 @@ function loadAll() {
                                 if (val) thead.innerHTML = val.value
                             })
 
+                            Array.from(document.querySelector('#applyTable #abilsThead').children).map(thead => {
+                                let val = keysVals.find(word => word.key == thead.id)
+                                if (val) thead.innerHTML = val.value
+                            })
+
                             //
                             let glossTable = document.getElementById('glossTable')
                             let applyTable = document.getElementById('applyTable')

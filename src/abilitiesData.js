@@ -291,13 +291,16 @@ let abilities = {
                       r[10] = skillsDescAdjusted.filter(loc => loc.includes(r[1]))[0] == undefined ? r[10] : skillsDescAdjusted.filter(loc => loc.includes(r[1]))[0][1]
                       translatedName = skillsNamesAdjusted.filter(loc => loc[0] == r[1])[0]
                       if (translatedName) r[1] = translatedName[1]
-
-
                       break;
                   case 'Chinese':
                       r[10] = skillsDescAdjusted.filter(loc => loc.includes(r[1] || loc == r[1]))[0] == undefined ? r[10] : skillsDescAdjusted.filter(loc => loc.includes(r[1]))[0][2]
                       translatedName = skillsNamesAdjusted.filter(loc => loc[0] == r[1])[0]
                       if (translatedName) r[1] = translatedName[2]
+                      break;
+                  case 'Chinese(Trad)':
+                      r[10] = skillsDescAdjusted.filter(loc => loc.includes(r[1] || loc == r[1]))[0] == undefined ? r[10] : skillsDescAdjusted.filter(loc => loc.includes(r[1]))[0][3]
+                      translatedName = skillsNamesAdjusted.filter(loc => loc[0] == r[1])[0]
+                      if (translatedName) r[1] = translatedName[3]
                       break;
               }
           })
@@ -305,17 +308,24 @@ let abilities = {
           res.map(inf => appliesAllInfo.push(inf))
           appliesAllInfo = appliesAllInfo.slice(end+1, appliesAllInfo.length )
           appliesAllInfo.length = 29
-          console.log(appliesAllInfo)
           appliesAllInfo.map(r => {
+              let translatedName
               let lang = document.getElementById('langSel').value
               switch (lang) {
                   case 'English':
                       r[10] = skillsDescAdjusted.filter(loc => loc.includes(r[1]))[0] == undefined ? r[10] : skillsDescAdjusted.filter(loc => loc.includes(r[1]))[0][1]
-
+                      translatedName = skillsNamesAdjusted.filter(loc => loc[0] == r[1])[0]
+                      if (translatedName) r[1] = translatedName[1]
                       break;
                   case 'Chinese':
                       r[10] = skillsDescAdjusted.filter(loc => loc.includes(r[1] || loc == r[1]))[0] == undefined ? r[10] : skillsDescAdjusted.filter(loc => loc.includes(r[1]))[0][2]
-
+                      translatedName = skillsNamesAdjusted.filter(loc => loc[1] == r[1])[0]
+                      if (translatedName) r[1] = translatedName[2]
+                      break;
+                  case 'Chinese(Trad)':
+                      r[10] = skillsDescAdjusted.filter(loc => loc.includes(r[1] || loc == r[1]))[0] == undefined ? r[10] : skillsDescAdjusted.filter(loc => loc.includes(r[1]))[0][3]
+                      translatedName = skillsNamesAdjusted.filter(loc => loc[1] == r[1])[0]
+                      if (translatedName) r[1] = translatedName[3]
                       break;
               }
             })
@@ -1389,7 +1399,6 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
                         let enemies = r[6] || ''
                         let miniboss = r[7] || ''
                         let boss = r[8] || ''
-                        console.log(charsLoc)
                         r[6] = enemies.includes('-') ? enemies.split('-').map(en => charsLoc.filter(loc => loc[0] == en)[0][1]).join('-') : charsLoc.filter(loc => loc[0] == r[6])[0][1]
                         r[7] = miniboss.includes('-') ? miniboss.split('-').map(en => charsLoc.filter(loc => loc[0] == en)[0][1]).join('-') : (charsLoc.filter(loc => loc[0] == r[7])[0] == undefined ? '' : charsLoc.filter(loc => loc[0] == r[7])[0][1])
                         r[8] = boss.includes('-') ? boss.split('-').map(en => charsLoc.filter(loc => loc[0] == en)[0][1]).join('-') : charsLoc.filter(loc => loc[0] == r[8])[0][1]
@@ -1545,7 +1554,6 @@ descFinale = descFinale.map(data => data.replace(/\bDark\b/gi, '<span class=\'da
             res.shift()
             let lang = document.getElementById('langSel').value
             let exhaust = skillsNamesLoc.filter(loc => loc[0] == 'Exhaust')[0]
-            console.log(exhaust)
             switch (lang) {
                 case 'English':
                     res.map((r,i) => {

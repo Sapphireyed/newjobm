@@ -112,7 +112,6 @@ let localization = {
                 res.shift()
                 res.shift()
                 chaptersLoc = res
-                console.log(chaptersLoc)
             })
     },
     rules: () => {
@@ -800,11 +799,32 @@ let descriptions = {
                 action = getKeywordEngName(skillsNamesLoc, 'XActionPoint')[0] == undefined ? '' : getKeywordEngName(skillsNamesLoc, 'XActionPoint')[0]
                 actionNext = getKeywordEngName(skillsNamesLoc, 'XActionPointNext')[0] == undefined ? '' : getKeywordEngName(skillsNamesLoc, 'XActionPointNext')[0]
                 drawNext = getKeywordEngName(skillsNamesLoc, 'XDrawNext')[0] == undefined ? '' : getKeywordEngName(skillsNamesLoc, 'XDrawNext')[0]
+
+                let actionNextN = actionNext.map(a => a.replace('XActionPointNext', 'Gain AP Next').replace('{0}', ''))
+                let drawNextN = drawNext.map(a => a.replace('XDrawNext', 'Draw Ability Next').replace('{0}', ''))
+                skillsNamesAdjusted.push(actionNextN, drawNextN)
+
                 actionNext.splice(0, 1, 'Gain AP Next')
                 actionNext = actionNext.map(a => a.replace('{0}', '+X'))
                 drawNext.splice(0, 1, 'Draw Ability Next')
                 drawNext = drawNext.map(a => a.replace('{0}', '+X'))
                 skillsDescAdjusted.push(actionNext, drawNext)
+
+                let attrHp = attrsNames.filter(b => b[0] == 'MaxHP')[0]
+                let attrStr = attrsNames.filter(b => b[0] == 'Strength')[0]
+                let attrAgi = attrsNames.filter(b => b[0] == 'Agility')[0]
+                let attrInt = attrsNames.filter(b => b[0] == 'Intelligence')[0]
+
+                let attrWater = elementsNames.filter(b => b[0] == 'Water')[0]
+
+                let debuffParal = debuffs.filter(d => d[0] == 'Paralysis')[0]
+                let debuffSlack = debuffs.filter(d => d[0] == 'Slack')[0]
+                let debuffConfuse = debuffs.filter(d => d[0] == 'Confuse')[0]
+                let debuffInjury = debuffs.filter(d => d[0] == 'Injury')[0]
+                let debuffBlind = debuffs.filter(d => d[0] == 'Blind')[0]
+                let debuffDizzy = debuffs.filter(d => d[0] == 'Dizzy')[0]
+                let debuffDepress = debuffs.filter(d => d[0] == 'Depress')[0]
+                let debuffBleed = debuffs.filter(d => d[0] == 'Bleed')[0]
 
                 //other buffs debuffs etc
                 buffsDesc.map(skill => {
@@ -817,7 +837,6 @@ let descriptions = {
 
                             let sdName = skillsNamesLoc.filter(loc => loc[0] == 'SuddenDeath')[0]
                             sdName.splice(0, 1, 'Sudden Death')
-                            console.log(sdName)
                             skillsNamesAdjusted.push(sdName)
                             break
                     }
@@ -835,6 +854,13 @@ let descriptions = {
                                 statActBuff = statActBuff.map(s => s.split('.')[0])
                                 statActBuff.splice(0, 1, attr + ' Action Buff')
                                 skillsDescAdjusted.push(statActBuff)
+
+                                let sdName = skillsNamesLoc.filter(loc => loc[0] == 'XActBuff')[0]
+                                if (sdName != undefined) {
+                                    sdName = sdName.map((s, i) => s.replace('{0}', attrName[i]))
+                                    sdName.splice(0, 1, attr + ' Action Buff')
+                                    skillsNamesAdjusted.push(sdName)
+                                } 
                             })
                             let statActBuff = skill.map((s, i) => s.replace('{0}', protectName[i]))
                             statActBuff = statActBuff.map((s, i) => s.replace('{1}', protectName[i]))
@@ -843,6 +869,11 @@ let descriptions = {
                             statActBuff = statActBuff.map(s => s.split('.')[0])
                             statActBuff.splice(0, 1, 'Protect Enhance')
                             skillsDescAdjusted.push(statActBuff)
+
+                            let protectEnchName = skillsNamesLoc.filter(loc => loc[0] == 'XProtectEnhance')[0]
+                            protectEnchName.splice(0, 1, 'Protect Enhance')
+                            protectEnchName = protectEnchName.map((s,i) => s.replace('{0}', protectName[i]))
+                            skillsNamesAdjusted.push(protectEnchName)
                             break;
                         case 'XDebuffDescr':
                             attrs.map((attr, ind) => {
@@ -852,76 +883,121 @@ let descriptions = {
                                 statActBuff = statActBuff.map((s, i) => s.replace('{2}', '3').replace('{3}', '5'))
                                 statActBuff.splice(0, 1, attr + ' Debuff')
                                 skillsDescAdjusted.push(statActBuff)
+
+                                let statDebuffName = skillsNamesLoc.filter(loc => loc[0] == 'XDebuff')[0]
+                                if (statDebuffName != undefined) {
+                                    statDebuffName = statDebuffName.map((s, i) => s.replace('{0}', attrName[i]))
+                                    statDebuffName.splice(0, 1, attr + ' Debuff')
+                                    skillsNamesAdjusted.push(statDebuffName)
+                                } 
                             })
                         case 'ChargeXDescr':
                             let chargeDescr = skill.map((s, i) => s.replace('{0}', '30%').replace('{1}', '50%'))
                             chargeDescr.splice(0, 1, 'Charge')
                             skillsDescAdjusted.push(chargeDescr)
+
+                            let chargeN = skillsNamesLoc.filter(loc => loc[0] == 'Charge')[0]
+                            chargeN.splice(0, 1, 'Charge')
+                            skillsNamesAdjusted.push(chargeN)
                             break
                         case 'GuardXDescr':
                             let guardDescr = skill.map((s, i) => s.replace('{0}', '30%').replace('{1}', '50%'))
                             guardDescr.splice(0, 1, 'Guard')
                             skillsDescAdjusted.push(guardDescr)
+
+                            let guardN = skillsNamesLoc.filter(loc => loc[0] == 'Guard')[0]
+                            guardN.splice(0, 1, 'Guard')
+                            skillsNamesAdjusted.push(guardN)
                             break
                         case 'StackChargeXDescr':
                             let stackChargeDesc = skill.map((s, i) => s.replace('{0}', '15X%').replace('{1}', '500%').replace('{2}', '800%'))
                             stackChargeDesc.splice(0, 1, 'Stack Charge')
                             skillsDescAdjusted.push(stackChargeDesc)
+
+                            let stackChargeN = skillsNamesLoc.filter(loc => loc[0] == 'StackCharge')[0]
+                            stackChargeN.splice(0, 1, 'Stack Charge')
+                            skillsNamesAdjusted.push(stackChargeN)
                             break
                         case 'StackGuardXDescr':
                             let stackGuardDesc = skill.map((s, i) => s.replace('{0}', '30%').replace('{1}', '40%').replace('{2}', '10%'))
                             stackGuardDesc.splice(0, 1, 'Stack Guard')
                             skillsDescAdjusted.push(stackGuardDesc)
+
+                            let stackGuardN = skillsNamesLoc.filter(loc => loc[0] == 'StackGuard')[0]
+                            stackGuardN.splice(0, 1, 'Stack Guard')
+                            skillsNamesAdjusted.push(stackGuardN)
                             break
                         case 'XEActBuffDescr':
                             elements.map(attr => {
                                 let attrName = elementsNames.filter(a => a.includes(attr) || a == attr)[0]
                                 let translatedName = attrName[1] + ' Action Buff'
-                                let attrBuff = skill.map((s, i) => s.replace('{0}', translatedName).replace('{1}', '5X%').replace('{2}', '15').replace('{3}', '20'))
+                                let attrBuff = skill.map((s, i) => s.replace('{0}', attr).replace('{1}', '5X%').replace('{2}', '15').replace('{3}', '20'))
                                 attrBuff.splice(0, 1, translatedName)
                                 skillsDescAdjusted.push(attrBuff)
+
+                                let elActBuffName = skillsNamesLoc.filter(loc => loc[0] == 'XActBuff')[0]
+                                if (elActBuffName != undefined) {
+                                    elActBuffName = elActBuffName.map((s, i) => s.replace('{0}', attrName[i]))
+                                    elActBuffName.splice(0, 1, attr + ' Action Buff')
+                                    skillsNamesAdjusted.push(elActBuffName)
+                                } 
                             })
                             break;
                         case 'FWTEWElementXDescr':
-                            let elStatus, elOpposite
-                            elements.map(attr => {
+                            let elStatus, elOpposite, el
+                            elements.map((attr,ind) => {
                                 switch (attr) {
                                     case 'Fire':
-                                        elStatus = burnName
-                                        elOpposite = windName
+                                        el = elementsNames[0]
+                                        elStatus = debuffs.filter(d => d[0] == 'Burn')[0]
+                                        elOpposite = elementsNames[ind + 3]
                                         break;
                                     case 'Water':
-                                        elStatus = chillName
-                                        elOpposite = fireName
+                                        el = elementsNames[1]
+                                        elStatus = debuffs.filter(d => d[0] == 'Chill')[0]
+                                        elOpposite = elementsNames[ind - 1]
                                         break;
                                     case 'Earth':
-                                        elStatus = seedName
-                                        elOpposite = thunderName
+                                        el = elementsNames[2]
+                                        elStatus = debuffs.filter(d => d[0] == 'Seed')[0]
+                                        elOpposite = elementsNames[ind + 2]
                                         break;
                                     case 'Thunder':
-                                        elStatus = paralysysName
-                                        elOpposite = waterName
+                                        el = elementsNames[4]
+                                        elStatus = debuffs.filter(d => d[0] == 'Paralysis')[0]
+                                        elOpposite = elementsNames[ind -3]
                                         break;
                                     case 'Wind':
-                                        elStatus = dizzyName
-                                        elOpposite = earthName
+                                        el = elementsNames[3]
+                                        elStatus = debuffs.filter(d => d[0] == 'Dizzy')[0]
+                                        elOpposite = elementsNames[ind - 1]
                                         break;
                                     case 'Light':
-                                        elStatus = blindName
-                                        elOpposite = darkName
+                                        el = elementsNames[5]
+                                        elStatus = debuffs.filter(d => d[0] == 'Blind')[0]
+                                        elOpposite = elementsNames[ind + 1]
                                         break;
                                     case 'Dark':
-                                        elStatus = depressName
-                                        elOpposite = lightName
+                                        el = elementsNames[6]
+                                        elStatus = debuffs.filter(d => d[0] == 'Depress')[0]
+                                        elOpposite = elementsNames[ind - 1]
                                         break;
                                 }
                                 let attrName = elementsNames.filter(a => a.includes(attr) || a == attr)[0]
                                 let translatedName = attrName[1] + ' Element'
-                                let attrBuff = skill.map((s, i) => s.replaceAll(/\{0\}/gi, '5X%').replaceAll(/\{1\}/gi, elStatus).replaceAll(/\{2\}/gi, elOpposite).replaceAll(/\{3\}/gi, attr).replaceAll(/\{4\}/gi, '5').replaceAll(/\{5\}/gi, '10').replaceAll(/\{6\}/gi, elOpposite))
+                                let attrBuff = skill.map((s, i) => s.replaceAll(/\{0\}/gi, '5X%').replaceAll(/\{1\}/gi, elStatus[i]).replaceAll(/\{2\}/gi, elOpposite[i]).replaceAll(/\{3\}/gi, el[i]).replaceAll(/\{4\}/gi, '5').replaceAll(/\{5\}/gi, '10').replaceAll(/\{6\}/gi, elOpposite[i]))
                                 attrBuff.splice(0, 1, translatedName)
                                 skillsDescAdjusted.push(attrBuff)
+
+                                let elElementName = skillsNamesLoc.filter(loc => loc[0] == 'XElement')[0]
+                                if (elElementName != undefined) {
+                                    elElementName = elElementName.map((s, i) => s.replace('{0}', attrName[i]))
+                                    elElementName.splice(0, 1, attr + ' Element')
+                                    skillsNamesAdjusted.push(elElementName)
+                                } 
                             })
                             break;
+
                         case 'XBuffDescr':
                             attrs.map((attr, ind) => {
                                 let attrName = attrsNames.filter(a => a.includes(attr) || a == attr)[0]
@@ -930,80 +1006,212 @@ let descriptions = {
                                 statBuff = statBuff.map((s, i) => s.replace('{2}', '3').replace('{3}', '5'))
                                 statBuff.splice(0, 1, attr + ' Buff') 
                                 skillsDescAdjusted.push(statBuff)
+
+                                let statBuffName = skillsNamesLoc.filter(loc => loc[0] == 'XBuff')[0]
+                                if (statBuffName != undefined) {
+                                    statBuffName = statBuffName.map((s, i) => s.replace('{0}', attrName[i]))
+                                    statBuffName.splice(0, 1, attr + ' Buff')
+                                    skillsNamesAdjusted.push(statBuffName)
+                                } 
                             })
+
                             break
                         case 'BurnXDescr':
-                            let burnDesc = skill.map((s, i) => s.replace('{0}', '5%').replace('{1}', hpName[i]).replace('{2}', fireName).replace('{3}', '3').replace('{4}', '5'))
+                            let attrFire = elementsNames.filter(b => b[0] == 'Fire')[0] // added bc fireName won't translate properly on switching lang, only on page reload
+                            let burnDesc = skill.map((s, i) => s.replace('{0}', '5%').replace('{1}', attrHp[i]).replace('{2}', attrFire[i]).replaceAll(/\{3 \}/gi, '3').replace('{4}', '5'))
                             burnDesc.splice(0, 1, 'Burned')
                             skillsDescAdjusted.push(burnDesc)
+
+                            let burnedN = skillsNamesLoc.filter(loc => loc[0] == 'Burn')[0]
+                            burnedN.splice(0, 1, 'Burned')
+                            skillsNamesAdjusted.push(burnedN)
                             break
                         case 'ChillXDescr':
-                            let chilledDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '1').replace(/\{1\}/gi, waterName).replace(/\{2\}/gi, '2'))
+                            let chilledDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '1').replace(/\{1\}/gi, attrWater[i]).replace(/\{2\}/gi, '2'))
                             chilledDesc.splice(0, 1, 'Chilled')
                             skillsDescAdjusted.push(chilledDesc)
+
+                            let chilledN = skillsNamesLoc.filter(loc => loc[0] == 'Chill')[0]
+                            chilledN.splice(0, 1, 'Chilled')
+                            skillsNamesAdjusted.push(chilledN)
                             break
                         case 'ParalysisXDescr':
-                            let paralDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '10%').replace(/\{1\}/gi, thunderName).replace(/\{2\}/gi, '3').replace(/\{3\}/gi, '5'))
+                            let attrThund = elementsNames.filter(b => b[0] == 'Thunder')[0]
+                            let paralDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '10%').replace(/\{1\}/gi, attrThund[i]).replace(/\{2\}/gi, '3').replace(/\{3\}/gi, '5'))
                             paralDesc.splice(0, 1, 'Paralyzed')
                             skillsDescAdjusted.push(paralDesc)
+
+                            let paralN = skillsNamesLoc.filter(loc => loc[0] == 'Paralysis')[0]
+                            paralN.splice(0, 1, 'Paralyzed')
+                            skillsNamesAdjusted.push(paralN)
                             break
                         case 'SeedXDescr':
-                            let seedDesc = skill.map((s, i) => s.replace(/\{0\}/gi, earthName).replace(/\{1\}/gi, '20%').replace(/\{2\}/gi, '3').replace(/\{3\}/gi, '5'))
+                            let attrEarth = elementsNames.filter(b => b[0] == 'Earth')[0]
+                            let seedDesc = skill.map((s, i) => s.replace(/\{0\}/gi, attrEarth[i]).replace(/\{1\}/gi, '20%').replace(/\{2\}/gi, '3').replace(/\{3\}/gi, '5'))
                             seedDesc.splice(0, 1, 'Seeded')
                             skillsDescAdjusted.push(seedDesc)
+
+                            let seededN = skillsNamesLoc.filter(loc => loc[0] == 'Seed')[0]
+                            seededN.splice(0, 1, 'Seeded')
+                            skillsNamesAdjusted.push(seededN)
                             break
                         case 'DizzyXDescr':
-                            let dizzyDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '10%').replace(/\{1\}/gi, windName).replace(/\{2\}/gi, '3').replace(/\{3\}/gi, '5'))
+                            let attrWind = elementsNames.filter(b => b[0] == 'Wind')[0]
+                            let dizzyDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '10%').replace(/\{1\}/gi, attrWind[i]).replace(/\{2\}/gi, '3').replace(/\{3\}/gi, '5'))
                             dizzyDesc.splice(0, 1, 'Dizzy')
                             skillsDescAdjusted.push(dizzyDesc)
+
+
+                            let dizzyN = skillsNamesLoc.filter(loc => loc[0] == 'Dizzy')[0]
+                            dizzyN.splice(0, 1, 'Dizzy')
+                            skillsNamesAdjusted.push(dizzyN)
                             break
                         case 'BlindXDescr':
-                            let blindDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '15%').replace(/\{1\}/gi, lightName).replace(/\{2\}/gi, '3').replace(/\{3\}/gi, '5'))
+                            let attrLight = elementsNames.filter(b => b[0] == 'Light')[0]
+                            let blindDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '15%').replace(/\{1\}/gi, attrLight[i]).replace(/\{2\}/gi, '3').replace(/\{3\}/gi, '5'))
                             blindDesc.splice(0, 1, 'Blinded')
                             skillsDescAdjusted.push(blindDesc)
+
+                            let blindN = skillsNamesLoc.filter(loc => loc[0] == 'Blind')[0]
+                            blindN.splice(0, 1, 'Blinded')
+                            skillsNamesAdjusted.push(blindN)
                             break
                         case 'DepressXDescr':
-                            let depressDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]).replace(/\{1\}/gi, '15%').replace(/\{2\}/gi, darkName).replace(/\{3\}/gi, '3').replace(/\{4\}/gi, '5'))
+                            let attrDark = elementsNames.filter(b => b[0] == 'Dark')[0]
+                            let depressDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]).replace(/\{1\}/gi, '15%').replace(/\{2\}/gi, attrDark[i]).replace(/\{3\}/gi, '3').replace(/\{4\}/gi, '5'))
                             depressDesc.splice(0, 1, 'Depressd')
                             skillsDescAdjusted.push(depressDesc)
+
+                            let depressN = skillsNamesLoc.filter(loc => loc[0] == 'Depress')[0]
+                            depressN.splice(0, 1, 'Depressd')
+                            skillsNamesAdjusted.push(depressN)
                             break
                         case 'BleedXDescr':
-                            let bleedDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '1%').replace(/\{1\}/gi, hpName).replace(/\{2\}/gi, '4').replace(/\{3\}/gi, '7'))
+                            let bleedDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '1%').replace(/\{1\}/gi, attrHp[i]).replace(/\{2\}/gi, '4').replace(/\{3\}/gi, '7'))
                             bleedDesc.splice(0, 1, 'Bleeding')
                             skillsDescAdjusted.push(bleedDesc)
+
+                            let bleedN = skillsNamesLoc.filter(loc => loc[0] == 'Bleed')[0]
+                            bleedN.splice(0, 1, 'Bleeding')
+                            skillsNamesAdjusted.push(bleedN)
                             break
                         case 'InjuryXDescr':
                             let injuryDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '3%').replace(/\{1\}/gi, '8').replace(/\{2\}/gi, '15'))
                             injuryDesc.splice(0, 1, 'Injured')
                             skillsDescAdjusted.push(injuryDesc)
+
+                            let injuryN = skillsNamesLoc.filter(loc => loc[0] == 'Injury')[0]
+                            injuryN.splice(0, 1, 'Injured')
+                            skillsNamesAdjusted.push(injuryN)
                             break
                         case 'VRIXDescr':
                             vri.map(v => {
                                 let vriDesc = skill.map(s => s.replace('{0}', '10%').replace('{2}', '25').replace('{3}', '40'))
                                 if (v[0] == 'Venom') {
-                                    vriDesc = vriDesc.map((r, i) => r.replace('{1}', strName))
+                                    vriDesc = vriDesc.map((r, i) => r.replace('{1}', attrStr[i]))
                                     vriDesc.splice(0, 1, 'Venomed')
+
+                                    let venomN = skillsNamesLoc.filter(loc => loc[0] == 'Venom')[0]
+                                    venomN.splice(0, 1, 'Venomed')
+                                    skillsNamesAdjusted.push(venomN)
                                 }
                                 if (v[0] == 'Restrain') {
-                                    vriDesc = vriDesc.map((r, i) => r.replace('{1}', agiName))
+                                    vriDesc = vriDesc.map((r, i) => r.replace('{1}', attrAgi[i]))
                                     vriDesc.splice(0, 1, 'Restrained')
+
+                                    let restrainN = skillsNamesLoc.filter(loc => loc[0] == 'Restrain')[0]
+                                    restrainN.splice(0, 1, 'Restrained')
+                                    skillsNamesAdjusted.push(restrainN)
                                 }
                                 if (v[0] == 'Insane') {
-                                    vriDesc = vriDesc.map((r, i) => r.replace('{1}', intName))
+                                    vriDesc = vriDesc.map((r, i) => r.replace('{1}', attrInt[i]))
                                     vriDesc.splice(0, 1, 'Insane')
+
+                                    let insaneN = skillsNamesLoc.filter(loc => loc[0] == 'Insane')[0]
+                                    insaneN.splice(0, 1, 'Insane')
+                                    skillsNamesAdjusted.push(insaneN)
                                 }
                                 skillsDescAdjusted.push(vriDesc)
                             })
                             break
                         case 'ProtectXDescr':
-                            let protectDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '50%').replace(/\{1\}/gi, hpName).replace(/\{2\}/gi, '80%'))
+                            let protectDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '50%').replace(/\{1\}/gi, attrHp).replace(/\{2\}/gi, '80%'))
                             protectDesc.splice(0, 1, 'Protect')
                             skillsDescAdjusted.push(protectDesc)
+
+                            let protectN = skillsNamesLoc.filter(loc => loc[0] == 'Protect')[0]
+                            protectN.splice(0, 1, 'Protect')
+                            skillsNamesAdjusted.push(protectN)
                             break
                         case 'SecondChanceXDescr':
                             let sndChanceDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '10%').replace(/\{1\}/gi, '2'))
                             sndChanceDesc.splice(0, 1, 'Second Chance')
                             skillsDescAdjusted.push(sndChanceDesc)
+
+                            let scN = skillsNamesLoc.filter(loc => loc[0] == 'SecondChance')[0]
+                            scN.splice(0, 1, 'Second Chance')
+                            skillsNamesAdjusted.push(scN)
+                            break
+                        case 'FTEWLDVulnXDescr':
+                            let elStatus2, el2
+                            elements.map(attr => {
+                                if (attr != 'Water') {
+                                    switch (attr) {
+                                        case 'Fire':
+                                            el2 = elementsNames[0]
+                                            elStatus2 = debuffs.filter(d => d[0] == 'Burned')[0]
+                                            break;
+                                        case 'Earth':
+                                            el = elementsNames[2]
+                                            elStatus2 = debuffs.filter(d => d[0] == 'Seeded')[0]
+                                            break;
+                                        case 'Thunder':
+                                            el2 = elementsNames[4]
+                                            elStatus2 = debuffs.filter(d => d[0] == 'Paralyzed')[0]
+                                            break;
+                                        case 'Wind':
+                                            el2 = elementsNames[3]
+                                            elStatus2 = debuffs.filter(d => d[0] == 'Dizzy')[0]
+                                            break;
+                                        case 'Light':
+                                            el2 = elementsNames[5]
+                                            elStatus2 = debuffs.filter(d => d[0] == 'Blinded')[0]
+                                            break;
+                                        case 'Dark':
+                                            el2 = elementsNames[6]
+                                            elStatus2 = debuffs.filter(d => d[0] == 'Depressd')[0]
+                                            break;
+                                    }
+
+                                    let attrName = elementsNames.filter(a => a.includes(attr) || a == attr)[0]
+                                    let translatedName = attrName[1] + ' Vulnerable'
+                                    let attrBuff;
+                                    if (elStatus2) {
+                                        attrBuff = skill.map((s, i) => s.replaceAll(/\{0\}/gi, '5%').replaceAll(/\{1\}/gi, el2[i]).replaceAll(/\{2\}/gi, elStatus2[i]).replaceAll(/\{3\}/gi, '5%').replaceAll(/\{4\}/gi, '10'))
+                                        attrBuff.splice(0, 1, translatedName)
+                                        skillsDescAdjusted.push(attrBuff)
+                                    }
+                                    
+                                    let elVulnN = skillsNamesLoc.filter(loc => loc[0] == 'XVulnerable')[0]
+                                    if (elVulnN != undefined) {
+                                        elVulnN = elVulnN.map((s, i) => s.replace('X', attr+ ' '))
+                                        elVulnN = elVulnN.map((s, i) => s.replaceAll(/\{0\}/gi, (attrName[i])))
+                                        skillsNamesAdjusted.push(elVulnN)
+                                    } 
+                                }
+                            })
+
+                            break;
+                        case 'WaterVulnXDescr':
+                            let waterVulnDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '5%').replace(/\{1\}/gi, attrWater[i]).replace('{2}', chillName).replace('{3}', '2'))
+                            waterVulnDesc.splice(0, 1, 'Water Vulnerable')
+                            skillsDescAdjusted.push(waterVulnDesc)
+
+                            let attrName = elementsNames.filter(a => a.includes('Water') || a == 'Water')[0]
+                            let waterCulnN = skillsNamesLoc.filter(loc => loc[0] == 'XVulnerable')[0]
+                            waterCulnN = waterCulnN.map((s, i) => s.replace('X', 'Water '))
+                            waterCulnN = waterCulnN.map((s, i) => s.replaceAll(/\{0\}/gi, (attrName[i])))
+                            skillsNamesAdjusted.push(waterCulnN)
                             break
                         case 'StatVulnXDescr':
                             attrs.map((attr, ind) => {
@@ -1011,10 +1219,22 @@ let descriptions = {
                                 let statBuff = skill.map((s, i) => s.replace('{0}', '5%'))
                                 statBuff = statBuff.map((s, i) => s.replace('{1}', attrName[i]))
                                 statBuff = statBuff.map((s, i) => s.replace('{2}', '10'))
-                                if (attr = hpName) {
+
+                                if (attr == 'Max HP') {
                                     statBuff.splice(0, 1, 'HP Vulnerable')
+
+                                    let statHpN = skillsNamesLoc.filter(loc => loc[0] == 'XVulnerable')[0]
+                                    statHpN = statHpN.map((s, i) => s.replace('X', 'HP '))
+                                    statHpN = statHpN.map((s, i) => s.replaceAll(/\{0\}/gi, (attrName[i])))
+                                    skillsNamesAdjusted.push(statHpN)
                                 } else {
                                     statBuff.splice(0, 1, attr + ' Vulnerable')
+                                    let statVulnN = skillsNamesLoc.filter(loc => loc[0] == 'XVulnerable')[0]
+                                    if (statVulnN != undefined) {
+                                        statVulnN = statVulnN.map((s, i) => s.replace('X', attr + ' '))
+                                        statVulnN = statVulnN.map((s, i) => s.replaceAll(/\{0\}/gi, (attrName[i])))
+                                        skillsNamesAdjusted.push(statVulnN)
+                                    } 
                                 }
                                 
                                 skillsDescAdjusted.push(statBuff)
@@ -1024,87 +1244,87 @@ let descriptions = {
                             let pierceDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '10%').replace(/\{1\}/gi, protectName[i]).replace('{2}', '10'))
                             pierceDesc.splice(0, 1, 'Protect Pirece')
                             skillsDescAdjusted.push(pierceDesc)
-                            break
-                        case 'FTEWLDVulnXDescr':
-                                let elStatus2
-                            elements.map(attr => {
-                                if (attr != 'Water') {
-                                    switch (attr) {
-                                        case 'Fire':
-                                            elStatus2 = burnName
-                                            break;
-                                        case 'Water':
-                                            elStatus2 = chillName
-                                            break;
-                                        case 'Earth':
-                                            elStatus2 = seedName
-                                            break;
-                                        case 'Thunder':
-                                            elStatus2 = paralysysName
-                                            break;
-                                        case 'Wind':
-                                            elStatus2 = dizzyName
-                                            break;
-                                        case 'Light':
-                                            elStatus2 = blindName
-                                            break;
-                                        case 'Dark':
-                                            elStatus2 = depressName
-                                            break;
-                                    }
-                                    let attrName = elementsNames.filter(a => a.includes(attr) || a == attr)[0]
-                                    let translatedName = attrName[1] + ' Vulnerable'
-                                    let attrBuff = skill.map((s, i) => s.replaceAll(/\{0\}/gi, '5%').replaceAll(/\{1\}/gi, attrName[i]).replaceAll(/\{2\}/gi, elStatus2).replaceAll(/\{3\}/gi, '5%').replaceAll(/\{4\}/gi, '10'))
-                                    attrBuff.splice(0, 1, translatedName)
-                                    skillsDescAdjusted.push(attrBuff)
-                                }
-                            })
 
-                            break;
-                        case 'WaterVulnXDescr':
-                            let waterVulnDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '5%').replace(/\{1\}/gi, waterName).replace('{2}', chillName).replace('{3}', '2'))
-                            waterVulnDesc.splice(0, 1, 'Water Vulnerable')
-                            skillsDescAdjusted.push(waterVulnDesc)
+                            let protectPierceN = skillsNamesLoc.filter(loc => loc[0] == 'XPierce')[0]
+                            protectPierceN = protectPierceN.map((pp, i) => pp.replace('XPierce', protectName[i] + ' Pirece'))
+                            protectPierceN = protectPierceN.map((pp, i) => pp.replace('{0}', ''))
+                            skillsNamesAdjusted.push(protectPierceN)
                             break
                         case 'BleedVulnXDescr':
                             let bleedVulnDesc = skill.map((s, i) => s.replace(/\{0\}/gi, bleedName).replace(/\{1\}/gi, '3'))
                             bleedVulnDesc.splice(0, 1, 'Bleed Vulnerable')
                             skillsDescAdjusted.push(bleedVulnDesc)
+
+                            let bleedVulnN = skillsNamesLoc.filter(loc => loc[0] == 'XVulnerable')[0]
+                            bleedVulnN = bleedVulnN.map((pp, i) => pp.replace('X', debuffBleed[1] + ' '))
+                            bleedVulnN = bleedVulnN.map((pp, i) => pp.replace('{0}', ''))
+                            skillsNamesAdjusted.push(bleedVulnN)
                             break
                         case 'InjuryVulnXDescr':
                             let injuryVulnDesc = skill.map((s, i) => s.replaceAll(/\{0\}/gi, injuryName).replace(/\{1\}/gi, '3'))
                             injuryVulnDesc.splice(0, 1, 'Injury Vulnerable')
                             skillsDescAdjusted.push(injuryVulnDesc)
+
+                            let injuryVulnN = skillsNamesLoc.filter(loc => loc[0] == 'XVulnerable')[0]
+                            injuryVulnN = injuryVulnN.map((pp, i) => pp.replace('X', debuffInjury[1] + ' '))
+                            injuryVulnN = injuryVulnN.map((pp, i) => pp.replace('{0}', ''))
+                            console.log(injuryVulnN)
+                            skillsNamesAdjusted.push(injuryVulnN)
                             break
                         case 'InvulnerableDescr':
                             let invulnDesc = skill.map((s, i) => s.replace(/\{0\}/gi, 'X'))
                             invulnDesc.splice(0, 1, 'Invulnerable')
                             skillsDescAdjusted.push(invulnDesc)
+
+                            let invulnN = skillsNamesLoc.filter(loc => loc[0] == 'Invulnerable')[0]
+                            invulnN.splice(0, 1, 'Invulnerable')
+                            skillsNamesAdjusted.push(invulnN)
                             break
                         case 'ConfuseXDescr':
-                            let confuseDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]))
+                            let confuseDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]).replace(/\{1\}/gi, attrHp[i]).replace(/\{2\}/gi, '3'))
                             confuseDesc.splice(0, 1, 'Confuse')
                             skillsDescAdjusted.push(confuseDesc)
+
+                            let confuseN = skillsNamesLoc.filter(loc => loc[0] == 'Confuse')[0]
+                            confuseN.splice(0, 1, 'Confuse')
+                            skillsNamesAdjusted.push(confuseN)
                             break
                         case 'SlackXDescr':
-                            let slackDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]))
+                            let slackDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '50%').replace(/\{1\}/gi, '10%').replace(/\{2\}/gi, attrHp[i]).replace(/\{3\}/gi, '2'))
                             slackDesc.splice(0, 1, 'Slack')
                             skillsDescAdjusted.push(slackDesc)
+
+                            let slackN = skillsNamesLoc.filter(loc => loc[0] == 'Slack')[0]
+                            slackN.splice(0, 1, 'Slack')
+                            skillsNamesAdjusted.push(slackN)
                             break
                         case 'CertainXDescr':
-                            let certainDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]))
+                            let certainDesc = skill.map((s, i) => s.replace(/\{0\}/gi, debuffParal[i]).replace(/\{1\}/gi, debuffSlack[i]).replace(/\{2\}/gi, debuffConfuse[i])
+                                .replace(/\{3\}/gi, debuffInjury[i]).replace(/\{4\}/gi, debuffBlind[i]).replace(/\{5\}/gi, debuffDizzy[i]).replace(/\{6\}/gi, debuffDepress[i]))
                             certainDesc.splice(0, 1, 'Certain')
                             skillsDescAdjusted.push(certainDesc)
+
+                            let certainN = skillsNamesLoc.filter(loc => loc[0] == 'Certain')[0]
+                            certainN.splice(0, 1, 'Certain')
+                            skillsNamesAdjusted.push(certainN)
                             break
                         case 'RageXDescr':
                             let rageDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]))
                             rageDesc.splice(0, 1, 'Rage Buff')
                             skillsDescAdjusted.push(rageDesc)
+
+                            let rageN = skillsNamesLoc.filter(loc => loc[0] == 'Rage')[0]
+                            rageN.splice(0, 1, 'Rage Buff')
+                            skillsNamesAdjusted.push(rageN)
                             break
                         case 'InstinctXDescr':
                             let instinctDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]))
                             instinctDesc.splice(0, 1, 'Instinct Buff')
                             skillsDescAdjusted.push(instinctDesc)
+
+                            let instinctN = skillsNamesLoc.filter(loc => loc[0] == 'Instinct')[0]
+                            instinctN.splice(0, 1, 'Instinct Buff')
+                            skillsNamesAdjusted.push(instinctN)
                             break
                         case 'CorruptionXDescr':
                             let corruptionDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]))
@@ -1115,6 +1335,10 @@ let descriptions = {
                             let sealDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]))
                             sealDesc.splice(0, 1, 'Seal')
                             skillsDescAdjusted.push(sealDesc)
+
+                            let sealN = skillsNamesLoc.filter(loc => loc[0] == 'Seal')[0]
+                            sealN.splice(0, 1, 'Seal')
+                            skillsNamesAdjusted.push(sealN)
                             break
                         case 'MadnessXDescr':
                             let madnessDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]))
@@ -1129,6 +1353,15 @@ let descriptions = {
                                 actDebuffDesc = actDebuffDesc.map((s, i) => s.replace('{2}', '3').replace('{3}', '5'))
                                 actDebuffDesc.splice(0, 1, attr + ' Action Debuff')
                                 skillsDescAdjusted.push(actDebuffDesc)
+
+                                let statActDebuffN = skillsNamesLoc.filter(loc => loc[0] == 'XActDebuff')[0]
+                                if (statActDebuffN != undefined) {
+                                    statActDebuffN = statActDebuffN.map((s, i) => s.replace('X', attr + ' '))
+                                    statActDebuffN = statActDebuffN.map((s, i) => s.replaceAll(/\{0\}/gi, attrName[i]))
+                                    statActDebuffN.splice(0, 1, statActDebuffN[1])
+                                    console.log(statActDebuffN)
+                                    skillsNamesAdjusted.push(statActDebuffN)
+                                } 
                             })
                             break
 
@@ -1137,91 +1370,154 @@ let descriptions = {
                             races.map((attr, ind) => {
                                 let attrName = races.filter(a => a.includes(attr) || a == attr)[0]
                                 let applyRace = skill.map((s, i) => s.replaceAll(/\{0\}/gi, '25%').replaceAll(/\{1\}/gi, attrName[i]).replaceAll(/\{2\}/gi, '40%'))
-                                let translatedName = 'Apply ' + attrName[0]
+                                let translatedName = attrName[1]
                                 applyRace.splice(0, 1, translatedName)
                                 skillsDescAdjusted.push(applyRace)
+
+                                skillsNamesAdjusted.push(races[ind])
                             })
                             break
                         case 'LifeStealApplyXDescr':
                             let lifestealDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '50%').replace(/\{1\}/gi, '100%'))
-                            lifestealDesc.splice(0, 1, 'Apply Lifesteal')
+                            lifestealDesc.splice(0, 1, 'Lifesteal')
                             skillsDescAdjusted.push(lifestealDesc)
+
+                            let lifestealN = skillsNamesLoc.filter(loc => loc[0] == 'LifeSteal')[0]
+                            lifestealN.splice(0, 1, 'Lifesteal')
+                            skillsNamesAdjusted.push(lifestealN)
                             break
                         case 'SynergyApplyXDescr':
                             attrs.map((attr, ind) => {
                                 let attrName = attrsNames.filter(a => a.includes(attr) || a == attr)[0]
                                 let synergyDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '1%').replace(/\{1\}/gi, attrName[i]).replace(/\{2\}/gi, '100'))
-                                synergyDesc.splice(0, 1, 'Apply ' +  attr + ' Synergy')
+                                synergyDesc.splice(0, 1, attr + ' Synergy')
                                 skillsDescAdjusted.push(synergyDesc)
+
+                                let statSynegyN = skillsNamesLoc.filter(loc => loc[0] == 'XSynergy')[0]
+                                if (statSynegyN != undefined) {
+                                    statSynegyN = statSynegyN.map((s, i) => s.replace('X', attr + ' '))
+                                    statSynegyN = statSynegyN.map((s, i) => s.replaceAll(/\{0\}/gi, attrName[i]))
+                                    skillsNamesAdjusted.push(statSynegyN)
+                                } 
                             })
                             break
                         case 'ElementApplyXDescr':
                             elements.map((attr, ind) => {
                                 let attrName = elementsNames.filter(a => a.includes(attr) || a == attr)[0]
                                 let applyElDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '1%').replace(/\{1\}/gi, attrName[i]).replace(/\{2\}/gi, '100'))
-                                applyElDesc.splice(0, 1, 'Apply ' + attr)
+                                applyElDesc.splice(0, 1, attr)
                                 skillsDescAdjusted.push(applyElDesc)
+
+                                skillsNamesAdjusted.push(attrName)
                             })
                             break
                         case 'TurnChargeApplyXDescr':
                             let turnChargeDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '15%').replace(/\{1\}/gi, '4').replace(/\{2\}/gi, '6'))
-                            turnChargeDesc.splice(0, 1, 'Turn Charge')
+                            turnChargeDesc.splice(0, 1, 'Chronocharge')
                             skillsDescAdjusted.push(turnChargeDesc)
+
+                            let turnChargeN = skillsNamesLoc.filter(loc => loc[0] == 'TurnCharge')[0]
+                            turnChargeN.splice(0, 1, 'Chronochargw')
+                            skillsNamesAdjusted.push(turnChargeN)
                             break
                         case 'PracticePerfectApplyXDescr':
                             let practicePerfDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '10%').replace(/\{1\}/gi, '5').replace(/\{2\}/gi, '8'))
                             practicePerfDesc.splice(0, 1, 'Practice Perfect')
                             skillsDescAdjusted.push(practicePerfDesc)
+
+                            let practicePerfN = skillsNamesLoc.filter(loc => loc[0] == 'PracticePerfect')[0]
+                            practicePerfN.splice(0, 1, 'Practice Perfect')
+                            skillsNamesAdjusted.push(practicePerfN)
                             break
                         case 'FocusEnergyApplyXDescr':
                             let focusEnergyDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '5%').replace(/\{1\}/gi, '10'))
                             focusEnergyDesc.splice(0, 1, 'Focus Energy')
                             skillsDescAdjusted.push(focusEnergyDesc)
+
+                            let focusEnN = skillsNamesLoc.filter(loc => loc[0] == 'FocusEnergy')[0]
+                            focusEnN.splice(0, 1, 'Focus Energy')
+                            skillsNamesAdjusted.push(focusEnN)
                             break
                         case 'NegativePowerApplyXDescr':
                             let negPowerDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '10%').replace(/\{1\}/gi, '10'))
                             negPowerDesc.splice(0, 1, 'Desperate Power')
                             skillsDescAdjusted.push(negPowerDesc)
+
+                            let despPowN = skillsNamesLoc.filter(loc => loc[0] == 'NegativePower')[0]
+                            despPowN.splice(0, 1, 'Desperate Power')
+                            skillsNamesAdjusted.push(despPowN)
                             break
                         case 'OverloadedApplyDescr':
                             let overloadedDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '2'))
                             overloadedDesc.splice(0, 1, 'Overloaded')
                             skillsDescAdjusted.push(overloadedDesc)
+
+                            let overloadedN = skillsNamesLoc.filter(loc => loc[0] == 'Overloaded')[0]
+                            overloadedN.splice(0, 1, 'Overloaded')
+                            skillsNamesAdjusted.push(overloadedN)
                             break
                         case 'LastResortApplyXDescr':
                             let lastResortDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '100%').replace(/\{1\}/gi, '2'))
                             lastResortDesc.splice(0, 1, 'Last Resort')
                             skillsDescAdjusted.push(lastResortDesc)
+
+                            let lastResortN = skillsNamesLoc.filter(loc => loc[0] == 'LastResort')[0]
+                            lastResortN.splice(0, 1, 'Last Resort')
+                            skillsNamesAdjusted.push(lastResortN)
                             break
                         case 'ExhaustApplyXDescr':
                             let exhaustDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '2'))
                             exhaustDesc.splice(0, 1, 'Exhaust')
                             skillsDescAdjusted.push(exhaustDesc)
+
+                            let ExhaustN = skillsNamesLoc.filter(loc => loc[0] == 'Exhaust')[0]
+                            ExhaustN.splice(0, 1, 'Exhaust')
+                            skillsNamesAdjusted.push(ExhaustN)
                             break
                         case 'CurseApplyXDescr':
                             let curseDesc = skill
                             curseDesc.splice(0, 1, 'Curse')
                             skillsDescAdjusted.push(curseDesc)
+
+                            let CurseN = skillsNamesLoc.filter(loc => loc[0] == 'Curse')[0]
+                            CurseN.splice(0, 1, 'Curse')
+                            skillsNamesAdjusted.push(CurseN)
                             break
                         case 'ComboBlendApplyXDescr':
                             let comboBlendDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '1').replace(/\{1\}/gi, '2'))
                             comboBlendDesc.splice(0, 1, 'Combo Blend')
                             skillsDescAdjusted.push(comboBlendDesc)
+                            console.log(skillsNamesLoc)
+                            let comboBlendN = skillsNamesLoc.filter(loc => loc[0] == 'Combo Blend')[0]
+                            comboBlendN.splice(0, 1, 'Combo Blend')
+                            skillsNamesAdjusted.push(comboBlendN)
                             break
                         case 'ScheduledApplyDescr':
                             let schedulesdDesd = skill
                             schedulesdDesd.splice(0, 1, 'Scheduled')
                             skillsDescAdjusted.push(schedulesdDesd)
+
+                            let ScheduledN = skillsNamesLoc.filter(loc => loc[0] == 'Scheduled')[0]
+                            ScheduledN.splice(0, 1, 'Scheduled')
+                            skillsNamesAdjusted.push(ScheduledN)
                             break
                         case 'AutoFireApplyDescr':
                             let autFireDesc = skill.map((s, i) => s.replace(/\{0\}/gi, protectName[i]))
                             autFireDesc.splice(0, 1, 'Automatic')
                             skillsDescAdjusted.push(autFireDesc)
+
+                            let autoFireN = skillsNamesLoc.filter(loc => loc[0] == 'AutoFire')[0]
+                            autoFireN.splice(0, 1, 'Automatic')
+                            skillsNamesAdjusted.push(autoFireN)
                             break
                         case 'GambleDescr':
                             let gambleDesc = skill
                             gambleDesc.splice(0, 1, 'Gamble')
                             skillsDescAdjusted.push(gambleDesc)
+
+                            let gambleN = skillsNamesLoc.filter(loc => loc[0] == 'Gamble')[0]
+                            gambleN.splice(0, 1, 'Gamble')
+                            skillsNamesAdjusted.push(gambleN)
                             break
                     }
 
@@ -1497,8 +1793,6 @@ let descriptions = {
                 skillStackMasterName.splice(0, 1, 'Skill Stack Master')
                 normalMaster.splice(0, 1, 'Jack-of-all-Trades')
                 passivesDescAdjusted.push(normalMaster, skillStackMasterName)
-
-                console.log(passivesDescAdjusted)
             })
 
 

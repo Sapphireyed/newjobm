@@ -15,9 +15,7 @@ thead.innerHTML =  '<tr id="abilsThead">'
     + '<th id="Description">Description<i class="fas fa-sort float-right"></i></th>'
     + '<th id="MaxStack">Max Stack<i class="fas fa-sort float-right"></i></th>'
     + '<th id="UpgrMaxStack">Upgr Max Stack<i class="fas fa-sort float-right"></i></th>'
-   // + '<th id="StackDecreaseAt">Stack Decrease at<i class="fas fa-sort float-right"></i></th>'
-  //  + '<th id="StackIncreaseAt">Stack Increase at<i class="fas fa-sort float-right"></i></th>'
- //   + '<th id="RemovedAt">Removed at<i class="fas fa-sort float-right"></i></th>'
+
     + '</tr>'
   var tbody = document.createElement('tbody')
   tbody.id = 'abilsBody'
