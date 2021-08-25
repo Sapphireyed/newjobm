@@ -49,6 +49,7 @@ window.addEventListener('load', function () {
         language();
         loadAll();
     })
+    
     // main functionn
     function loadAll() {
         if (localStorage.getItem('language')) {

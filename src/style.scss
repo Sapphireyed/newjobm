@@ -130,7 +130,7 @@ nav:nth-child(2) {
 #ver:hover {
     color:rgba(255,255,255,.5)
 }
-#chooselang { visibility: visible; z-index: 1 }
+#chooselang { visibility: hidden; z-index: -1 }
 #logo {overflow: hidden}
 #logo:after {
   content: "";

@@ -9,7 +9,6 @@ var $ = require("jquery")
 import tablesorter from 'tablesorter';
 
 
-console.log(traits)
 export function glossFn() {
 
   function drawList() {
@@ -46,7 +45,6 @@ export function glossFn() {
           if (cell.innerHTML == 'pic') {
             let pic = document.createElement('img')
             imgComplete == undefined ? '' : pic.src = imgComplete[1]
-            console.log(pic.src)
             cell.id = 'pic'
             cell.innerHTML = ''
             cell.append(pic)
@@ -80,11 +78,11 @@ export function applyTableFn() {
         jobItem.splice(0,2)
         jobItem.splice(0,0, i+1)
         jobItem.splice(1, 0, "pic")
-        if (jobItem[2] !== undefined) {
+        if (jobItem[2] !== undefined && jobItem[3] !== '') {
           var tableRow = document.createElement('tr')
           tableRow.classList.add('jobRow')
           i % 2 == 0 ? tableRow.style.backgroundColor = '#f5f7f8' : tableRow.style.backgroundColor = '#d6d1bf'
-
+            console.log(jobItem)
           jobItem.map( (job, ind) => {
             var cell = document.createElement('td')
             cell.id = cell.innerHTML
@@ -96,8 +94,7 @@ export function applyTableFn() {
             var imgComplete = traitsImgs.find(jobimg => jobItem[2] == undefined ? '' : jobimg[0].toLowerCase() == jobItem[3].toLowerCase() + '.png')
             if (cell.innerHTML == 'pic') {
               let pic = document.createElement('img')
-              pic.src = imgComplete == undefined ? 'n/a' : imgComplete[1] 
-              console.log(traits)
+              pic.src = imgComplete == undefined ? '' : imgComplete[1] 
               cell.id = 'pic'
               cell.innerHTML = ''
               cell.append(pic)

@@ -29,7 +29,7 @@ export function getMatImgs() {
     matImagesComplete = []
     let lang = document.getElementById('langSel').value
     Object.entries(matsImgs).map(mat => {
-        
+
     let ext = mat[0].indexOf('.')
         let name = mat[0].substring(0, ext)
 
@@ -54,10 +54,10 @@ export function getMatImgs() {
     matImgHtml.className = 'material'
     matImgHtml.style.backgroundSize = 'cover'
         mats.map(material => {
-            
+
       if (material[1] == matImgHtml.id) { // set frame as img src dep on rarity
           let rarity = material[2]
-          
+
           switch (lang) {
               case 'English':
                   rarity = wordsLoc.filter(loc => loc[1] == rarity)[0][1];
@@ -248,7 +248,7 @@ export function getAbilImgs() {
   abilitiesAllInfo.map(img => {
     let abilImgHtml = document.createElement('img');  //create abil img empty
     abilImgHtml.classList.add(img[20])
-    abilImgHtml.id = img[2].trim()
+    abilImgHtml.id = img[2] == undefined ? '' : img[2]//.trim()
     abilImgArr.push(abilImgHtml)
   })
 

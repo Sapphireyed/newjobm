@@ -61,7 +61,7 @@ window.onload = function () {
                                         getAllKeys()
                                         let keysVals = getAllKeys()
                                         let jobsHeaderEl = document.querySelector('#jobsmain h1')
-                                        jobsHeaderEl.innerHTML = keysVals.find(word => word.key == 'Materials').value
+                                        jobsHeaderEl.innerHTML = keysVals.find(word => word.key == 'Chapters').value
 
                                         document.getElementById('search').previousElementSibling.innerText = keysVals.find(word => word.key == 'Search').value
 

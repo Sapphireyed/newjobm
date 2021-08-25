@@ -28,7 +28,7 @@ let localization = {
 
     wiki: () => {
         return GetSheetDone
-            .raw(id, 15).then(data => data.data).then(res => {
+            .raw(id, 'Wiki').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
 
@@ -44,7 +44,7 @@ let localization = {
     },
     skills: () => {
         return GetSheetDone
-            .raw(id, 3).then(data => data.data).then(res => {
+            .raw(id, 'skills%20description').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
 
@@ -96,7 +96,7 @@ let localization = {
     },
     characters: () => {
         return GetSheetDone
-            .raw(id, 9).then(data => data.data).then(res => {
+            .raw(id, 'Characters').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
                 charsLoc = res
@@ -108,7 +108,7 @@ let localization = {
     },
     chapters: () => {
         return GetSheetDone
-            .raw(id, 11).then(data => data.data).then(res => {
+            .raw(id, 'Chapters').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
                 chaptersLoc = res
@@ -116,7 +116,7 @@ let localization = {
     },
     rules: () => {
         return GetSheetDone
-            .raw(id, 13).then(data => data.data).then(res => {
+            .raw(id, 'Rules').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
                 rulesLoc = res
@@ -124,7 +124,7 @@ let localization = {
     },
     traits: () => {
         return GetSheetDone
-            .raw(id, 12).then(data => data.data).then(res => {
+            .raw(id, 'Traits').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
                 traitsLoc = res
@@ -132,7 +132,7 @@ let localization = {
     },
     materials: () => {
         return GetSheetDone
-            .raw(id, 7).then(data => data.data).then(res => {
+            .raw(id, 'Materials').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
                 let descIndex = res.map((r, i) => {
@@ -150,7 +150,7 @@ let localization = {
     },
     words: () => {
         return GetSheetDone
-            .raw(id, 1).then(data => data.data).then(res => {
+            .raw(id, 'Words').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
                 wordsLoc = res
@@ -158,7 +158,7 @@ let localization = {
     },
     jobs: () => {
         return GetSheetDone
-            .raw(id, 8).then(data => data.data).then(res => {
+            .raw(id, 'Jobs').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
                 jobsNamesLoc = res
@@ -166,7 +166,7 @@ let localization = {
     },
     abils: () => {
         return GetSheetDone
-            .raw(id, 5).then(data => data.data).then(res => {
+            .raw(id, 'Abilities').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
                 abilsNamesLoc = res
@@ -174,7 +174,7 @@ let localization = {
     },
     passives: () => {
         return GetSheetDone
-            .raw(id, 6).then(data => data.data).then(res => {
+            .raw(id, 'Passives').then(data => data.data).then(res => {
                 res.shift()
                 res.shift()
                 res.pop()
@@ -276,7 +276,7 @@ let passivesDescAdjusted = []
 let descriptions = {
     abilities: () => {
         return GetSheetDone
-            .raw(id, 3).then(data => data.data).then(res => {
+            .raw(id, 'Skills Description').then(data => data.data).then(res => {
                 //from words Array
                 random = wordsLoc.filter(a => a[0] == 'Random')[0]
                 all = wordsLoc.filter(a => a[0] == 'All')[0]
@@ -338,7 +338,7 @@ let descriptions = {
                 debuff = getKeywordEngName(skillsNamesLoc, 'Debuff')[0]
                 actionDebuff = getKeywordEngName(skillsNamesLoc, 'XActDebuff')[0] == undefined ? '' : getKeywordEngName(skillsNamesLoc, 'XActDebuff')[0].map(f => f.replace(/\{0\}/g, ''))
                 nerf = getKeywordEngName(skillsNamesLoc, 'XStatNerf')[0] == undefined ? '' : getKeywordEngName(skillsNamesLoc, 'XStatNerf')[0].map(f => f.replace(/\{0\}/g, ''))
-                drain = getKeywordEngName(skillsNamesLoc, 'XStatDrain')[0] == undefined ? '':  getKeywordEngName(skillsNamesLoc, 'XStatDrain')[0].map(f => f.replace(/\{0\}/g, ''))
+                drain = getKeywordEngName(skillsNamesLoc, 'XStatDrain')[0] == undefined ? '' : getKeywordEngName(skillsNamesLoc, 'XStatDrain')[0].map(f => f.replace(/\{0\}/g, ''))
                 absorb = getKeywordEngName(skillsNamesLoc, 'XAbsorb')[0] == undefined ? '' : getKeywordEngName(skillsNamesLoc, 'XAbsorb')[0].map(f => f.replace(/\{0\}/g, ''))
 
                 reflect = getKeywordEngName(skillsNamesLoc, 'Reflect')[0]
@@ -379,16 +379,19 @@ let descriptions = {
                         'ComboBlend', 'Scheduled', 'AutoFire', 'Overloaded', 'LastResort', 'Gamble',
                         'Exhaust', 'Curse']
                     let synergy = getKeywordEngName(skillsNamesLoc, 'XSynergy')[0] == undefined ? '' : getKeywordEngName(skillsNamesLoc, 'XSynergy')[0].map(f => f.replace(/\{0\}/g, '').replace('X', ''))
-
                     applies = applies.map(apply => getKeywordEngName(skillsNamesLoc, apply)[0])
                     attrsNames.map((attr, ind) => {
 
-                        let translatedName = attr.map((a, i) => a + ' ' + synergy[i])
+                        let translatedName = attr == undefined ? '' : attr.map((a, i) => a + ' ' + synergy[i])
                         applies.push(translatedName)
                     })
                 }
                 getAppliesNames()
-                applies = applies.map(a => [a[0] == 'ComboBlend' ? a[0] = 'Combo Blend' : a[0], a[1], a[2], a[3]])
+                applies = applies.map(a => {
+                    if (a !== undefined) {
+                        return [a[0] == 'ComboBlend' ? a[0] = 'Combo Blend' : a[0], a[1], a[2], a[3]]
+                    }
+                })
                 abilsDesc.map(abil => {
                     let nameKey = abil[0]
                     switch (nameKey) {
@@ -791,7 +794,7 @@ let descriptions = {
 
     glossary: () => {
         return GetSheetDone
-            .raw(id, 3).then(data => data.data).then(res => {
+            .raw(id, 'Skills Description').then(data => data.data).then(res => {
                 localization.skills()
                 protectName = getKeywordEngName(skillsNamesLoc, 'Protect')[0]
                 skillsDesc.shift()
@@ -1268,7 +1271,6 @@ let descriptions = {
                             let injuryVulnN = skillsNamesLoc.filter(loc => loc[0] == 'XVulnerable')[0]
                             injuryVulnN = injuryVulnN.map((pp, i) => pp.replace('X', debuffInjury[1] + ' '))
                             injuryVulnN = injuryVulnN.map((pp, i) => pp.replace('{0}', ''))
-                            console.log(injuryVulnN)
                             skillsNamesAdjusted.push(injuryVulnN)
                             break
                         case 'InvulnerableDescr':
@@ -1359,7 +1361,6 @@ let descriptions = {
                                     statActDebuffN = statActDebuffN.map((s, i) => s.replace('X', attr + ' '))
                                     statActDebuffN = statActDebuffN.map((s, i) => s.replaceAll(/\{0\}/gi, attrName[i]))
                                     statActDebuffN.splice(0, 1, statActDebuffN[1])
-                                    console.log(statActDebuffN)
                                     skillsNamesAdjusted.push(statActDebuffN)
                                 } 
                             })
@@ -1487,7 +1488,6 @@ let descriptions = {
                             let comboBlendDesc = skill.map((s, i) => s.replace(/\{0\}/gi, '1').replace(/\{1\}/gi, '2'))
                             comboBlendDesc.splice(0, 1, 'Combo Blend')
                             skillsDescAdjusted.push(comboBlendDesc)
-                            console.log(skillsNamesLoc)
                             let comboBlendN = skillsNamesLoc.filter(loc => loc[0] == 'Combo Blend')[0]
                             comboBlendN.splice(0, 1, 'Combo Blend')
                             skillsNamesAdjusted.push(comboBlendN)
@@ -1526,7 +1526,7 @@ let descriptions = {
     },
     passives: () => {
         return GetSheetDone
-            .raw(id, 3).then(data => data.data).then(res => {
+            .raw(id, 'Skills Description').then(data => data.data).then(res => {
                 localization.skills()
                 protectName = getKeywordEngName(skillsNamesLoc, 'Protect')[0]
                 venomName = getKeywordEngName(skillsNamesLoc, 'Venom')[0]
