@@ -12,7 +12,6 @@ import {filterAb} from '../basicfn/filters.js'
 import { showIcon, hideIcon } from '../basicfn/hoverIcons.js'
 var $ = require("jquery")
 import tablesorter from 'tablesorter';
-import i18next from 'i18next';
 
 export {matspics}
 let matspics = Object.entries(matsImgs)

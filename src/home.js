@@ -99,7 +99,7 @@ setInterval(function() {
             function picInside(el, arr) {
                 let start = setInterval(function () {
                     let rand = Math.floor(Math.random() * arr.length)
-                    el.src = arr == jobImagesComplete ? arr.[rand].children[0].src : arr[rand].src || arr[rand]
+                    el.src = arr == jobImagesComplete ? arr[rand].children[0].src : arr[rand].src || arr[rand]
                     el.style.opacity = 0
                     el.style.transition = '1s'
                     el.style.opacity = 1

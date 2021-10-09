@@ -18,7 +18,6 @@ import { preload } from './preload/preload.js'
 import { localization, descriptions } from './local/local.js';
 import { getAllKeys } from './basicfn/getAllKeys.js'
 import { changeMenu } from './basicfn/changeMenu.js'
-import i18next from 'i18next';
 
 document.body.append(nav(),preload, jobsmain, sideDiv)
 cursor()
@@ -37,43 +36,8 @@ window.onscroll = function() {
 
 window.onload = function () {
 
-    function changeLng(lng) {
-        i18next.changeLanguage(lng);
-    }
-
 
     document.getElementById('langSel').addEventListener('change', function () {
-        i18next.init({
-            lng: 'de',
-            debug: false,
-            resources: {
-                en: {
-                    translation: {
-                        "key": "hello world"
-                    }
-                },
-                chin: {
-                    translation: {
-                        "key": "hello welt"
-                    }
-                },
-            }
-        }).then(updateContent);
-        function updateContent() {
-         //   document.querySelector('#chapters h1').innerHTML = i18next.t('key');
-        }
-        let lang = document.getElementById('langSel').value
-        switch (lang) {
-            case 'English':
-                i18next.changeLanguage('en', updateContent);
-                break;
-            case 'Chinese':
-                i18next.changeLanguage('chin', updateContent);
-                break;
-        }
-        document.querySelector('tbody').innerHTML = '';
-        language();
-          loadAll()
     })
     function loadAll() {
         if (localStorage.getItem('language')) {
